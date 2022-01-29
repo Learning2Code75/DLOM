@@ -5,7 +5,7 @@ Video Link : [[1]](https://youtube.com/playlist?list=PL6QREj8te1P7VSwhrMf3D3Xt4V
 ## Create read
 Link : create read:[[2]](https://youtu.be/ngc9gnGgUdA)  
 Watching this to implement :
-1. 4 - Client Add , Read nicely as avatar
+1. 4 - Client Add , Read nicely with avatar
 2. 5 - Product Add, Read nicely as [catalogue, qty modified catalogue to be downloaded as pdf]
 3. 6 - Order Add, Read nicely as kanban
 
