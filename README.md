@@ -52,18 +52,23 @@ Watching this to implement :
 
 
 # 3_Databases (MongoDB, Postgresql)
-Link :
-
-
+Link : mongodb : [[8]](https://youtu.be/2QQGWYe7IDU)
+Link : postgresql : [[9]](https://www.youtube.com/watch?v=J01rYl9T3BU)
+# 4_GMERN
+Link : gmern : 
+- graphql client , server :[[10]](https://youtu.be/yqWzCV0kU_c)  
+- Apollo server :[[11]](https://youtube.com/playlist?list=PLpGo-Y3em4SXceWj-OOEFcJmN0MO05vs7) 
+- Apollo server , apollo client fullstack:[[12]](https://youtube.com/playlist?list=PLASldBPN_pkDUuOzyPotAkKmvwqyDoA0g) 
+- [[13]](https://youtu.be/n1mdAPFq2Os)  (GMERN)
+- Apollo client:[[14]](https://youtu.be/4smsVPgZDOo) , [[15]](https://youtu.be/DAiXXdGJjvQ)
 
 # CSS_Snippets
-1. h
+1. css playlist: [[16]](https://m.youtube.com/playlist?list=PLhoNfB3WZFScWKvVE-_wdqe6_PH9LctiG)
 
-
-# Node js server with mongodb ultimate
--- user management
-## 1. Manage User roles in Node.js
-
+# Authentication , Authentication : JWT
+1. [[17]](https://www.youtube.com/watch?v=enopDSs3DRw) 
+2. [[18]](https://www.youtube.com/watch?v=F-sFp_AvHc8)
+3. [[19]](https://www.youtube.com/watch?v=Yh5Lil03tpI)
 
 
 
