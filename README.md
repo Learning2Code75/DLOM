@@ -3,7 +3,7 @@
 # 1_CRUD MERN
 Video Link : [[1]](https://youtube.com/playlist?list=PL6QREj8te1P7VSwhrMf3D3Xt4V6_SRkhu)
 ## Create read
-Link : create read:[[2]](https://youtu.be/ngc9gnGgUdA)  
+Link : create read:[[2]](https://youtu.be/ngc9gnGgUdA)  (done-28mins)
 Watching this to implement :
 1. 4 - Client Add , Read nicely with avatar
 2. 5 - Product Add, Read nicely as [catalogue, qty modified catalogue to be downloaded as pdf]
@@ -65,7 +65,7 @@ Link : gmern :
 # CSS_Snippets
 1. css playlist: [[16]](https://m.youtube.com/playlist?list=PLhoNfB3WZFScWKvVE-_wdqe6_PH9LctiG)
 
-# Authentication , Authentication : JWT
+# Authentication , Authorization : JWT
 1. [[17]](https://www.youtube.com/watch?v=enopDSs3DRw) 
 2. [[18]](https://www.youtube.com/watch?v=F-sFp_AvHc8)
 3. [[19]](https://www.youtube.com/watch?v=Yh5Lil03tpI)
@@ -128,3 +128,17 @@ Link : gmern :
 5. pagination , search: https://youtu.be/LYWgPSbPDfQ
 6. comments : https://youtu.be/46NRrn4xi5Y
 7. ecommerce MERN : https://youtu.be/AN3t-OmdyKA?list=PLt5mNkGuWcuXpkXwmXwTU6i1kjwnLomhy
+8. 
+9. 
+10. 
+11. 
+12. 
+13. 
+14. 
+15. 
+16. 
+17. 
+18. 
+19. 
+20. mongodb datatypes : https://www.mongodb.com/docs/manual/reference/bson-types/ 
+21. mongoose schema definition: https://mongoosejs.com/docs/schematypes.html#objectids
