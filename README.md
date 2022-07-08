@@ -52,7 +52,7 @@ Watching this to implement :
 
 
 # 3_Databases (MongoDB, Postgresql)
-Link : mongodb : [[8]](https://youtu.be/2QQGWYe7IDU)
+Link : mongodb : [[8i]](https://youtu.be/2QQGWYe7IDU) [[8ii]](https://youtu.be/DdvhZj7SsEM) [[8iii]](https://youtube.com/playlist?list=PLaxxQQak6D_dHXuCYHwgyHwhs225vUX6d)
 Link : postgresql : [[9]](https://www.youtube.com/watch?v=J01rYl9T3BU)
 # 4_GMERN
 Link : gmern :
@@ -142,3 +142,5 @@ Link : gmern :
 19.
 20. mongodb datatypes : https://www.mongodb.com/docs/manual/reference/bson-types/
 21. mongoose schema definition: https://mongoosejs.com/docs/schematypes.html#objectids
+22. rest api status codes : https://www.restapitutorial.com/httpstatuscodes.html
+23.

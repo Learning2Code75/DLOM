@@ -8,7 +8,9 @@ const clientSchema = mongoose.Schema({
   locationPin:String,
   state:String,
   gst:String,
-  cin:String
+  cin:String,
+  address:String,
+  phone:String
 })
 
 const Client = mongoose.model("Client",clientSchema)
