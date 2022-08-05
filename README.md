@@ -45,21 +45,28 @@ Link : [[6]](https://youtu.be/46NRrn4xi5Y)
 3. 6 - suggested updates, tasks on orders
 
 # 2_ecommerce MERN
-Link :ecommerce MERN : [[7]](https://youtu.be/AN3t-OmdyKA?list=PLt5mNkGuWcuXpkXwmXwTU6i1kjwnLomhy)
+Link :ecommerce MERN : [[7i]](https://youtu.be/AN3t-OmdyKA?list=PLt5mNkGuWcuXpkXwmXwTU6i1kjwnLomhy)
+
+[[7ii]](https://youtu.be/TNV0_7QRDwY)
+[[7iii]](https://youtu.be/rltfdjcXjmk)
+
+
 Watching this to implement :
 
 
 
 
 # 3_Databases (MongoDB, Postgresql)
-Link : mongodb : [[8i]](https://youtu.be/2QQGWYe7IDU) [[8ii]](https://youtu.be/DdvhZj7SsEM) [[8iii]](https://youtube.com/playlist?list=PLaxxQQak6D_dHXuCYHwgyHwhs225vUX6d)
+Link : mongodb : [[8i]](https://youtu.be/2QQGWYe7IDU) [[8ii]](https://youtube.com/playlist?list=PLuGe-XRWqbNQHhIJXq5UfkzCB98vvw1m7) [[8iii]](https://youtube.com/playlist?list=PLaxxQQak6D_dHXuCYHwgyHwhs225vUX6d) [[8iv]](https://youtube.com/playlist?list=PL4cUxeGkcC9h77dJ-QJlwGlZlTd4ecZOA) [[8v]](https://www.youtube.com/c/MongoDBofficial)
 Link : postgresql : [[9]](https://www.youtube.com/watch?v=J01rYl9T3BU)
+
 # 4_GMERN
 Link : gmern :
 - graphql client , server :[[10]](https://youtu.be/yqWzCV0kU_c)  
 - Apollo server :[[11]](https://youtube.com/playlist?list=PLpGo-Y3em4SXceWj-OOEFcJmN0MO05vs7)
 - Apollo server , apollo client fullstack:[[12]](https://youtube.com/playlist?list=PLASldBPN_pkDUuOzyPotAkKmvwqyDoA0g)
-- [[13]](https://youtu.be/n1mdAPFq2Os)  (GMERN)
+- [[13i]](https://youtu.be/n1mdAPFq2Os)  (GMERN full1)
+- [[13ii]](https://youtu.be/BcLNfwF04Kw) (GMERN full2)
 - Apollo client:[[14]](https://youtu.be/4smsVPgZDOo) , [[15]](https://youtu.be/DAiXXdGJjvQ)
 
 # CSS_Snippets
