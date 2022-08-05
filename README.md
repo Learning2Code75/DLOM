@@ -77,6 +77,24 @@ Link : gmern :
 2. [[18]](https://www.youtube.com/watch?v=F-sFp_AvHc8)
 3. [[19]](https://www.youtube.com/watch?v=Yh5Lil03tpI)
 
+# Blockchain
+1. [[20i]](https://www.youtube.com/watch?v=gyMwXuJrbJQ)
+2. [[20ii]](https://www.youtube.com/watch?v=Wn_Kb3MR_cU)
+3. [[20iii]](https://www.youtube.com/watch?v=kDo_MdyNJzI)
+4. [[20iv]](https://www.youtube.com/watch?v=6aF6p2VUORE)
+
+# ML
+1. [[21i]](https://youtube.com/playlist?list=PLyMom0n-MBrq-KvGy4TSEa3PQnZ03OoM6)
+2. [[21ii]](https://youtube.com/playlist?list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH)
+
+# Microservices Deployment
+1. [[22i]](https://youtu.be/9zUHg7xjIqQ)
+1. [[22ii]](https://youtube.com/playlist?list=PLaLqLOj2bk9ZV2RhqXzABUP5QSg42uJEs)
+2. [[22iii]](https://youtube.com/playlist?list=PLrwNNiB6YOA0KmfliJoSuZzEN6tjSdEXc)
+3. [[22iv]](https://youtube.com/playlist?list=PLIGDNOJWiL182j1bD_nQm-SxARR5s977O)
+4. [[22v]](https://youtube.com/playlist?list=PL9gnSGHSqcnoqBXdMwUTRod4Gi3eac2Ak)
+
+
 
 
 <hr/>
