@@ -103,6 +103,11 @@ const mutation = new GraphQLObjectType({
         id: { type: GraphQLNonNull(GraphQLID) },
       },
       resolve(parent, args) {
+        Order.find({ clientId: args.id }).then((orders) => {
+          orders.forEach((o) => {
+            o.remove();
+          });
+        });
         return Client.findByIdAndRemove(args.id);
       },
     },
@@ -146,8 +151,8 @@ const mutation = new GraphQLObjectType({
         return Order.findByIdAndRemove(args.id);
       },
     },
-    // update project :
-    updateProject: {
+    // update order :
+    updateOrder: {
       type: OrderType,
       args: {
         id: { type: GraphQLNonNull(GraphQLID) },
