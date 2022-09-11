@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Form from "./Form/Form";
 import Products from "./Products/Products";
@@ -8,18 +8,21 @@ import { getProducts } from "../../../redux/actions/products";
 
 const CRUD = () => {
   const dispatch = useDispatch();
+
+  const [curProdId, setCurProdId] = useState(null);
   useEffect(() => {
     dispatch(getProducts());
-  }, [dispatch]);
+  }, [dispatch, curProdId]);
+
   return (
     <div>
       CRUD
       <Link to="/product">Product</Link>
       <div>
-        <Form />
+        <Form curProdId={curProdId} setCurProdId={setCurProdId} />
       </div>
       <div>
-        <Products />
+        <Products setCurProdId={setCurProdId} />
       </div>
     </div>
   );
