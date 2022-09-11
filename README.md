@@ -145,6 +145,123 @@ Link : gmern :
 
 
 
+## Try 2
+
+### Client CRUD
+- addClient Mutation :
+```js
+mutation{
+  addClient(companyName:"Company1",
+  	clientSocialMedia:[{title:"gmail",link:"company1@gmail.com"},{title:"linkedin",link:"company1.linkedin.com"}],
+    contactPersonName:"cp1",
+    address:"addr1",
+    gst:"gst1",
+    phoneNumber:"phno1",
+    discountRate:"5",
+    salesPersonAssigned:"sp1",
+    typeOfCustomer:"permanent"
+  ){
+    id
+    companyName
+    contactPersonName
+    address
+    gst
+    phoneNumber
+    discountRate
+    salesPersonAssigned
+
+    clientSocialMedia{title,link}
+    typeOfCustomer
+  }
+}
+```
+
+- view Clients query :
+```js
+{
+  clients{
+    id
+    companyName
+    contactPersonName
+    address
+    gst
+    phoneNumber
+    discountRate
+    salesPersonAssigned
+    clientSocialMedia{title,link}
+    typeOfCustomer
+   }
+}
+```
+- view client query :
+```js
+{
+  client(id:"6319cf896dfda39aa7147307"){
+    id
+    companyName
+    contactPersonName
+    address
+    gst
+    phoneNumber
+    discountRate
+    salesPersonAssigned
+    clientSocialMedia{title,link}
+    typeOfCustomer
+   }
+}
+```
+- delete client mutation :
+```js
+mutation{
+  deleteClient(id:"6319db516dfda39aa714730e"){
+    id
+    companyName
+    contactPersonName
+    address
+    gst
+    phoneNumber
+    discountRate
+    salesPersonAssigned
+    clientSocialMedia{title,link}
+    typeOfCustomer
+
+  }
+}
+```
+
+- update client mutation :
+```js
+mutation{
+  updateClient(id:"6319cf896dfda39aa7147307",
+  companyName:"Company3331",
+    clientSocialMedia:[{title:"gmail",link:"company1@gmail.com"},{title:"linkedin",link:"company1.linkedin.com"}],
+  contactPersonName:"cp1",
+  address:"addr1",
+  gst:"gst1",
+  phoneNumber:"phno1",
+  discountRate:"5",
+  salesPersonAssigned:"sp1",
+  typeOfCustomer:"permanent"
+
+  ){
+    id
+    companyName
+    contactPersonName
+    address
+    gst
+    phoneNumber
+    discountRate
+    salesPersonAssigned
+    clientSocialMedia{title,link}
+    typeOfCustomer
+
+  }
+}
+```
+
+
+
+
 # References
 1.  JavsScript Mastery MERN playlist. https://youtube.com/playlist?list=PL6QREj8te1P7VSwhrMf3D3Xt4V6_SRkhu
 2. Create and Read . https://youtu.be/ngc9gnGgUdA

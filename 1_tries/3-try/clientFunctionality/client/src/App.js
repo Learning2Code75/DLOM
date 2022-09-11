@@ -4,7 +4,19 @@ import Header from "./components/Header";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
-import Order from "./pages/Order";
+import OrderI from "./pages/Order";
+
+import Order from "./components/Order/Order";
+import Client from "./components/Client/Client";
+import ClientsCRUD from "./components/Client/CRUD/CRUD";
+import ClientsCRM from "./components/Client/CRM/CRM";
+import ClientsPayments from "./components/Client/Payments/Payments";
+
+import ProductsCRUD from "./components/Product/CRUD/CRUD";
+import ProductsInventory from "./components/Product/Inventory/Inventory";
+import ProductsCatelog from "./components/Product/Catelog/Catelog";
+
+import Product from "./components/Product/Product";
 const cache = new InMemoryCache({
   typePolicies: {
     Query: {
@@ -38,7 +50,28 @@ function App() {
           <div className="container">
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/orders/:id" element={<Order />} />
+              <Route path="/orders/:id" element={<OrderI />} />
+
+              <Route path="/client" element={<Client />} />
+              <Route path="client/clientsCRUD" element={<ClientsCRUD />} />
+              <Route path="client/clientsCRM" element={<ClientsCRM />} />
+              <Route
+                path="client/clientsPayments"
+                element={<ClientsPayments />}
+              />
+
+              <Route path="/order" element={<Order />} />
+              <Route path="/product" element={<Product />} />
+              <Route path="/product/productsCRUD" element={<ProductsCRUD />} />
+              <Route
+                path="/product/productsInventory"
+                element={<ProductsInventory />}
+              />
+              <Route
+                path="/product/productsCatelog"
+                element={<ProductsCatelog />}
+              />
+
               <Route path="*" element={<NotFound />} />
             </Routes>
           </div>

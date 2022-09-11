@@ -13,7 +13,7 @@ const Header = () => {
               height={150}
               width={150}
             />
-            <div>Clients Functionality</div>
+            {/* <div>Clients Functionality</div> */}
           </div>
         </a>
       </div>
