@@ -17,6 +17,7 @@ import ProductsInventory from "./components/Product/Inventory/Inventory";
 import ProductsCatelog from "./components/Product/Catelog/Catelog";
 
 import Product from "./components/Product/Product";
+import Auth from "./pages/Auth/Auth";
 const cache = new InMemoryCache({
   typePolicies: {
     Query: {
@@ -47,9 +48,12 @@ function App() {
       <ApolloProvider client={client}>
         <Router>
           <Header />
+
           <div className="container">
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/auth" element={<Auth />} />
+
               <Route path="/orders/:id" element={<OrderI />} />
 
               <Route path="/client" element={<Client />} />
