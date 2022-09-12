@@ -1,10 +1,38 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Input from "./Input";
+import { signup, signin } from "../../redux/actions/Auth";
 
 const Auth = () => {
   const [isSignup, setIsSignup] = useState(false);
-  const handleSubmit = () => {};
-  const handleChange = () => {};
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    cpassword: "",
+    userRole: "",
+  });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    console.log(formData);
+
+    if (isSignup) {
+      dispatch(signup(formData, navigate));
+    } else {
+      dispatch(signin(formData, navigate));
+    }
+  };
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
   return (
     <div>
       <h1>Auth</h1>
@@ -45,13 +73,25 @@ const Auth = () => {
             type="password"
           />
           {isSignup && (
-            <Input
-              name="cpassword"
-              placeholder="Confirm Password"
-              handleChange={handleChange}
-              autoFocus={false}
-              type="password"
-            />
+            <>
+              <Input
+                name="cpassword"
+                placeholder="Confirm Password"
+                handleChange={handleChange}
+                autoFocus={false}
+                type="password"
+              />
+            </>
+          )}
+          {isSignup && (
+            <select name="userRole" onChange={handleChange}>
+              <option>Select Role of User</option>
+              <option value="root">Root</option>
+              <option value="manager">Manager</option>
+              <option value="salesperson">Salesperson</option>
+              <option value="finance">Finance</option>
+              <option value="warehouse">Warehouse</option>
+            </select>
           )}
         </div>
         <div>

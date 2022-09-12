@@ -114,3 +114,9 @@ button:after {
   top: 0;
   border-radius: 10px;
 }
+
+
+select{
+   width:80%;
+  height: 2rem;
+}
