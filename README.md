@@ -85,11 +85,12 @@ Link : gmern :
 
 # ML
 ## 3_regc
+0. sales data analysis : https://youtu.be/eMOA1pPVUc4
 1. CampusX regc [[21i]](https://youtube.com/playlist?list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH)
 2. Jovian regc [[21ii]](https://youtube.com/playlist?list=PLyMom0n-MBrq-KvGy4TSEa3PQnZ03OoM6)
 
-## 2_mockData
-1. mock sales data (https://youtu.be/VJBY2eVtf7o)
+## 1_mockData
+1. mock sales data (https://youtu.be/VJBY2eVtf7o) -- done
 2. search this on yt: "generate mock data using python"
   - https://www.youtube.com/watch?v=skfPyTAgC0k
   - https://www.youtube.com/watch?v=LsrJraFPmo0
@@ -98,7 +99,7 @@ Link : gmern :
   - https://www.youtube.com/watch?v=jSBjRur5dc8
   - https://www.youtube.com/watch?v=w9zBy6f224I
 
-## 3_textClassif
+## 2_textClassif
 1. CampusX(https://youtube.com/playlist?list=PLKnIA16_RmvZo7fp5kkIth6nRTeQQsjfX)
 2. PyData(https://youtu.be/4jROlXH9Nvc)
 3. own prev
