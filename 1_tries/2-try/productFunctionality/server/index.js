@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 
 import orderRoutes from "./routes/orders.js";
 import productRoutes from "./routes/products.js";
+import userRoutes from "./routes/users.js";
 
 const app = express();
 dotenv.config();
@@ -16,6 +17,7 @@ app.use(cors());
 
 app.use("/orders", orderRoutes);
 app.use("/products", productRoutes);
+app.use("/users", userRoutes);
 
 const PORT = process.env.PORT || 5000;
 mongoose

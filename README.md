@@ -84,8 +84,25 @@ Link : gmern :
 4. [[20iv]](https://www.youtube.com/watch?v=6aF6p2VUORE)
 
 # ML
-1. [[21i]](https://youtube.com/playlist?list=PLyMom0n-MBrq-KvGy4TSEa3PQnZ03OoM6)
-2. [[21ii]](https://youtube.com/playlist?list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH)
+## 3_regc
+1. CampusX regc [[21i]](https://youtube.com/playlist?list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH)
+2. Jovian regc [[21ii]](https://youtube.com/playlist?list=PLyMom0n-MBrq-KvGy4TSEa3PQnZ03OoM6)
+
+## 2_mockData
+1. mock sales data (https://youtu.be/VJBY2eVtf7o)
+2. search this on yt: "generate mock data using python"
+  - https://www.youtube.com/watch?v=skfPyTAgC0k
+  - https://www.youtube.com/watch?v=LsrJraFPmo0
+  - https://www.youtube.com/watch?v=bW2uTvvqTg4
+  - https://www.youtube.com/watch?v=7M2Q5wrqC7I
+  - https://www.youtube.com/watch?v=jSBjRur5dc8
+  - https://www.youtube.com/watch?v=w9zBy6f224I
+
+## 3_textClassif
+1. CampusX(https://youtube.com/playlist?list=PLKnIA16_RmvZo7fp5kkIth6nRTeQQsjfX)
+2. PyData(https://youtu.be/4jROlXH9Nvc)
+3. own prev
+4. pytorch ensemble (https://ensemble-pytorch.readthedocs.io/en/latest/introduction.html)
 
 # Microservices Deployment
 1. [[22i]](https://youtu.be/9zUHg7xjIqQ)
