@@ -1,12 +1,19 @@
 import React from "react";
 import moment from "moment";
 import { useDispatch } from "react-redux";
+import { deleteProduct } from "../../../../../redux/actions/products";
 const Product = ({ p, setCurProdId }) => {
   const dispatch = useDispatch();
   return (
     <>
-      <div>Product</div>
-      <div>
+      <div
+        style={{
+          padding: "1em",
+          borderRadius: "1rem",
+          background: "rgba(0,0,0,0.89)",
+          color: "#f0f0f0",
+        }}
+      >
         <div>SKU:{p.prodSKU}</div>
         <div
           style={{
@@ -46,16 +53,14 @@ const Product = ({ p, setCurProdId }) => {
             </div>
           ))}
         </div>
-        <div>
-          Created : {moment(p.createdAt).fromNow()} [{p.createdAt}]
-        </div>
+        <div>Created at : {moment(p.createdAt).fromNow()}</div>
         <div
           style={{
             display: "flex",
           }}
         >
           <button onClick={() => setCurProdId(p._id)}>Update</button>
-          {/* <button onClick={() => dispatch(deleteProduct(p._id))}>Delete</button> */}
+          <button onClick={() => dispatch(deleteProduct(p._id))}>Delete</button>
         </div>
       </div>
 
