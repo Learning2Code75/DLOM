@@ -101,6 +101,7 @@ Link : gmern :
 
 ## 2_textClassif
 1. CampusX(https://youtube.com/playlist?list=PLKnIA16_RmvZo7fp5kkIth6nRTeQQsjfX)
+2. hyperparameter tuning (https://youtu.be/YncZ0WwxyzU)
 2. PyData(https://youtu.be/4jROlXH9Nvc)
 3. own prev
 4. pytorch ensemble (https://ensemble-pytorch.readthedocs.io/en/latest/introduction.html)
