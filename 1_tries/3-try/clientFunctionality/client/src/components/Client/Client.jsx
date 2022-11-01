@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Client = () => {
   return (
     <div>
-      <h1>Client</h1>
+      <h1>Client Functionalities</h1>
       <div
         style={{
           display: "flex",
