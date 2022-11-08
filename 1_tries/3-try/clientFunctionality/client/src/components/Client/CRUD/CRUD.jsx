@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ClientSocialMediaInput from "./ClientSocialMediaInput";
 import { GrFormAdd } from "react-icons/gr";
 import { FiSave } from "react-icons/fi";
 import { useMutation } from "@apollo/client";
 
-import { ADD_CLIENT } from "../../../mutations/dlomClientMutation";
+import {
+  ADD_CLIENT,
+  UPDATE_CLIENT,
+} from "../../../mutations/dlomClientMutation";
 import { GET_CLIENTS } from "../../../queries/dlomClientQueries";
 import ViewClients from "./ViewClients";
 
@@ -21,7 +24,7 @@ const CRUD = () => {
     salesPersonAssigned: "",
     typeOfCustomer: "permanent",
   });
-
+  const [isUpdate, setIsUpdate] = useState(false);
   const [addClient] = useMutation(ADD_CLIENT, {
     variables: {
       companyName: state.companyName,
@@ -35,6 +38,23 @@ const CRUD = () => {
       typeOfCustomer: state.typeOfCustomer,
     },
     refetchQueries: [{ query: GET_CLIENTS }],
+  });
+
+  const [updateClient, { data, loading, error }] = useMutation(UPDATE_CLIENT, {
+    variables: {
+      id: state.id,
+      companyName: state.companyName,
+      contactPersonName: state.contactPersonName,
+      address: state.address,
+      gst: state.gst,
+      phoneNumber: state.phoneNumber,
+      discountRate: state.discountRate,
+      salesPersonAssigned: state.salesPersonAssigned,
+      clientSocialMedia: state.clientSocialMedia,
+      typeOfCustomer: state.typeOfCustomer,
+    },
+    onCompleted: () => clearCurrClient(),
+    refetchQueries: [{ query: GET_CLIENTS, variables: { id: state.id } }],
   });
 
   const addClientSubmit = (e) => {
@@ -51,20 +71,60 @@ const CRUD = () => {
       state.typeOfCustomer
     );
   };
+
+  const updateClientSubmit = (e) => {
+    e.preventDefault();
+    updateClient(
+      state.id,
+      state.companyName,
+      state.contactPersonName,
+      state.address,
+      state.gst,
+      state.phoneNumber,
+      state.discountRate,
+      state.salesPersonAssigned,
+      state.clientSocialMedia,
+      state.typeOfCustomer
+    );
+  };
+
   const addClientSocial = (e) => {
     e.preventDefault();
     let new_cli_soc_media = { ...state };
     let new_cli = { title: "", link: "" };
-    new_cli_soc_media.clientSocialMedia.push(new_cli);
+    new_cli_soc_media.clientSocialMedia = [
+      ...new_cli_soc_media.clientSocialMedia,
+      new_cli,
+    ];
     setState(new_cli_soc_media);
   };
+
+  const clearCurrClient = (e) => {
+    // e.preventDefault();
+    setState({
+      companyName: "",
+      clientSocialMedia: [{ title: "", link: "" }],
+      contactPersonName: "",
+      address: "",
+      gst: "",
+      phoneNumber: "",
+      discountRate: "",
+      salesPersonAssigned: "",
+      typeOfCustomer: "permanent",
+    });
+    setIsUpdate(false);
+  };
+
   return (
     <div>
-      <h1>Client CRUD</h1>
       <Link to="/client">Client</Link>
+
+      <h1>Client CRUD</h1>
       <pre>{JSON.stringify(state, null, 2)}</pre>
+      <pre>{JSON.stringify(isUpdate, null, 2)}</pre>
+
       <div>
-        <form onSubmit={addClientSubmit}>
+        <form>
           <div className="formLabel">Company Name</div>
           <input
             type="text"
@@ -161,14 +221,34 @@ const CRUD = () => {
               state={state}
               setState={setState}
               index={index}
+              csm={csm}
+              isUpdate={isUpdate}
             />
           ))}
 
-          <button type="submit">Add Client</button>
+          <button
+            onClick={
+              isUpdate
+                ? (e) => {
+                    updateClientSubmit(e);
+                  }
+                : (e) => addClientSubmit(e)
+            }
+          >
+            {isUpdate ? "Update Client" : "Add Client"}
+          </button>
+          {isUpdate && (
+            <button onClick={(e) => clearCurrClient(e)}>Cancel</button>
+          )}
         </form>
       </div>
       <div>
-        <ViewClients />
+        <ViewClients
+          currClient={state}
+          setCurrClient={setState}
+          setUpdate={setIsUpdate}
+          clearCurrClient={clearCurrClient}
+        />
       </div>
     </div>
   );

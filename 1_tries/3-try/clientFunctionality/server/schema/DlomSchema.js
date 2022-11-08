@@ -1,4 +1,5 @@
 const DlomClient = require("../models/DlomClient");
+const DlomDistributor = require("../models/DlomDistributor");
 
 const {
   GraphQLObjectType,
@@ -16,12 +17,28 @@ const DlomClientSocialMediaItemType = new GraphQLObjectType({
     link: { type: GraphQLString },
   }),
 });
-
+const DlomClientCRMType = new GraphQLObjectType({
+  name: "CRMChatItem",
+  fields: () => ({
+    msg: { type: GraphQLString },
+    personType: { type: GraphQLString },
+    timestamp: { type: GraphQLString },
+  }),
+});
 const DlomClientSocialMediaItemInputType = new GraphQLInputObjectType({
   name: "SocialMediaInputItem",
   fields: () => ({
     title: { type: GraphQLString },
     link: { type: GraphQLString },
+  }),
+});
+
+const DlomClientCRMInputType = new GraphQLInputObjectType({
+  name: "CRMChatInputItem",
+  fields: () => ({
+    msg: { type: GraphQLString },
+    personType: { type: GraphQLString },
+    timestamp: { type: GraphQLString },
   }),
 });
 
@@ -38,6 +55,33 @@ const DlomClientType = new GraphQLObjectType({
     salesPersonAssigned: { type: GraphQLString },
     clientSocialMedia: { type: new GraphQLList(DlomClientSocialMediaItemType) },
     typeOfCustomer: { type: GraphQLString },
+    crm: { type: new GraphQLList(DlomClientCRMType) },
+  }),
+});
+
+const DlomDistributorType = new GraphQLObjectType({
+  name: "DlomDistributor",
+  fields: () => ({
+    id: { type: GraphQLID },
+    companyName: {
+      type: GraphQLString,
+    },
+    address: {
+      type: GraphQLString,
+    },
+    gst: {
+      type: GraphQLString,
+    },
+    phoneNumber: {
+      type: GraphQLString,
+    },
+    accountNumber: {
+      type: GraphQLString,
+    },
+    bankIfsc: {
+      type: GraphQLString,
+    },
+    socialMedia: { type: new GraphQLList(DlomClientSocialMediaItemType) },
   }),
 });
 
@@ -56,6 +100,12 @@ const RootQuery = new GraphQLObjectType({
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
         return DlomClient.findById(args.id);
+      },
+    },
+    distributor: {
+      type: new GraphQLList(DlomDistributorType),
+      resolve(parent, args) {
+        return DlomDistributor.find();
       },
     },
   },
@@ -133,6 +183,108 @@ const mutation = new GraphQLObjectType({
               salesPersonAssigned: args.salesPersonAssigned,
               clientSocialMedia: args.clientSocialMedia,
               typeOfCustomer: args.typeOfCustomer,
+            },
+          },
+          { new: true }
+        );
+      },
+    },
+    updateClientCRM: {
+      type: DlomClientType,
+      args: {
+        id: { type: GraphQLID },
+        crm: {
+          type: new GraphQLList(DlomClientCRMInputType),
+        },
+      },
+      resolve(parent, args) {
+        return DlomClient.findByIdAndUpdate(
+          args.id,
+          {
+            $set: {
+              crm: args.crm,
+            },
+          },
+          { new: true }
+        );
+      },
+    },
+    addDistributor: {
+      type: DlomDistributorType,
+      args: {
+        companyName: {
+          type: GraphQLString,
+        },
+        address: {
+          type: GraphQLString,
+        },
+        gst: {
+          type: GraphQLString,
+        },
+        phoneNumber: {
+          type: GraphQLString,
+        },
+        accountNumber: {
+          type: GraphQLString,
+        },
+        bankIfsc: {
+          type: GraphQLString,
+        },
+        socialMedia: {
+          type: new GraphQLList(DlomClientSocialMediaItemInputType),
+        },
+      },
+      resolve(parent, args) {
+        const distributor = new DlomDistributor({
+          companyName: args.companyName,
+          address: args.address,
+          gst: args.gst,
+          phoneNumber: args.phoneNumber,
+          accountNumber: args.accountNumber,
+          bankIfsc: args.bankIfsc,
+          socialMedia: args.socialMedia,
+        });
+        return distributor.save();
+      },
+    },
+    updateDistributor: {
+      type: DlomDistributorType,
+      args: {
+        id: { type: GraphQLID },
+        companyName: {
+          type: GraphQLString,
+        },
+        address: {
+          type: GraphQLString,
+        },
+        gst: {
+          type: GraphQLString,
+        },
+        phoneNumber: {
+          type: GraphQLString,
+        },
+        accountNumber: {
+          type: GraphQLString,
+        },
+        bankIfsc: {
+          type: GraphQLString,
+        },
+        socialMedia: {
+          type: new GraphQLList(DlomClientSocialMediaItemInputType),
+        },
+      },
+      resolve(parent, args) {
+        return DlomDistributor.findByIdAndUpdate(
+          args.id,
+          {
+            $set: {
+              companyName: args.companyName,
+              address: args.address,
+              gst: args.gst,
+              phoneNumber: args.phoneNumber,
+              accountNumber: args.accountNumber,
+              bankIfsc: args.bankIfsc,
+              socialMedia: args.socialMedia,
             },
           },
           { new: true }

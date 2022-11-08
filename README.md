@@ -278,6 +278,122 @@ mutation{
 }
 ```
 
+### CRM CRUD
+- updateClientCRM Mutation :
+
+```js
+mutation{
+updateClientCRM(
+  id:"636672f7d649e0c2f9cc53e9",
+  crm:[{msg:"msg1",personType:"client",timestamp:"2022-11-23 00:12"},{msg:"msg2",personType:"sp",timestamp:"2022-11-23 00:13"}]){
+  id
+  crm{
+    msg
+    personType
+    timestamp
+  }
+}
+}
+
+```
+### Distributor CRUD
+- addDistributor Mutation :
+
+```js
+mutation{
+  addDistributor(
+    companyName:"company1",
+    address:"addr1",
+    gst:"gst1",
+    phoneNumber:"12345",
+    accountNumber:"658423",
+    bankIfsc:"bank1",
+    socialMedia:[
+      {
+        title:"title1",
+      	link:"link1"
+      },
+      {
+        title:"title2",
+        link:"link2"
+      }
+    ]
+  ){
+    id
+    companyName
+    address
+    gst
+    phoneNumber
+    accountNumber
+    bankIfsc
+    socialMedia{
+      title
+      link
+    }
+  }
+}
+```
+
+- updateDistributor Mutation :
+
+```js
+mutation{
+  updateDistributor(
+    id:"6367874c456e26e9928b9c82",
+    companyName:"company11",
+    address:"addr11",
+    gst:"gst11",
+    phoneNumber:"112345",
+    accountNumber:"1658423",
+    bankIfsc:"bank11",
+    socialMedia:[
+      {
+        title:"title11",
+      	link:"link11"
+      },
+      {
+        title:"title22",
+        link:"link22"
+      }
+    ]
+  ){
+    id
+    companyName
+    address
+    gst
+    phoneNumber
+    accountNumber
+    bankIfsc
+    socialMedia{
+      title
+      link
+    }
+  }
+}
+```
+
+- viewDistributor Mutation :
+
+```js
+{
+	distributor{
+    id
+    companyName
+    address
+    gst
+    phoneNumber
+    accountNumber
+    bankIfsc
+    socialMedia{
+      title
+      link
+    }
+  }
+}
+
+```
+
+
 
 
 

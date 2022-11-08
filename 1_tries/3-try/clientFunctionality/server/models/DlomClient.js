@@ -27,6 +27,13 @@ const DlomClientSchema = new mongoose.Schema({
   typeOfCustomer: {
     type: String,
   },
+  crm: [
+    {
+      msg: String,
+      personType: String,
+      timestamp: String,
+    },
+  ],
 });
 
 module.exports = mongoose.model("DlomClient", DlomClientSchema);

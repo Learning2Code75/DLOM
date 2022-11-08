@@ -1,13 +1,22 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { FiDelete, FiSave } from "react-icons/fi";
-const ClientSocialMediaInput = ({ state, setState, index }) => {
+const ClientSocialMediaInput = ({ state, setState, index, isUpdate }) => {
   const [cli, setCli] = useState({ title: "", link: "" });
+  useEffect(() => {
+    setCli({
+      ...state.clientSocialMedia[index],
+    });
+  }, [state]);
   const addClientInput = (e) => {
     e.preventDefault();
-    let new_cli_arr = { ...state };
-    let new_cli_inp = { ...cli };
-    new_cli_arr.clientSocialMedia[index] = new_cli_inp;
-    setState(new_cli_arr);
+    let new_client_sm = [...state.clientSocialMedia];
+    let curr_cli_sm = { ...cli };
+    new_client_sm[index] = curr_cli_sm;
+    setState({
+      ...state,
+      clientSocialMedia: new_client_sm,
+    });
   };
   const delClientInput = (e) => {
     e.preventDefault();

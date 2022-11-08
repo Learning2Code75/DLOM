@@ -16,6 +16,11 @@ const GET_CLIENTS = gql`
         link
       }
       typeOfCustomer
+      crm {
+        msg
+        personType
+        timestamp
+      }
     }
   }
 `;
