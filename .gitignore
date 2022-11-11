@@ -7,3 +7,5 @@
 **/senti_orderwise_try3.csv
 **/X_train.csv
 **/mnist_train.csv
+**/orderwise_cli_sp_chats.csv
+**/*.csv

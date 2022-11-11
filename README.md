@@ -88,7 +88,8 @@ Link : gmern :
 0. sales data analysis : https://youtu.be/eMOA1pPVUc4
 1. CampusX regc [[21i]](https://youtube.com/playlist?list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH)
 2. Jovian regc [[21ii]](https://youtube.com/playlist?list=PLyMom0n-MBrq-KvGy4TSEa3PQnZ03OoM6)
-
+3. model vids
+- d
 ## 1_mockData
 1. mock sales data (https://youtu.be/VJBY2eVtf7o) -- done
 2. search this on yt: "generate mock data using python"
@@ -98,13 +99,16 @@ Link : gmern :
   - https://www.youtube.com/watch?v=7M2Q5wrqC7I
   - https://www.youtube.com/watch?v=jSBjRur5dc8
   - https://www.youtube.com/watch?v=w9zBy6f224I
-
+3. model vids
+  - d
 ## 2_textClassif
 1. CampusX(https://youtube.com/playlist?list=PLKnIA16_RmvZo7fp5kkIth6nRTeQQsjfX)
 2. hyperparameter tuning (https://youtu.be/YncZ0WwxyzU)
 2. PyData(https://youtu.be/4jROlXH9Nvc)
 3. own prev
 4. pytorch ensemble (https://ensemble-pytorch.readthedocs.io/en/latest/introduction.html)
+5. model vids
+- d
 
 # Microservices Deployment
 1. [[22i]](https://youtu.be/9zUHg7xjIqQ)
