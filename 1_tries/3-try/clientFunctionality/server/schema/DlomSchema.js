@@ -85,6 +85,44 @@ const DlomDistributorType = new GraphQLObjectType({
   }),
 });
 
+const DlomOrderType = new GraphQLObjectType({
+  name: "DlomOrder",
+  fields: () => ({
+    id: { type: GraphQLID },
+    client: {
+      type: DlomClientType,
+      resolve(parent, args) {
+        return DlomClient.findById(parent.clientId);
+      },
+    },
+    salesperson: {
+      type: GraphQLString,
+    },
+    salesOrder: {},
+    invoice: {},
+    wareHouseReceipt: [{ imgString: String }],
+    salesReceipt: {},
+    orderDelivery: {
+      history: [{ timeStamp: String, status: String }],
+    },
+    orderCancel: {
+      timeStamp: String,
+      state: String,
+      desc: String,
+    },
+    orderPayment: {
+      history: [
+        {
+          timeStamp: String,
+          amount: String,
+          method: String,
+          description: String,
+        },
+      ],
+    },
+  }),
+});
+
 //Queries
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
@@ -108,6 +146,10 @@ const RootQuery = new GraphQLObjectType({
         return DlomDistributor.find();
       },
     },
+    orders: {
+      type: new GraphQLList(DlomOrderType),
+    },
+    order: {},
   },
 });
 //Mutations

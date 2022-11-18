@@ -115,14 +115,30 @@ const DistributorCRUD = () => {
           className="formControl"
         />
 
-        <div className="formLabel">Social media</div>
+        <div className="formLabel">
+          Social media
+          <button
+            className="btn"
+            onClick={(e) => {
+              e.preventDefault();
+              let new_state = { ...state };
+              new_state.socialMedia.push({ title: "", link: "" });
+              setState(new_state);
+            }}
+          >
+            +
+          </button>
+        </div>
         {state.socialMedia.map((sm, index) => (
-          <DistributorSocialMediaInput
-            state={state}
-            setState={setState}
-            index={index}
-            sm={sm}
-          />
+          <>
+            {/* <pre>{JSON.stringify(sm, null, 2)}</pre> */}
+            <DistributorSocialMediaInput
+              state={state}
+              setState={setState}
+              index={index}
+              sm={sm}
+            />
+          </>
         ))}
 
         <div>

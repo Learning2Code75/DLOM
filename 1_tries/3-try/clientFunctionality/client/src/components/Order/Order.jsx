@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import DistributorCRUD from "./DistributorCRUD/DistributorCRUD";
+import OrderCardCRUD from "./OrderCardCRUD/OrderCardCRUD";
 
 const Order = () => {
   return (
@@ -11,6 +12,10 @@ const Order = () => {
 
       <div>
         <DistributorCRUD />
+      </div>
+
+      <div>
+        <OrderCardCRUD />
       </div>
     </div>
   );

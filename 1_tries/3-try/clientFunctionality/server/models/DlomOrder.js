@@ -11,12 +11,8 @@ const DlomOrderSchema = new mongoose.Schema(
     },
     salesOrder: {},
     invoice: {},
-    wareHouseReceipt: {
-      img1: String,
-      img2: String,
-    },
+    wareHouseReceipt: [{ imgString: String }],
     salesReceipt: {},
-
     orderDelivery: {
       history: [{ timeStamp: String, status: String }],
     },
@@ -34,11 +30,6 @@ const DlomOrderSchema = new mongoose.Schema(
           description: String,
         },
       ],
-    },
-    distributorDetails: {
-      name: String,
-      address: String,
-      logo: String,
     },
   },
   {

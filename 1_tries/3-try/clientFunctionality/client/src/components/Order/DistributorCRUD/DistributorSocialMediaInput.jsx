@@ -1,15 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { FiDelete, FiSave } from "react-icons/fi";
 
-const DistributorSocialMediaInput = (state, setState, index, sm) => {
+const DistributorSocialMediaInput = ({ state, setState, index, sm }) => {
   const [dis, setDis] = useState({ title: "", link: "" });
   useEffect(() => {
     setDis(sm);
-  }, [state]);
+  }, [sm]);
   const addDisInput = (e) => {
     e.preventDefault();
     let new_dis_sm = [...state.socialMedia];
     let curr_dis_sm = { ...dis };
+
+    new_dis_sm = new_dis_sm.map((nd, idx) => {
+      if (idx === index) {
+        return curr_dis_sm;
+      } else {
+        return nd;
+      }
+    });
+    console.log(new_dis_sm);
     setState({
       ...state,
       socialMedia: new_dis_sm,
@@ -27,6 +36,7 @@ const DistributorSocialMediaInput = (state, setState, index, sm) => {
         display: "flex",
       }}
     >
+      <pre>{JSON.stringify(dis, null, 2)}</pre>
       <input
         placeholder="title"
         value={dis?.title}
