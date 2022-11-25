@@ -136,7 +136,7 @@ classif : -
 3. own prev
 4. pytorch ensemble (https://ensemble-pytorch.readthedocs.io/en/latest/introduction.html)
 5. model vids
-- stemming : https://www.youtube.com/watch?v=YeqKAO2P19E
+- stemming : [https://www.youtube.com/watch?v=YeqKAO2P19E (done), https://www.youtube.com/watch?v=7zq8tAHRTiA , https://www.youtube.com/watch?v=W34Vpl7jXpY , https://www.youtube.com/watch?v=GQ1sXx8hH4k  ]
 - bow :
 - tfidf :
 - word2vec : [https://www.youtube.com/watch?v=UqRCEmrv1gQ, https://www.youtube.com/watch?v=DDfLc5AHoJI]
