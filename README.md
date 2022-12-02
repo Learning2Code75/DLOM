@@ -140,13 +140,14 @@ classif : -
 - bow :
 - tfidf :
 - word2vec : [https://www.youtube.com/watch?v=UqRCEmrv1gQ, https://www.youtube.com/watch?v=DDfLc5AHoJI]
-- stacking :
+- stacking : [https://youtu.be/lcXKFS65BI0,
+https://www.youtube.com/watch?v=O-aDHBGMqXA&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=108]
 - support vector classifier :https://www.youtube.com/watch?v=9iD8DMF6odw
 - k nearest neighbors classifier :https://www.youtube.com/watch?v=wKmEULDRszo
 - decision tree classif :
 - logistic reg classif :
 - gaussain nb :https://www.youtube.com/watch?v=H3EjCKtlVog
-- voting :
+- voting : [https://www.youtube.com/watch?v=_W1i-c_6rOk , https://www.youtube.com/watch?v=pGQnNYdPTvY , https://www.youtube.com/watch?v=ut4vh59rGkw ]
 - bagging :
 - pasting :
 - random subspaces :
@@ -447,9 +448,886 @@ mutation{
 }
 
 ```
+### Order CRUD
+- add Order
+```js
+mutation{
+  addOrder(clientId:"636672f7d649e0c2f9cc53e9",
+  salesperson:"sp1",
+    salesOrder:{
+      distributorName:"dname1",
+      distributorDetails:"daddr dno",
+      voucherNo:"vno1",
+      dated:"2/12/22",
+      modeTermsOfPayment:"cash",
+      buyerRefOrderNo:"bron123",
+      otherRef:"or123",
+      invoiceTo:"buyer1",
+      despatchThrough:"fed x",
+      destination:"Kolkata",
+      termsOfDelivery:"30 day payment",
+      soTable:[{
+        siNo:1,
+        descriptionOfGoods:"prod1",
+        dueOn:"22/12/22",
+        qty:2,
+        rate:"500",
+        per:"unit",
+        amount:"1000"
+      },{
+        siNo:2,
+        descriptionOfGoods:"prod2",
+        dueOn:"22/12/22",
+        qty:2,
+        rate:"1000",
+        per:"unit",
+        amount:"2000"
+      },{
+        siNo:3,
+        descriptionOfGoods:"prod3",
+        dueOn:"22/12/22",
+        qty:1,
+        rate:"100",
+        per:"unit",
+        amount:"100"
+      }],
+      totalQty:5,
+      totalAmt:"3100",
+      amtInWords:"Three Thousand One Hundred Only"
+    },
+    invoice:{
+      distributorName:"dname1",
+      distributorDetails:"daddr dno",
+      invoiceNo:"inv1",
+      dated:"2/12/22",
+      deliveryNote:"del note1",
+      supplierRef:"sr1",
+      otherRef:"or1",
+      client:"cli1",
+      despatchDocNo:"ddoc1",
+      deliveryNoteDate:"13/12/22",
+      despatchedThrough:"fed x",
+      destination:"Kolkata",
+      invTable:[
+        {
+          siNo:1,
+          descriptionOfGoods:"prod1",
+          hsnSAC:"1243",
+          GSTRate:"18",
+          qty:2,
+          rate:"500",
+          per:"unit",
+          amount:"1000"
+        },
+        {
+          siNo:2,
+          descriptionOfGoods:"prod2",
+          hsnSAC:"1243",
+          GSTRate:"18",
+          qty:2,
+          rate:"1000",
+          per:"unit",
+          amount:"2000"
+        },
+        {
+          siNo:3,
+          descriptionOfGoods:"prod3",
+          hsnSAC:"1244",
+          GSTRate:"18",
+          qty:1,
+          rate:"100",
+          per:"unit",
+          amount:"100"
+        }
+      ],
+      totalQty:4,
+      totalAmount:"3100",
+      amtChargableInWords:"Three Thousand Only",
+      invTaxTable:[
+        {
+          hsnSAC:"1243",
+          taxableValue:"3000",
+          centralTaxRate:"9",
+          centralTaxAmt:"270",
+          stateTaxRate:"9",
+          stateTaxAmt:"270"
+        },
+        {
+          hsnSAC:"1244",
+          taxableValue:"100",
+          centralTaxRate:"9",
+          centralTaxAmt:"9",
+          stateTaxRate:"9",
+          stateTaxAmt:"9"
+        }
+      ],
+      totalTaxableValue:"3100",
+      totalCentralTaxAmt:"279",
+      totalStateTaxAmt:"279",
+      taxAmtInWords:"Two Hundred and Seventy Nine Only",
+      companyPAN:"123456789",
+      companyBankDetails:{
+        bankName:"bank1",
+        acNo:"321564798",
+        BranchIFSCode:"bk12354"
+      },
+      for:"dname1",
+    },
+    wareHouseReceipt:[{
+      imgString:"https://daf.adsa.com"
+    }],
+    salesReceipt:{
+      distributorName:"dname1",
+      distributorDetails:"daddr dno",
+      soldBy:"dname 1",
+      date :"4/12/22",
+      name:"company1",
+      address:"addr1",
+      mode:"cash",
+      srTable:[
+        {
+          qty:2,
+          details:"prod1",
+          price:"500",
+          amount:"1000"
+        },
+        {
+          qty:2,
+          details:"prod2",
+          price:"1000",
+          amount:"2000"
+        },
+        {
+          qty:1,
+          details:"prod3",
+          price:"100",
+          amount:"100"
+        }
+      ]
+    },
+    orderDelivery:{
+      history:[{
+        timeStamp:"time1",
+        status:"Ordered"
+      },{
+        timeStamp:"time2",
+        status:"Dispatched"
+      },{
+        timeStamp:"time3",
+        status:"Delivered"
+      }
+      ]
+    },
+    orderCancel:{
+      timeStamp:"",
+      state:"",
+      desc:""
+    },
+    orderPayment:{
+      history:[
+        {
+          timeStamp:"time1",
+          amount:"2000",
+          method:"cash",
+          description:"payment 1"
+        },
+        {
+          timeStamp:"time2",
+          amount:"1379",
+          method:"cash",
+          description:"payment 2"
+        }
+      ]
+    }
+  ){
+    id
+    client{
+      companyName
+      contactPersonName      
+    }
+    salesperson
+    salesOrder{
+      distributorName
+      distributorDetails
+      voucherNo
+      dated
+      modeTermsOfPayment
+      buyerRefOrderNo
+      otherRef
+      invoiceTo
+      despatchThrough
+      destination
+      termsOfDelivery
+      soTable{
+        siNo
+        descriptionOfGoods
+        dueOn
+        qty
+        rate
+        per
+        amount
+      }
+      totalQty
+      totalAmt
+      amtInWords
 
+    }
+    invoice{
+      distributorName
+      distributorDetails
+      invoiceNo
+      dated
+      deliveryNote
+      supplierRef
+      otherRef
+      client
+      despatchDocNo
+      deliveryNoteDate
+      despatchedThrough
+      destination
+      invTable{
+        siNo
+        descriptionOfGoods
+        hsnSAC
+        GSTRate
+        qty
+        rate
+        per
+        amount
+      }
+      totalQty
+      totalAmount
+      amtChargableInWords
+      invTaxTable{
+        hsnSAC
+        taxableValue
+        centralTaxRate
+        centralTaxAmt
+        stateTaxRate
+        stateTaxAmt
+      }
+      totalTaxableValue
+      totalCentralTaxAmt
+      totalStateTaxAmt
+      taxAmtInWords
+      companyPAN
+      companyBankDetails{
+        bankName
+        acNo
+        BranchIFSCode
+      }
+      for
+    }
+    wareHouseReceipt{imgString}
+    salesReceipt{
+      distributorName
+      distributorDetails
+      soldBy
+      date
+      name
+      address
+      mode
+      srTable{
+        qty
+        details
+        price
+        amount
+      }
+    }
 
+    orderDelivery{
+      history{
+        timeStamp
+        status
+      }
+    }
 
+    orderCancel{
+      timeStamp
+      state
+      desc
+    }
+
+    orderPayment{
+      history{
+        timeStamp
+        amount
+        method
+        description
+      }
+    }
+
+  }  
+}
+```
+
+- update Order
+```js
+mutation{
+  updateOrder(
+    id:"6389302986505aa4f005d8bf",
+    clientId:"636672f7d649e0c2f9cc53e9",
+  salesperson:"sp2",
+    salesOrder:{
+      distributorName:"dname1",
+      distributorDetails:"daddr dno",
+      voucherNo:"vno1",
+      dated:"2/12/22",
+      modeTermsOfPayment:"cash",
+      buyerRefOrderNo:"bron123",
+      otherRef:"or123",
+      invoiceTo:"buyer1",
+      despatchThrough:"fed x",
+      destination:"Kolkata",
+      termsOfDelivery:"30 day payment",
+      soTable:[{
+        siNo:1,
+        descriptionOfGoods:"prod1",
+        dueOn:"22/12/22",
+        qty:2,
+        rate:"500",
+        per:"unit",
+        amount:"1000"
+      },{
+        siNo:2,
+        descriptionOfGoods:"prod2",
+        dueOn:"22/12/22",
+        qty:2,
+        rate:"1000",
+        per:"unit",
+        amount:"2000"
+      },{
+        siNo:3,
+        descriptionOfGoods:"prod3",
+        dueOn:"22/12/22",
+        qty:1,
+        rate:"100",
+        per:"unit",
+        amount:"100"
+      }],
+      totalQty:5,
+      totalAmt:"3100",
+      amtInWords:"Three Thousand One Hundred Only"
+    },
+    invoice:{
+      distributorName:"dname1",
+      distributorDetails:"daddr dno",
+      invoiceNo:"inv1",
+      dated:"2/12/22",
+      deliveryNote:"del note1",
+      supplierRef:"sr1",
+      otherRef:"or1",
+      client:"cli1",
+      despatchDocNo:"ddoc1",
+      deliveryNoteDate:"13/12/22",
+      despatchedThrough:"fed x",
+      destination:"Kolkata",
+      invTable:[
+        {
+          siNo:1,
+          descriptionOfGoods:"prod1",
+          hsnSAC:"1243",
+          GSTRate:"18",
+          qty:2,
+          rate:"500",
+          per:"unit",
+          amount:"1000"
+        },
+        {
+          siNo:2,
+          descriptionOfGoods:"prod2",
+          hsnSAC:"1243",
+          GSTRate:"18",
+          qty:2,
+          rate:"1000",
+          per:"unit",
+          amount:"2000"
+        },
+        {
+          siNo:3,
+          descriptionOfGoods:"prod3",
+          hsnSAC:"1244",
+          GSTRate:"18",
+          qty:1,
+          rate:"100",
+          per:"unit",
+          amount:"100"
+        }
+      ],
+      totalQty:4,
+      totalAmount:"3100",
+      amtChargableInWords:"Three Thousand Only",
+      invTaxTable:[
+        {
+          hsnSAC:"1243",
+          taxableValue:"3000",
+          centralTaxRate:"9",
+          centralTaxAmt:"270",
+          stateTaxRate:"9",
+          stateTaxAmt:"270"
+        },
+        {
+          hsnSAC:"1244",
+          taxableValue:"100",
+          centralTaxRate:"9",
+          centralTaxAmt:"9",
+          stateTaxRate:"9",
+          stateTaxAmt:"9"
+        }
+      ],
+      totalTaxableValue:"3100",
+      totalCentralTaxAmt:"279",
+      totalStateTaxAmt:"279",
+      taxAmtInWords:"Two Hundred and Seventy Nine Only",
+      companyPAN:"123456789",
+      companyBankDetails:{
+        bankName:"bank1",
+        acNo:"321564798",
+        BranchIFSCode:"bk12354"
+      },
+      for:"dname1",
+    },
+    wareHouseReceipt:[{
+      imgString:"https://daf.adsa.com"
+    }],
+    salesReceipt:{
+      distributorName:"dname1",
+      distributorDetails:"daddr dno",
+      soldBy:"dname 1",
+      date :"4/12/22",
+      name:"company1",
+      address:"addr1",
+      mode:"cash",
+      srTable:[
+        {
+          qty:2,
+          details:"prod1",
+          price:"500",
+          amount:"1000"
+        },
+        {
+          qty:2,
+          details:"prod2",
+          price:"1000",
+          amount:"2000"
+        },
+        {
+          qty:1,
+          details:"prod3",
+          price:"100",
+          amount:"100"
+        }
+      ]
+    },
+    orderDelivery:{
+      history:[{
+        timeStamp:"time1",
+        status:"Ordered"
+      },{
+        timeStamp:"time2",
+        status:"Dispatched"
+      },{
+        timeStamp:"time3",
+        status:"Delivered"
+      }
+      ]
+    },
+    orderCancel:{
+      timeStamp:"",
+      state:"",
+      desc:""
+    },
+    orderPayment:{
+      history:[
+        {
+          timeStamp:"time1",
+          amount:"2000",
+          method:"cash",
+          description:"payment 1"
+        },
+        {
+          timeStamp:"time2",
+          amount:"1379",
+          method:"cash",
+          description:"payment 2"
+        }
+      ]
+    }
+  ){
+    id
+    client{
+      companyName
+      contactPersonName      
+    }
+    salesperson
+    salesOrder{
+      distributorName
+      distributorDetails
+      voucherNo
+      dated
+      modeTermsOfPayment
+      buyerRefOrderNo
+      otherRef
+      invoiceTo
+      despatchThrough
+      destination
+      termsOfDelivery
+      soTable{
+        siNo
+        descriptionOfGoods
+        dueOn
+        qty
+        rate
+        per
+        amount
+      }
+      totalQty
+      totalAmt
+      amtInWords
+
+    }
+    invoice{
+      distributorName
+      distributorDetails
+      invoiceNo
+      dated
+      deliveryNote
+      supplierRef
+      otherRef
+      client
+      despatchDocNo
+      deliveryNoteDate
+      despatchedThrough
+      destination
+      invTable{
+        siNo
+        descriptionOfGoods
+        hsnSAC
+        GSTRate
+        qty
+        rate
+        per
+        amount
+      }
+      totalQty
+      totalAmount
+      amtChargableInWords
+      invTaxTable{
+        hsnSAC
+        taxableValue
+        centralTaxRate
+        centralTaxAmt
+        stateTaxRate
+        stateTaxAmt
+      }
+      totalTaxableValue
+      totalCentralTaxAmt
+      totalStateTaxAmt
+      taxAmtInWords
+      companyPAN
+      companyBankDetails{
+        bankName
+        acNo
+        BranchIFSCode
+      }
+      for
+    }
+    wareHouseReceipt{imgString}
+    salesReceipt{
+      distributorName
+      distributorDetails
+      soldBy
+      date
+      name
+      address
+      mode
+      srTable{
+        qty
+        details
+        price
+        amount
+      }
+    }
+
+    orderDelivery{
+      history{
+        timeStamp
+        status
+      }
+    }
+
+    orderCancel{
+      timeStamp
+      state
+      desc
+    }
+
+    orderPayment{
+      history{
+        timeStamp
+        amount
+        method
+        description
+      }
+    }
+
+  }  
+}
+```
+
+- view all orders :
+```js
+query{
+  orders{
+
+  id
+  client{
+    companyName
+    contactPersonName      
+  }
+  salesperson
+  salesOrder{
+    distributorName
+    distributorDetails
+    voucherNo
+    dated
+    modeTermsOfPayment
+    buyerRefOrderNo
+    otherRef
+    invoiceTo
+    despatchThrough
+    destination
+    termsOfDelivery
+    soTable{
+      siNo
+      descriptionOfGoods
+      dueOn
+      qty
+      rate
+      per
+      amount
+    }
+    totalQty
+    totalAmt
+    amtInWords
+
+  }
+  invoice{
+    distributorName
+    distributorDetails
+    invoiceNo
+    dated
+    deliveryNote
+    supplierRef
+    otherRef
+    client
+    despatchDocNo
+    deliveryNoteDate
+    despatchedThrough
+    destination
+    invTable{
+      siNo
+      descriptionOfGoods
+      hsnSAC
+      GSTRate
+      qty
+      rate
+      per
+      amount
+    }
+    totalQty
+    totalAmount
+    amtChargableInWords
+    invTaxTable{
+      hsnSAC
+      taxableValue
+      centralTaxRate
+      centralTaxAmt
+      stateTaxRate
+      stateTaxAmt
+    }
+    totalTaxableValue
+    totalCentralTaxAmt
+    totalStateTaxAmt
+    taxAmtInWords
+    companyPAN
+    companyBankDetails{
+      bankName
+      acNo
+      BranchIFSCode
+    }
+    for
+  }
+  wareHouseReceipt{imgString}
+  salesReceipt{
+    distributorName
+    distributorDetails
+    soldBy
+    date
+    name
+    address
+    mode
+    srTable{
+      qty
+      details
+      price
+      amount
+    }
+  }
+
+  orderDelivery{
+    history{
+      timeStamp
+      status
+    }
+  }
+
+  orderCancel{
+    timeStamp
+    state
+    desc
+  }
+
+  orderPayment{
+    history{
+      timeStamp
+      amount
+      method
+      description
+    }
+  }
+  }
+
+}  
+
+```
+
+- view order :
+```js
+query{
+  order(id:"6389302986505aa4f005d8bf"){
+
+  id
+  client{
+    companyName
+    contactPersonName      
+  }
+  salesperson
+  salesOrder{
+    distributorName
+    distributorDetails
+    voucherNo
+    dated
+    modeTermsOfPayment
+    buyerRefOrderNo
+    otherRef
+    invoiceTo
+    despatchThrough
+    destination
+    termsOfDelivery
+    soTable{
+      siNo
+      descriptionOfGoods
+      dueOn
+      qty
+      rate
+      per
+      amount
+    }
+    totalQty
+    totalAmt
+    amtInWords
+
+  }
+  invoice{
+    distributorName
+    distributorDetails
+    invoiceNo
+    dated
+    deliveryNote
+    supplierRef
+    otherRef
+    client
+    despatchDocNo
+    deliveryNoteDate
+    despatchedThrough
+    destination
+    invTable{
+      siNo
+      descriptionOfGoods
+      hsnSAC
+      GSTRate
+      qty
+      rate
+      per
+      amount
+    }
+    totalQty
+    totalAmount
+    amtChargableInWords
+    invTaxTable{
+      hsnSAC
+      taxableValue
+      centralTaxRate
+      centralTaxAmt
+      stateTaxRate
+      stateTaxAmt
+    }
+    totalTaxableValue
+    totalCentralTaxAmt
+    totalStateTaxAmt
+    taxAmtInWords
+    companyPAN
+    companyBankDetails{
+      bankName
+      acNo
+      BranchIFSCode
+    }
+    for
+  }
+  wareHouseReceipt{imgString}
+  salesReceipt{
+    distributorName
+    distributorDetails
+    soldBy
+    date
+    name
+    address
+    mode
+    srTable{
+      qty
+      details
+      price
+      amount
+    }
+  }
+
+  orderDelivery{
+    history{
+      timeStamp
+      status
+    }
+  }
+
+  orderCancel{
+    timeStamp
+    state
+    desc
+  }
+
+  orderPayment{
+    history{
+      timeStamp
+      amount
+      method
+      description
+    }
+  }
+  }
+
+}  
+
+```
 
 
 # References

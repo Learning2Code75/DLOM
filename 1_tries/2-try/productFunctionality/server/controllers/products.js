@@ -2,7 +2,7 @@ import Product from "../models/product.js";
 import mongoose from "mongoose";
 
 export const getProducts = async (req, res) => {
-  if (!req.userId) return res.json({ message: "Unauthenticated" });
+  // if (!req.userId) return res.json({ message: "Unauthenticated" });
 
   try {
     const products = await Product.find();
@@ -16,7 +16,7 @@ export const getProducts = async (req, res) => {
 };
 
 export const createProduct = async (req, res) => {
-  if (!req.userId) return res.json({ message: "Unauthenticated" });
+  // if (!req.userId) return res.json({ message: "Unauthenticated" });
 
   const prod = req.body;
   const newProduct = new Product(prod);
@@ -32,7 +32,7 @@ export const createProduct = async (req, res) => {
 export const updateProduct = async (req, res) => {
   // console.log(req.params)
   // console.log(req.body)
-  if (!req.userId) return res.json({ message: "Unauthenticated" });
+  // if (!req.userId) return res.json({ message: "Unauthenticated" });
 
   const { id: _id } = req.params;
   const prod = req.body;
@@ -55,7 +55,7 @@ export const updateProduct = async (req, res) => {
 };
 
 export const deleteProduct = async (req, res) => {
-  if (!req.userId) return res.json({ message: "Unauthenticated" });
+  // if (!req.userId) return res.json({ message: "Unauthenticated" });
 
   const { id: _id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(_id)) {
