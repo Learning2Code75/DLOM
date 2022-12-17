@@ -91,20 +91,30 @@ Link : gmern :
 3. model vids
 
 reg : -
-- multiple lr
-- sgd
-- mini batch gd
-- poly reg
-- ridge reg
-- lasso
-- elastic net
-- logistic reg
-- dtree
-- voting
-- bagging
-- random forest
+- multiple lr :[https://www.youtube.com/watch?v=ashGekqstl8&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=53 ,
+https://www.youtube.com/watch?v=NU37mF5q8VE&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=54 ,
+https://www.youtube.com/watch?v=VmZWXzxmNrE&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=55
+]
+- sgd: https://www.youtube.com/watch?v=V7KBAa_gh4c&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=58
 
-classif : -
+- mini batch gd:https://www.youtube.com/watch?v=_scscQ4HVTY&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=59
+- poly reg:https://www.youtube.com/watch?v=BNWLf3cKdbQ&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=60
+- ridge reg:[
+https://www.youtube.com/watch?v=aEow1QoTLo0&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=62 ,
+https://www.youtube.com/watch?v=oDlZBQjk_3A&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=63 ,
+https://www.youtube.com/watch?v=Fci_wwMp8G8&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=64 ,
+https://www.youtube.com/watch?v=8osKeShYVRQ&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=65
+]
+- lasso:[https://www.youtube.com/watch?v=HLF4bFbBgwk&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=66 , https://www.youtube.com/watch?v=FN4aZPIAfI4&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=67 ]
+- elastic net:https://www.youtube.com/watch?v=2g2DBkFhTTY&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=68
+- logistic reg: [refer 2_]
+- dtree:https://www.youtube.com/watch?v=RANHxyAvtM4&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=82
+- voting [refer 2_ ,https://www.youtube.com/watch?v=ut4vh59rGkw&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=87 ]
+- bagging [refer 2_ , https://www.youtube.com/watch?v=HYVzrETXbkE&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=90]
+- random forest: [refer 2_]
+- xgb :[ https://www.youtube.com/watch?v=OtD8wVaFm6E&list=PLZ5DHV9_5h9vQwAImmNi1RfoTtSuOUjwM&index=16 , https://xgboost.readthedocs.io/en/latest/tutorials/model.html]
+
+classif : - [refer 2_]
 - dtree
 - log reg
 - knn
@@ -127,7 +137,7 @@ classif : -
   - accuracy
   - precision
   - r2 score
-
++
 
 ## 2_textClassif
 1. CampusX(https://youtube.com/playlist?list=PLKnIA16_RmvZo7fp5kkIth6nRTeQQsjfX)
@@ -144,23 +154,57 @@ classif : -
 https://www.youtube.com/watch?v=O-aDHBGMqXA&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=108]
 - support vector classifier :https://www.youtube.com/watch?v=9iD8DMF6odw
 - k nearest neighbors classifier :https://www.youtube.com/watch?v=wKmEULDRszo
-- decision tree classif :
-- logistic reg classif :
+- decision tree classif :[https://www.youtube.com/watch?v=IZnno-dKgVQ&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=80,https://www.youtube.com/watch?v=mDEV0Iucwz0&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=81]
+- logistic reg classif :[
+https://www.youtube.com/watch?v=XNXzVfItWGY&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=69,
+https://www.youtube.com/watch?v=tLezwPKvPK4&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=70,
+https://www.youtube.com/watch?v=ehO0-6i9qD4&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=71,
+https://www.youtube.com/watch?v=6bXOo0sxY5c&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=72,
+https://www.youtube.com/watch?v=awjXaFR1jOM&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=73,
+https://www.youtube.com/watch?v=ABrrSwMYWSg&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=74,
+https://www.youtube.com/watch?v=Z8noL_0M4tw&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=77,
+https://www.youtube.com/watch?v=WnBYW_DX3sM&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=78,
+https://www.youtube.com/watch?v=ay_OcblJasE&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=79
+]
 - gaussain nb :https://www.youtube.com/watch?v=H3EjCKtlVog
-- voting : [https://www.youtube.com/watch?v=_W1i-c_6rOk , https://www.youtube.com/watch?v=pGQnNYdPTvY , https://www.youtube.com/watch?v=ut4vh59rGkw ]
-- bagging :
+- voting : [https://www.youtube.com/watch?v=_W1i-c_6rOk , https://www.youtube.com/watch?v=pGQnNYdPTvY  ]
+- bagging :[https://www.youtube.com/watch?v=LUiBOAy7x6Y&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=88 ,https://www.youtube.com/watch?v=-1T54G_E-ys&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=89]
 - pasting :
 - random subspaces :
 - random patches :
 - oob score :
-- random forest classif :
-- ada :
-- bagging :
+- random forest classif :[
+https://www.youtube.com/watch?v=F9uESCHGjhA&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=91,
+https://www.youtube.com/watch?v=jHgG4gjuFAk&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=92,
+https://www.youtube.com/watch?v=l93jRojZMqU&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=93,
+https://www.youtube.com/watch?v=WOFVY_wQ9wU&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=94,
+https://www.youtube.com/watch?v=4Im0CT43QxY&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=95,
+https://www.youtube.com/watch?v=tdDhyFoSG94&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=96,
+https://www.youtube.com/watch?v=R47JAob1xBY&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=97
+]
+- ada :[
+https://www.youtube.com/watch?v=sFKnP0iP0K0&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=98,
+https://www.youtube.com/watch?v=RT0t9a3Xnfw&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=99,
+https://www.youtube.com/watch?v=a20TaKNsriE&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=100,
+https://www.youtube.com/watch?v=JmXnztjULnQ&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=101
+]
+- bagging :[
+  refer up
+]
 - extra trees classif :https://youtu.be/1VgevfcOmyE
-- gradient boosting :
-- xgb :
-- ann :
-- gru :
+- gradient boosting dt:[https://www.youtube.com/watch?v=jxuNLH5dXCs&list=PLblh5JKOoLUJjeXUvUE0maghNuY2_5fY6&index=3, https://www.youtube.com/watch?v=StWY5QWMXCw&list=PLblh5JKOoLUJjeXUvUE0maghNuY2_5fY6&index=4]
+- xgb :[https://www.youtube.com/watch?v=8b1JEDvenQU&list=PLZ5DHV9_5h9vQwAImmNi1RfoTtSuOUjwM&index=17 , https://xgboost.readthedocs.io/en/latest/tutorials/model.html]
+- ann :https://youtu.be/Tb23YtZ92AE
+- gru :[https://www.youtube.com/watch?v=8HyCNIVRbSU , https://www.youtube.com/watch?v=pYRIOGTPRPU]
+
+
+## other_rp_docs :
+- metrics, analysis , discussion : [
+https://www.youtube.com/watch?v=Ti7c-Hz7GSM&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=52,
+https://www.youtube.com/watch?v=c09drtuCS3c&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=75 ,
+https://www.youtube.com/watch?v=iK-kdhJ-7yI&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=76
+]
+
 
 # Microservices Deployment
 1. [[22i]](https://youtu.be/9zUHg7xjIqQ)
