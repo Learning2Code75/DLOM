@@ -94,25 +94,25 @@ reg : -
 - multiple lr :[https://www.youtube.com/watch?v=ashGekqstl8&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=53 ,
 https://www.youtube.com/watch?v=NU37mF5q8VE&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=54 ,
 https://www.youtube.com/watch?v=VmZWXzxmNrE&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=55
-]
-- sgd: https://www.youtube.com/watch?v=V7KBAa_gh4c&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=58
+](done)
+- sgd: https://www.youtube.com/watch?v=V7KBAa_gh4c&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=58 (done)
 
-- mini batch gd:https://www.youtube.com/watch?v=_scscQ4HVTY&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=59
-- poly reg:https://www.youtube.com/watch?v=BNWLf3cKdbQ&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=60
+- mini batch gd:https://www.youtube.com/watch?v=_scscQ4HVTY&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=59 (done)
+- poly reg:https://www.youtube.com/watch?v=BNWLf3cKdbQ&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=60 (done)
 - ridge reg:[
 https://www.youtube.com/watch?v=aEow1QoTLo0&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=62 ,
 https://www.youtube.com/watch?v=oDlZBQjk_3A&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=63 ,
 https://www.youtube.com/watch?v=Fci_wwMp8G8&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=64 ,
 https://www.youtube.com/watch?v=8osKeShYVRQ&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=65
-]
-- lasso:[https://www.youtube.com/watch?v=HLF4bFbBgwk&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=66 , https://www.youtube.com/watch?v=FN4aZPIAfI4&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=67 ]
-- elastic net:https://www.youtube.com/watch?v=2g2DBkFhTTY&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=68
-- logistic reg: [refer 2_]
-- dtree:https://www.youtube.com/watch?v=RANHxyAvtM4&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=82
-- voting [refer 2_ ,https://www.youtube.com/watch?v=ut4vh59rGkw&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=87 ]
-- bagging [refer 2_ , https://www.youtube.com/watch?v=HYVzrETXbkE&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=90]
-- random forest: [refer 2_]
-- xgb :[ https://www.youtube.com/watch?v=OtD8wVaFm6E&list=PLZ5DHV9_5h9vQwAImmNi1RfoTtSuOUjwM&index=16 , https://xgboost.readthedocs.io/en/latest/tutorials/model.html]
+](done)
+- lasso:[https://www.youtube.com/watch?v=HLF4bFbBgwk&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=66 , https://www.youtube.com/watch?v=FN4aZPIAfI4&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=67 ] (done)
+- elastic net:https://www.youtube.com/watch?v=2g2DBkFhTTY&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=68 (done)
+- logistic reg: [refer 2_ , https://www.youtube.com/playlist?list=PLblh5JKOoLUKxzEP5HA2d-Li7IJkHfXSe]
+- dtree:https://www.youtube.com/watch?v=RANHxyAvtM4&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=82 (done)
+- voting [refer 2_ ,https://www.youtube.com/watch?v=ut4vh59rGkw&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=87 ] (done)
+- bagging [refer 2_ , https://www.youtube.com/watch?v=HYVzrETXbkE&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=90] (done)
+- random forest: [refer 2_] (done)
+- xgb :[ https://www.youtube.com/watch?v=OtD8wVaFm6E&list=PLZ5DHV9_5h9vQwAImmNi1RfoTtSuOUjwM&index=16 , https://xgboost.readthedocs.io/en/latest/tutorials/model.html] (done)
 
 classif : - [refer 2_]
 - dtree
@@ -146,15 +146,15 @@ classif : - [refer 2_]
 3. own prev
 4. pytorch ensemble (https://ensemble-pytorch.readthedocs.io/en/latest/introduction.html)
 5. model vids
-- stemming : [https://www.youtube.com/watch?v=YeqKAO2P19E (done), https://www.youtube.com/watch?v=7zq8tAHRTiA , https://www.youtube.com/watch?v=W34Vpl7jXpY , https://www.youtube.com/watch?v=GQ1sXx8hH4k  ]
+- stemming : [https://www.youtube.com/watch?v=YeqKAO2P19E (done), https://www.youtube.com/watch?v=7zq8tAHRTiA (no), https://www.youtube.com/watch?v=W34Vpl7jXpY (done) , https://www.youtube.com/watch?v=GQ1sXx8hH4k (no) ]
 - bow :
 - tfidf :
-- word2vec : [https://www.youtube.com/watch?v=UqRCEmrv1gQ, https://www.youtube.com/watch?v=DDfLc5AHoJI]
-- stacking : [https://youtu.be/lcXKFS65BI0,
-https://www.youtube.com/watch?v=O-aDHBGMqXA&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=108]
-- support vector classifier :https://www.youtube.com/watch?v=9iD8DMF6odw
-- k nearest neighbors classifier :https://www.youtube.com/watch?v=wKmEULDRszo
-- decision tree classif :[https://www.youtube.com/watch?v=IZnno-dKgVQ&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=80,https://www.youtube.com/watch?v=mDEV0Iucwz0&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=81]
+- word2vec : [https://www.youtube.com/watch?v=UqRCEmrv1gQ (no), https://www.youtube.com/watch?v=DDfLc5AHoJI (done)]
+- stacking : [https://youtu.be/lcXKFS65BI0 (ok),
+https://www.youtube.com/watch?v=O-aDHBGMqXA&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=108 (done)]
+- support vector classifier :https://www.youtube.com/watch?v=9iD8DMF6odw (done)
+- k nearest neighbors classifier :https://www.youtube.com/watch?v=wKmEULDRszo (done)
+- decision tree classif :[https://www.youtube.com/watch?v=IZnno-dKgVQ&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=80 (done) , https://www.youtube.com/watch?v=mDEV0Iucwz0&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=81 (done)]
 - logistic reg classif :[
 https://www.youtube.com/watch?v=XNXzVfItWGY&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=69,
 https://www.youtube.com/watch?v=tLezwPKvPK4&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=70,
@@ -166,9 +166,9 @@ https://www.youtube.com/watch?v=Z8noL_0M4tw&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJg
 https://www.youtube.com/watch?v=WnBYW_DX3sM&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=78,
 https://www.youtube.com/watch?v=ay_OcblJasE&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=79
 ]
-- gaussain nb :https://www.youtube.com/watch?v=H3EjCKtlVog
-- voting : [https://www.youtube.com/watch?v=_W1i-c_6rOk , https://www.youtube.com/watch?v=pGQnNYdPTvY  ]
-- bagging :[https://www.youtube.com/watch?v=LUiBOAy7x6Y&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=88 ,https://www.youtube.com/watch?v=-1T54G_E-ys&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=89]
+- gaussain nb :https://www.youtube.com/watch?v=H3EjCKtlVog (done)
+- voting : [https://www.youtube.com/watch?v=_W1i-c_6rOk (done) , https://www.youtube.com/watch?v=pGQnNYdPTvY (done) ]
+- bagging :[https://www.youtube.com/watch?v=LUiBOAy7x6Y&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=88 (done),https://www.youtube.com/watch?v=-1T54G_E-ys&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=89 (done)]
 - pasting :
 - random subspaces :
 - random patches :
@@ -181,19 +181,19 @@ https://www.youtube.com/watch?v=WOFVY_wQ9wU&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJg
 https://www.youtube.com/watch?v=4Im0CT43QxY&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=95,
 https://www.youtube.com/watch?v=tdDhyFoSG94&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=96,
 https://www.youtube.com/watch?v=R47JAob1xBY&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=97
-]
+](done)
 - ada :[
 https://www.youtube.com/watch?v=sFKnP0iP0K0&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=98,
 https://www.youtube.com/watch?v=RT0t9a3Xnfw&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=99,
 https://www.youtube.com/watch?v=a20TaKNsriE&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=100,
 https://www.youtube.com/watch?v=JmXnztjULnQ&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=101
-]
+](done)
 - bagging :[
   refer up
 ]
-- extra trees classif :https://youtu.be/1VgevfcOmyE
-- gradient boosting dt:[https://www.youtube.com/watch?v=jxuNLH5dXCs&list=PLblh5JKOoLUJjeXUvUE0maghNuY2_5fY6&index=3, https://www.youtube.com/watch?v=StWY5QWMXCw&list=PLblh5JKOoLUJjeXUvUE0maghNuY2_5fY6&index=4]
-- xgb :[https://www.youtube.com/watch?v=8b1JEDvenQU&list=PLZ5DHV9_5h9vQwAImmNi1RfoTtSuOUjwM&index=17 , https://xgboost.readthedocs.io/en/latest/tutorials/model.html]
+- extra trees classif :https://youtu.be/1VgevfcOmyE (later)
+- gradient boosting dt:[https://www.youtube.com/watch?v=jxuNLH5dXCs&list=PLblh5JKOoLUJjeXUvUE0maghNuY2_5fY6&index=3, https://www.youtube.com/watch?v=StWY5QWMXCw&list=PLblh5JKOoLUJjeXUvUE0maghNuY2_5fY6&index=4] (done)
+- xgb :[https://www.youtube.com/watch?v=8b1JEDvenQU&list=PLZ5DHV9_5h9vQwAImmNi1RfoTtSuOUjwM&index=17 , https://xgboost.readthedocs.io/en/latest/tutorials/model.html] (done)
 - ann :https://youtu.be/Tb23YtZ92AE
 - gru :[https://www.youtube.com/watch?v=8HyCNIVRbSU , https://www.youtube.com/watch?v=pYRIOGTPRPU]
 
@@ -202,7 +202,9 @@ https://www.youtube.com/watch?v=JmXnztjULnQ&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJg
 - metrics, analysis , discussion : [
 https://www.youtube.com/watch?v=Ti7c-Hz7GSM&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=52,
 https://www.youtube.com/watch?v=c09drtuCS3c&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=75 ,
-https://www.youtube.com/watch?v=iK-kdhJ-7yI&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=76
+https://www.youtube.com/watch?v=iK-kdhJ-7yI&list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH&index=76 ,
+https://youtu.be/u-Ez7trpNrM ,
+https://youtube.com/playlist?list=PLAyz_McAak4kdOqpribZk3pyw3NSNHb3q
 ]
 
 
