@@ -6378,6 +6378,11 @@ nth-check@^2.0.1:
   dependencies:
     boolbase "^1.0.0"
 
+num-words@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/num-words/-/num-words-1.2.2.tgz#3e19672955cd7b604c217f3b1f5ae043bb994834"
+  integrity sha512-9OrwYwBDosGA46MBeRSioU+9qpqWDDWKvl7xfIuJh1J02zw9trnYHQE+HA8KEfoUqTqK6fGAGf0LSwpZ7HrXKA==
+
 nwsapi@^2.2.0:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/nwsapi/-/nwsapi-2.2.2.tgz#e5418863e7905df67d51ec95938d67bf801f0bb0"
@@ -7581,6 +7586,11 @@ react-scripts@5.0.1:
     workbox-webpack-plugin "^6.4.1"
   optionalDependencies:
     fsevents "^2.3.2"
+
+react-uuid@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/react-uuid/-/react-uuid-2.0.0.tgz#e3c97e190db9eef53cb9dacfcc7314d913a411fa"
+  integrity sha512-FNUH/8WR/FEtx0Bu6gmt1eONfc413hhvrEXFWUSFGvznUhI4dYoVZA09p7JHoTpnM4WC2D/bG2YSxGKXF4oVLg==
 
 react@^15.6.1:
   version "15.7.0"

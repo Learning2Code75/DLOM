@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import SoTableEntry from "./SoTableEntry";
+import uuid from "react-uuid";
+import { useEffect } from "react";
+import numWords from "num-words";
 
 const OrderCardCRUD = () => {
   const [state, setState] = useState({
@@ -18,27 +22,30 @@ const OrderCardCRUD = () => {
       termsOfDelivery: "30 day payment",
       soTable: [
         {
+          _id: uuid(),
           siNo: 1,
           descriptionOfGoods: "prod1",
-          dueOn: "22/12/22",
+          dueOn: "2022-12-20",
           qty: 2,
           rate: "500",
           per: "unit",
           amount: "1000",
         },
         {
+          _id: uuid(),
           siNo: 2,
           descriptionOfGoods: "prod2",
-          dueOn: "22/12/22",
+          dueOn: "2022-12-20",
           qty: 2,
           rate: "1000",
           per: "unit",
           amount: "2000",
         },
         {
+          _id: uuid(),
           siNo: 3,
           descriptionOfGoods: "prod3",
-          dueOn: "22/12/22",
+          dueOn: "2022-12-20",
           qty: 1,
           rate: "100",
           per: "unit",
@@ -201,7 +208,42 @@ const OrderCardCRUD = () => {
   });
 
   const [isUpdate, setIsUpdate] = useState(false);
+  const calcTotalQty = () => {
+    let qty = 0;
+    for (let i = 0; i < state.salesOrder.soTable.length; i++) {
+      qty = parseFloat(qty) + parseFloat(state.salesOrder.soTable[i].qty);
+    }
 
+    return qty;
+  };
+  const calcTotalAmount = () => {
+    let amt = 0;
+    for (let i = 0; i < state.salesOrder.soTable.length; i++) {
+      amt = parseFloat(amt) + parseFloat(state.salesOrder.soTable[i].amount);
+    }
+
+    return amt;
+  };
+
+  const calcNumWords = (a) => {
+    let amt = "";
+    amt = numWords(a) + " only";
+    return amt;
+  };
+
+  useEffect(() => {
+    let totQty = calcTotalQty();
+    let totAmt = calcTotalAmount();
+    let new_sales_order = { ...state.salesOrder };
+    new_sales_order.amtInWords = calcNumWords(totAmt);
+    new_sales_order.totalQty = totQty;
+    new_sales_order.totalAmt = totAmt;
+    setState({ ...state, salesOrder: new_sales_order });
+  }, [state.salesOrder.soTable]);
+
+  useEffect(() => {
+    console.log(state);
+  }, []);
   return (
     <div>
       <h1> OrderCard CRUD</h1>
@@ -407,6 +449,62 @@ const OrderCardCRUD = () => {
             id="soAmtInWords"
             className="formControl"
           />
+
+          <div className="formLabel">
+            <span>SO Table</span>{" "}
+            <button
+              className="btn"
+              onClick={(e) => {
+                e.preventDefault();
+                let new_sales_order = { ...state.salesOrder };
+                new_sales_order.soTable = [
+                  ...new_sales_order.soTable,
+                  {
+                    _id: uuid(),
+                    siNo: "",
+                    descriptionOfGoods: "",
+                    dueOn: "",
+                    qty: "",
+                    rate: "",
+                    per: "",
+                    amount: "",
+                  },
+                ];
+                setState({ ...state, salesOrder: new_sales_order });
+              }}
+            >
+              Add Entry
+            </button>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <div>Si</div>
+            <div>Description</div>
+            <div>Due on</div>
+            <div>Qty</div>
+            <div>Rate</div>
+            <div>Per</div>
+            <div>Amount</div>
+            <div>{""}</div>
+            <div>{""}</div>
+          </div>
+          {state.salesOrder.soTable.map((soEntry, idx) => (
+            <SoTableEntry
+              idx={idx}
+              setOrder={setState}
+              order={state}
+              soEntry={soEntry}
+            />
+          ))}
+
+          <div className="formLabel">
+            <button>Save Sales Order</button>
+          </div>
         </form>
       </div>
 
