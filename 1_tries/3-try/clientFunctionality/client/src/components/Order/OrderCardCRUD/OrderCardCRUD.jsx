@@ -3,16 +3,21 @@ import SoTableEntry from "./SoTableEntry";
 import uuid from "react-uuid";
 import { useEffect } from "react";
 import numWords from "num-words";
+import { useMutation } from "@apollo/client";
+import { ADD_ORDER, UPDATE_ORDER } from "../../../mutations/dlomOrderMutation";
+import { GET_ORDERS } from "../../../queries/dlomOrderQueries";
+import ViewOrders from "./ViewOrders";
 
 const OrderCardCRUD = () => {
   const [state, setState] = useState({
+    id: "",
     clientId: "636672f7d649e0c2f9cc53e9",
     salesperson: "sp1",
     salesOrder: {
       distributorName: "dname1",
       distributorDetails: "daddr dno",
       voucherNo: "vno1",
-      dated: "2/12/22",
+      dated: "2022-12-02",
       modeTermsOfPayment: "cash",
       buyerRefOrderNo: "bron123",
       otherRef: "or123",
@@ -22,7 +27,6 @@ const OrderCardCRUD = () => {
       termsOfDelivery: "30 day payment",
       soTable: [
         {
-          _id: uuid(),
           siNo: 1,
           descriptionOfGoods: "prod1",
           dueOn: "2022-12-20",
@@ -32,7 +36,6 @@ const OrderCardCRUD = () => {
           amount: "1000",
         },
         {
-          _id: uuid(),
           siNo: 2,
           descriptionOfGoods: "prod2",
           dueOn: "2022-12-20",
@@ -42,7 +45,6 @@ const OrderCardCRUD = () => {
           amount: "2000",
         },
         {
-          _id: uuid(),
           siNo: 3,
           descriptionOfGoods: "prod3",
           dueOn: "2022-12-20",
@@ -208,10 +210,49 @@ const OrderCardCRUD = () => {
   });
 
   const [isUpdate, setIsUpdate] = useState(false);
+
+  const [currOrder, setCurrOrder] = useState("");
+
+  const [addOrder] = useMutation(ADD_ORDER, {
+    variables: {
+      clientId: state.clientId,
+      salesperson: state.salesperson,
+      salesOrder: state.salesOrder,
+      invoice: state.invoice,
+      wareHouseReceipt: state.wareHouseReceipt,
+      salesReceipt: state.salesReceipt,
+      orderDelivery: state.orderDelivery,
+      orderCancel: state.orderCancel,
+      orderPayment: state.orderPayment,
+    },
+    refetchQueries: [{ query: GET_ORDERS }],
+  });
+
+  const [updateOrder, { data, loading, error }] = useMutation(UPDATE_ORDER, {
+    variables: {
+      id: state.id,
+      clientId: state.clientId,
+      salesperson: state.salesperson,
+      salesOrder: state.salesOrder,
+      invoice: state.invoice,
+      wareHouseReceipt: state.wareHouseReceipt,
+      salesReceipt: state.salesReceipt,
+      orderDelivery: state.orderDelivery,
+      orderCancel: state.orderCancel,
+      orderPayment: state.orderPayment,
+    },
+    refetchQueries: [
+      {
+        query: GET_ORDERS,
+        variables: { id: state.id },
+      },
+    ],
+  });
+
   const calcTotalQty = () => {
     let qty = 0;
     for (let i = 0; i < state.salesOrder.soTable.length; i++) {
-      qty = parseFloat(qty) + parseFloat(state.salesOrder.soTable[i].qty);
+      qty = parseFloat(qty) + parseFloat(state?.salesOrder?.soTable[i]?.qty);
     }
 
     return qty;
@@ -231,22 +272,51 @@ const OrderCardCRUD = () => {
     return amt;
   };
 
-  useEffect(() => {
-    let totQty = calcTotalQty();
-    let totAmt = calcTotalAmount();
-    let new_sales_order = { ...state.salesOrder };
-    new_sales_order.amtInWords = calcNumWords(totAmt);
-    new_sales_order.totalQty = totQty;
-    new_sales_order.totalAmt = totAmt;
-    setState({ ...state, salesOrder: new_sales_order });
-  }, [state.salesOrder.soTable]);
+  const addOrderSubmit = (e) => {
+    e.preventDefault();
+    addOrder(
+      state.clientId,
+      state.salesperson,
+      state.salesOrder,
+      state.invoice,
+      state.wareHouseReceipt,
+      state.salesReceipt,
+      state.orderDelivery,
+      state.orderCancel,
+      state.orderPayment
+    );
+  };
 
-  useEffect(() => {
-    console.log(state);
-  }, []);
+  const updateOrderSubmit = (e) => {
+    e.preventDefault();
+    updateOrder(
+      state.id,
+      state.clientId,
+      state.salesperson,
+      state.salesOrder,
+      state.invoice,
+      state.wareHouseReceipt,
+      state.salesReceipt,
+      state.orderDelivery,
+      state.orderCancel,
+      state.orderPayment
+    );
+  };
+
+  // useEffect(() => {
+  //   let totQty = calcTotalQty();
+  //   let totAmt = calcTotalAmount();
+  //   let new_sales_order = { ...state.salesOrder };
+  //   new_sales_order.amtInWords = calcNumWords(totAmt);
+  //   new_sales_order.totalQty = totQty;
+  //   new_sales_order.totalAmt = totAmt;
+  //   setState({ ...state, salesOrder: new_sales_order });
+  // }, [state.salesOrder.soTable]);
+
   return (
     <div>
       <h1> OrderCard CRUD</h1>
+      {/* {console.log(error, data)} */}
       <div>
         <form>
           <div className="formLabel">Client name</div>
@@ -503,7 +573,52 @@ const OrderCardCRUD = () => {
           ))}
 
           <div className="formLabel">
-            <button>Save Sales Order</button>
+            <button
+              onClick={(e) => {
+                addOrderSubmit(e);
+              }}
+            >
+              Save Sales Order
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <ViewOrders
+        currOrder={currOrder}
+        setCurrOrder={setCurrOrder}
+        state={state}
+        setState={setState}
+      />
+      <div>
+        <form>
+          <div>
+            <h2>Invoice </h2>
+            <p>{currOrder}</p>
+          </div>
+          <div className="formLabel">Distributor name</div>
+          <input
+            type="text"
+            value={state.invoice.distributorName}
+            onChange={(e) => {
+              let new_state = { ...state };
+              new_state.invoice = {
+                ...new_state.invoice,
+                distributorName: e.target.value,
+              };
+              setState(new_state);
+            }}
+            id="invDistributorName"
+            className="formControl"
+          />
+          <div className="formLabel">
+            <button
+              onClick={(e) => {
+                updateOrderSubmit(e);
+              }}
+            >
+              Save Invoice
+            </button>
           </div>
         </form>
       </div>

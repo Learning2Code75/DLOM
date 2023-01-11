@@ -44,6 +44,13 @@ Link : [[6]](https://youtu.be/46NRrn4xi5Y)
 2. 5 - suggested updates on product info
 3. 6 - suggested updates, tasks on orders
 
+## pdf download :
+1. https://youtu.be/Do7T8LDKy0Q
+
+## csv download :
+1. https://youtu.be/c_pJCw8mLOE
+2. https://youtu.be/sKmHKej2O80
+
 # 2_ecommerce MERN
 Link :ecommerce MERN : [[7i]](https://youtu.be/AN3t-OmdyKA?list=PLt5mNkGuWcuXpkXwmXwTU6i1kjwnLomhy)
 
@@ -1202,7 +1209,6 @@ query{
       acNo
       BranchIFSCode
     }
-    for
   }
   wareHouseReceipt{imgString}
   salesReceipt{
@@ -1244,11 +1250,9 @@ query{
   }
   }
 
-}  
-
+}
 ```
-
-- view order :
+- view order
 
 ```js
 query{
@@ -1373,7 +1377,6 @@ query{
   }
 
 }  
-
 ```
 
 

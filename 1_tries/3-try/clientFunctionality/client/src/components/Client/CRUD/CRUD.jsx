@@ -37,6 +37,7 @@ const CRUD = () => {
       clientSocialMedia: state.clientSocialMedia,
       typeOfCustomer: state.typeOfCustomer,
     },
+    onCompleted: () => clearCurrClient(),
     refetchQueries: [{ query: GET_CLIENTS }],
   });
 

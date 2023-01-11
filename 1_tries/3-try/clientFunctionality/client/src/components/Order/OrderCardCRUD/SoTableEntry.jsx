@@ -24,14 +24,14 @@ const SoTableEntry = ({ idx, soEntry, order, setOrder }) => {
   //   amount: "",
   //   });
   const [state, setState] = useState({
-    _id: soEntry._id,
-    siNo: soEntry.siNo,
-    descriptionOfGoods: soEntry.descriptionOfGoods,
-    dueOn: soEntry.dueOn,
-    qty: soEntry.qty,
-    rate: soEntry.rate,
-    per: soEntry.per,
-    amount: soEntry.amount,
+    _id: soEntry?._id,
+    siNo: soEntry?.siNo,
+    descriptionOfGoods: soEntry?.descriptionOfGoods,
+    dueOn: soEntry?.dueOn,
+    qty: soEntry?.qty,
+    rate: soEntry?.rate,
+    per: soEntry?.per,
+    amount: soEntry?.amount,
   });
 
   const saveSOTableEntry = (e) => {

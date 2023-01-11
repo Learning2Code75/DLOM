@@ -91,16 +91,27 @@ const CRM = () => {
   const deleteItem = (client, index) => {
     let new_client = { ...client };
     new_client.crm = new_client.crm.filter((c, idx) => idx !== index);
+    new_client.crm = new_client.crm.map((c, index) => {
+      return {
+        msg: c.msg,
+        personType: c.personType,
+        timestamp: c.timestamp,
+      };
+    });
     setCurrClient(new_client);
     // setTimeout(() => {
     //   // updateClientCRM(currClient.id, currClient.crm);
     //   console.log(currClient);
     // }, 100);
   };
+  const deleteItemAPI = () => {
+    updateClientCRM(currClient.id, currClient.crm);
+  };
   return (
     <div>
       <Link to="/client">Client</Link>
       <h1>CRM</h1>
+      <pre>{JSON.stringify(currClient, null, 2)}</pre>
       <div>
         <form>
           <h2>Chat Modal</h2>
@@ -190,6 +201,7 @@ const CRM = () => {
           setCurrChat={setState}
           setIsUpdate={setIsUpdate}
           deleteItem={deleteItem}
+          deleteItemAPI={deleteItemAPI}
         />
       </div>
       <pre>{JSON.stringify(state, null, 2)}</pre>
