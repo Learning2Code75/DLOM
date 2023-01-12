@@ -21,6 +21,14 @@ const productSchema = mongoose.Schema({
     type: Date,
     default: new Date(),
   },
+  damaged: {
+    type: String,
+    default: "normal",
+  },
+  damagedDescription: {
+    type: String,
+    default: "",
+  },
 });
 
 const Product = mongoose.model("Product", productSchema);

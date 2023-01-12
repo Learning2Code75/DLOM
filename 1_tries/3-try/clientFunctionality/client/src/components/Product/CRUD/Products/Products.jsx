@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 
 const Products = ({ setCurProdId }) => {
   const products = useSelector((state) => state.products);
-  console.log(products);
   return (
     <>
       <div>Products</div>

@@ -10,7 +10,7 @@ API.interceptors.request.use((req) => {
   }
   return req;
 });
-
+//products
 export const fetchProducts = () => API.get("/products");
 export const createProduct = (newProd) => API.post("/products", newProd);
 export const updateProduct = (pId, pData) =>
@@ -18,5 +18,12 @@ export const updateProduct = (pId, pData) =>
 
 export const deleteProduct = (pId) => API.delete(`/products/${pId}`);
 
+//user
 export const signIn = (fData) => API.post("/users/signin", fData);
 export const signUp = (fData) => API.post("/users/signup", fData);
+
+//inventory logs
+
+//order logs
+
+//user chats

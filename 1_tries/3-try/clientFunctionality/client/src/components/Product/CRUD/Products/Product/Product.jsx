@@ -1,6 +1,7 @@
 import React from "react";
 import moment from "moment";
 import { useDispatch } from "react-redux";
+import { deleteProduct } from "../../../../../redux/actions/products";
 const Product = ({ p, setCurProdId }) => {
   const dispatch = useDispatch();
   return (
@@ -55,7 +56,7 @@ const Product = ({ p, setCurProdId }) => {
           }}
         >
           <button onClick={() => setCurProdId(p._id)}>Update</button>
-          {/* <button onClick={() => dispatch(deleteProduct(p._id))}>Delete</button> */}
+          <button onClick={() => dispatch(deleteProduct(p._id))}>Delete</button>
         </div>
       </div>
 

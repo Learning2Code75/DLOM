@@ -12,7 +12,7 @@ const CRUD = () => {
   const [curProdId, setCurProdId] = useState(null);
   useEffect(() => {
     dispatch(getProducts());
-  }, [dispatch, curProdId]);
+  }, [dispatch]);
 
   return (
     <div>

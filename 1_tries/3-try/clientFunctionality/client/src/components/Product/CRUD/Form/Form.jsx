@@ -4,6 +4,7 @@ import FileBase from "react-file-base64";
 import { useDispatch, useSelector } from "react-redux";
 import {
   createProduct,
+  getProducts,
   updateProduct,
 } from "../../../../redux/actions/products";
 import DescInput from "./DescInput";

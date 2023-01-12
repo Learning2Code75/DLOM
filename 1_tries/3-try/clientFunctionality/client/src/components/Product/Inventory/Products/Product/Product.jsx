@@ -2,7 +2,7 @@ import React from "react";
 import moment from "moment";
 import { useDispatch } from "react-redux";
 import { deleteProduct } from "../../../../../redux/actions/products";
-const Product = ({ p, setCurProdId }) => {
+const Product = ({ p, setCurProdId, setProdLog }) => {
   const dispatch = useDispatch();
   return (
     <>
@@ -59,8 +59,45 @@ const Product = ({ p, setCurProdId }) => {
             display: "flex",
           }}
         >
-          <button onClick={() => setCurProdId(p._id)}>Update</button>
-          <button onClick={() => dispatch(deleteProduct(p._id))}>Delete</button>
+          {/* <button onClick={() => setCurProdId(p._id)}>Update</button> */}
+          {/* <button onClick={() => dispatch(deleteProduct(p._id))}>Delete</button> */}
+          <button
+            className="btn"
+            onClick={() => {
+              setCurProdId(p._id);
+              setProdLog("addQty");
+            }}
+          >
+            Add Qty
+          </button>
+          <button
+            className="btn"
+            onClick={() => {
+              setCurProdId(p._id);
+              setProdLog("subQty");
+            }}
+          >
+            Reduce Qty
+          </button>
+
+          <button
+            className="btn"
+            onClick={() => {
+              setCurProdId(p._id);
+              setProdLog("updateQty");
+            }}
+          >
+            Update Qty
+          </button>
+          <button
+            className="btn"
+            onClick={() => {
+              setCurProdId(p._id);
+              setProdLog("markDamaged");
+            }}
+          >
+            Mark Damaged
+          </button>
         </div>
       </div>
 

@@ -2,7 +2,7 @@ import React from "react";
 import Product from "./Product/Product";
 import { useSelector } from "react-redux";
 
-const Products = ({ setCurProdId }) => {
+const Products = ({ setCurProdId, setProdLog }) => {
   const products = useSelector((state) => state.products);
   console.log(products);
   return (
@@ -28,7 +28,11 @@ const Products = ({ setCurProdId }) => {
             }}
             key={p._id}
           >
-            <Product p={p} setCurProdId={setCurProdId} />
+            <Product
+              p={p}
+              setCurProdId={setCurProdId}
+              setProdLog={setProdLog}
+            />
           </div>
         ))}
       </div>
