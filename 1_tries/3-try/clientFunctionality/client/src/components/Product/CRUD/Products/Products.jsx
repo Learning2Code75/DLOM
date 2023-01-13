@@ -21,7 +21,7 @@ const Products = ({ setCurProdId }) => {
           <div
             style={{
               border: "1px solid black",
-              overflow: "scroll",
+              overflowY: "scroll",
             }}
             key={p._id}
           >

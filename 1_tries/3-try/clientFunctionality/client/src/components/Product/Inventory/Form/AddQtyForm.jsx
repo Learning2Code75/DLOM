@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { createProductlog } from "../../../../redux/actions/productlogs";
 import { updateProduct } from "../../../../redux/actions/products";
 
 const AddQtyForm = ({ curProdId, setCurProdId }) => {
@@ -51,6 +52,12 @@ const AddQtyForm = ({ curProdId, setCurProdId }) => {
     prodD.qty = parseInt(productData.qty) + parseInt(addQty);
     // console.log(prodD);
     dispatch(updateProduct(curProdId, prodD));
+    let new_prod_log = {
+      product: { _id: curProdId },
+      operation: "added product",
+      qty: addQty,
+    };
+    dispatch(createProductlog(new_prod_log));
 
     clear();
   };

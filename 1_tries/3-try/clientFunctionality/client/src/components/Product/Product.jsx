@@ -21,6 +21,9 @@ const Product = () => {
         <p className="item">
           <Link to="productsCatelog">Products Catelog</Link>
         </p>
+        <p className="item">
+          <Link to="inventoryLogs">Inventory logs</Link>
+        </p>
       </div>
 
       <Link to="/">Go Back</Link>
