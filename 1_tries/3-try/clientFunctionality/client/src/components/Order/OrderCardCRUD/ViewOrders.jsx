@@ -36,27 +36,70 @@ const ViewOrders = ({ currOrder, setCurrOrder, state, setState }) => {
             >
               <div>{order.id}</div>
               <div>{order.salesperson}</div>
-              <button
-                className="btn"
-                onClick={() => {
-                  setState({ ...state, id: order.id });
-                  setCurrOrder(order.id);
-                  //   setState({
-                  //     clientId: order.clientId,
-                  //     salesperson: order.salesperson,
-                  //     salesOrder: order.salesOrder,
-                  //     invoice: order.invoice,
-                  //     wareHouseReceipt: order.wareHouseReceipt,
-                  //     salesReceipt: order.salesReceipt,
-                  //     orderDelivery: order.orderDelivery,
-                  //     orderCancel: order.orderCancel,
-                  //     orderPayment: order.orderPayment,
-                  //   });
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-around",
                 }}
               >
-                Invoice
-              </button>
+                <button
+                  className="btn"
+                  onClick={() => {
+                    let new_state = { ...order };
+                    delete new_state.client;
+                    delete new_state.__typename;
+                    setState(new_state);
+                  }}
+                >
+                  Invoice
+                </button>
+                <button
+                  className="btn"
+                  onClick={() => {
+                    setState(order);
+                  }}
+                >
+                  Warehouse Receipt
+                </button>
+
+                <button
+                  className="btn"
+                  onClick={() => {
+                    setState(order);
+                  }}
+                >
+                  Sales Receipt
+                </button>
+
+                <button
+                  className="btn"
+                  onClick={() => {
+                    setState(order);
+                  }}
+                >
+                  Order Delivery
+                </button>
+
+                <button
+                  className="btn"
+                  onClick={() => {
+                    setState(order);
+                  }}
+                >
+                  Order Payment
+                </button>
+                <button
+                  className="btn"
+                  onClick={() => {
+                    setState(order);
+                  }}
+                >
+                  Cancel Order
+                </button>
+              </div>
+
               <div>{order.invoice.distributorName}</div>
+              <pre>{JSON.stringify(order, null, 2)}</pre>
             </div>
           ))}
         </div>

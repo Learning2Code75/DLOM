@@ -12,7 +12,13 @@ import { FiDelete, FiSave } from "react-icons/fi";
 "amount": "1000"
 */
 
-const SoTableEntry = ({ idx, soEntry, order, setOrder }) => {
+const SoTableEntry = ({
+  idx,
+  soEntry,
+  order,
+  setOrder,
+  calcSalesOrderFields,
+}) => {
   //   const [state, setState] = useState({
   //   _id: "",
   //   siNo: "",
@@ -47,6 +53,9 @@ const SoTableEntry = ({ idx, soEntry, order, setOrder }) => {
       }
     });
     new_order.salesOrder.soTable = new_soTable;
+
+    // calcSalesOrderFields()
+
     setOrder(new_order);
   };
 

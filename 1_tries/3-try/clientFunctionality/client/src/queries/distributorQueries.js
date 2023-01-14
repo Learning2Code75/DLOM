@@ -18,4 +18,14 @@ const GET_DISTRIBUTOR_DETAILS = gql`
   }
 `;
 
-export { GET_DISTRIBUTOR_DETAILS };
+const GET_DISTRIBUTOR_DETAILS_ORD = gql`
+query getDistributorOrd{
+	distributor{
+		companyName
+		address
+	}
+	
+}
+`;
+
+export { GET_DISTRIBUTOR_DETAILS , GET_DISTRIBUTOR_DETAILS_ORD};

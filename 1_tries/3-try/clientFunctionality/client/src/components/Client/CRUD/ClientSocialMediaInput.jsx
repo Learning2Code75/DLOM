@@ -30,6 +30,7 @@ const ClientSocialMediaInput = ({ state, setState, index, isUpdate }) => {
         display: "flex",
       }}
     >
+      <pre>{JSON.stringify(cli, null, 2)}</pre>
       <input
         placeholder="title"
         value={cli.title}
