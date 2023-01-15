@@ -4,6 +4,7 @@ import { GET_DISTRIBUTOR_DETAILS } from "../../../queries/distributorQueries";
 import { UPDATE_DISTRIBUTOR_DETAILS } from "../../../mutations/dlomDistributorMutations";
 
 import DistributorSocialMediaInput from "./DistributorSocialMediaInput";
+import DistributorSocialMediaInputNew from "./DistributorSocialMediaInputNew";
 
 const DistributorCRUD = () => {
   const { loading, error, data } = useQuery(GET_DISTRIBUTOR_DETAILS);
@@ -132,11 +133,16 @@ const DistributorCRUD = () => {
         {state.socialMedia.map((sm, index) => (
           <>
             {/* <pre>{JSON.stringify(sm, null, 2)}</pre> */}
-            <DistributorSocialMediaInput
+            {/* <DistributorSocialMediaInput
               state={state}
               setState={setState}
               index={index}
               sm={sm}
+            /> */}
+            <DistributorSocialMediaInputNew
+              state={state}
+              setState={setState}
+              index={index}
             />
           </>
         ))}

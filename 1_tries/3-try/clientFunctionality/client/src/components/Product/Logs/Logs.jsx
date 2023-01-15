@@ -26,6 +26,7 @@ const Logs = () => {
       >
         {productlogs?.map((p) => {
           let ts = new Date(p.timestamp).toString();
+          let ts2 = new Date(p.createdAt).toString();
 
           return (
             <div
@@ -38,6 +39,7 @@ const Logs = () => {
               <div>SKU: {p.product.prodSKU}</div>
               <div>Prodname: {p.product.prodName}</div>
               <div>timestamp : {ts}</div>
+              <div>timestamp2 : {ts2}</div>
               <div>operation : {p.operation}</div>
               <div>qty : {p.qty}</div>
 

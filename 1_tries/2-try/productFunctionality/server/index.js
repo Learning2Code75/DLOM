@@ -5,6 +5,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 
 import orderRoutes from "./routes/orders.js";
+import orderlogsRoutes from "./routes/orderlogs.js";
 import productRoutes from "./routes/products.js";
 import productlogsRoutes from "./routes/productlogs.js";
 import userRoutes from "./routes/users.js";
@@ -17,6 +18,7 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
 app.use("/orders", orderRoutes);
+app.use("/orderlogs", orderlogsRoutes);
 app.use("/products", productRoutes);
 app.use("/productlogs", productlogsRoutes);
 app.use("/users", userRoutes);

@@ -22,6 +22,10 @@ const Dashboard = () => {
           <Link to="/order">Order</Link>
         </div>
         <div className="item">
+          <Link to="/orderlogs">Order logs</Link>
+        </div>
+
+        <div className="item">
           <Link to="/product">Product</Link>
         </div>
         <div>

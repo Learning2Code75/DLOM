@@ -11,10 +11,10 @@ const Home = () => {
     <>
       <Dashboard />
 
-      <AddClientModal />
+      {/* <AddClientModal />
       <AddOrderModal />
       <Orders />
-      <Clients />
+      <Clients /> */}
     </>
   );
 };

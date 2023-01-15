@@ -27,5 +27,7 @@ export const fetchProductlogs = () => API.get("/productlogs");
 export const createProductlog = (prodlog) => API.post("/productlogs", prodlog);
 
 //order logs
+export const fetchOrderlogs = () => API.get("/orderlogs");
+export const createOrderlog = (ordlog) => API.post("/orderlogs", ordlog);
 
 //user taskboard

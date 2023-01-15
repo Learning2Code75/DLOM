@@ -19,6 +19,7 @@ import ProductsCatelog from "./components/Product/Catelog/Catelog";
 import Product from "./components/Product/Product";
 import Auth from "./pages/Auth/Auth";
 import Logs from "./components/Product/Logs/Logs";
+import OrderLogs from "./components/Order/OrderLogs";
 const cache = new InMemoryCache({
   typePolicies: {
     Query: {
@@ -74,6 +75,8 @@ function App() {
               />
 
               <Route path="/order" element={<Order />} />
+              <Route path="/orderlogs" element={<OrderLogs />} />
+
               <Route path="/product" element={<Product />} />
               <Route path="/product/productsCRUD" element={<ProductsCRUD />} />
               <Route

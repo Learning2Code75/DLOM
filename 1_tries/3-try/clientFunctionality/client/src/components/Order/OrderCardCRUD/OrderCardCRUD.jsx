@@ -9,8 +9,17 @@ import { GET_ORDERS } from "../../../queries/dlomOrderQueries";
 import { GET_CLIENT_IDS } from "../../../queries/dlomClientQueries";
 import { GET_DISTRIBUTOR_DETAILS_ORD } from "../../../queries/distributorQueries";
 import ViewOrders from "./ViewOrders";
+import SoTableEntryNew from "./SoTableEntryNew";
+import InvTableEntry from "./InvTableEntry";
+import WarehouseReceiptEntry from "./WarehouseReceiptEntry";
+import SrTableEntry from "./SrTableEntry";
+import OrderDeliveryEntry from "./OrderDeliveryEntry";
+import OrderPaymentEntry from "./OrderPaymentEntry";
+import { useDispatch } from "react-redux";
+import { createOrderlog } from "../../../redux/actions/orderlogs";
 
 const OrderCardCRUD = () => {
+  const dispatch = useDispatch();
   // const [state, setState] = useState({
   //   id: "",
   //   clientId: "636672f7d649e0c2f9cc53e9",
@@ -312,6 +321,7 @@ const OrderCardCRUD = () => {
   const [updateOrder, { data, loading, error }] = useMutation(UPDATE_ORDER, {
     variables: {
       id: state.id,
+      clientId: state.clientId,
       salesperson: state.salesperson,
       salesOrder: state.salesOrder,
       invoice: state.invoice,
@@ -333,18 +343,18 @@ const OrderCardCRUD = () => {
 
   const distribDetails = useQuery(GET_DISTRIBUTOR_DETAILS_ORD);
 
-  const calcTotalQty = () => {
+  const calcTotalQty = (soTable) => {
     let qty = 0;
-    for (let i = 0; i < state.salesOrder.soTable.length; i++) {
-      qty = parseFloat(qty) + parseFloat(state?.salesOrder?.soTable[i]?.qty);
+    for (let i = 0; i < soTable.length; i++) {
+      qty = parseFloat(qty) + parseFloat(soTable[i]?.qty);
     }
 
     return qty;
   };
-  const calcTotalAmount = () => {
+  const calcTotalAmount = (soTable) => {
     let amt = 0;
-    for (let i = 0; i < state.salesOrder.soTable.length; i++) {
-      amt = parseFloat(amt) + parseFloat(state.salesOrder.soTable[i].amount);
+    for (let i = 0; i < soTable.length; i++) {
+      amt = parseFloat(amt) + parseFloat(soTable[i].amount);
     }
 
     return amt;
@@ -352,7 +362,8 @@ const OrderCardCRUD = () => {
 
   const calcNumWords = (a) => {
     let amt = "";
-    amt = numWords(a) + " only";
+    let r_a = a.toFixed();
+    amt = numWords(r_a) + " only";
     return amt;
   };
 
@@ -374,6 +385,8 @@ const OrderCardCRUD = () => {
   const updateOrderSubmit = (e) => {
     e.preventDefault();
     updateOrder(
+      state.id,
+      state.clientId,
       state.salesperson,
       state.salesOrder,
       state.invoice,
@@ -385,14 +398,97 @@ const OrderCardCRUD = () => {
     );
   };
 
-  const calcSalesOrderFields = () => {
-    let totQty = calcTotalQty();
-    let totAmt = calcTotalAmount();
-    let new_sales_order = { ...state.salesOrder };
-    new_sales_order.amtInWords = calcNumWords(totAmt);
-    new_sales_order.totalQty = totQty;
-    new_sales_order.totalAmt = totAmt;
-    setState({ ...state, salesOrder: new_sales_order });
+  const calcSalesOrderFields = (soTable) => {
+    let totQty = calcTotalQty(soTable);
+    let totAmt = calcTotalAmount(soTable);
+    let amtInWords = calcNumWords(totAmt);
+
+    return {
+      totalQty: totQty,
+      totalAmt: totAmt,
+      amtInWords,
+    };
+  };
+
+  const clearState = () => {
+    setState({
+      id: "",
+      clientId: "",
+      salesperson: "",
+      salesOrder: {
+        distributorName: "",
+        distributorDetails: "",
+        voucherNo: "",
+        dated: "",
+        modeTermsOfPayment: "",
+        buyerRefOrderNo: "",
+        otherRef: "",
+        invoiceTo: "",
+        despatchThrough: "",
+        destination: "",
+        termsOfDelivery: "",
+        soTable: [],
+        totalQty: 0,
+        totalAmt: "",
+        amtInWords: "",
+      },
+      invoice: {
+        distributorName: "",
+        distributorDetails: "",
+        invoiceNo: "",
+        dated: "",
+        deliveryNote: "",
+        supplierRef: "",
+        otherRef: "",
+        client: "",
+        despatchDocNo: "",
+        deliveryNoteDate: "",
+        despatchedThrough: "",
+        destination: "",
+        invTable: [],
+        totalQty: 0,
+        totalAmount: "",
+        amtChargableInWords: "",
+        invTaxTable: [],
+        totalTaxableValue: "",
+        totalCentralTaxAmt: "",
+        totalStateTaxAmt: "",
+        taxAmtInWords: "",
+        companyPAN: "",
+        companyBankDetails: {
+          bankName: "",
+          acNo: "",
+          BranchIFSCode: "",
+        },
+        for: "",
+      },
+      wareHouseReceipt: [
+        {
+          imgString: "",
+        },
+      ],
+      salesReceipt: {
+        distributorName: "",
+        distributorDetails: "",
+        soldBy: "",
+        date: "",
+        name: "",
+        address: "",
+        mode: "",
+        srTable: [],
+      },
+      orderDelivery: {
+        history: [],
+      },
+      orderCancel: {
+        timeStamp: new Date().toISOString(),
+        state: "",
+        desc: "",
+      },
+      orderPayment: {
+        history: [],
+      },
+    });
   };
 
   useEffect(() => {
@@ -691,7 +787,6 @@ const OrderCardCRUD = () => {
                 new_sales_order.soTable = [
                   ...new_sales_order.soTable,
                   {
-                    _id: uuid(),
                     siNo: "",
                     descriptionOfGoods: "",
                     dueOn: "",
@@ -724,7 +819,7 @@ const OrderCardCRUD = () => {
             <div>{""}</div>
             <div>{""}</div>
           </div>
-          {state.salesOrder.soTable.map((soEntry, idx) => (
+          {/* {state.salesOrder.soTable.map((soEntry, idx) => (
             <SoTableEntry
               idx={idx}
               setOrder={setState}
@@ -732,15 +827,43 @@ const OrderCardCRUD = () => {
               soEntry={soEntry}
               calcSalesOrderFields={calcSalesOrderFields}
             />
+          ))} */}
+
+          {state.salesOrder.soTable.map((soTableEntry, idx) => (
+            <SoTableEntryNew
+              state={state}
+              setState={setState}
+              index={idx}
+              soTableEntry={soTableEntry}
+              calcSalesOrderFields={calcSalesOrderFields}
+            />
           ))}
 
           <div className="formLabel">
             <button
               onClick={(e) => {
-                addOrderSubmit(e);
+                if (isUpdate) {
+                  updateOrderSubmit(e);
+                  dispatch(
+                    createOrderlog({
+                      order: { ...state },
+                      operation: "so update",
+                    })
+                  );
+                } else {
+                  addOrderSubmit(e);
+                  dispatch(
+                    createOrderlog({
+                      order: { ...state },
+                      operation: "so create",
+                    })
+                  );
+                }
+                setIsUpdate(false);
+                clearState();
               }}
             >
-              Save Sales Order
+              {isUpdate ? "Edit" : "Save"} Sales Order
             </button>
           </div>
         </form>
@@ -751,6 +874,7 @@ const OrderCardCRUD = () => {
         setCurrOrder={setCurrOrder}
         state={state}
         setState={setState}
+        setIsUpdate={setIsUpdate}
       />
       <div>
         <form>
@@ -951,6 +1075,32 @@ const OrderCardCRUD = () => {
           />
 
           <div className="formLabel">Invoice Table</div>
+          <button
+            className="btn"
+            onClick={(e) => {
+              e.preventDefault();
+              let new_invoice = { ...state.invoice };
+              new_invoice.invTable = [
+                ...new_invoice.invTable,
+                {
+                  siNo: 0,
+                  descriptionOfGoods: "",
+                  hsnSAC: "",
+                  GSTRate: "",
+                  qty: 0,
+                  rate: "",
+                  per: "unit",
+                  amount: "",
+                },
+              ];
+              setState({ ...state, invoice: new_invoice });
+            }}
+          >
+            Add Entry
+          </button>
+          {state.invoice.invTable.map((invTEntry, index) => (
+            <InvTableEntry state={state} setState={setState} index={index} />
+          ))}
 
           <div className="formLabel">Total Qty</div>
           <input
@@ -1003,6 +1153,33 @@ const OrderCardCRUD = () => {
           />
 
           <div className="formLabel">Invoice Tax Table</div>
+          <table
+            style={{
+              border: "1px solid lightgrey",
+            }}
+          >
+            <thead>
+              <tr>
+                <td>HSN SAC</td>
+                <td>Taxable value</td>
+                <td>central tax rate</td>
+                <td>central tax amt</td>
+                <td>state tax rate</td>
+                <td>state tax amt</td>
+              </tr>
+            </thead>
+
+            {state.invoice.invTaxTable.map((i) => (
+              <tr>
+                <td>{i.hsnSAC}</td>
+                <td>{i.taxableValue}</td>
+                <td>{i.centralTaxRate}</td>
+                <td>{i.centralTaxAmt}</td>
+                <td>{i.stateTaxRate}</td>
+                <td>{i.stateTaxAmt}</td>
+              </tr>
+            ))}
+          </table>
 
           <div className="formLabel">Total Taxable Value</div>
           <input
@@ -1156,6 +1333,13 @@ const OrderCardCRUD = () => {
             <button
               onClick={(e) => {
                 updateOrderSubmit(e);
+                dispatch(
+                  createOrderlog({
+                    order: { ...state },
+                    operation: "invoice",
+                  })
+                );
+                clearState();
               }}
             >
               Save Invoice
@@ -1170,11 +1354,41 @@ const OrderCardCRUD = () => {
             <h2>Warehouse Receipt </h2>
           </div>
           <div className="formLabel">Img Upload table</div>
+          <button
+            className="btn"
+            onClick={(e) => {
+              e.preventDefault();
+              let new_whr = [...state.wareHouseReceipt];
+              new_whr = [
+                ...new_whr,
+                {
+                  imgString: "",
+                },
+              ];
+              setState({ ...state, wareHouseReceipt: new_whr });
+            }}
+          >
+            Add Entry
+          </button>
+          {state.wareHouseReceipt.map((item, index) => (
+            <WarehouseReceiptEntry
+              state={state}
+              setState={setState}
+              index={index}
+            />
+          ))}
 
           <div className="formLabel">
             <button
               onClick={(e) => {
                 updateOrderSubmit(e);
+                dispatch(
+                  createOrderlog({
+                    order: { ...state },
+                    operation: "warehouse receipt",
+                  })
+                );
+                clearState();
               }}
             >
               Save Warehouse Receipt
@@ -1301,11 +1515,40 @@ const OrderCardCRUD = () => {
           />
 
           <div className="formLabel">Sales Receipt table</div>
+          <button
+            className="btn"
+            onClick={(e) => {
+              e.preventDefault();
+              let new_sales_receipt = { ...state.salesReceipt };
+              new_sales_receipt.srTable = [
+                ...new_sales_receipt.srTable,
+                {
+                  qty: 0,
+                  details: "",
+                  price: "",
+                  amount: "",
+                },
+              ];
+              setState({ ...state, salesReceipt: new_sales_receipt });
+            }}
+          >
+            Add Entry
+          </button>
+          {state.salesReceipt.srTable.map((item, index) => (
+            <SrTableEntry state={state} setState={setState} index={index} />
+          ))}
 
           <div className="formLabel">
             <button
               onClick={(e) => {
                 updateOrderSubmit(e);
+                dispatch(
+                  createOrderlog({
+                    order: { ...state },
+                    operation: "sales receipt",
+                  })
+                );
+                clearState();
               }}
             >
               Save Sales Receipt
@@ -1320,11 +1563,42 @@ const OrderCardCRUD = () => {
             <h2>Order Delivery </h2>
           </div>
           <div className="formLabel">History table</div>
+          <button
+            className="btn"
+            onClick={(e) => {
+              e.preventDefault();
+              let new_order_delivery = { ...state.orderDelivery };
+              new_order_delivery.history = [
+                ...new_order_delivery.history,
+                {
+                  timeStamp: "",
+                  status: "",
+                },
+              ];
+              setState({ ...state, orderDelivery: new_order_delivery });
+            }}
+          >
+            Add Entry
+          </button>
+          {state.orderDelivery.history.map((item, index) => (
+            <OrderDeliveryEntry
+              state={state}
+              setState={setState}
+              index={index}
+            />
+          ))}
 
           <div className="formLabel">
             <button
               onClick={(e) => {
                 updateOrderSubmit(e);
+                dispatch(
+                  createOrderlog({
+                    order: { ...state },
+                    operation: "delivery entry",
+                  })
+                );
+                clearState();
               }}
             >
               Save Order Delivery entry
@@ -1338,11 +1612,44 @@ const OrderCardCRUD = () => {
           <div>
             <h2>Order Payment </h2>
             <div className="formLabel">History table</div>
+            <button
+              className="btn"
+              onClick={(e) => {
+                e.preventDefault();
+                let new_order_payment = { ...state.orderPayment };
+                new_order_payment.history = [
+                  ...new_order_payment.history,
+                  {
+                    timeStamp: "",
+                    amount: "",
+                    method: "",
+                    description: "",
+                  },
+                ];
+                setState({ ...state, orderPayment: new_order_payment });
+              }}
+            >
+              Add Entry
+            </button>
+            {state.orderPayment.history.map((item, index) => (
+              <OrderPaymentEntry
+                state={state}
+                setState={setState}
+                index={index}
+              />
+            ))}
 
             <div className="formLabel">
               <button
                 onClick={(e) => {
                   updateOrderSubmit(e);
+                  dispatch(
+                    createOrderlog({
+                      order: { ...state },
+                      operation: "payment entry",
+                    })
+                  );
+                  clearState();
                 }}
               >
                 Save Order Payment entry
@@ -1393,6 +1700,13 @@ const OrderCardCRUD = () => {
             <button
               onClick={(e) => {
                 updateOrderSubmit(e);
+                dispatch(
+                  createOrderlog({
+                    order: { ...state },
+                    operation: "order cancel",
+                  })
+                );
+                clearState();
               }}
             >
               Cancel Order

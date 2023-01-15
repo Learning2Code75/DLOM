@@ -5,6 +5,7 @@ const GET_ORDERS = gql`
     orders {
       id
       client {
+      	id
         companyName
         contactPersonName
       }
@@ -78,6 +79,7 @@ const GET_ORDERS = gql`
           acNo
           BranchIFSCode
         }
+        for
       }
       wareHouseReceipt {
         imgString
