@@ -223,6 +223,10 @@ https://youtube.com/playlist?list=PLAyz_McAak4kdOqpribZk3pyw3NSNHb3q
 4. [[22v]](https://youtube.com/playlist?list=PL9gnSGHSqcnoqBXdMwUTRod4Gi3eac2Ak)
 
 
+# Poster, docs vids
+1. poster : [https://youtu.be/ZwiTqrVfDFU]
+2. ppt : [https://youtu.be/VBzQrac6lUE]
+3. report : []
 
 
 <hr/>
