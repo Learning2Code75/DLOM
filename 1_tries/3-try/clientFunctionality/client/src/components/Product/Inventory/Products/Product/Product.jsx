@@ -22,7 +22,7 @@ const Product = ({ p, setCurProdId, setProdLog }) => {
             justifyContent: "center",
           }}
         >
-          <img src={p.prodImgUrl} />
+          <img width={350} height={350} src={p.prodImgUrl} />
         </div>
         <div>Name : {p.prodName}</div>
         <div>Unit Rate : {p.productUnitRate}</div>

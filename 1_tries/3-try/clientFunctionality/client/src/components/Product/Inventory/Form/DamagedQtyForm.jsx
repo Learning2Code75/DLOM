@@ -63,6 +63,11 @@ const DamagedQtyForm = ({ curProdId, setCurProdId }) => {
     dispatch(updateProduct(curProdId, new_updated_prod));
     let new_prod = { ...prodD, qty: damagedQty, damaged: "damaged" };
     delete new_prod._id;
+    new_prod.prodDesc = new_prod.prodDesc.map((pd) => ({
+      title: pd.title,
+      desc: pd.desc,
+    }));
+    console.log(new_prod);
     dispatch(createProduct(new_prod));
     let new_prod_log = {
       product: { _id: curProdId },

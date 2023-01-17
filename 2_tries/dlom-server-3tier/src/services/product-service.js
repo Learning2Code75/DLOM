@@ -16,7 +16,7 @@ class ProductService {
         products,
       });
     } catch (err) {
-      throw new APIError("Data Not found");
+      throw new APIError("Products Not found");
     }
   }
 
@@ -25,7 +25,27 @@ class ProductService {
       const productResult = await this.repository.CreateProduct(productInputs);
       return FormateData(productResult);
     } catch (err) {
-      throw new APIError("Data Not found");
+      throw new APIError("Product Not created");
+    }
+  }
+
+  async UpdateProduct(productInputs) {
+    let { _id, prod } = productInputs;
+    try {
+      const productResult = await this.repository.UpdateProduct(_id, prod);
+      return FormateData(productResult);
+    } catch (err) {
+      throw new APIError("Product Not updated");
+    }
+  }
+
+  async DeleteProduct(productInputs) {
+    let { _id } = productInputs;
+    try {
+      const productResult = await this.repository.DeleteProduct(_id);
+      return FormateData(productResult);
+    } catch (err) {
+      throw new APIError("Product Not deleted");
     }
   }
 }

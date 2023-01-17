@@ -50,10 +50,15 @@ const Form = ({ curProdId, setCurProdId }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(curProdId);
-    let prodD = productData;
-    let new_prodDesc_arr = prodD.prodDesc;
-    new_prodDesc_arr.pop();
-    prodD.prodDesc = new_prodDesc_arr;
+    let prodD = { ...productData };
+    // let new_prodDesc_arr = prodD.prodDesc;
+    // new_prodDesc_arr.pop();
+    // prodD.prodDesc = new_prodDesc_arr;
+    prodD.prodDesc = prodD.prodDesc.map((pd) => ({
+      title: pd.title,
+      desc: pd.desc,
+    }));
+    console.log(prodD);
     if (curProdId) {
       dispatch(updateProduct(curProdId, prodD));
     } else {
@@ -64,6 +69,7 @@ const Form = ({ curProdId, setCurProdId }) => {
 
   return (
     <>
+      <pre>{JSON.stringify(productData, null, 2)}</pre>
       <form autoComplete="off" noValidate onSubmit={handleSubmit}>
         <h2>{curProdId ? "Update" : "Create"} a Product</h2>
         <div
