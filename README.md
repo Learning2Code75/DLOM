@@ -218,6 +218,7 @@ https://youtube.com/playlist?list=PLAyz_McAak4kdOqpribZk3pyw3NSNHb3q
 # Microservices Deployment
 1. [[22i]](https://youtu.be/9zUHg7xjIqQ)
 1. [[22ii]](https://youtube.com/playlist?list=PLaLqLOj2bk9ZV2RhqXzABUP5QSg42uJEs)
+ - dockerize graphql : https://youtu.be/65Odh3u8Zf0
 2. [[22iii]](https://youtube.com/playlist?list=PLrwNNiB6YOA0KmfliJoSuZzEN6tjSdEXc)
 3. [[22iv]](https://youtube.com/playlist?list=PLIGDNOJWiL182j1bD_nQm-SxARR5s977O)
 4. [[22v]](https://youtube.com/playlist?list=PL9gnSGHSqcnoqBXdMwUTRod4Gi3eac2Ak)
