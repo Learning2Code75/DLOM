@@ -36,6 +36,7 @@ const Logs = () => {
               }}
               key={p._id}
             >
+              <pre>{JSON.stringify(p, null, 2)}</pre>
               <div>SKU: {p.product.prodSKU}</div>
               <div>Prodname: {p.product.prodName}</div>
               <div>timestamp : {ts}</div>

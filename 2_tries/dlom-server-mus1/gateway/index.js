@@ -12,6 +12,7 @@ app.use("/productlogs", proxy("http://localhost:8002"));
 app.use("/products", proxy("http://localhost:8003"));
 // app.use('/users',proxy('http://localhost:8004'))
 app.use("/", proxy("http://localhost:8004")); // root : users
+// app.use("/graphql", proxy("http://localhost:5002"));
 
 app.listen(8000, () => {
   console.log("gateway : 8000");

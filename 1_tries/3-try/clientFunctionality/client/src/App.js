@@ -49,6 +49,11 @@ const dlomClient = new ApolloClient({
   cache,
 });
 
+// const dlomClient = new ApolloClient({
+//   uri: "http://localhost:8000/graphql/graph",
+//   cache,
+// });
+
 function App() {
   return (
     <>
