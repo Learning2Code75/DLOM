@@ -2,17 +2,17 @@ const { PRODUCTS_BINDING_KEY } = require("../config/index.js");
 const ProductlogService = require("../services/productlog-service.js");
 const { PublishMessage, SubscribeMessage } = require("../utils");
 
-module.exports = async (app, channel) => {
+module.exports = async (app, channel, channel_prime) => {
   const service_pl = new ProductlogService();
 
-  try {
-    await SubscribeMessage(channel, service_pl);
-  } catch (err) {
-    console.log(err);
-  }
+  // try {
+  //   await SubscribeMessage(channel, service_pl);
+  // } catch (err) {
+  //   console.log(err);
+  // }
 
   // GET /productlogs/ : getProductlogs
-  app.get("/", async (req, res, next) => {
+  app.get("/productlogs", async (req, res, next) => {
     //check validation
     try {
       const { data } = await service_pl.GetProductlogs();
@@ -23,7 +23,7 @@ module.exports = async (app, channel) => {
   });
 
   // POST /productlogs/ : createProductlog
-  app.post("/", async (req, res, next) => {
+  app.post("/productlogs", async (req, res, next) => {
     //get payload(Productlog) to send to product-service
     try {
       let prodlog = req.body;
@@ -40,7 +40,7 @@ module.exports = async (app, channel) => {
       await PublishMessage(channel, PRODUCTS_BINDING_KEY, stringified_data);
 
       try {
-        await SubscribeMessage(channel, service_pl);
+        await SubscribeMessage(channel_prime, service_pl);
       } catch (err) {
         console.log(err);
       }

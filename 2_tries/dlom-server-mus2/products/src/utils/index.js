@@ -73,21 +73,8 @@ module.exports.CreateChannel = async () => {
   }
 };
 
-// publish messages
-module.exports.PublishMessage = async (channel, binding_key, message) => {
-  try {
-    await channel.publish(
-      EXCHANGE_NAME_PRIME,
-      binding_key,
-      Buffer.from(message)
-    );
-  } catch (err) {
-    throw err;
-  }
-};
-
 // subscribe messages
-module.exports.SubscribeMessage = async (channel, service) => {
+module.exports.SubscribeMessage = async (channel, service, channel_prime) => {
   try {
     const appQueue = await channel.assertQueue(QUEUE_NAME);
     let prod_id = "a";
@@ -127,7 +114,11 @@ module.exports.SubscribeMessage = async (channel, service) => {
 
       console.log("prod_toSend=", prod_to_send);
 
-      await this.PublishMessage(channel, PRODUCTLOGS_BINDING_KEY, prod_to_send);
+      await this.PublishMessage(
+        channel_prime,
+        PRODUCTLOGS_BINDING_KEY,
+        prod_to_send
+      );
 
       channel.ack(data);
     });
@@ -135,5 +126,30 @@ module.exports.SubscribeMessage = async (channel, service) => {
     // let prod = await service.PublishFoundProduct();
   } catch (err) {
     console.log(err);
+  }
+};
+
+//create a channel : channel_prime
+module.exports.CreateChannelPrime = async () => {
+  try {
+    const connection = await amqplib.connect(MESSAGE_BROKER_URL);
+    const channel = await connection.createChannel();
+    await channel.assertExchange(EXCHANGE_NAME_PRIME, "direct", false);
+    return channel;
+  } catch (err) {
+    throw err;
+  }
+};
+
+// publish messages
+module.exports.PublishMessage = async (channel_prime, binding_key, message) => {
+  try {
+    await channel_prime.publish(
+      EXCHANGE_NAME_PRIME,
+      binding_key,
+      Buffer.from(message)
+    );
+  } catch (err) {
+    throw err;
   }
 };

@@ -1,17 +1,17 @@
 const ProductService = require("../services/product-service");
 const { SubscribeMessage } = require("../utils");
 
-module.exports = async (app, channel) => {
+module.exports = async (app, channel, channel_prime) => {
   const service = new ProductService();
 
   try {
-    await SubscribeMessage(channel, service);
+    await SubscribeMessage(channel, service, channel_prime);
   } catch (err) {
     console.log(err);
   }
 
   // GET /products/ : getProducts
-  app.get("/", async (req, res, next) => {
+  app.get("/products", async (req, res, next) => {
     //check validation
     try {
       const { data } = await service.GetProducts();
@@ -22,7 +22,7 @@ module.exports = async (app, channel) => {
   });
 
   // POST /products/ : createProduct
-  app.post("/", async (req, res, next) => {
+  app.post("/products", async (req, res, next) => {
     try {
       const prod = req.body;
       const { data } = await service.CreateProduct(prod);
@@ -32,7 +32,7 @@ module.exports = async (app, channel) => {
     }
   });
   // PATCH /products/:id : updateProduct
-  app.patch("/:id", async (req, res, next) => {
+  app.patch("/products/:id", async (req, res, next) => {
     try {
       const { id: _id } = req.params;
       const prod = req.body;
@@ -43,7 +43,7 @@ module.exports = async (app, channel) => {
     }
   });
   // DELETE /products/:id : deleteProduct
-  app.delete("/:id", async (req, res, next) => {
+  app.delete("/products/:id", async (req, res, next) => {
     try {
       const { id: _id } = req.params;
       const { data } = await service.DeleteProduct({ _id });

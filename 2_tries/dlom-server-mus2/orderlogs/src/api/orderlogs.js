@@ -4,7 +4,7 @@ module.exports = (app) => {
   const service_ol = new OrderlogService();
 
   // GET /orderlogs/ : getOrderlogs
-  app.get("/", async (req, res, next) => {
+  app.get("/orderlogs", async (req, res, next) => {
     //check validation
     try {
       const { data } = await service_ol.GetOrderlogs();
@@ -15,7 +15,7 @@ module.exports = (app) => {
   });
 
   // POST /orderlogs/ : createOrderlog
-  app.post("/", async (req, res, next) => {
+  app.post("/orderlogs", async (req, res, next) => {
     try {
       const ord = req.body;
       const { data } = await service_ol.CreateOrderlog(ord);

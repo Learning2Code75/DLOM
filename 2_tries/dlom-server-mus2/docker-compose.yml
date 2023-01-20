@@ -1,0 +1,95 @@
+version: "3"
+services:
+  nosql-db:
+    image: mongo
+    ports:
+      - "27018:27017"
+    container_name: nosql-db
+    volumes:
+      - ./db/:/data/db
+  rabbitmq3:
+    image: rabbitmq:3-management
+    environment:
+      RABBITMT_ERLANG_COOKIE: 'secret cookie there'
+    container_name: rabbitmq3
+    volumes:
+      - ./db-data:/var/lib/rabbitmq
+    ports:
+      - 15672:15672
+      - 5672:5672
+  orderlogs:
+    build:
+      dockerfile: DockerFile
+      context: ./orderlogs
+    container_name: orderlogs
+    ports:
+      - "8001:8001"
+    restart: always
+    depends_on:
+      - "nosql-db"
+    volumes:
+      - .:/app
+      - /app/orderlogs/node_modules
+
+    env_file:
+      - ./orderlogs/.env.dev
+  productlogs:
+    build:
+      dockerfile: DockerFile
+      context: ./productlogs
+    container_name: productlogs
+    ports:
+      - "8002:8002"
+    restart: always
+    depends_on:
+      - "nosql-db"
+      - rabbitmq3
+    volumes:
+      - .:/app
+      - /app/productlogs/node_modules
+
+    env_file:
+      - ./productlogs/.env.dev
+  products:
+    build:
+      dockerfile: DockerFile
+      context: ./products
+    container_name: products
+    ports:
+      - "8003:8003"
+    restart: always
+    depends_on:
+      - "nosql-db"
+      - rabbitmq3
+    volumes:
+      - .:/app
+      - /app/products/node_modules
+
+    env_file:
+      - ./products/.env.dev
+  users:
+    build:
+      dockerfile: DockerFile
+      context: ./users
+    container_name: users
+    ports:
+      - "8004:8004"
+    restart: always
+    depends_on:
+      - "nosql-db"
+    volumes:
+      - .:/app
+      - /app/users/node_modules
+    env_file:
+      - ./users/.env.dev
+  nginx-proxy:
+    build:
+      dockerfile: DockerFile
+      context: ./proxy
+    depends_on:
+      - orderlogs
+      - productlogs
+      - products
+      - users
+    ports:
+      - 80:80

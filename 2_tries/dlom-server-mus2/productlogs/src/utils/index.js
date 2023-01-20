@@ -92,6 +92,18 @@ module.exports.PublishMessage = async (channel, binding_key, message) => {
   }
 };
 
+//create a channel : channel_prime
+module.exports.CreateChannelPrime = async () => {
+  try {
+    const connection = await amqplib.connect(MESSAGE_BROKER_URL);
+    const channel = await connection.createChannel();
+    await channel.assertExchange(EXCHANGE_NAME_PRIME, "direct", false);
+    return channel;
+  } catch (err) {
+    throw err;
+  }
+};
+
 // subscribe messages
 module.exports.SubscribeMessage = async (channel, service) => {
   const appQueue = await channel.assertQueue(QUEUE_NAME_PRIME);
