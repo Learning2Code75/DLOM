@@ -225,9 +225,10 @@ https://youtube.com/playlist?list=PLAyz_McAak4kdOqpribZk3pyw3NSNHb3q
 
 
 # Poster, docs vids
-1. poster : [https://youtu.be/ZwiTqrVfDFU]
-2. ppt : [https://youtu.be/VBzQrac6lUE]
-3. report : []
+1. [23i] poster : [https://youtu.be/ZwiTqrVfDFU]
+2. [23ii] ppt : [https://youtu.be/VBzQrac6lUE]
+3. [23iii] software reports : [own_pjs ,https://www.youtube.com/playlist?list=PLEJZyr6k_ykJ4Sa7B-FMr7zbr4uegNO5_ , https://youtu.be/WuBhWX1s_m0 ]
+4. [23iv] diags : [uml(https://youtu.be/WnMQ8HlmeXc) ]
 
 
 <hr/>
