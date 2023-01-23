@@ -2,7 +2,7 @@ const dotEnv = require("dotenv");
 
 if (process.env.NODE_ENV !== "prod") {
   // const configFile = `./.env.${process.env.NODE_ENV}`;
-  const configFile = `${__dirname}/./../../.env`;
+  const configFile = `${__dirname}/./../../.env.dev`;
   dotEnv.config({ path: configFile });
 } else {
   dotEnv.config();

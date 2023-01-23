@@ -1,15 +1,17 @@
 const express = require("express");
 const colors = require("colors");
 const cors = require("cors");
-require("dotenv").config();
+// require("dotenv").config();
 const { graphqlHTTP } = require("express-graphql");
 
 // const schema = require("./schema/schema.js");
 const dlomSchema = require("./schema/DlomSchema.js");
 const connectDB = require("./config/db.js");
+const { PORT } = require("./config/index.js");
 
 // const port = process.env.PORT || 5001;
-const port2 = process.env.PORT2 || 5002;
+// const port2 = process.env.PORT || 5002;
+const port2 = PORT || 5002;
 
 // const app = express();
 const app2 = express();
@@ -31,9 +33,9 @@ app2.use(
   "/graphql",
   graphqlHTTP({
     schema: dlomSchema,
-    graphiql: process.env.NODE_ENV === "development",
+    graphiql: process.env.NODE_ENV === "dev",
   })
 );
 
 // app.listen(port, console.log(`Server running on port${port}`));
-app2.listen(port2, console.log(`Server2 running on port ${port2}`));
+app2.listen(port2, console.log(`orderclient running on port ${port2}`));

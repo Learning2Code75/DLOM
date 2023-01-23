@@ -37,7 +37,7 @@ const Logs = () => {
               key={p._id}
             >
               <pre>{JSON.stringify(p, null, 2)}</pre>
-              <div>SKU: {p.product.prodSKU}</div>
+              {/* <div>SKU: {p.product.prodSKU}</div>
               <div>Prodname: {p.product.prodName}</div>
               <div>timestamp : {ts}</div>
               <div>timestamp2 : {ts2}</div>
@@ -46,7 +46,7 @@ const Logs = () => {
 
               {p.damagedDescription !== "" && (
                 <div>damagedDescription : {p.damagedDescription}</div>
-              )}
+              )} */}
             </div>
           );
         })}

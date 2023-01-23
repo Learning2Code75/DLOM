@@ -230,6 +230,11 @@ https://youtube.com/playlist?list=PLAyz_McAak4kdOqpribZk3pyw3NSNHb3q
 3. [23iii] software reports : [own_pjs ,https://www.youtube.com/playlist?list=PLEJZyr6k_ykJ4Sa7B-FMr7zbr4uegNO5_ , https://youtu.be/WuBhWX1s_m0 ]
 4. [23iv] diags : [uml(https://youtu.be/WnMQ8HlmeXc) ]
 
+# ML API , analytics client
+1. [24i] flask , docker : [https://youtu.be/S--SD4QbGps, https://youtu.be/zGP_nYmZd9c]
+2. [24ii] aws ec2 , flask : https://youtu.be/_rwNTY5Mn40
+3. [24iii] heroku , flask : https://youtu.be/qNF1HqBvpGE
+4. [24iv] react chart js : [https://youtu.be/RF57yDglDfE , https://youtu.be/Ge6PQkpa6pA , https://youtu.be/c_9c5zkfQ3Y , https://youtube.com/playlist?list=PLlL2ecj-T3qT6iX6vUNrrjrYPlZPhyjag]
 
 <hr/>
 
