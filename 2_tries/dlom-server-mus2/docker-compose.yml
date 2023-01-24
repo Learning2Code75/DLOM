@@ -7,16 +7,16 @@ services:
     container_name: nosql-db
     volumes:
       - ./db/:/data/db
-  # rabbitmq3:
-  #   image: rabbitmq:3-management
-  #   environment:
-  #     RABBITMT_ERLANG_COOKIE: 'secret cookie there'
-  #   container_name: rabbitmq3
-  #   volumes:
-  #     - ./db-data:/var/lib/rabbitmq
-  #   ports:
-  #     - 15672:15672
-  #     - 5672:5672
+  rabbitmq3:
+    image: rabbitmq:3-management
+    environment:
+      RABBITMT_ERLANG_COOKIE: 'secret cookie there'
+    container_name: rabbitmq3
+    volumes:
+      - ./db-data:/var/lib/rabbitmq
+    ports:
+      - 15672:15672
+      - 5672:5672
   orderclient:
     build:
       dockerfile: DockerFile
@@ -59,7 +59,7 @@ services:
     restart: always
     depends_on:
       - "nosql-db"
-      # - rabbitmq3
+      - rabbitmq3
     volumes:
       - .:/app
       - /app/productlogs/node_modules
@@ -76,7 +76,7 @@ services:
     restart: always
     depends_on:
       - "nosql-db"
-      # - rabbitmq3
+      - rabbitmq3
     volumes:
       - .:/app
       - /app/products/node_modules

@@ -22,6 +22,7 @@ export const createProduct = (prod) => async (dispatch) => {
 
 export const updateProduct = (prodId, prodData) => async (dispatch) => {
   try {
+    console.log(prodId, prodData);
     const { data } = await api.updateProduct(prodId, prodData);
     console.log(data);
 

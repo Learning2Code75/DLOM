@@ -39,6 +39,7 @@ module.exports = async (app, channel, channel_prime) => {
       const { data } = await service.UpdateProduct({ _id, prod });
       return res.json(data);
     } catch (err) {
+      console.log(err);
       next(err);
     }
   });
@@ -49,6 +50,8 @@ module.exports = async (app, channel, channel_prime) => {
       const { data } = await service.DeleteProduct({ _id });
       return res.json(data);
     } catch (err) {
+      console.log(err);
+
       next(err);
     }
   });
