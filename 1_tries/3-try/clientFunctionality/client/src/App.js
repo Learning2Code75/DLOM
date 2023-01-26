@@ -20,6 +20,9 @@ import Product from "./components/Product/Product";
 import Auth from "./pages/Auth/Auth";
 import Logs from "./components/Product/Logs/Logs";
 import OrderLogs from "./components/Order/OrderLogs";
+import Users from "./components/Users/Users";
+import UserManage from "./components/Users/UserManage/UserManage";
+import UserTaskboard from "./components/Users/UserTaskboard/UserTaskboard";
 const cache = new InMemoryCache({
   typePolicies: {
     Query: {
@@ -68,6 +71,9 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/auth" element={<Auth />} />
+              <Route path="/users" element={<Users />} />
+              <Route path="users/userManage" element={<UserManage />} />
+              <Route path="users/userTaskboard" element={<UserTaskboard />} />
 
               <Route path="/orders/:id" element={<OrderI />} />
 

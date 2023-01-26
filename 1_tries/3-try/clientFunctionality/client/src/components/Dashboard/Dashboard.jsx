@@ -28,6 +28,11 @@ const Dashboard = () => {
         <div className="item">
           <Link to="/product">Product</Link>
         </div>
+
+        <div className="item">
+          <Link to="/users">Users</Link>
+        </div>
+
         <div>
           {user ? (
             <div>
