@@ -19,14 +19,14 @@ export const createProduct = (newProd) => API.post("/products", newProd);
 // export const createProduct = (newProd) =>
 //   API.post("http://localhost:8003/products", newProd);
 
-// export const updateProduct = (pId, pData) =>
-//   API.patch(`/products/${pId}`, pData);
 export const updateProduct = (pId, pData) =>
-  MUS1_API.patch(`http://localhost:8003/products/${pId}`, pData);
+  API.patch(`/products/${pId}`, pData);
+// export const updateProduct = (pId, pData) =>
+//   MUS1_API.patch(`http://localhost:8003/products/${pId}`, pData);
 
-// export const deleteProduct = (pId) => API.delete(`/products/${pId}`);
-export const deleteProduct = (pId) =>
-  MUS1_API.delete(`http://localhost:8003/products/${pId}`);
+export const deleteProduct = (pId) => API.delete(`/products/${pId}`);
+// export const deleteProduct = (pId) =>
+//   MUS1_API.delete(`http://localhost:8003/products/${pId}`);
 
 //user
 export const signIn = (fData) => API.post("/users/signin", fData);
