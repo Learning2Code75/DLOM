@@ -20,7 +20,7 @@ const Catelog = () => {
         <Link to="/product">Product</Link>
       </div>
       <div>
-        <pre>{JSON.stringify(prodsForCatelog, null, 2)}</pre>
+        {/* <pre>{JSON.stringify(prodsForCatelog, null, 2)}</pre> */}
         <CatelogDisplay
           prodsForCatelog={prodsForCatelog}
           setProdsForCatelog={setProdsForCatelog}

@@ -10,6 +10,18 @@ class UserService {
     this.repository = new UserRepository();
   }
 
+  async GetUsers() {
+    try {
+      const users = await this.repository.Users();
+
+      return FormateData({
+        users,
+      });
+    } catch (err) {
+      throw new APIError("Users Not found");
+    }
+  }
+
   async CheckExistingUser({ email }) {
     try {
       const eUser = await this.repository.CheckExistingUser({ email });
@@ -84,6 +96,30 @@ class UserService {
       return isPasswordCorrect;
     } catch (err) {
       throw new APIError("Passwords not correct");
+    }
+  }
+
+  async UpdateUser(userInputs) {
+    let { _id, user, hashedPassword } = userInputs;
+    try {
+      user.password = hashedPassword;
+      user.name = `${user.firstName} ${user.lastName}`;
+
+      const userResult = await this.repository.UpdateUser(_id, user);
+      return FormateData(userResult);
+    } catch (err) {
+      throw new APIError("User Not updated");
+    }
+  }
+
+  async DeleteUser(userInputs) {
+    let { _id } = userInputs;
+    try {
+      console.log(_id);
+      const userResult = await this.repository.DeleteUser(_id);
+      return FormateData(userResult);
+    } catch (err) {
+      throw new APIError("User Not deleted");
     }
   }
 }

@@ -7,18 +7,17 @@ const Header = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("profile"))?.result
-  );
+  const [user, setUser] = useState();
   const logout = () => {
     dispatch({ type: "LOGOUT" });
     // history.push("/auth");
     navigate("/auth");
-
+    localStorage.clear();
     setUser(null);
   };
   useEffect(() => {
     // dispatch({ type: "LOGOUT" });
+    setUser(JSON.parse(localStorage.getItem("profile"))?.result);
     const token = JSON.parse(localStorage.getItem("profile"))?.token;
     if (token) {
       const decodedToken = decode(token);

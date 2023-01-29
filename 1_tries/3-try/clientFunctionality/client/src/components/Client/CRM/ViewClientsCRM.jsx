@@ -4,6 +4,7 @@ import { FiDelete, FiEdit } from "react-icons/fi";
 import { UPDATE_CLIENT } from "../../../mutations/dlomClientMutation";
 import { GET_CLIENTS } from "../../../queries/dlomClientQueries";
 import Spinner from "../../Spinner";
+import CRMCSV from "./CRMCSV";
 const ViewClientsCRM = ({
   currClient,
   setCurrClient,
@@ -156,6 +157,9 @@ const ViewClientsCRM = ({
                   <div>{client.phoneNumber}</div>
                   <div>{client.salesPersonAssigned}</div>
                   <div>{client.typeOfCustomer}</div>
+                  <div>
+                    <CRMCSV crmData={client?.crm} />
+                  </div>
                   {client.clientSocialMedia.map((cs) => (
                     <div>
                       <h3>{cs.title}</h3>
@@ -222,6 +226,9 @@ const ViewClientsCRM = ({
                             textDecoration: "underline",
                           }}
                         >
+                          {c.personType === "client"
+                            ? "client:"
+                            : "salesperson:"}
                           {c.personType === "client"
                             ? client.contactPersonName
                             : client.salesPersonAssigned}

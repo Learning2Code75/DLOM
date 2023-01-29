@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
@@ -23,6 +24,7 @@ import OrderLogs from "./components/Order/OrderLogs";
 import Users from "./components/Users/Users";
 import UserManage from "./components/Users/UserManage/UserManage";
 import UserTaskboard from "./components/Users/UserTaskboard/UserTaskboard";
+import { useSelector } from "react-redux";
 const cache = new InMemoryCache({
   typePolicies: {
     Query: {
@@ -58,6 +60,7 @@ const dlomClient = new ApolloClient({
 // });
 
 function App() {
+  const user = useSelector((state) => state?.auth?.authData?.result);
   return (
     <>
       <ApolloProvider
@@ -69,40 +72,68 @@ function App() {
 
           <div className="container">
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={user?._id ? <Home /> : <Auth />} />
               <Route path="/auth" element={<Auth />} />
-              <Route path="/users" element={<Users />} />
-              <Route path="users/userManage" element={<UserManage />} />
-              <Route path="users/userTaskboard" element={<UserTaskboard />} />
-
-              <Route path="/orders/:id" element={<OrderI />} />
-
-              <Route path="/client" element={<Client />} />
-              <Route path="client/clientsCRUD" element={<ClientsCRUD />} />
-              <Route path="client/clientsCRM" element={<ClientsCRM />} />
+              <Route path="/users" element={user?._id ? <Users /> : <Auth />} />
               <Route
-                path="client/clientsPayments"
-                element={<ClientsPayments />}
+                path="users/userManage"
+                element={user?._id ? <UserManage /> : <Auth />}
+              />
+              <Route
+                path="users/userTaskboard"
+                element={user?._id ? <UserTaskboard /> : <Auth />}
               />
 
-              <Route path="/order" element={<Order />} />
-              <Route path="/orderlogs" element={<OrderLogs />} />
+              {/* <Route path="/orders/:id" element={<OrderI />} /> */}
 
-              <Route path="/product" element={<Product />} />
-              <Route path="/product/productsCRUD" element={<ProductsCRUD />} />
+              <Route
+                path="/client"
+                element={user?._id ? <Client /> : <Auth />}
+              />
+              <Route
+                path="client/clientsCRUD"
+                element={user?._id ? <ClientsCRUD /> : <Auth />}
+              />
+              <Route
+                path="client/clientsCRM"
+                element={user?._id ? <ClientsCRM /> : <Auth />}
+              />
+              <Route
+                path="client/clientsPayments"
+                element={user?._id ? <ClientsPayments /> : <Auth />}
+              />
+
+              <Route path="/order" element={user?._id ? <Order /> : <Auth />} />
+              <Route
+                path="/orderlogs"
+                element={user?._id ? <OrderLogs /> : <Auth />}
+              />
+
+              <Route
+                path="/product"
+                element={user?._id ? <Product /> : <Auth />}
+              />
+              <Route
+                path="/product/productsCRUD"
+                element={user?._id ? <ProductsCRUD /> : <Auth />}
+              />
               <Route
                 path="/product/productsInventory"
-                element={<ProductsInventory />}
+                element={user?._id ? <ProductsInventory /> : <Auth />}
               />
               <Route
                 path="/product/productsCatelog"
-                element={<ProductsCatelog />}
+                element={user?._id ? <ProductsCatelog /> : <Auth />}
               />
-              <Route path="/product/inventoryLogs" element={<Logs />} />
+              <Route
+                path="/product/inventoryLogs"
+                element={user?._id ? <Logs /> : <Auth />}
+              />
 
-              <Route path="*" element={<NotFound />} />
+              <Route path="*" element={user?._id ? <NotFound /> : <Auth />} />
             </Routes>
           </div>
+          <Footer />
         </Router>
       </ApolloProvider>
     </>

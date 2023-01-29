@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { UPDATE_CLIENT_CRM } from "../../../mutations/dlomClientMutation";
 import { GET_CLIENTS } from "../../../queries/dlomClientQueries";
+import CRMCSV from "./CRMCSV";
 import ViewClientsCRM from "./ViewClientsCRM";
 
 const CRM = () => {
@@ -193,6 +194,7 @@ const CRM = () => {
           </div>
         </form>
       </div>
+
       <div>
         <ViewClientsCRM
           currClient={currClient}

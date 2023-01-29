@@ -33,7 +33,7 @@ const Dashboard = () => {
           <Link to="/users">Users</Link>
         </div>
 
-        <div>
+        {/* <div>
           {user ? (
             <div>
               <span>{user.result.name}</span>
@@ -44,7 +44,7 @@ const Dashboard = () => {
               <Link to="/auth">Login</Link>
             </div>
           )}
-        </div>
+        </div> */}
       </div>
     </div>
   );

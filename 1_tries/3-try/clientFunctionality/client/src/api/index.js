@@ -54,4 +54,12 @@ export const createOrderlog = (ordlog) => API.post("/orderlogs", ordlog);
 // export const createOrderlog = (ordlog) =>
 //   API.post("http://localhost:8001/orderlogs", ordlog);
 
+//user crud :
+export const fetchUsers = () => API.get("/users");
+
+export const updateUser = (uid, udata) =>
+  API.patch(`/users/`, { id: uid, data: udata });
+
+export const deleteUser = (usid) => API.delete(`/users/${usid}`);
+
 //user taskboard

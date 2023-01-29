@@ -42,6 +42,55 @@ class UserRepository {
       );
     }
   }
+  async Users() {
+    try {
+      return await UserModel.find().select("-password");
+    } catch (err) {
+      throw new APIError(
+        "API Error",
+        STATUS_CODES.INTERNAL_ERROR,
+        "Unable to Get Users"
+      );
+    }
+  }
+
+  async UpdateUser(_id, user) {
+    if (!mongoose.Types.ObjectId.isValid(_id)) {
+      throw new APIError(
+        "API Error",
+        STATUS_CODES.NOT_FOUND,
+        "No user with that id"
+      );
+    }
+    try {
+      console.log("rep user", user);
+      const updatedUser = await UserModel.findByIdAndUpdate(
+        _id,
+        { ...user, _id },
+        { new: true }
+      );
+      return updatedUser;
+    } catch (err) {
+      throw new APIError(
+        "API Error",
+        STATUS_CODES.INTERNAL_ERROR,
+        "Error Updating the user"
+      );
+    }
+  }
+
+  async DeleteUser(_id) {
+    if (!mongoose.Types.ObjectId.isValid(_id)) {
+      throw new APIError(
+        "API Error",
+        STATUS_CODES.NOT_FOUND,
+        "No user with that id"
+      );
+    }
+    console.log(_id);
+    await UserModel.findByIdAndRemove(_id);
+    return { message: "User deleted successfully" };
+  }
 }
 
 module.exports = UserRepository;

@@ -7,19 +7,19 @@ import { signup, signin } from "../../redux/actions/Auth";
 const Auth = () => {
   const [isSignup, setIsSignup] = useState(false);
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    // firstName: "",
+    // lastName: "",
     email: "",
     password: "",
-    cpassword: "",
-    userRole: "",
+    // cpassword: "",
+    // userRole: "",
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(formData);
+    // console.log(formData);
 
     if (isSignup) {
       dispatch(signup(formData, navigate));
@@ -96,14 +96,14 @@ const Auth = () => {
         </div>
         <div>
           <button type="submit">{isSignup ? "SignUp" : "SignIn"}</button>
-          <button
+          {/* <button
             onClick={(e) => {
               e.preventDefault();
               setIsSignup(!isSignup);
             }}
           >
             {isSignup ? "Have Account?Login" : "Don't have Account?Signup"}
-          </button>
+          </button> */}
         </div>
       </form>
       <pre>{JSON.stringify(formData, null, 2)}</pre>

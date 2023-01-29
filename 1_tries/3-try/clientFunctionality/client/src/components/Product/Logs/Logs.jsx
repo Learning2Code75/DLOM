@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getProductlogs } from "../../../redux/actions/productlogs";
+import ProductlogsCSV from "./ProductlogsCSV";
 
 const Logs = () => {
   const productlogs = useSelector((state) => state.productlogs);
@@ -13,6 +14,8 @@ const Logs = () => {
     <>
       <div>Product logs</div>
       <Link to="/product">Product</Link>
+
+      <ProductlogsCSV prodLogsData={productlogs} />
 
       <div
         style={{

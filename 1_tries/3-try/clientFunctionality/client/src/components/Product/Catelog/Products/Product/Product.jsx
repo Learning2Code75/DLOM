@@ -60,37 +60,42 @@ const Product = ({ p, setCurProdId, prodsForCatelog, setProdsForCatelog }) => {
           ))}
         </div>
         <div>Created at : {moment(p.createdAt).fromNow()}</div>
-        <div
+        {/* <div
           style={{
             display: "flex",
           }}
         >
           <button onClick={() => setCurProdId(p._id)}>Update</button>
           <button onClick={() => dispatch(deleteProduct(p._id))}>Delete</button>
-        </div>
+        </div> */}
         <div>
           <button
             onClick={(e) => {
               e.preventDefault();
-              setDisplayCustom(!displayCustom);
+              let dc = displayCustom;
               let new_prd = p;
               new_prd.display = customDetails;
               console.log(new_prd);
               // let new_prds_display = prodsForCatelog;
               // new_prds_display.push(new_prd);
               // setProdsForCatelog(new_prds_display);
-              let nps = prodsForCatelog;
+              let nps = [...prodsForCatelog];
               console.log(nps);
-              nps.push(new_prd);
+              if (!dc) {
+                nps.push(new_prd);
+              } else {
+                nps = nps.filter((n) => n._id !== new_prd._id);
+              }
               console.log(nps);
               setProdsForCatelog(nps);
+              setDisplayCustom(!displayCustom);
             }}
           >
             {displayCustom ? "Selected" : "Select"}
           </button>
         </div>
         <pre>{JSON.stringify(customDetails, null, 2)}</pre>
-        {displayCustom && (
+        {!displayCustom && (
           <div>
             <div>
               Discount Display:

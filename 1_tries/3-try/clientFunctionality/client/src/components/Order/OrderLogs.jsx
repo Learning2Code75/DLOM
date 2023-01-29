@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getOrderlogs } from "../../redux/actions/orderlogs";
+import OrderLogsCSV from "./OrderLogsCSV";
 
 const OrderLogs = () => {
   const orderlogs = useSelector((state) => state.orderlogs);
@@ -15,7 +16,9 @@ const OrderLogs = () => {
     <>
       <div>OrderLogs</div>
       <Link to="/">Dashboard</Link>
-
+      <div>
+        <OrderLogsCSV orderLogsData={orderlogs} />
+      </div>
       <div
         style={{
           display: "grid",

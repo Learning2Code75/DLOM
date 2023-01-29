@@ -4,7 +4,7 @@ export const signin = (formData, navigate) => async (dispatch) => {
   try {
     //login user
     const { data } = await api.signIn(formData);
-    console.log(data);
+    // console.log(data);
     dispatch({ type: "AUTH", data });
 
     navigate("/");
@@ -13,12 +13,13 @@ export const signin = (formData, navigate) => async (dispatch) => {
   }
 };
 
-export const signup = (formData, navigate) => async (dispatch) => {
+export const signup = (formData) => async (dispatch) => {
   try {
     // signup and login user
     const { data } = await api.signUp(formData);
-    dispatch({ type: "AUTH", data });
-    navigate("/");
+    // dispatch({ type: "AUTH", data });
+    dispatch({ type: "CREATE_USER", payload: data.result.data });
+    // navigate("/");
   } catch (error) {
     console.log(error);
   }

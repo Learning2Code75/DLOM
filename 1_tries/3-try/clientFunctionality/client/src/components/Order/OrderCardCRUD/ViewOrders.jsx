@@ -2,6 +2,11 @@ import { useQuery } from "@apollo/client";
 import React from "react";
 import { GET_ORDERS } from "../../../queries/dlomOrderQueries";
 import Spinner from "../../Spinner";
+import DeliveryCSV from "./DeliveryCSV";
+import InvPrint from "./InvPrint";
+import PaymentCSV from "./PaymentCSV";
+import SoPrint from "./SoPrint";
+import SrPrint from "./SrPrint";
 
 const ViewOrders = ({
   currOrder,
@@ -188,6 +193,7 @@ const ViewOrders = ({
 
     setState(new_state);
   };
+
   return (
     <>
       {!loading && !error && (
@@ -278,6 +284,26 @@ const ViewOrders = ({
                 >
                   Cancel Order
                 </button>
+              </div>
+
+              <div>
+                <SoPrint data={order?.salesOrder} />
+              </div>
+
+              <div>
+                <InvPrint data={order?.invoice} />
+              </div>
+
+              <div>
+                <SrPrint data={order?.salesReceipt} />
+              </div>
+
+              <div>
+                <DeliveryCSV deliveryData={order?.orderDelivery?.history} />
+              </div>
+
+              <div>
+                <PaymentCSV paymentData={order?.orderPayment?.history} />
               </div>
 
               {/* <div>{order.invoice.distributorName}</div> */}
