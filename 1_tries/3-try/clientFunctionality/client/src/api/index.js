@@ -63,3 +63,9 @@ export const updateUser = (uid, udata) =>
 export const deleteUser = (usid) => API.delete(`/users/${usid}`);
 
 //user taskboard
+export const fetchTasks = () => API.get("/users/tasks");
+
+// export const updateUser = (uid, udata) =>
+// API.patch(`/users/`, { id: uid, data: udata });
+
+// export const deleteUser = (usid) => API.delete(`/users/${usid}`);

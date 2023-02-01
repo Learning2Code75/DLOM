@@ -1,7 +1,9 @@
+const TaskboardService = require("../services/taskboard-service");
 const UserService = require("../services/user-service");
 
 module.exports = (app) => {
   const service = new UserService();
+  const tasks_service = new TaskboardService();
 
   // GET /users : getUsers
   app.get("/users", async (req, res, next) => {
@@ -116,6 +118,72 @@ module.exports = (app) => {
     } catch (err) {
       console.log(err);
       res.status(500).json({ message: "something went wrong" });
+    }
+  });
+
+  //taskboard
+  // GET /tasks : getTasks
+  app.get("/users/tasks", async (req, res, next) => {
+    try {
+      const { data } = await tasks_service.GetTasks();
+      return res.status(200).json(data.tasks);
+    } catch (err) {
+      next(err);
+    }
+  });
+
+  //POST /tasks : createTask
+  app.post("/users/tasks", async (req, res, next) => {
+    const {
+      operation_type,
+      description,
+      status,
+      responses,
+      suggestions,
+      task_assigned_to,
+    } = req.body;
+    try {
+      const result = await tasks_service.CreateTask({
+        operation_type,
+        description,
+        status,
+        responses,
+        suggestions,
+        task_assigned_to,
+      });
+
+      res.status(200).json({ result });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ message: "something went wrong" });
+    }
+  });
+
+  //PATCH /tasks : updateTask
+  app.patch("/users/tasks", async (req, res, next) => {
+    try {
+      console.log(req.body);
+      const { task_id: _id } = req.body;
+      const task = req.body.data;
+
+      const { data } = await tasks_service.UpdateTask({ _id, task });
+      return res.json(data);
+    } catch (err) {
+      console.log(err);
+      next(err);
+    }
+  });
+
+  //DELETE /users : deleteTask
+  app.delete("/users/tasks/:id", async (req, res, next) => {
+    try {
+      const { id: _id } = req.params;
+      console.log(req.params);
+      const { data } = await tasks_service.DeleteTask({ _id });
+      return res.json(data);
+    } catch (err) {
+      console.log(err);
+      next(err);
     }
   });
 };
