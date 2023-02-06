@@ -235,7 +235,7 @@ https://youtube.com/playlist?list=PLAyz_McAak4kdOqpribZk3pyw3NSNHb3q
 2. [24ii] aws ec2 , flask : https://youtu.be/_rwNTY5Mn40
 3. [24iii] heroku , flask : https://youtu.be/qNF1HqBvpGE
 4. [24iv] react chart js : [https://youtu.be/RF57yDglDfE , https://youtu.be/Ge6PQkpa6pA , https://youtu.be/c_9c5zkfQ3Y , https://youtube.com/playlist?list=PLlL2ecj-T3qT6iX6vUNrrjrYPlZPhyjag]
-
+5.[24v] mern dashboard : [https://youtu.be/0cPCMIuDk2I]
 <hr/>
 
 # Tries
