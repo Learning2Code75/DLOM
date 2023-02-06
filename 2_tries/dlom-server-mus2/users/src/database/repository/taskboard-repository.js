@@ -29,7 +29,12 @@ class TaskboardRepository {
         suggestions,
         task_assigned_to,
       });
-      return task;
+      let taskPopulated = await TaskboardModel.findById(task._id).populate([
+        { path: "responses", populate: { path: "user_data", model: "user" } },
+        { path: "suggestions", populate: { path: "user_data", model: "user" } },
+        { path: "task_assigned_to", model: "user" },
+      ]);
+      return taskPopulated;
     } catch (err) {
       throw APIError(
         "API Error",
@@ -68,7 +73,11 @@ class TaskboardRepository {
         _id,
         { ...task, _id },
         { new: true }
-      );
+      ).populate([
+        { path: "responses", populate: { path: "user_data", model: "user" } },
+        { path: "suggestions", populate: { path: "user_data", model: "user" } },
+        { path: "task_assigned_to", model: "user" },
+      ]);
       return updatedTask;
     } catch (err) {
       throw new APIError(

@@ -25,6 +25,7 @@ import Users from "./components/Users/Users";
 import UserManage from "./components/Users/UserManage/UserManage";
 import UserTaskboard from "./components/Users/UserTaskboard/UserTaskboard";
 import { useSelector } from "react-redux";
+import UsagePricing from "./components/Users/UsagePricing/UsagePricing";
 const cache = new InMemoryCache({
   typePolicies: {
     Query: {
@@ -74,15 +75,26 @@ function App() {
             <Routes>
               <Route path="/" element={user?._id ? <Home /> : <Auth />} />
               <Route path="/auth" element={<Auth />} />
-              <Route path="/users" element={user?._id ? <Users /> : <Auth />} />
-              <Route
-                path="users/userManage"
-                element={user?._id ? <UserManage /> : <Auth />}
-              />
-              <Route
-                path="users/userTaskboard"
-                element={user?._id ? <UserTaskboard /> : <Auth />}
-              />
+              {(user?.userRole === "manager" || user?.userRole === "root") && (
+                <>
+                  <Route
+                    path="/users"
+                    element={user?._id ? <Users /> : <Auth />}
+                  />
+                  <Route
+                    path="users/userManage"
+                    element={user?._id ? <UserManage /> : <Auth />}
+                  />
+                  <Route
+                    path="users/userTaskboard"
+                    element={user?._id ? <UserTaskboard /> : <Auth />}
+                  />
+                  <Route
+                    path="users/usagePricing"
+                    element={user?._id ? <UsagePricing /> : <Auth />}
+                  />
+                </>
+              )}
 
               {/* <Route path="/orders/:id" element={<OrderI />} /> */}
 
@@ -94,41 +106,62 @@ function App() {
                 path="client/clientsCRUD"
                 element={user?._id ? <ClientsCRUD /> : <Auth />}
               />
-              <Route
-                path="client/clientsCRM"
-                element={user?._id ? <ClientsCRM /> : <Auth />}
-              />
-              <Route
-                path="client/clientsPayments"
-                element={user?._id ? <ClientsPayments /> : <Auth />}
-              />
+              {(user?.userRole === "manager" ||
+                user?.userRole === "root" ||
+                user?.userRole === "salesperson") && (
+                <Route
+                  path="client/clientsCRM"
+                  element={user?._id ? <ClientsCRM /> : <Auth />}
+                />
+              )}
+              {(user?.userRole === "manager" ||
+                user?.userRole === "root" ||
+                user?.userRole === "salesperson" ||
+                user?.userRole === "finance") && (
+                <Route
+                  path="client/clientsPayments"
+                  element={user?._id ? <ClientsPayments /> : <Auth />}
+                />
+              )}
 
               <Route path="/order" element={user?._id ? <Order /> : <Auth />} />
-              <Route
-                path="/orderlogs"
-                element={user?._id ? <OrderLogs /> : <Auth />}
-              />
+              {(user?.userRole === "manager" || user?.userRole === "root") && (
+                <Route
+                  path="/orderlogs"
+                  element={user?._id ? <OrderLogs /> : <Auth />}
+                />
+              )}
 
               <Route
                 path="/product"
                 element={user?._id ? <Product /> : <Auth />}
               />
-              <Route
-                path="/product/productsCRUD"
-                element={user?._id ? <ProductsCRUD /> : <Auth />}
-              />
-              <Route
-                path="/product/productsInventory"
-                element={user?._id ? <ProductsInventory /> : <Auth />}
-              />
+              {(user?.userRole === "manager" ||
+                user?.userRole === "root" ||
+                user?.userRole === "finance") && (
+                <Route
+                  path="/product/productsCRUD"
+                  element={user?._id ? <ProductsCRUD /> : <Auth />}
+                />
+              )}
+              {(user?.userRole === "manager" ||
+                user?.userRole === "root" ||
+                user?.userRole === "finance") && (
+                <Route
+                  path="/product/productsInventory"
+                  element={user?._id ? <ProductsInventory /> : <Auth />}
+                />
+              )}
               <Route
                 path="/product/productsCatelog"
                 element={user?._id ? <ProductsCatelog /> : <Auth />}
               />
-              <Route
-                path="/product/inventoryLogs"
-                element={user?._id ? <Logs /> : <Auth />}
-              />
+              {(user?.userRole === "manager" || user?.userRole === "root") && (
+                <Route
+                  path="/product/inventoryLogs"
+                  element={user?._id ? <Logs /> : <Auth />}
+                />
+              )}
 
               <Route path="*" element={user?._id ? <NotFound /> : <Auth />} />
             </Routes>

@@ -1,0 +1,25 @@
+version: "3"
+services:
+  business-db:
+    image: mongo
+    ports:
+      - "27019:27017"
+    container_name: business-db
+    volumes:
+      - ./db/:/data/db
+  business-dashboard:
+    build:
+      dockerfile: DockerFile
+      context: ./businessdashboard
+    container_name: businessdashboard
+    ports:
+      - "9000:9000"
+    restart: always
+    depends_on:
+      - "business-db"
+    volumes:
+      - .:/app
+      - /app/businessdashboard/node_modules
+
+    env_file:
+      - ./businessdashboard/.env 

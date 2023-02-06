@@ -1,0 +1,16 @@
+version: "3"
+services:
+  dlom-client-main-app:
+    build: 
+      dockerfile: Dockerfile
+      context: ./dlom-client-main-app
+    container_name: dlomclientmainapp
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/app
+      - /app/dlom-client-main-app/node_modules
+    stdin_open: true
+    tty: true
+
+
