@@ -6,6 +6,7 @@ import { createTask, getTasks, updateTask } from "../../../redux/actions/tasks";
 import { createOp } from "../../../redux/actions/users";
 import AddResponse from "./AddResponse";
 import AddSuggestion from "./AddSuggestion";
+import { TiArrowLeftThick } from "react-icons/ti";
 
 const status_options = {
   todo: ["done"],
@@ -138,9 +139,36 @@ const UserTaskboard = () => {
   }, [dispatch]);
   return (
     <div>
-      <Link to="/users">Users</Link>
-
-      <h1>User Taskboard</h1>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-start",
+          alignItems: "center",
+        }}
+      >
+        <Link
+          to="/users"
+          className="dashboardLink"
+          style={{
+            marginRight: "1rem",
+            fontSize: "2em",
+            color: "white",
+            boxShadow:
+              " inset 5px 5px 5px rgba(0,0,0,0.2),inset -5px -5px 15px rgba(255,255,255,0.1), 5px 5px 15px rgba(0,0,0,0.3),  -5px -5px 15px rgba(255,255,255,0.2)",
+            borderRadius: ".64rem",
+            padding: ".4rem .6rem",
+            cursor: "pointer",
+          }}
+        >
+          <TiArrowLeftThick
+            style={{
+              margin: "0",
+              padding: "0",
+            }}
+          />
+        </Link>
+        <h1>User Taskboard</h1>
+      </div>
 
       <h3>Tasks CRUD</h3>
       <div>

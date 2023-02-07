@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getProductlogs } from "../../../redux/actions/productlogs";
 import ProductlogsCSV from "./ProductlogsCSV";
+import { TiArrowLeftThick } from "react-icons/ti";
 
 const Logs = () => {
   const productlogs = useSelector((state) => state.productlogs);
@@ -12,8 +13,36 @@ const Logs = () => {
   }, [dispatch]);
   return (
     <>
-      <div>Product logs</div>
-      <Link to="/product">Product</Link>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-start",
+          alignItems: "center",
+        }}
+      >
+        <Link
+          to="/product"
+          className="dashboardLink"
+          style={{
+            marginRight: "1rem",
+            fontSize: "2em",
+            color: "white",
+            boxShadow:
+              " inset 5px 5px 5px rgba(0,0,0,0.2),inset -5px -5px 15px rgba(255,255,255,0.1), 5px 5px 15px rgba(0,0,0,0.3),  -5px -5px 15px rgba(255,255,255,0.2)",
+            borderRadius: ".64rem",
+            padding: ".4rem .6rem",
+            cursor: "pointer",
+          }}
+        >
+          <TiArrowLeftThick
+            style={{
+              margin: "0",
+              padding: "0",
+            }}
+          />
+        </Link>
+        <h1>Inventory Logs</h1>
+      </div>
 
       <ProductlogsCSV prodLogsData={productlogs} />
 

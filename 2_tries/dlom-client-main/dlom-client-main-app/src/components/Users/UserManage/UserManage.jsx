@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { signup } from "../../../redux/actions/Auth";
 import { createOp, getUsers, updateUser } from "../../../redux/actions/users";
 import ViewUsers from "./ViewUsers";
+import { TiArrowLeftThick } from "react-icons/ti";
 
 const UserManage = () => {
   const dispatch = useDispatch();
@@ -65,9 +66,36 @@ const UserManage = () => {
 
   return (
     <div>
-      <Link to="/users">Users</Link>
-
-      <h1>User Manage</h1>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-start",
+          alignItems: "center",
+        }}
+      >
+        <Link
+          to="/users"
+          className="dashboardLink"
+          style={{
+            marginRight: "1rem",
+            fontSize: "2em",
+            color: "white",
+            boxShadow:
+              " inset 5px 5px 5px rgba(0,0,0,0.2),inset -5px -5px 15px rgba(255,255,255,0.1), 5px 5px 15px rgba(0,0,0,0.3),  -5px -5px 15px rgba(255,255,255,0.2)",
+            borderRadius: ".64rem",
+            padding: ".4rem .6rem",
+            cursor: "pointer",
+          }}
+        >
+          <TiArrowLeftThick
+            style={{
+              margin: "0",
+              padding: "0",
+            }}
+          />
+        </Link>
+        <h1>Manage Users</h1>
+      </div>
       <pre>state:{JSON.stringify(state, null, 2)}</pre>
       <pre>currUser:{JSON.stringify(currUser, null, 2)}</pre>
 

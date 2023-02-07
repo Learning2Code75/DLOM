@@ -1,35 +1,30 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { BsFillCaretRightFill } from "react-icons/bs";
+import DistributorCRUD from "./DistributorCRUD/DistributorCRUD";
+import OrderCardCRUD from "./OrderCardCRUD/OrderCardCRUD";
 import { TiArrowLeftThick } from "react-icons/ti";
-const clientDashboardArr = [
+import { BsFillCaretRightFill } from "react-icons/bs";
+
+const ordersDashboardArr = [
   {
     headingBg: "01",
-    heading: "Manage Clients",
+    heading: "Manage Orders",
     desc: "Client Manager includes client detail management functionalities",
-    link: "clientsCRUD",
-    linkText: "Manage Clients",
+    link: "/order",
+    linkText: "Manage Orders",
     allowedUsers: ["root", "manager", "salesperson", "finance", "warehouse"],
   },
   {
     headingBg: "02",
-    heading: "CRM",
+    heading: "Order Logs",
     desc: "Client Manager includes client detail management functionalities",
-    link: "clientsCRM",
-    linkText: "CRM",
-    allowedUsers: ["root", "manager", "salesperson"],
-  },
-  {
-    headingBg: "03",
-    heading: "Payments",
-    desc: "Client Manager includes client detail management functionalities",
-    link: "clientsPayments",
-    linkText: "Payments",
-    allowedUsers: ["root", "manager", "salesperson", "finance"],
+    link: "/orderlogs",
+    linkText: "Orderlogs",
+    allowedUsers: ["root", "manager"],
   },
 ];
-const Client = () => {
+const Orders = () => {
   const user = useSelector((state) => state?.auth?.authData?.result);
 
   return (
@@ -62,11 +57,10 @@ const Client = () => {
             }}
           />
         </Link>
-        <h1>Client Functionalities</h1>
+        <h1>Order Functionalities</h1>
       </div>
-
       <div className="dashboardContainer">
-        {clientDashboardArr
+        {ordersDashboardArr
           .filter((da) => da.allowedUsers.includes(user?.userRole))
           .map((da) => (
             <div
@@ -143,33 +137,8 @@ const Client = () => {
             </div>
           ))}
       </div>
-      {/* <div
-        style={{
-          display: "flex",
-          background: "rgb(235,235,235",
-        }}
-      >
-        <p className="item">
-          <Link to="clientsCRUD">Clients CRUD</Link>
-        </p>
-        {(user?.userRole === "manager" ||
-          user?.userRole === "root" ||
-          user?.userRole === "salesperson") && (
-          <p className="item">
-            <Link to="clientsCRM">Clients CRM</Link>
-          </p>
-        )}
-        {(user?.userRole === "manager" ||
-          user?.userRole === "root" ||
-          user?.userRole === "salesperson" ||
-          user?.userRole === "finance") && (
-          <p className="item">
-            <Link to="clientsPayments">Client Payments</Link>
-          </p>
-        )}
-      </div> */}
     </div>
   );
 };
 
-export default Client;
+export default Orders;

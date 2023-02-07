@@ -6,6 +6,7 @@ import { UPDATE_CLIENT_CRM } from "../../../mutations/dlomClientMutation";
 import { GET_CLIENTS } from "../../../queries/dlomClientQueries";
 import CRMCSV from "./CRMCSV";
 import ViewClientsCRM from "./ViewClientsCRM";
+import { TiArrowLeftThick } from "react-icons/ti";
 
 const CRM = () => {
   const [state, setState] = useState({
@@ -110,8 +111,36 @@ const CRM = () => {
   };
   return (
     <div>
-      <Link to="/client">Client</Link>
-      <h1>CRM</h1>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-start",
+          alignItems: "center",
+        }}
+      >
+        <Link
+          to="/client"
+          className="dashboardLink"
+          style={{
+            marginRight: "1rem",
+            fontSize: "2em",
+            color: "white",
+            boxShadow:
+              " inset 5px 5px 5px rgba(0,0,0,0.2),inset -5px -5px 15px rgba(255,255,255,0.1), 5px 5px 15px rgba(0,0,0,0.3),  -5px -5px 15px rgba(255,255,255,0.2)",
+            borderRadius: ".64rem",
+            padding: ".4rem .6rem",
+            cursor: "pointer",
+          }}
+        >
+          <TiArrowLeftThick
+            style={{
+              margin: "0",
+              padding: "0",
+            }}
+          />
+        </Link>
+        <h1>CRM</h1>
+      </div>
       <pre>{JSON.stringify(currClient, null, 2)}</pre>
       <div>
         <form>

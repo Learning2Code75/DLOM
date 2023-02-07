@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getBilling, getDlomCli } from "../../../redux/actions/users";
+import { TiArrowLeftThick } from "react-icons/ti";
 
 const UsagePricing = () => {
   const dispatch = useDispatch();
@@ -100,8 +101,36 @@ const UsagePricing = () => {
   }, [dispatch]);
   return (
     <>
-      <Link to="/users">Users</Link>
-      <div>UsagePricing</div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-start",
+          alignItems: "center",
+        }}
+      >
+        <Link
+          to="/users"
+          className="dashboardLink"
+          style={{
+            marginRight: "1rem",
+            fontSize: "2em",
+            color: "white",
+            boxShadow:
+              " inset 5px 5px 5px rgba(0,0,0,0.2),inset -5px -5px 15px rgba(255,255,255,0.1), 5px 5px 15px rgba(0,0,0,0.3),  -5px -5px 15px rgba(255,255,255,0.2)",
+            borderRadius: ".64rem",
+            padding: ".4rem .6rem",
+            cursor: "pointer",
+          }}
+        >
+          <TiArrowLeftThick
+            style={{
+              margin: "0",
+              padding: "0",
+            }}
+          />
+        </Link>
+        <h1>Usage and Pricing</h1>
+      </div>
 
       <div>
         <h2>Usage</h2>

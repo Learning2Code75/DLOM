@@ -1,5 +1,6 @@
 *{
     font-family: Helvetica, Arial, sans-serif;
+    box-sizing: border-box;
 }
 :root{
   font-size:1rem;
@@ -22,13 +23,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 body::-webkit-scrollbar{
-  width:0.35rem;
+  width:0.4rem;
+
 }
 body::-webkit-scrollbar-track{
   background:#1e1e1e24;
 }
 body::-webkit-scrollbar-thumb{
-  background:#6649b8;
+  background:#2196f3;
   border-radius: .3rem;
 }
 
@@ -145,6 +147,9 @@ select{
   margin-left:5rem;
   padding:1rem;
 }
+
+/* Sidebar , Navbar */
+
 .sidebar{
 
   position: fixed;
@@ -271,4 +276,118 @@ select{
     display:inline;
     transition: opacity var(--transition-speed);
   }
+}
+
+/* Dashboard Grid */
+body{
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap; */
+  min-height: 100vh;
+  background:#232427;
+  color:white;
+}
+.dashboardContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 2.5rem 0;
+}
+.dashboardContainer .dashboardCard{
+  position: relative;
+  min-width: 19rem;
+  min-height: 24rem;
+  box-shadow: inset 5px 5px 5px rgba(0,0,0,0.2),
+              inset -5px -5px 15px rgba(255,255,255,0.1),
+              5px 5px 15px rgba(0,0,0,0.3),
+              -5px -5px 15px rgba(255,255,255,0.2);
+  border-radius: 1rem;
+  margin:1rem;
+}
+
+.dashboardContainer .dashboardCard .dashboardBox{
+  position:absolute;
+  top:1rem;
+  left:.8rem;
+  right:1rem;
+  bottom:1rem;
+  height: inherit;
+  background:#2a2b2f;
+  border:2px solid #1e1f23;
+  border-radius: 1rem;
+  box-shadow : 0 20px 50px rgba(0,0,0,0.5);
+  transition: 0.5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.dashboardContainer .dashboardCard .dashboardBox::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:0;
+  width:50%;
+  height: 100%;
+  background-color: rgba(255,255,255,0.03);
+  pointer-events: none;
+}
+
+.dashboardContainer .dashboardCard .dashboardBox:hover{
+  transform: translateY(-35px);
+  box-shadow: 0 40px 70px rgba(0,0,0,0.5);
+}
+
+.dashboardContainer .dashboardCard .dashboardBox .dashboardContent{
+  padding:1.2rem;
+  text-align: center;
+}
+
+
+.dashboardContainer .dashboardCard .dashboardBox .dashboardContent h2{
+  position:absolute;
+  top:-100px;
+  right:10px;
+  font-size:7em;
+  color:rgba(255,255,255,0.05);
+}
+
+
+.dashboardContainer .dashboardCard .dashboardBox .dashboardContent h3{
+  font-size:2em;
+  color:rgba(255,255,255,0.5);
+  z-index: 1;
+  transition: 0.5s;
+}
+
+.dashboardContainer .dashboardCard .dashboardBox .dashboardContent p{
+  font-size:1rem;
+  font-weight: 300;
+  color:rgba(255,255,255,0.5);
+  z-index: 1;
+  transform: 0.5s;
+}
+.dashboardLink{
+  background: #2196f3;
+  font-weight: 500;
+  color:white;
+  transition: 0.2s ease;
+}
+.dashboardLink:hover{
+  color:#008cff;
+  font-weight:700;
+  background-color:#141418d6;
+}
+
+
+/* small screens */
+@media only screen and (max-width: 400px){
+.dashboardContainer .dashboardCard{
+  min-width: 90vw;
+}
+
 }

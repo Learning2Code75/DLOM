@@ -26,6 +26,7 @@ import UserManage from "./components/Users/UserManage/UserManage";
 import UserTaskboard from "./components/Users/UserTaskboard/UserTaskboard";
 import { useSelector } from "react-redux";
 import UsagePricing from "./components/Users/UsagePricing/UsagePricing";
+import Orders from "./components/Order/Orders";
 const cache = new InMemoryCache({
   typePolicies: {
     Query: {
@@ -123,6 +124,10 @@ function App() {
                   element={user?._id ? <ClientsPayments /> : <Auth />}
                 />
               )}
+              <Route
+                path="/orders"
+                element={user?._id ? <Orders /> : <Auth />}
+              />
 
               <Route path="/order" element={user?._id ? <Order /> : <Auth />} />
               {(user?.userRole === "manager" || user?.userRole === "root") && (
