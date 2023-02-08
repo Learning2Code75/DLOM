@@ -235,8 +235,13 @@ https://youtube.com/playlist?list=PLAyz_McAak4kdOqpribZk3pyw3NSNHb3q
 2. [24ii] aws ec2 , flask : https://youtu.be/_rwNTY5Mn40
 3. [24iii] heroku , flask : https://youtu.be/qNF1HqBvpGE
 4. [24iv] react chart js : [https://youtu.be/RF57yDglDfE , https://youtu.be/Ge6PQkpa6pA , https://youtu.be/c_9c5zkfQ3Y , https://youtube.com/playlist?list=PLlL2ecj-T3qT6iX6vUNrrjrYPlZPhyjag]
-5.[24v] mern dashboard : [https://youtu.be/0cPCMIuDk2I]
+5. [24v] mern dashboard : [https://youtu.be/0cPCMIuDk2I]
+6. [24vi] fetch data from mongo --> pandas df : [https://youtu.be/4l4yOZZ9FYY , https://youtu.be/magzEfYqIos?list=PLZoTAELRMXVN_8zzsevm1bm6G-plsiO1I , https://youtu.be/IUUPz5HjkkE , https://youtu.be/qWYx5neOh2s ]
 <hr/>
+
+# RP writing vids (what to include?)
+1. [25i]abstract,proposal :[https://youtu.be/m7ePXitjZ3Y , https://youtu.be/XE1IFt4FYUE ,  https://youtu.be/eALzUfkQJRU?list=PLvcb33xNTVUk-Bj4Y9iuU0n46LowYtjb5 , https://youtu.be/oUiKwFNzKDM?list=PLvcb33xNTVUk-Bj4Y9iuU0n46LowYtjb5]
+2. [25ii] full paper : [https://www.youtube.com/playlist?list=PLvcb33xNTVUk-Bj4Y9iuU0n46LowYtjb5]
 
 # Tries
 
