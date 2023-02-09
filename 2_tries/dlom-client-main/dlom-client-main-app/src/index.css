@@ -1,4 +1,6 @@
 *{
+    margin:0;
+    padding:0;
     font-family: Helvetica, Arial, sans-serif;
     box-sizing: border-box;
 }
@@ -12,7 +14,9 @@
   --transition-speed:300ms;
 
 }
-
+html {
+  scroll-behavior: smooth;
+}
 body {
   margin: 0;
   padding:0;
@@ -38,7 +42,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-form {
+/* form {
   background: linear-gradient(to left top, #22132e, #000) fixed;
   color:white;
 }
@@ -142,12 +146,209 @@ button:after {
 select{
    width:80%;
   height: 2rem;
-}
+} */
 .mainContainer{
   margin-left:5rem;
   padding:1rem;
+  min-height: 100vh;
+}
+/* Login */
+.loginContainer{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background:#23242a;
+}
+.loginBox{
+  position:relative;
+  min-width: 380px;
+  min-height: 400px;
+  background-color: #1c1c1c;
+  border-radius: .5rem;
+  overflow:hidden;
 }
 
+.loginBox::before{
+  content:'';
+  position:absolute;
+  top:-50%;
+  left:-50%;
+  min-width: 380px;
+  min-height: 400px;
+  background: linear-gradient(0deg,transparent,#008cff,#008cff);
+  transform-origin: bottom right;
+  animation: animate 6s linear infinite;
+}
+.loginBox::after{
+  content:'';
+  position:absolute;
+  top:-50%;
+  left:-50%;
+  min-width: 380px;
+  min-height: 420px;
+  background: linear-gradient(0deg,transparent,#008cff,#008cff);
+  transform-origin: bottom right;
+  animation:animate 6s linear infinite;
+  animation-delay:-3s;
+}
+@keyframes animate {
+  0%
+  {
+    transform: rotate(0deg);
+  }
+  100%
+  {
+    transform:rotate(360deg);
+  }
+}
+
+.loginForm{
+  position:absolute;
+  inset:2px;
+  border-radius: .5rem;
+  background-color: #28292d;
+  z-index: 10;
+  padding:3.4rem 2.8rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.loginForm h2{
+  color:#008cff;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.1em;
+}
+
+.loginInputBox{
+  position:relative;
+  min-width:300px;
+  margin-top:2rem;
+}
+.loginInputBox input{
+  position:relative;
+  width:100%;
+  padding:20px 10px 10px;
+  background-color: transparent;
+  border:none;
+  outline:none;
+  color:#23242a;
+  font-size: 1em;
+  letter-spacing: 0.05em;
+  z-index: 10;
+}
+.loginInputBox span{
+  position: absolute;
+  left:0;
+  padding:20px 10px 10px;
+  font-size: 1em;
+  color:#8f8f8f;
+  pointer-events: none;
+  letter-spacing: 0.05em;
+  transition: 0.5s;
+  font-weight: 600;
+}
+.loginInputBox input:valid ~ span,
+.loginInputBox input:focus ~ span{
+  color:#008cff;
+  transform:translateX(0px) translateY(-34px);
+  font-size:0.8em;
+}
+
+.loginInputBox i{
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:100%;
+  height: 2px;
+  background-color: #008cff;
+  border-radius: 4px;
+  transition: 0.5s;
+  pointer-events: none;
+  z-index:9;
+}
+
+.loginInputBox input:valid ~ i,
+.loginInputBox input:focus ~ i{
+  height: 38px;
+}
+
+.loginSubmit{
+  margin-top: 2rem;
+  border:none;
+  outline:none;
+  background-color: #008cff;
+  padding:.8rem 1.4rem;
+  width:40%;
+  border-radius: .5rem;
+  font-weight: bold;
+  cursor:pointer;
+  color:white;
+}
+
+.loginSubmit:hover{
+  opacity:0.7;
+  color:#d4d6eb;
+}
+
+@media only screen and (max-width: 428px){
+ .loginBox{
+  min-width: 90vw;
+ }
+ .loginForm{
+  padding:2rem 1rem;
+ }
+ .loginInputBox{
+  min-width: 80vw;
+ }
+}
+
+/* Appbar */
+.appbar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0 1rem 6rem;
+}
+.switch{
+  display:flex;
+  width:100%;
+  /* height: 100px; */
+  justify-content: center;
+  align-items: center;
+  margin-right: 1rem;
+}
+
+.switch label{
+  margin:10px;
+}
+
+#light .switch label{
+  color:#202035;
+}
+
+#dark .switch label{
+  color:white;
+}
+
+#light body{
+  color:#141418;
+  background-color: #ebecf0;
+}
+#dark body{
+  background:#232427;
+  color:white;
+}
+#light{
+  color:#141418;
+  background-color: #ebecf0;
+}
+#dark {
+  background:#232427;
+  color:white;
+}
 /* Sidebar , Navbar */
 
 .sidebar{
@@ -234,7 +435,17 @@ select{
     bottom:0;
     width:100vw;
     height: 5rem;
-
+  }
+  .appbar{
+    padding:.8rem;
+  }
+  .switch{
+    flex-direction: column;
+  }
+  .switch label{
+    padding:0;
+    margin:0;
+    margin-top:.3rem;
   }
   .logo{
     display:none;
@@ -285,10 +496,10 @@ body{
   align-items: center;
   flex-wrap: wrap; */
   min-height: 100vh;
-  background:#232427;
-  color:white;
+  /* background:#232427;
+  color:white; */
 }
-.dashboardContainer{
+#dark .dashboardContainer{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -296,7 +507,7 @@ body{
   max-width: 1200px;
   margin: 2.5rem 0;
 }
-.dashboardContainer .dashboardCard{
+#dark .dashboardContainer .dashboardCard{
   position: relative;
   min-width: 19rem;
   min-height: 24rem;
@@ -308,7 +519,7 @@ body{
   margin:1rem;
 }
 
-.dashboardContainer .dashboardCard .dashboardBox{
+#dark .dashboardContainer .dashboardCard .dashboardBox{
   position:absolute;
   top:1rem;
   left:.8rem;
@@ -326,7 +537,7 @@ body{
   overflow: hidden;
 }
 
-.dashboardContainer .dashboardCard .dashboardBox::before{
+#dark .dashboardContainer .dashboardCard .dashboardBox::before{
   content:'';
   position:absolute;
   top:0;
@@ -337,57 +548,199 @@ body{
   pointer-events: none;
 }
 
-.dashboardContainer .dashboardCard .dashboardBox:hover{
+#dark .dashboardContainer .dashboardCard .dashboardBox:hover{
   transform: translateY(-35px);
   box-shadow: 0 40px 70px rgba(0,0,0,0.5);
 }
 
-.dashboardContainer .dashboardCard .dashboardBox .dashboardContent{
+#dark .dashboardContainer .dashboardCard .dashboardBox .dashboardContent{
   padding:1.2rem;
   text-align: center;
 }
 
 
-.dashboardContainer .dashboardCard .dashboardBox .dashboardContent h2{
+#dark .dashboardContainer .dashboardCard .dashboardBox .dashboardContent h2{
   position:absolute;
-  top:-100px;
+  top:0px;
   right:10px;
   font-size:7em;
   color:rgba(255,255,255,0.05);
 }
 
 
-.dashboardContainer .dashboardCard .dashboardBox .dashboardContent h3{
+#dark .dashboardContainer .dashboardCard .dashboardBox .dashboardContent h3{
   font-size:2em;
   color:rgba(255,255,255,0.5);
   z-index: 1;
   transition: 0.5s;
 }
 
-.dashboardContainer .dashboardCard .dashboardBox .dashboardContent p{
+#dark .dashboardContainer .dashboardCard .dashboardBox .dashboardContent p{
   font-size:1rem;
   font-weight: 300;
   color:rgba(255,255,255,0.5);
   z-index: 1;
   transform: 0.5s;
 }
-.dashboardLink{
+#dark .dashboardLink{
   background: #2196f3;
   font-weight: 500;
   color:white;
   transition: 0.2s ease;
 }
-.dashboardLink:hover{
+#dark .dashboardLink:hover{
   color:#008cff;
   font-weight:700;
   background-color:#141418d6;
 }
 
+#light .dashboardContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 2.5rem 0;
+}
+#light .dashboardContainer .dashboardCard{
+  position: relative;
+  min-width: 19rem;
+  min-height: 24rem;
+  box-shadow: inset 5px 5px 5px rgba(0,0,0,0.05),
+              inset -5px -5px 5px rgba(255,255,255,0.5),
+              5px 5px 5px rgba(0,0,0,0.05),
+              -5px -5px 5px rgba(255,255,255,0.5);
+  border-radius: 1rem;
+  margin:1rem;
+}
 
+#light .dashboardContainer .dashboardCard .dashboardBox{
+  position:absolute;
+  top:1rem;
+  left:.8rem;
+  right:1rem;
+  bottom:1rem;
+  height: inherit;
+  /* border:2px solid #1e1f23; */
+  border-radius: 1rem;
+  background:#ebf5fc;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  transition: 0.5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+#light .dashboardContainer .dashboardCard .dashboardBox::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:0;
+  width:50%;
+  height: 100%;
+  background-color: rgba(47, 43, 43, 0.125);
+  pointer-events: none;
+}
+
+#light .dashboardContainer .dashboardCard .dashboardBox:hover{
+  transform: translateY(-35px);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+  background:linear-gradient(45deg,cyan,#2196f3,#008cff);
+}
+
+#light .dashboardContainer .dashboardCard .dashboardBox .dashboardContent{
+  padding:1.2rem;
+  text-align: center;
+}
+
+
+#light .dashboardContainer .dashboardCard .dashboardBox .dashboardContent h2{
+  position:absolute;
+  top:0px;
+  right:10px;
+  font-size:7em;
+  color:rgba(0, 0, 0, 0.088);
+}
+
+
+#light .dashboardContainer .dashboardCard .dashboardBox .dashboardContent h3{
+  font-size:2em;
+  color:#777;
+  z-index: 1;
+  transition: 0.5s;
+}
+
+#light .dashboardContainer .dashboardCard .dashboardBox .dashboardContent p{
+  font-size:1rem;
+  font-weight: 300;
+  color:#777;
+  z-index: 1;
+  transform: 0.5s;
+}
+#light .dashboardContainer .dashboardCard:hover .dashboardBox .dashboardContent h3,
+#light .dashboardContainer .dashboardCard:hover .dashboardBox .dashboardContent p{
+  color:#fff;
+}
+
+#light .dashboardLink{
+  background: #215df3;
+  font-weight: 500;
+  color:white;
+  transition: 0.2s ease;
+}
+#light .dashboardLink:hover{
+  color:#008cff;
+  font-weight:700;
+  background-color:#141418d6;
+}
 /* small screens */
 @media only screen and (max-width: 400px){
 .dashboardContainer .dashboardCard{
   min-width: 90vw;
 }
 
+}
+
+/* sub dashboard */
+
+
+
+
+/* Client - Manage Client */
+
+.manageClientDialogOpen{
+  display:flex;
+  justify-content: center;
+  padding:1rem;
+  width:100%;
+  align-items: center;
+}
+.manageClientDialogOpen button{
+  cursor:pointer;
+  padding:.8rem 1.3rem;
+  border-radius: .9rem;
+  text-align:center;
+  border: 2px solid transparent;
+  background: linear-gradient(160deg,#f0f1f4 0%,#e4e6eb 100%);
+  box-shadow: -3px -3px 6px 2px #fff , 5px 5px 8px 0px rgba(0,0,0,0.17), 1px 2px 2px 0px rgba(0,0,0,0.1);
+  transition: 0.1s;
+  font-weight: bold;
+}
+
+.manageClientDialogOpen button:focus,
+.manageClientDialogOpen button:hover
+{
+  border:1.4px solid #fafafa;
+  outline:none;
+  box-shadow: inset -3px -3px 5px 0px #fff , -1px -1px 4px 0px #fff, inset 5px 5px 10px 0px rgba(0,0,0,0.12) , inset 2px 2px 3px 0px rgba(0,0,0,0.07), 1px 2px 3px 0px rgba(0,0,0,1);
+}
+.manageClientDialogForm{
+  padding:.5rem 1rem;
+}
+
+.manageClientDialogHeading{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

@@ -34,13 +34,10 @@ const Auth = () => {
     });
   };
   return (
-    <div>
-      <h1>Auth</h1>
-      <h2>{isSignup ? "Sign Up" : "Sign In"}</h2>
-
-      <form onSubmit={handleSubmit}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
-          {isSignup && (
+    <div className="loginContainer">
+      <div className="loginBox">
+        <form className="loginForm" onSubmit={handleSubmit}>
+          {/* {isSignup && (
             <>
               <Input
                 name="firstName"
@@ -57,8 +54,10 @@ const Auth = () => {
                 type="text"
               />
             </>
-          )}
-          <Input
+          )} */}
+          <h2>DLOM Login</h2>
+
+          {/* <Input
             name="email"
             placeholder="Email"
             handleChange={handleChange}
@@ -71,8 +70,36 @@ const Auth = () => {
             handleChange={handleChange}
             autoFocus={false}
             type="password"
-          />
-          {isSignup && (
+          /> */}
+          <div className="loginInputBox">
+            <input
+              name="email"
+              placeholder="Email"
+              onChange={handleChange}
+              autoFocus={true}
+              type="email"
+              value={formData.email}
+              required
+            />
+            <span>Email</span>
+            <i></i>
+          </div>
+
+          <div className="loginInputBox">
+            <input
+              name="password"
+              placeholder="Password"
+              onChange={handleChange}
+              autoFocus={false}
+              type="password"
+              value={formData.password}
+              required
+            />
+            <span>Password</span>
+            <i></i>
+          </div>
+
+          {/* {isSignup && (
             <>
               <Input
                 name="cpassword"
@@ -82,8 +109,8 @@ const Auth = () => {
                 type="password"
               />
             </>
-          )}
-          {isSignup && (
+          )} */}
+          {/* {isSignup && (
             <select name="userRole" onChange={handleChange}>
               <option>Select Role of User</option>
               <option value="root">Root</option>
@@ -92,10 +119,11 @@ const Auth = () => {
               <option value="finance">Finance</option>
               <option value="warehouse">Warehouse</option>
             </select>
-          )}
-        </div>
-        <div>
-          <button type="submit">{isSignup ? "SignUp" : "SignIn"}</button>
+          )} */}
+
+          <button className="loginSubmit" type="submit">
+            {isSignup ? "SignUp" : "SignIn"}
+          </button>
           {/* <button
             onClick={(e) => {
               e.preventDefault();
@@ -104,9 +132,27 @@ const Auth = () => {
           >
             {isSignup ? "Have Account?Login" : "Don't have Account?Signup"}
           </button> */}
+          {/* <pre>{JSON.stringify(formData, null, 2)}</pre> */}
+        </form>
+      </div>
+      {/* <div className="loginBox">
+        <div className="loginForm">
+          <h2>DLOM Login</h2>
+          <div className="loginInputBox">
+            <input type="email" required="required" />
+            <span>Email</span>
+            <i></i>
+          </div>
+
+          <div className="loginInputBox">
+            <input type="password" required="required" />
+            <span>Password</span>
+            <i></i>
+          </div>
+
+          <input className="loginSubmit" type="submit" value="login" />
         </div>
-      </form>
-      <pre>{JSON.stringify(formData, null, 2)}</pre>
+      </div> */}
     </div>
   );
 };

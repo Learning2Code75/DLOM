@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import DistributorCRUD from "./DistributorCRUD/DistributorCRUD";
 import OrderCardCRUD from "./OrderCardCRUD/OrderCardCRUD";
 import { TiArrowLeftThick } from "react-icons/ti";
 import { BsFillCaretRightFill } from "react-icons/bs";
+import { ThemeContext } from "../../App";
 
 const ordersDashboardArr = [
   {
@@ -25,15 +26,24 @@ const ordersDashboardArr = [
   },
 ];
 const Orders = () => {
+  const { theme } = useContext(ThemeContext);
   const user = useSelector((state) => state?.auth?.authData?.result);
 
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+      }}
+    >
       <div
         style={{
           display: "flex",
           justifyContent: "flex-start",
           alignItems: "center",
+          width: "100%",
         }}
       >
         <Link
@@ -79,10 +89,14 @@ const Orders = () => {
                 <h2
                   style={{
                     position: "absolute",
-                    top: "-60px",
+                    top: "0px",
                     right: "20px",
                     fontSize: "5em",
-                    color: "rgba(255,255,255,0.05)",
+                    color: `${
+                      theme === "dark"
+                        ? "rgba(255,255,255,0.05)"
+                        : "rgba(0, 0, 0, 0.088)"
+                    }`,
                   }}
                 >
                   {da.headingBg}
@@ -90,7 +104,9 @@ const Orders = () => {
                 <h3
                   style={{
                     fontSize: "1.5em",
-                    color: "rgba(255,255,255,0.5)",
+                    color: `${
+                      theme === "dark" ? "rgba(255,255,255,0.5)" : "#777"
+                    }`,
                     zIndex: "1",
                     transition: "0.5s",
                   }}
@@ -101,7 +117,9 @@ const Orders = () => {
                   style={{
                     fontSize: "1em",
                     fontWeight: "400",
-                    color: "rgba(255,255,255,0.5)",
+                    color: `${
+                      theme === "dark" ? "rgba(255,255,255,0.5)" : "#777"
+                    }`,
                     zIndex: "1",
                   }}
                 >

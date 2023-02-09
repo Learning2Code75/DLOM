@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ClientSocialMediaInput from "./ClientSocialMediaInput";
-import { GrFormAdd } from "react-icons/gr";
+import { GrClose, GrFormAdd } from "react-icons/gr";
 import { FiSave } from "react-icons/fi";
 import { useMutation } from "@apollo/client";
 import { TiArrowLeftThick } from "react-icons/ti";
@@ -14,9 +14,13 @@ import { GET_CLIENTS } from "../../../queries/dlomClientQueries";
 import ViewClients from "./ViewClients";
 import { useDispatch, useSelector } from "react-redux";
 import { createOp } from "../../../redux/actions/users";
+import { Dialog, IconButton, useMediaQuery, useTheme } from "@mui/material";
+import { FaCross } from "react-icons/fa";
 
 const CRUD = () => {
   const dispatch = useDispatch();
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const user = useSelector((state) => state?.auth?.authData?.result);
 
   const [state, setState] = useState({
@@ -30,6 +34,7 @@ const CRUD = () => {
     salesPersonAssigned: "",
     typeOfCustomer: "permanent",
   });
+  const [openDialog, setOpenDialog] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
   const [addClient] = useMutation(ADD_CLIENT, {
     variables: {
@@ -83,6 +88,7 @@ const CRUD = () => {
       state.clientSocialMedia,
       state.typeOfCustomer
     );
+    setOpenDialog(false);
   };
 
   const updateClientSubmit = (e) => {
@@ -99,6 +105,7 @@ const CRUD = () => {
       state.clientSocialMedia,
       state.typeOfCustomer
     );
+    setOpenDialog(false);
   };
 
   const addClientSocial = (e) => {
@@ -167,132 +174,177 @@ const CRUD = () => {
         user?.userRole === "salesperson" ||
         user?.userRole === "finance") && (
         <div>
-          <h1>Client CRUD</h1>
-          <pre>{JSON.stringify(state, null, 2)}</pre>
-          <pre>{JSON.stringify(isUpdate, null, 2)}</pre>
+          {/* <h1>Client CRUD</h1> */}
 
-          <form>
-            <div className="formLabel">Company Name</div>
-            <input
-              type="text"
-              value={state.companyName}
-              onChange={(e) =>
-                setState({ ...state, companyName: e.target.value })
+          <div className="manageClientDialogOpen">
+            <button onClick={() => setOpenDialog(true)}>Add Client</button>
+          </div>
+
+          <Dialog
+            open={openDialog}
+            fullWidth={true}
+            fullScreen={fullScreen}
+            // maxWidth={}
+            onClose={(e, r) => {
+              if (r === "backdropClick") {
+                clearCurrClient();
+                setOpenDialog(!openDialog);
+              } else {
+                clearCurrClient();
+                setOpenDialog(!openDialog);
               }
-              id="companyName"
-              className="formControl"
-            />
-
-            <div className="formLabel">Contact Person Name</div>
-            <input
-              type="text"
-              value={state.contactPersonName}
-              onChange={(e) =>
-                setState({ ...state, contactPersonName: e.target.value })
-              }
-              id="contactPersonName"
-              className="formControl"
-            />
-
-            <div className="formLabel">Address</div>
-            <input
-              type="text"
-              value={state.address}
-              onChange={(e) => setState({ ...state, address: e.target.value })}
-              id="address"
-              className="formControl"
-            />
-
-            <div className="formLabel">GST No.</div>
-            <input
-              type="text"
-              value={state.gst}
-              onChange={(e) => setState({ ...state, gst: e.target.value })}
-              id="gst"
-              className="formControl"
-            />
-
-            <div className="formLabel">Phone Number</div>
-            <input
-              type="text"
-              value={state.phoneNumber}
-              onChange={(e) =>
-                setState({ ...state, phoneNumber: e.target.value })
-              }
-              id="phoneNumber"
-              className="formControl"
-            />
-
-            <div className="formLabel">Discount Rate</div>
-            <input
-              type="text"
-              value={state.discountRate}
-              onChange={(e) =>
-                setState({ ...state, discountRate: e.target.value })
-              }
-              id="discountRate"
-              className="formControl"
-            />
-
-            <div className="formLabel">Sales Person Assigned</div>
-            <input
-              type="text"
-              value={state.salesPersonAssigned}
-              onChange={(e) =>
-                setState({ ...state, salesPersonAssigned: e.target.value })
-              }
-              id="salesPersonAssigned"
-              className="formControl"
-            />
-
-            <div className="formLabel">Type of Customer</div>
-
-            <select
-              value={state.typeOfCustomer}
-              onChange={(e) =>
-                setState({ ...state, typeOfCustomer: e.target.value })
-              }
-            >
-              <option value={"permanent"}>Permanent</option>
-              <option value={"potential"}>Potential</option>
-            </select>
-
-            <div className="formLabel">
-              Client Social Media{" "}
-              <span>
-                <button onClick={addClientSocial}>+</button>
-              </span>
-            </div>
-            {state.clientSocialMedia.map((csm, index) => (
-              <ClientSocialMediaInput
-                state={state}
-                setState={setState}
-                index={index}
-                csm={csm}
-                isUpdate={isUpdate}
+            }}
+            // PaperComponent={}
+            PaperProps={{ sx: { borderRadius: "1rem" } }}
+            scroll={"body"}
+          >
+            {/* <pre>{JSON.stringify(state, null, 2)}</pre> */}
+            {/* <pre>{JSON.stringify(isUpdate, null, 2)}</pre> */}
+            <form className="manageClientDialogForm">
+              <div className="manageClientDialogHeading">
+                <h2> {isUpdate ? "Update Client" : "Add Client"}</h2>
+                <IconButton
+                  onClick={() => {
+                    setOpenDialog(false);
+                    clearCurrClient();
+                  }}
+                >
+                  <GrClose />
+                </IconButton>
+              </div>
+              <div className="formLabel">Company Name</div>
+              <input
+                type="text"
+                value={state.companyName}
+                onChange={(e) =>
+                  setState({ ...state, companyName: e.target.value })
+                }
+                id="companyName"
+                className="formControl"
               />
-            ))}
 
-            <button
-              onClick={
-                isUpdate
-                  ? (e) => {
-                      updateClientSubmit(e);
-                    }
-                  : (e) => addClientSubmit(e)
-              }
-            >
-              {isUpdate ? "Update Client" : "Add Client"}
-            </button>
-            {isUpdate && (
-              <button onClick={(e) => clearCurrClient(e)}>Cancel</button>
-            )}
-          </form>
+              <div className="formLabel">Contact Person Name</div>
+              <input
+                type="text"
+                value={state.contactPersonName}
+                onChange={(e) =>
+                  setState({ ...state, contactPersonName: e.target.value })
+                }
+                id="contactPersonName"
+                className="formControl"
+              />
+
+              <div className="formLabel">Address</div>
+              <input
+                type="text"
+                value={state.address}
+                onChange={(e) =>
+                  setState({ ...state, address: e.target.value })
+                }
+                id="address"
+                className="formControl"
+              />
+
+              <div className="formLabel">GST No.</div>
+              <input
+                type="text"
+                value={state.gst}
+                onChange={(e) => setState({ ...state, gst: e.target.value })}
+                id="gst"
+                className="formControl"
+              />
+
+              <div className="formLabel">Phone Number</div>
+              <input
+                type="text"
+                value={state.phoneNumber}
+                onChange={(e) =>
+                  setState({ ...state, phoneNumber: e.target.value })
+                }
+                id="phoneNumber"
+                className="formControl"
+              />
+
+              <div className="formLabel">Discount Rate</div>
+              <input
+                type="text"
+                value={state.discountRate}
+                onChange={(e) =>
+                  setState({ ...state, discountRate: e.target.value })
+                }
+                id="discountRate"
+                className="formControl"
+              />
+
+              <div className="formLabel">Sales Person Assigned</div>
+              <input
+                type="text"
+                value={state.salesPersonAssigned}
+                onChange={(e) =>
+                  setState({ ...state, salesPersonAssigned: e.target.value })
+                }
+                id="salesPersonAssigned"
+                className="formControl"
+              />
+
+              <div className="formLabel">Type of Customer</div>
+
+              <select
+                value={state.typeOfCustomer}
+                onChange={(e) =>
+                  setState({ ...state, typeOfCustomer: e.target.value })
+                }
+              >
+                <option value={"permanent"}>Permanent</option>
+                <option value={"potential"}>Potential</option>
+              </select>
+
+              <div className="formLabel">
+                Client Social Media{" "}
+                <span>
+                  <button onClick={addClientSocial}>+</button>
+                </span>
+              </div>
+              {state.clientSocialMedia.map((csm, index) => (
+                <ClientSocialMediaInput
+                  state={state}
+                  setState={setState}
+                  index={index}
+                  csm={csm}
+                  isUpdate={isUpdate}
+                />
+              ))}
+
+              <button
+                onClick={
+                  isUpdate
+                    ? (e) => {
+                        updateClientSubmit(e);
+                        clearCurrClient(e);
+                      }
+                    : (e) => addClientSubmit(e)
+                }
+              >
+                {isUpdate ? "Update Client" : "Add Client"}
+              </button>
+              {isUpdate && (
+                <button
+                  onClick={(e) => {
+                    clearCurrClient(e);
+                    setOpenDialog(false);
+                  }}
+                >
+                  Cancel
+                </button>
+              )}
+            </form>
+          </Dialog>
         </div>
       )}
       <div>
         <h2>Clients</h2>
         <ViewClients
+          setOpenDialog={setOpenDialog}
           currClient={state}
           setCurrClient={setState}
           setUpdate={setIsUpdate}

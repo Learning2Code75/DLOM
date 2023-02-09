@@ -1,9 +1,12 @@
 import logo from "./assets/logo.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import decode from "jwt-decode";
+import ReactSwitch from "react-switch";
+import { ThemeContext } from "../App";
 const Header = () => {
+  const { theme, toggleTheme } = useContext(ThemeContext);
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -28,14 +31,8 @@ const Header = () => {
   }, [location]);
   return (
     <nav className="navbar">
-      {/* <div
-        className="container"
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-        }}
-      >
-        <a className="navbarBrand">
+      <div className="appbar">
+        {/* <a className="navbarBrand">
           <div className="logoContainer">
             <img
               src={logo}
@@ -45,13 +42,26 @@ const Header = () => {
               width={150}
             />
           </div>
-        </a>
+        </a> */}
         <div>
           {JSON.parse(localStorage.getItem("profile"))?.result.name}[
           {JSON.parse(localStorage.getItem("profile"))?.result.userRole}]
         </div>
-        <div>{user && <button onClick={() => logout()}>Logout</button>}</div>
-      </div> */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: "0 1rem",
+          }}
+        >
+          <div className="switch">
+            <ReactSwitch onChange={toggleTheme} checked={theme === "dark"} />
+            <label>{theme === "light" ? "Light Mode" : "Dark Mode"}</label>
+          </div>
+          <div>{user && <button onClick={() => logout()}>Logout</button>}</div>
+        </div>
+      </div>
       <div className="sidebar">
         <ul className="sidebarNav">
           <li class="logo">
@@ -105,7 +115,7 @@ const Header = () => {
           </li>
 
           <li className="navItem">
-            <Link to="/order" className="navLink">
+            <Link to="/orders" className="navLink">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -117,7 +127,7 @@ const Header = () => {
                 <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
               </svg>
 
-              <span className="linkText">Order</span>
+              <span className="linkText">Orders</span>
             </Link>
           </li>
 

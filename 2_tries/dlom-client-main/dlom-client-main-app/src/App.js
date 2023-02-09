@@ -27,6 +27,7 @@ import UserTaskboard from "./components/Users/UserTaskboard/UserTaskboard";
 import { useSelector } from "react-redux";
 import UsagePricing from "./components/Users/UsagePricing/UsagePricing";
 import Orders from "./components/Order/Orders";
+import { createContext, useState } from "react";
 const cache = new InMemoryCache({
   typePolicies: {
     Query: {
@@ -61,118 +62,137 @@ const dlomClient = new ApolloClient({
 //   cache,
 // });
 
+export const ThemeContext = createContext(null);
+
 function App() {
   const user = useSelector((state) => state?.auth?.authData?.result);
+  const [theme, setTheme] = useState("light");
+  const toggleTheme = () => {
+    setTheme((curr) => (curr === "light" ? "dark" : "light"));
+  };
   return (
     <>
       <ApolloProvider
         // client={client}
         client={dlomClient}
       >
-        <Router>
-          <Header />
+        <ThemeContext.Provider value={{ theme, toggleTheme }}>
+          <Router>
+            <div id={theme}>
+              {user?._id && <Header />}
 
-          <div className="mainContainer">
-            <Routes>
-              <Route path="/" element={user?._id ? <Home /> : <Auth />} />
-              <Route path="/auth" element={<Auth />} />
-              {(user?.userRole === "manager" || user?.userRole === "root") && (
-                <>
+              <div className={user?._id && "mainContainer"}>
+                <Routes>
+                  <Route path="/" element={user?._id ? <Home /> : <Auth />} />
+                  <Route path="/auth" element={<Auth />} />
+                  {(user?.userRole === "manager" ||
+                    user?.userRole === "root") && (
+                    <>
+                      <Route
+                        path="/users"
+                        element={user?._id ? <Users /> : <Auth />}
+                      />
+                      <Route
+                        path="users/userManage"
+                        element={user?._id ? <UserManage /> : <Auth />}
+                      />
+                      <Route
+                        path="users/userTaskboard"
+                        element={user?._id ? <UserTaskboard /> : <Auth />}
+                      />
+                      <Route
+                        path="users/usagePricing"
+                        element={user?._id ? <UsagePricing /> : <Auth />}
+                      />
+                    </>
+                  )}
+
+                  {/* <Route path="/orders/:id" element={<OrderI />} /> */}
+
                   <Route
-                    path="/users"
-                    element={user?._id ? <Users /> : <Auth />}
+                    path="/client"
+                    element={user?._id ? <Client /> : <Auth />}
                   />
                   <Route
-                    path="users/userManage"
-                    element={user?._id ? <UserManage /> : <Auth />}
+                    path="client/clientsCRUD"
+                    element={user?._id ? <ClientsCRUD /> : <Auth />}
                   />
+                  {(user?.userRole === "manager" ||
+                    user?.userRole === "root" ||
+                    user?.userRole === "salesperson") && (
+                    <Route
+                      path="client/clientsCRM"
+                      element={user?._id ? <ClientsCRM /> : <Auth />}
+                    />
+                  )}
+                  {(user?.userRole === "manager" ||
+                    user?.userRole === "root" ||
+                    user?.userRole === "salesperson" ||
+                    user?.userRole === "finance") && (
+                    <Route
+                      path="client/clientsPayments"
+                      element={user?._id ? <ClientsPayments /> : <Auth />}
+                    />
+                  )}
                   <Route
-                    path="users/userTaskboard"
-                    element={user?._id ? <UserTaskboard /> : <Auth />}
+                    path="/orders"
+                    element={user?._id ? <Orders /> : <Auth />}
                   />
+
                   <Route
-                    path="users/usagePricing"
-                    element={user?._id ? <UsagePricing /> : <Auth />}
+                    path="/order"
+                    element={user?._id ? <Order /> : <Auth />}
                   />
-                </>
-              )}
+                  {(user?.userRole === "manager" ||
+                    user?.userRole === "root") && (
+                    <Route
+                      path="/orderlogs"
+                      element={user?._id ? <OrderLogs /> : <Auth />}
+                    />
+                  )}
 
-              {/* <Route path="/orders/:id" element={<OrderI />} /> */}
+                  <Route
+                    path="/product"
+                    element={user?._id ? <Product /> : <Auth />}
+                  />
+                  {(user?.userRole === "manager" ||
+                    user?.userRole === "root" ||
+                    user?.userRole === "finance") && (
+                    <Route
+                      path="/product/productsCRUD"
+                      element={user?._id ? <ProductsCRUD /> : <Auth />}
+                    />
+                  )}
+                  {(user?.userRole === "manager" ||
+                    user?.userRole === "root" ||
+                    user?.userRole === "finance") && (
+                    <Route
+                      path="/product/productsInventory"
+                      element={user?._id ? <ProductsInventory /> : <Auth />}
+                    />
+                  )}
+                  <Route
+                    path="/product/productsCatelog"
+                    element={user?._id ? <ProductsCatelog /> : <Auth />}
+                  />
+                  {(user?.userRole === "manager" ||
+                    user?.userRole === "root") && (
+                    <Route
+                      path="/product/inventoryLogs"
+                      element={user?._id ? <Logs /> : <Auth />}
+                    />
+                  )}
 
-              <Route
-                path="/client"
-                element={user?._id ? <Client /> : <Auth />}
-              />
-              <Route
-                path="client/clientsCRUD"
-                element={user?._id ? <ClientsCRUD /> : <Auth />}
-              />
-              {(user?.userRole === "manager" ||
-                user?.userRole === "root" ||
-                user?.userRole === "salesperson") && (
-                <Route
-                  path="client/clientsCRM"
-                  element={user?._id ? <ClientsCRM /> : <Auth />}
-                />
-              )}
-              {(user?.userRole === "manager" ||
-                user?.userRole === "root" ||
-                user?.userRole === "salesperson" ||
-                user?.userRole === "finance") && (
-                <Route
-                  path="client/clientsPayments"
-                  element={user?._id ? <ClientsPayments /> : <Auth />}
-                />
-              )}
-              <Route
-                path="/orders"
-                element={user?._id ? <Orders /> : <Auth />}
-              />
-
-              <Route path="/order" element={user?._id ? <Order /> : <Auth />} />
-              {(user?.userRole === "manager" || user?.userRole === "root") && (
-                <Route
-                  path="/orderlogs"
-                  element={user?._id ? <OrderLogs /> : <Auth />}
-                />
-              )}
-
-              <Route
-                path="/product"
-                element={user?._id ? <Product /> : <Auth />}
-              />
-              {(user?.userRole === "manager" ||
-                user?.userRole === "root" ||
-                user?.userRole === "finance") && (
-                <Route
-                  path="/product/productsCRUD"
-                  element={user?._id ? <ProductsCRUD /> : <Auth />}
-                />
-              )}
-              {(user?.userRole === "manager" ||
-                user?.userRole === "root" ||
-                user?.userRole === "finance") && (
-                <Route
-                  path="/product/productsInventory"
-                  element={user?._id ? <ProductsInventory /> : <Auth />}
-                />
-              )}
-              <Route
-                path="/product/productsCatelog"
-                element={user?._id ? <ProductsCatelog /> : <Auth />}
-              />
-              {(user?.userRole === "manager" || user?.userRole === "root") && (
-                <Route
-                  path="/product/inventoryLogs"
-                  element={user?._id ? <Logs /> : <Auth />}
-                />
-              )}
-
-              <Route path="*" element={user?._id ? <NotFound /> : <Auth />} />
-            </Routes>
-          </div>
-          <Footer />
-        </Router>
+                  <Route
+                    path="*"
+                    element={user?._id ? <NotFound /> : <Auth />}
+                  />
+                </Routes>
+              </div>
+              {user?._id && <Footer />}
+            </div>
+          </Router>
+        </ThemeContext.Provider>
       </ApolloProvider>
     </>
   );

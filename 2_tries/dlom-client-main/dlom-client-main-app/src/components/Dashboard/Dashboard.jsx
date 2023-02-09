@@ -40,7 +40,15 @@ const Dashboard = () => {
   const user = useSelector((state) => state?.auth?.authData?.result);
 
   return (
-    <div>
+    <div
+      style={{
+        // border: "2px solid cyan",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+      }}
+    >
       <h1>Dashboard</h1>
       <div className="dashboardContainer">
         {dashboardArr

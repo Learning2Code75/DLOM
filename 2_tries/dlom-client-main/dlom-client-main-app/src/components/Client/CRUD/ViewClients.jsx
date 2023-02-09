@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_CLIENTS } from "../../../queries/dlomClientQueries";
 import Spinner from "../../Spinner";
 import { DELETE_CLIENT } from "../../../mutations/dlomClientMutation";
 import { useSelector } from "react-redux";
+import { Dialog, useMediaQuery, useTheme } from "@mui/material";
 // import { GET_CLIENTS } from "../../../queries/clientsQueries";
 
 const ViewClients = ({
+  setOpenDialog,
   currClient,
   setCurrClient,
   setUpdate,
@@ -14,7 +16,9 @@ const ViewClients = ({
 }) => {
   const { loading, error, data } = useQuery(GET_CLIENTS);
   const user = useSelector((state) => state?.auth?.authData?.result);
-
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const [delDialog, setDelDialog] = useState(false);
   const [deleteClient] = useMutation(DELETE_CLIENT, {
     variables: {
       id: currClient.id,
@@ -40,6 +44,45 @@ const ViewClients = ({
   };
   return (
     <>
+      <div className="dialogs">
+        <Dialog
+          open={delDialog}
+          fullWidth={true}
+          fullScreen={fullScreen}
+          // maxWidth={}
+          onClose={(e, r) => {
+            if (r === "backdropClick") {
+              clearCurrClient();
+              setDelDialog(!delDialog);
+            } else {
+              clearCurrClient();
+              setDelDialog(!delDialog);
+            }
+          }}
+          // PaperComponent={}
+          PaperProps={{ sx: { minHeight: "8rem", borderRadius: "1rem" } }}
+          scroll={"body"}
+        >
+          Delete the client?
+          <button
+            onClick={() => {
+              deleteClient();
+              setDelDialog(false);
+              clearCurrClient();
+            }}
+          >
+            Delete
+          </button>
+          <button
+            onClick={() => {
+              setDelDialog(false);
+              clearCurrClient();
+            }}
+          >
+            Cancel
+          </button>
+        </Dialog>
+      </div>
       {!loading && !error && (
         <div
           style={{
@@ -65,6 +108,7 @@ const ViewClients = ({
                     onClick={() => {
                       setUpdate(true);
                       settingCurrClient(client);
+                      setOpenDialog(true);
                     }}
                   >
                     Edit
@@ -73,7 +117,8 @@ const ViewClients = ({
                     className="btn"
                     onClick={() => {
                       settingCurrClient(client);
-                      deleteClient();
+                      setDelDialog(true);
+                      // deleteClient();
                     }}
                   >
                     Delete
