@@ -7,8 +7,13 @@ import { GET_CLIENTS } from "../../../queries/dlomClientQueries";
 import CRMCSV from "./CRMCSV";
 import ViewClientsCRM from "./ViewClientsCRM";
 import { TiArrowLeftThick } from "react-icons/ti";
+import { Dialog, IconButton, useMediaQuery, useTheme } from "@mui/material";
+import { GrClose, GrFormAdd } from "react-icons/gr";
 
 const CRM = () => {
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
+
   const [state, setState] = useState({
     date: "",
     time: "",
@@ -17,6 +22,8 @@ const CRM = () => {
     timestamp: "",
   });
   const [currClient, setCurrClient] = useState({});
+  const [openDialog, setOpenDialog] = useState(false);
+
   const [isUpdate, setIsUpdate] = useState(false);
   const clear = () => {
     setState({
@@ -109,6 +116,7 @@ const CRM = () => {
   const deleteItemAPI = () => {
     updateClientCRM(currClient.id, currClient.crm);
   };
+
   return (
     <div>
       <div
@@ -143,85 +151,122 @@ const CRM = () => {
       </div>
       <pre>{JSON.stringify(currClient, null, 2)}</pre>
       <div>
-        <form>
-          <h2>Chat Modal</h2>
+        <Dialog
+          open={openDialog}
+          fullWidth={true}
+          fullScreen={fullScreen}
+          // maxWidth={}
+          onClose={(e, r) => {
+            if (r === "backdropClick") {
+              clear();
+              setOpenDialog(!openDialog);
+            } else {
+              clear();
+              setOpenDialog(!openDialog);
+            }
+          }}
+          // PaperComponent={}
+          PaperProps={{ sx: { borderRadius: "1rem" } }}
+          scroll={"body"}
+        >
+          <form>
+            <div className="manageClientDialogHeading">
+              <h2> Add Chat</h2>
+              <IconButton
+                onClick={() => {
+                  setOpenDialog(false);
+                  clear();
+                }}
+              >
+                <GrClose />
+              </IconButton>
+            </div>
+            <div className="formLabel">Date</div>
+            <input
+              type="date"
+              value={state.date}
+              onChange={(e) =>
+                setState({
+                  ...state,
+                  date: e.target.value,
+                  timestamp: ` ${e.target.value} ${state.time}`,
+                })
+              }
+              id="date"
+              className="formControl"
+            />
+            <div className="formLabel">Time</div>
+            <input
+              type="time"
+              value={state.time}
+              onChange={(e) =>
+                setState({
+                  ...state,
+                  time: e.target.value,
+                  timestamp: `${state.date} ${e.target.value}`,
+                })
+              }
+              id="time"
+              className="formControl"
+            />
 
-          <div className="formLabel">Date</div>
-          <input
-            type="date"
-            value={state.date}
-            onChange={(e) =>
-              setState({
-                ...state,
-                date: e.target.value,
-                timestamp: ` ${e.target.value} ${state.time}`,
-              })
-            }
-            id="date"
-            className="formControl"
-          />
-          <div className="formLabel">Time</div>
-          <input
-            type="time"
-            value={state.time}
-            onChange={(e) =>
-              setState({
-                ...state,
-                time: e.target.value,
-                timestamp: `${state.date} ${e.target.value}`,
-              })
-            }
-            id="time"
-            className="formControl"
-          />
+            <div className="formLabel">Message</div>
+            <input
+              type="text"
+              value={state.msg}
+              onChange={(e) =>
+                setState({
+                  ...state,
+                  msg: e.target.value,
+                })
+              }
+              id="msg"
+              className="formControl"
+            />
 
-          <div className="formLabel">Message</div>
-          <input
-            type="text"
-            value={state.msg}
-            onChange={(e) =>
-              setState({
-                ...state,
-                msg: e.target.value,
-              })
-            }
-            id="msg"
-            className="formControl"
-          />
-
-          <div className="formLabel">Message written by</div>
-          <select
-            type="text"
-            value={state.type}
-            onChange={(e) =>
-              setState({
-                ...state,
-                type: e.target.value,
-              })
-            }
-            id="type"
-            className="formControl"
-          >
-            <option value={"client"}>Client</option>
-            <option value={"sp"}>Salesperson</option>
-          </select>
-          <div>
-            <button
-              onClick={isUpdate ? (e) => updateChat(e) : (e) => addChat(e)}
+            <div className="formLabel">Message written by</div>
+            <select
+              type="text"
+              value={state.type}
+              onChange={(e) =>
+                setState({
+                  ...state,
+                  type: e.target.value,
+                })
+              }
+              id="type"
+              className="formControl"
             >
-              {isUpdate ? "Update Chat" : "Add Chat"}
-            </button>
+              <option value={"client"}>Client</option>
+              <option value={"sp"}>Salesperson</option>
+            </select>
+            <div>
+              <button
+                onClick={isUpdate ? (e) => updateChat(e) : (e) => addChat(e)}
+              >
+                {isUpdate ? "Update Chat" : "Add Chat"}
+              </button>
 
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                updateClientCRM(currClient.id, currClient.crm);
-              }}
-            >
-              {"Save Changes"}
-            </button>
-          </div>
-        </form>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  updateClientCRM(currClient.id, currClient.crm);
+                }}
+              >
+                {"Save Changes"}
+              </button>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  setOpenDialog(false);
+                  clear();
+                }}
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </Dialog>
       </div>
 
       <div>
@@ -233,6 +278,7 @@ const CRM = () => {
           setIsUpdate={setIsUpdate}
           deleteItem={deleteItem}
           deleteItemAPI={deleteItemAPI}
+          setOpenDialog={setOpenDialog}
         />
       </div>
       <pre>{JSON.stringify(state, null, 2)}</pre>

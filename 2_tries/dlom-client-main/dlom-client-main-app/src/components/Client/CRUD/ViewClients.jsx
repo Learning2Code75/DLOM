@@ -48,7 +48,6 @@ const ViewClients = ({
         <Dialog
           open={delDialog}
           fullWidth={true}
-          fullScreen={fullScreen}
           // maxWidth={}
           onClose={(e, r) => {
             if (r === "backdropClick") {

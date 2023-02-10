@@ -12,6 +12,7 @@ const ViewClientsCRM = ({
   setIsUpdate,
   deleteItem,
   deleteItemAPI,
+  setOpenDialog,
 }) => {
   const { loading, error, data } = useQuery(GET_CLIENTS);
 
@@ -128,6 +129,7 @@ const ViewClientsCRM = ({
                     className="btn"
                     onClick={() => {
                       settingCurrClient(client);
+                      setOpenDialog(true);
                     }}
                   >
                     Add Chat

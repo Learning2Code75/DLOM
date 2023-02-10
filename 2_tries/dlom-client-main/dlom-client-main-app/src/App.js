@@ -66,7 +66,7 @@ export const ThemeContext = createContext(null);
 
 function App() {
   const user = useSelector((state) => state?.auth?.authData?.result);
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState("dark");
   const toggleTheme = () => {
     setTheme((curr) => (curr === "light" ? "dark" : "light"));
   };
