@@ -7,7 +7,7 @@ const CRMCSV = ({ crmData }) => {
     { label: "Sender", key: "personType" },
     { label: "Message", key: "msg" },
   ];
-  console.log(crmData);
+  // console.log(crmData);
   //   const formatOrderlogsData = (d) => {
   //     let new_delivery_data = d?.map((od) => ({
   //       ...od,

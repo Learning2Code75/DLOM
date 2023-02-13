@@ -237,6 +237,7 @@ https://youtube.com/playlist?list=PLAyz_McAak4kdOqpribZk3pyw3NSNHb3q
 4. [24iv] react chart js : [https://youtu.be/RF57yDglDfE , https://youtu.be/Ge6PQkpa6pA , https://youtu.be/c_9c5zkfQ3Y , https://youtube.com/playlist?list=PLlL2ecj-T3qT6iX6vUNrrjrYPlZPhyjag]
 5. [24v] mern dashboard : [https://youtu.be/0cPCMIuDk2I]
 6. [24vi] fetch data from mongo --> pandas df : [https://youtu.be/4l4yOZZ9FYY , https://youtu.be/magzEfYqIos?list=PLZoTAELRMXVN_8zzsevm1bm6G-plsiO1I , https://youtu.be/IUUPz5HjkkE , https://youtu.be/qWYx5neOh2s ]
+7. [24vii] make mock data : [https://www.mockaroo.com/ , ]
 <hr/>
 
 # RP writing vids (what to include?)
@@ -1394,7 +1395,14 @@ query{
 
 }  
 ```
-
+# mock data gen
+id row row number
+address.city type
+address.state type
+friends[2-5] type 
+friendsArr JSON array
+friendsArr.firstName type
+friendsArr.lastName type
 
 # References
 1.  JavsScript Mastery MERN playlist. https://youtube.com/playlist?list=PL6QREj8te1P7VSwhrMf3D3Xt4V6_SRkhu
