@@ -63,21 +63,25 @@ const SoTableEntryNew = ({
     <div
       style={{
         display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
-      <pre>{JSON.stringify(entry, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(entry, null, 2)}</pre> */}
       <input
         placeholder="descn of goods"
         value={entry.descriptionOfGoods}
         onChange={(e) =>
           setEntry({ ...entry, descriptionOfGoods: e.target.value })
         }
+        className="formControl"
       />
 
       <input
         type="date"
         value={entry.dueOn}
         onChange={(e) => setEntry({ ...entry, dueOn: e.target.value })}
+        className="formControl"
       />
 
       <input
@@ -85,11 +89,13 @@ const SoTableEntryNew = ({
         placeholder="qty"
         value={entry.qty}
         onChange={(e) => setEntry({ ...entry, qty: parseInt(e.target.value) })}
+        className="formControl"
       />
       <input
         placeholder="rate"
         value={entry.rate}
         onChange={(e) => setEntry({ ...entry, rate: e.target.value })}
+        className="formControl"
       />
 
       {/* <select
@@ -99,20 +105,42 @@ const SoTableEntryNew = ({
         <option value={"unit"}>unit</option>
       </select> */}
 
-      <input value={entry.per} disabled={true} />
+      <input
+        value={entry.per}
+        disabled={true}
+        className="formControl"
+        placeholder="per"
+      />
 
       <input
         placeholder="amount"
         value={entry.amount}
         onChange={(e) => setEntry({ ...entry, amount: e.target.value })}
         disabled={true}
+        className="formControl"
       />
 
-      <button onClick={addEntry}>
+      <button
+        onClick={addEntry}
+        className="btn1"
+        style={{
+          margin: "0 0 0 .4em",
+          padding: ".4rem 0",
+          width: "20%",
+        }}
+      >
         <FiSave />
       </button>
 
-      <button onClick={delEntry}>
+      <button
+        className="btn3"
+        style={{
+          margin: "0 0 0 .4em",
+          padding: ".4rem 0",
+          width: "20%",
+        }}
+        onClick={delEntry}
+      >
         <FiDelete />
       </button>
     </div>

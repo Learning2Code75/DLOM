@@ -29,7 +29,13 @@ const DescInput = ({ pd, productData, setProductData, idx }) => {
     });
   }, [productData]);
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <input
         name="prodDescTitle"
         placeholder="title"
@@ -37,6 +43,7 @@ const DescInput = ({ pd, productData, setProductData, idx }) => {
         onChange={(e) => {
           setState({ ...state, title: e.target.value });
         }}
+        className="formControl"
       />
       <input
         name="prodDescDescription"
@@ -45,9 +52,9 @@ const DescInput = ({ pd, productData, setProductData, idx }) => {
         onChange={(e) => {
           setState({ ...state, desc: e.target.value });
         }}
+        className="formControl"
       />
-      <span>
-        {/* <button
+      {/* <button
           onClick={(e) => {
             e.preventDefault();
             let new_desc_arr = [...productData.prodDesc];
@@ -58,14 +65,29 @@ const DescInput = ({ pd, productData, setProductData, idx }) => {
         >
           Add
         </button> */}
-        <button onClick={addEntry}>
-          <FiSave />
-        </button>
+      <div
+        className="btn1"
+        style={{
+          margin: "0 0 0 .4em",
+          padding: ".4rem 0",
+          width: "20%",
+        }}
+        onClick={addEntry}
+      >
+        <FiSave />
+      </div>
 
-        <button onClick={delEntry}>
-          <FiDelete />
-        </button>
-      </span>
+      <div
+        className="btn3"
+        style={{
+          margin: "0 0 0 .4em",
+          padding: ".4rem 0",
+          width: "20%",
+        }}
+        onClick={delEntry}
+      >
+        <FiDelete />
+      </div>
     </div>
   );
 };

@@ -1,14 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getOrderlogs } from "../../redux/actions/orderlogs";
 import OrderLogsCSV from "./OrderLogsCSV";
 import { TiArrowLeftThick } from "react-icons/ti";
+import { ThemeContext } from "../../App";
 
 const OrderLogs = () => {
   const orderlogs = useSelector((state) => state.orderlogs);
   const dispatch = useDispatch();
-
+  const tc = useContext(ThemeContext);
   useEffect(() => {
     dispatch(getOrderlogs());
   }, [dispatch]);
@@ -24,16 +25,16 @@ const OrderLogs = () => {
       >
         <Link
           to="/orders"
-          className="dashboardLink"
+          className="openStylesButton1"
           style={{
             marginRight: "1rem",
-            fontSize: "2em",
-            color: "white",
-            boxShadow:
-              " inset 5px 5px 5px rgba(0,0,0,0.2),inset -5px -5px 15px rgba(255,255,255,0.1), 5px 5px 15px rgba(0,0,0,0.3),  -5px -5px 15px rgba(255,255,255,0.2)",
             borderRadius: ".64rem",
-            padding: ".4rem .6rem",
+            padding: ".6rem",
             cursor: "pointer",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            color: tc.theme === "light" ? "#232427" : "#ebecf0",
           }}
         >
           <TiArrowLeftThick
@@ -43,20 +44,17 @@ const OrderLogs = () => {
             }}
           />
         </Link>
-        <h1>Order Logs</h1>
+        <h2>Order Logs</h2>
       </div>
       <div>
         <OrderLogsCSV orderLogsData={orderlogs} />
       </div>
       <div
         style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gridGap: "10px",
-          margin: "0 auto",
-          maxWidth: "95vw",
-          marginBottom: "2rem",
+          margin: "1rem .5rem",
+          marginBottom: "5rem",
         }}
+        className="css9BasicGrid"
       >
         {orderlogs?.map((ol) => {
           let ts = new Date(ol.createdAt).toString();
@@ -64,11 +62,26 @@ const OrderLogs = () => {
             <div
               style={{
                 border: "1px solid black",
-                overflowY: "scroll",
+                // overflowY: "scroll",
               }}
+              className="css1Card"
               key={ol._id}
             >
-              <pre>{JSON.stringify(ol, null, 2)}</pre>
+              <div className="css1ContentBx">
+                <div className="css9BasicGrid1">
+                  <div className="tag">Invoice No.</div>
+                  <div className="info">{ol?.invoice?.invoiceNo}</div>
+                  <div className="tag">Operation</div>
+                  <div className="info">{ol?.operation}</div>
+                  <div className="tag">Timestamp</div>
+                  <div className="info">
+                    {new Date(ol?.createdAt).toDateString() + " "}[
+                    {new Date(ol?.createdAt).toTimeString().split(" ")[0]}]
+                  </div>
+                </div>
+              </div>
+
+              {/* <pre>{JSON.stringify(ol, null, 2)}</pre> */}
             </div>
           );
         })}

@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_CLIENTS } from "../../../queries/dlomClientQueries";
 import Spinner from "../../Spinner";
 import { DELETE_CLIENT } from "../../../mutations/dlomClientMutation";
 import { useSelector } from "react-redux";
 import { Dialog, useMediaQuery, useTheme } from "@mui/material";
+import { ThemeContext } from "../../../App";
 // import { GET_CLIENTS } from "../../../queries/clientsQueries";
 
 const ViewClients = ({
@@ -15,6 +16,7 @@ const ViewClients = ({
   clearCurrClient,
 }) => {
   const { loading, error, data } = useQuery(GET_CLIENTS);
+  const tc = useContext(ThemeContext);
   const user = useSelector((state) => state?.auth?.authData?.result);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
@@ -59,51 +61,86 @@ const ViewClients = ({
             }
           }}
           // PaperComponent={}
-          PaperProps={{ sx: { minHeight: "8rem", borderRadius: "1rem" } }}
+          PaperProps={{
+            sx: {
+              minHeight: "6rem",
+              borderRadius: "1rem",
+              background: tc.theme === "light" ? "#ebecf0" : "#232427",
+              color: tc.theme === "light" ? "#1c1c1c" : "#ebecf0",
+            },
+          }}
           scroll={"body"}
+          id={tc.theme}
         >
-          Delete the client?
-          <button
-            onClick={() => {
-              deleteClient();
-              setDelDialog(false);
-              clearCurrClient();
+          <div
+            className="css5Form "
+            style={{
+              padding: "1rem",
             }}
           >
-            Delete
-          </button>
-          <button
-            onClick={() => {
-              setDelDialog(false);
-              clearCurrClient();
-            }}
-          >
-            Cancel
-          </button>
+            <h6
+              style={{
+                textAlign: "center",
+                fontSize: "1rem",
+                marginBottom: ".5rem",
+              }}
+            >
+              Delete the client?
+            </h6>
+
+            <div className="FlexAround">
+              <div
+                onClick={() => {
+                  deleteClient();
+                  setDelDialog(false);
+                  clearCurrClient();
+                }}
+                className="btn3"
+                style={{
+                  fontSize: ".6rem",
+                  padding: ".6rem .4rem",
+                  margin: "0",
+                  width: "30%",
+                }}
+              >
+                Delete
+              </div>
+              <div
+                onClick={() => {
+                  setDelDialog(false);
+                  clearCurrClient();
+                }}
+                className="btn1"
+                style={{
+                  fontSize: ".6rem",
+                  padding: ".6rem .4rem",
+                  margin: "0",
+                  width: "30%",
+                }}
+              >
+                Cancel
+              </div>
+            </div>
+          </div>
         </Dialog>
       </div>
       {!loading && !error && (
         <div
           style={{
-            margin: "1rem",
+            margin: ".5rem",
+            marginBottom: "5rem",
           }}
+          className="css9BasicGrid"
         >
           {data.clients.map((client) => (
-            <div
-              style={{
-                border: "1px solid lightgrey",
-                borderRadius: "1rem",
-                marginBottom: "1rem",
-              }}
-              key={client.id}
-            >
+            <div className="css1Card" key={client.id}>
               {(user?.userRole === "manager" ||
                 user?.userRole === "root" ||
                 user?.userRole === "salesperson" ||
                 user?.userRole === "finance") && (
-                <div>
-                  <button
-                    className="btn"
+                <div className="FlexBetween">
+                  <div
+                    className="css1Btn"
                     onClick={() => {
                       setUpdate(true);
                       settingCurrClient(client);
@@ -111,9 +148,9 @@ const ViewClients = ({
                     }}
                   >
                     Edit
-                  </button>
-                  <button
-                    className="btn"
+                  </div>
+                  <div
+                    className="css1Btn"
                     onClick={() => {
                       settingCurrClient(client);
                       setDelDialog(true);
@@ -121,49 +158,46 @@ const ViewClients = ({
                     }}
                   >
                     Delete
-                  </button>
+                  </div>
                 </div>
               )}
-              {/* 
-              {
-  "__typename": "DlomClient",
-  "id": "6319cf896dfda39aa7147307",
-  "companyName": "Company3331",
-  "contactPersonName": "cp1",
-  "address": "addr1",
-  "gst": "gst1",
-  "phoneNumber": "phno1",
-  "discountRate": "5",
-  "salesPersonAssigned": "sp1",
-  "clientSocialMedia": [
-    {
-      "__typename": "SocialMediaItem",
-      "title": "gmail",
-      "link": "company1@gmail.com"
-    },
-    {
-      "__typename": "SocialMediaItem",
-      "title": "linkedin",
-      "link": "company1.linkedin.com"
-    }
-  ],
-  "typeOfCustomer": "permanent"
-}
-              
-              */}
-              <div>
-                <div>{client.companyName}</div>
-                <div>{client.contactPersonName}</div>
-                <div>{client.address}</div>
-                <div>{client.gst}</div>
-                <div>{client.phoneNumber}</div>
-                <div>{client.discountRate}</div>
-                <div>{client.salesPersonAssigned}</div>
-                <div>{client.typeOfCustomer}</div>
+
+              <div className="css1ContentBx">
+                <h2>{client.companyName}</h2>
+                <div className="css9BasicGrid1">
+                  <div className="tag">Contact Person</div>
+                  <div className="info">{client.contactPersonName}</div>
+                  <div className="tag">Address</div>
+                  <div className="info">{client.address}</div>
+
+                  <div className="tag">GST</div>
+                  <div className="info">{client.gst}</div>
+
+                  <div className="tag">Phone</div>
+                  <div className="info">{client.phoneNumber}</div>
+
+                  <div className="tag">Discount Rate</div>
+                  <div className="info">{client.discountRate}</div>
+
+                  <div className="tag">Salesperson Assigned</div>
+                  <div className="info">{client.salesPersonAssigned}</div>
+
+                  <div className="tag">Type of Customer</div>
+                  <div className="info">{client.typeOfCustomer}</div>
+                </div>
+                <div className="tag">Social Media</div>
                 {client.clientSocialMedia.map((cs) => (
-                  <div>
+                  <div className="info">
                     <h3>{cs.title}</h3>
-                    <p>{cs.link}</p>
+                    <a
+                      style={{
+                        color: "cyan",
+                      }}
+                      href={cs.link}
+                      target="__blank"
+                    >
+                      {cs.link}
+                    </a>
                   </div>
                 ))}
               </div>

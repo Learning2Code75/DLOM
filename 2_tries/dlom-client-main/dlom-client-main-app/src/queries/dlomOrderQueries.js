@@ -5,9 +5,11 @@ const GET_ORDERS = gql`
     orders {
       id
       client {
-      	id
+        id
         companyName
         contactPersonName
+        address
+        gst
       }
       salesperson
       salesOrder {

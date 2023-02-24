@@ -11,6 +11,11 @@ module.exports = async (app, channel, channel_prime) => {
   app.use(express.urlencoded({ extended: true, limit: "30mb" }));
 
   app.use(cors());
+  app.use(
+    cors({
+      origin: "*",
+    })
+  );
   app.use(express.static(__dirname + "/public"));
 
   //Listen to events :

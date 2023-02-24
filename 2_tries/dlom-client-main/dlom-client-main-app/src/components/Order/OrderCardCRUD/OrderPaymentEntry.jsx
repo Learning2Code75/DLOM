@@ -40,32 +40,53 @@ const OrderPaymentEntry = ({ state, setState, index }) => {
     <div
       style={{
         display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
-      <pre>{JSON.stringify(entry, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(entry, null, 2)}</pre> */}
       <input
         placeholder="amount"
         value={entry.amount}
         onChange={(e) => setEntry({ ...entry, amount: e.target.value })}
+        className="formControl"
       />
 
       <input
         placeholder="method"
         value={entry.method}
         onChange={(e) => setEntry({ ...entry, method: e.target.value })}
+        className="formControl"
       />
 
       <input
         placeholder="description"
         value={entry.description}
         onChange={(e) => setEntry({ ...entry, description: e.target.value })}
+        className="formControl"
       />
 
-      <button onClick={addEntry}>
+      <button
+        className="btn1"
+        style={{
+          margin: "0 0 0 .4em",
+          padding: ".4rem 0",
+          width: "20%",
+        }}
+        onClick={addEntry}
+      >
         <FiSave />
       </button>
 
-      <button onClick={delEntry}>
+      <button
+        className="btn3"
+        style={{
+          margin: "0 0 0 .4em",
+          padding: ".4rem 0",
+          width: "20%",
+        }}
+        onClick={delEntry}
+      >
         <FiDelete />
       </button>
     </div>

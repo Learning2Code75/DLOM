@@ -11,14 +11,15 @@ const AddResponse = ({ user, task }) => {
   });
 
   return (
-    <>
-      <div>AddResponse</div>
+    <div className="css5Form">
+      <div className="formLabel">AddResponse</div>
       <input
         placeholder="response description"
         value={state.description}
         onChange={(e) => setState({ ...state, description: e.target.value })}
+        className="formControl"
       />
-      <button
+      <div
         onClick={(e) => {
           let new_task = { ...task };
           let new_responses = new_task.responses;
@@ -32,10 +33,17 @@ const AddResponse = ({ user, task }) => {
             timestamp: new Date().toISOString(),
           });
         }}
+        className="btn1"
+        style={{
+          fontSize: ".8em",
+          padding: ".5em",
+          margin: "0",
+          marginTop: ".2rem",
+        }}
       >
         Add Response
-      </button>
-    </>
+      </div>
+    </div>
   );
 };
 

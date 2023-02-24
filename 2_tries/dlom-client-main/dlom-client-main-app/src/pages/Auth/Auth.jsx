@@ -80,6 +80,10 @@ const Auth = () => {
               type="email"
               value={formData.email}
               required
+              style={{
+                color: "#232427",
+                fontWeight: "bold",
+              }}
             />
             <span>Email</span>
             <i></i>
@@ -94,6 +98,10 @@ const Auth = () => {
               type="password"
               value={formData.password}
               required
+              style={{
+                color: "#232427",
+                fontWeight: "bold",
+              }}
             />
             <span>Password</span>
             <i></i>

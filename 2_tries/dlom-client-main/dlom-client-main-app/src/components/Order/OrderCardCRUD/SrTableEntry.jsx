@@ -46,13 +46,16 @@ const SrTableEntry = ({ state, setState, index }) => {
     <div
       style={{
         display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
-      <pre>{JSON.stringify(entry, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(entry, null, 2)}</pre> */}
       <input
         placeholder="details"
         value={entry.details}
         onChange={(e) => setEntry({ ...entry, details: e.target.value })}
+        className="formControl"
       />
 
       <input
@@ -60,11 +63,13 @@ const SrTableEntry = ({ state, setState, index }) => {
         placeholder="qty"
         value={entry.qty}
         onChange={(e) => setEntry({ ...entry, qty: parseInt(e.target.value) })}
+        className="formControl"
       />
       <input
         placeholder="price"
         value={entry.price}
         onChange={(e) => setEntry({ ...entry, price: e.target.value })}
+        className="formControl"
       />
 
       <input
@@ -72,13 +77,30 @@ const SrTableEntry = ({ state, setState, index }) => {
         value={entry.amount}
         onChange={(e) => setEntry({ ...entry, amount: e.target.value })}
         disabled={true}
+        className="formControl"
       />
 
-      <button onClick={addEntry}>
+      <button
+        className="btn1"
+        style={{
+          margin: "0 0 0 .4em",
+          padding: ".4rem 0",
+          width: "20%",
+        }}
+        onClick={addEntry}
+      >
         <FiSave />
       </button>
 
-      <button onClick={delEntry}>
+      <button
+        className="btn3"
+        style={{
+          margin: "0 0 0 .4em",
+          padding: ".4rem 0",
+          width: "20%",
+        }}
+        onClick={delEntry}
+      >
         <FiDelete />
       </button>
     </div>

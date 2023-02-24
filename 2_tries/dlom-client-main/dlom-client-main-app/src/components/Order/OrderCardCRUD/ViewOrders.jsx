@@ -15,6 +15,13 @@ const ViewOrders = ({
   state,
   setState,
   setIsUpdate,
+  setOpenDialog,
+  setInvDialog,
+  setWrDialog,
+  setSrDialog,
+  setPaymentDialog,
+  setDeliveryDialog,
+  setCancelDialog,
 }) => {
   const { loading, error, data } = useQuery(GET_ORDERS);
   const user = useSelector((state) => state?.auth?.authData?.result);
@@ -196,104 +203,201 @@ const ViewOrders = ({
     setState(new_state);
   };
 
+  const findTotal = (pays) => {
+    let ans = 0;
+    for (let i = 0; i < pays.length; i++) {
+      ans += parseFloat(pays[i].amount);
+    }
+
+    return ans;
+  };
+  const findBal = (a, b) => {
+    return parseFloat(b) - parseFloat(a);
+  };
+
   return (
     <>
       {!loading && !error && (
         <div
           style={{
-            margin: "1rem",
-            display: "grid",
-            gridTemplateColumns: "repeat(2,1fr)",
-            gridGap: "1rem",
+            margin: ".5rem",
+            marginBottom: "5rem",
           }}
+          className="css9BasicGrid"
         >
           {data.orders.map((order) => (
-            <div
-              style={{
-                border: "1px solid lightgrey",
-                borderRadius: "1rem",
-                marginBottom: "1rem",
-                padding: "1rem",
-              }}
-              key={order.id}
-            >
-              <div>{order.id}</div>
-              <div>{order.salesperson}</div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-around",
-                }}
-              >
-                <button
-                  className="btn"
-                  onClick={() => {
-                    setIsUpdate(true);
-                    settingOrder(order);
-                  }}
-                >
-                  Edit Order(Sales Order)
-                </button>
+            <div className="css1Card" key={order.id}>
+              <div className="info">{order.id}</div>
+              <div className="info">{order?.invoice?.invoiceNo}</div>
 
-                <button
-                  className="btn"
-                  onClick={() => {
-                    settingOrder(order);
-                  }}
-                >
-                  Invoice
-                </button>
-                <button
-                  className="btn"
-                  onClick={() => {
-                    settingOrder(order);
-                  }}
-                >
-                  Warehouse Receipt
-                </button>
+              <div className="tag">Salesperson</div>
+              <div className="info">{order.salesperson}</div>
 
-                <button
-                  className="btn"
-                  onClick={() => {
-                    settingOrder(order);
-                  }}
-                >
-                  Sales Receipt
-                </button>
-
-                <button
-                  className="btn"
-                  onClick={() => {
-                    settingOrder(order);
-                  }}
-                >
-                  Order Delivery
-                </button>
-
-                <button
-                  className="btn"
-                  onClick={() => {
-                    settingOrder(order);
-                  }}
-                >
-                  Order Payment
-                </button>
-                <button
-                  className="btn"
-                  onClick={() => {
-                    settingOrder(order);
-                  }}
-                >
-                  Cancel Order
-                </button>
+              <div className="tag">Delivery</div>
+              <div className="info">
+                {
+                  order?.orderDelivery?.history[
+                    order?.orderDelivery?.history?.length - 1
+                  ]?.status
+                }
               </div>
 
+              <div className="tag">Payment</div>
+              <div className="info">
+                <div className="FlexBetween">
+                  <div>
+                    Total
+                    <div>₹{order?.invoice?.totalAmount}</div>
+                  </div>
+                  <div
+                    style={{
+                      color: "cyan",
+                    }}
+                  >
+                    Paid
+                    <div>₹{findTotal(order?.orderPayment?.history)}</div>
+                  </div>
+
+                  <div
+                    style={{
+                      color: "rgb(255,80,80)",
+                    }}
+                  >
+                    Balance
+                    <div>
+                      ₹
+                      {findBal(
+                        findTotal(order?.orderPayment?.history),
+                        order?.invoice?.totalAmount
+                      )}{" "}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {order?.orderCancel?.state === "" ? (
+                <>
+                  <div
+                    className="FlexBetween"
+                    style={{
+                      margin: ".5rem 0",
+                    }}
+                  >
+                    <div
+                      className="css1Btn"
+                      onClick={() => {
+                        setOpenDialog(true);
+                        setIsUpdate(true);
+                        settingOrder(order);
+                      }}
+                    >
+                      Edit SO
+                    </div>
+
+                    <div
+                      className="css1Btn"
+                      onClick={() => {
+                        settingOrder(order);
+                        setInvDialog(true);
+                      }}
+                    >
+                      Invoice
+                    </div>
+                  </div>
+                  <div
+                    className="FlexBetween"
+                    style={{
+                      margin: ".5rem 0",
+                    }}
+                  >
+                    <div
+                      className="css1Btn"
+                      onClick={() => {
+                        settingOrder(order);
+                        setWrDialog(true);
+                      }}
+                    >
+                      Warehouse Receipt
+                    </div>
+
+                    <div
+                      className="css1Btn"
+                      onClick={() => {
+                        settingOrder(order);
+                        setSrDialog(true);
+                      }}
+                    >
+                      Sales Receipt
+                    </div>
+                  </div>
+                  <div
+                    className="FlexBetween"
+                    style={{
+                      margin: ".5rem 0",
+                    }}
+                  >
+                    <div
+                      className="css1Btn"
+                      onClick={() => {
+                        settingOrder(order);
+                        setDeliveryDialog(true);
+                      }}
+                    >
+                      Order Delivery
+                    </div>
+
+                    <div
+                      className="css1Btn"
+                      onClick={() => {
+                        settingOrder(order);
+                        setPaymentDialog(true);
+                      }}
+                    >
+                      Order Payment
+                    </div>
+                  </div>
+
+                  <div
+                    className="FlexBetween"
+                    style={{
+                      margin: ".5rem 0",
+                    }}
+                  >
+                    <div
+                      className="css1Btn"
+                      onClick={() => {
+                        settingOrder(order);
+                        setCancelDialog(true);
+                      }}
+                    >
+                      Cancel Order
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div
+                    style={{
+                      fontSize: "1.2rem",
+                      fontWeight: "600",
+                      textAlign: "center",
+                      color: "red",
+                    }}
+                  >
+                    ORDER CANCELLED
+                  </div>
+                  <div className="tag">Order Cancel Info</div>
+                  <div className="info">
+                    {order?.orderCancel?.state}
+                    <div>{order?.orderCancel?.desc}</div>
+                  </div>
+                </>
+              )}
               <div>
                 <SoPrint data={order?.salesOrder} />
               </div>
 
               <div>
-                <InvPrint data={order?.invoice} />
+                <InvPrint data={order?.invoice} cliData={order?.client} />
               </div>
 
               <div>
@@ -301,15 +405,25 @@ const ViewOrders = ({
               </div>
 
               <div>
-                <DeliveryCSV deliveryData={order?.orderDelivery?.history} />
+                <DeliveryCSV
+                  id={order?.invoice?.invoiceNo}
+                  deliveryData={order?.orderDelivery?.history}
+                />
               </div>
 
-              <div>
-                <PaymentCSV paymentData={order?.orderPayment?.history} />
+              <div
+                style={{
+                  marginTop: "1rem",
+                }}
+              >
+                <PaymentCSV
+                  id={order?.invoice?.invoiceNo}
+                  paymentData={order?.orderPayment?.history}
+                />
               </div>
 
               {/* <div>{order.invoice.distributorName}</div> */}
-              <pre>{JSON.stringify(order, null, 2)}</pre>
+              {/* <pre>{JSON.stringify(order, null, 2)}</pre> */}
             </div>
           ))}
         </div>

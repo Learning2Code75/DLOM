@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ClientSocialMediaInput from "./ClientSocialMediaInput";
-import { GrClose, GrFormAdd } from "react-icons/gr";
+import { GrAdd, GrClose, GrFormAdd } from "react-icons/gr";
 import { FiSave } from "react-icons/fi";
 import { useMutation } from "@apollo/client";
 import { TiArrowLeftThick } from "react-icons/ti";
@@ -16,12 +16,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { createOp } from "../../../redux/actions/users";
 import { Dialog, IconButton, useMediaQuery, useTheme } from "@mui/material";
 import { FaCross } from "react-icons/fa";
+import { ThemeContext } from "../../../App";
 
 const CRUD = () => {
   const dispatch = useDispatch();
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const user = useSelector((state) => state?.auth?.authData?.result);
+  const tc = useContext(ThemeContext);
 
   const [state, setState] = useState({
     companyName: "",
@@ -147,16 +149,16 @@ const CRUD = () => {
       >
         <Link
           to="/client"
-          className="dashboardLink"
+          className="openStylesButton1"
           style={{
             marginRight: "1rem",
-            fontSize: "2em",
-            color: "white",
-            boxShadow:
-              " inset 5px 5px 5px rgba(0,0,0,0.2),inset -5px -5px 15px rgba(255,255,255,0.1), 5px 5px 15px rgba(0,0,0,0.3),  -5px -5px 15px rgba(255,255,255,0.2)",
             borderRadius: ".64rem",
-            padding: ".4rem .6rem",
+            padding: ".6rem",
             cursor: "pointer",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            color: tc.theme === "light" ? "#232427" : "#ebecf0",
           }}
         >
           <TiArrowLeftThick
@@ -166,7 +168,7 @@ const CRUD = () => {
             }}
           />
         </Link>
-        <h1>Manage Clients</h1>
+        <h2>Manage Clients</h2>
       </div>
 
       {(user?.userRole === "manager" ||
@@ -176,8 +178,13 @@ const CRUD = () => {
         <div>
           {/* <h1>Client CRUD</h1> */}
 
-          <div className="manageClientDialogOpen">
-            <button onClick={() => setOpenDialog(true)}>Add Client</button>
+          <div className="dialogOpenContainer">
+            <div
+              className="openStylesButton1"
+              onClick={() => setOpenDialog(true)}
+            >
+              Add Client
+            </div>
           </div>
 
           <Dialog
@@ -194,19 +201,31 @@ const CRUD = () => {
                 setOpenDialog(!openDialog);
               }
             }}
-            // PaperComponent={}
-            PaperProps={{ sx: { borderRadius: "1rem" } }}
+            // PaperComponent={<PaperC />}
+            PaperProps={{
+              sx: {
+                borderRadius: "1rem",
+                background: tc.theme === "light" ? "#ebecf0" : "#232427",
+                color: tc.theme === "light" ? "#1c1c1c" : "#ebecf0",
+              },
+            }}
             scroll={"body"}
+            id={tc.theme}
           >
             {/* <pre>{JSON.stringify(state, null, 2)}</pre> */}
             {/* <pre>{JSON.stringify(isUpdate, null, 2)}</pre> */}
-            <form className="manageClientDialogForm">
-              <div className="manageClientDialogHeading">
+            <form className="css5Form">
+              <div className="FlexBetween">
                 <h2> {isUpdate ? "Update Client" : "Add Client"}</h2>
                 <IconButton
                   onClick={() => {
                     setOpenDialog(false);
                     clearCurrClient();
+                  }}
+                  style={{
+                    background:
+                      tc.theme === "dark" ? "lightgrey" : "transparent",
+                    padding: ".25rem",
                   }}
                 >
                   <GrClose />
@@ -219,8 +238,9 @@ const CRUD = () => {
                 onChange={(e) =>
                   setState({ ...state, companyName: e.target.value })
                 }
-                id="companyName"
+                // id="companyName"
                 className="formControl"
+                placeholder="Company Name"
               />
 
               <div className="formLabel">Contact Person Name</div>
@@ -232,6 +252,7 @@ const CRUD = () => {
                 }
                 id="contactPersonName"
                 className="formControl"
+                placeholder="Contact person"
               />
 
               <div className="formLabel">Address</div>
@@ -243,6 +264,7 @@ const CRUD = () => {
                 }
                 id="address"
                 className="formControl"
+                placeholder="Address"
               />
 
               <div className="formLabel">GST No.</div>
@@ -252,6 +274,7 @@ const CRUD = () => {
                 onChange={(e) => setState({ ...state, gst: e.target.value })}
                 id="gst"
                 className="formControl"
+                placeholder="GSTN."
               />
 
               <div className="formLabel">Phone Number</div>
@@ -263,6 +286,7 @@ const CRUD = () => {
                 }
                 id="phoneNumber"
                 className="formControl"
+                placeholder="Phone No."
               />
 
               <div className="formLabel">Discount Rate</div>
@@ -274,6 +298,7 @@ const CRUD = () => {
                 }
                 id="discountRate"
                 className="formControl"
+                placeholder="Discount Rate"
               />
 
               <div className="formLabel">Sales Person Assigned</div>
@@ -285,6 +310,7 @@ const CRUD = () => {
                 }
                 id="salesPersonAssigned"
                 className="formControl"
+                placeholder="Salesperson Assigned"
               />
 
               <div className="formLabel">Type of Customer</div>
@@ -294,6 +320,7 @@ const CRUD = () => {
                 onChange={(e) =>
                   setState({ ...state, typeOfCustomer: e.target.value })
                 }
+                className="btn1"
               >
                 <option value={"permanent"}>Permanent</option>
                 <option value={"potential"}>Potential</option>
@@ -302,7 +329,18 @@ const CRUD = () => {
               <div className="formLabel">
                 Client Social Media{" "}
                 <span>
-                  <button onClick={addClientSocial}>+</button>
+                  <button
+                    className="btn1"
+                    style={{
+                      width: "10%",
+                      marginLeft: "0",
+                      fontSize: "1.3em",
+                      padding: ".6rem",
+                    }}
+                    onClick={addClientSocial}
+                  >
+                    +
+                  </button>
                 </span>
               </div>
               {state.clientSocialMedia.map((csm, index) => (
@@ -315,7 +353,7 @@ const CRUD = () => {
                 />
               ))}
 
-              <button
+              <div
                 onClick={
                   isUpdate
                     ? (e) => {
@@ -324,18 +362,20 @@ const CRUD = () => {
                       }
                     : (e) => addClientSubmit(e)
                 }
+                className="btn2"
               >
                 {isUpdate ? "Update Client" : "Add Client"}
-              </button>
+              </div>
               {isUpdate && (
-                <button
+                <div
                   onClick={(e) => {
                     clearCurrClient(e);
                     setOpenDialog(false);
                   }}
+                  className="btn1"
                 >
                   Cancel
-                </button>
+                </div>
               )}
             </form>
           </Dialog>

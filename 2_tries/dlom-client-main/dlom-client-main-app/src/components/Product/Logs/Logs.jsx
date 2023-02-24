@@ -1,11 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getProductlogs } from "../../../redux/actions/productlogs";
 import ProductlogsCSV from "./ProductlogsCSV";
 import { TiArrowLeftThick } from "react-icons/ti";
+import { ThemeContext } from "../../../App";
 
 const Logs = () => {
+  const tc = useContext(ThemeContext);
   const productlogs = useSelector((state) => state.productlogs);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -22,16 +24,16 @@ const Logs = () => {
       >
         <Link
           to="/product"
-          className="dashboardLink"
+          className="openStylesButton1"
           style={{
             marginRight: "1rem",
-            fontSize: "2em",
-            color: "white",
-            boxShadow:
-              " inset 5px 5px 5px rgba(0,0,0,0.2),inset -5px -5px 15px rgba(255,255,255,0.1), 5px 5px 15px rgba(0,0,0,0.3),  -5px -5px 15px rgba(255,255,255,0.2)",
             borderRadius: ".64rem",
-            padding: ".4rem .6rem",
+            padding: ".6rem",
             cursor: "pointer",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            color: tc.theme === "light" ? "#232427" : "#ebecf0",
           }}
         >
           <TiArrowLeftThick
@@ -41,20 +43,17 @@ const Logs = () => {
             }}
           />
         </Link>
-        <h1>Inventory Logs</h1>
+        <h2>Inventory Logs</h2>
       </div>
 
       <ProductlogsCSV prodLogsData={productlogs} />
 
       <div
         style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gridGap: "10px",
-          margin: "0 auto",
-          maxWidth: "95vw",
-          marginBottom: "2rem",
+          margin: "1rem .5rem",
+          marginBottom: "5rem",
         }}
+        className="css9BasicGrid"
       >
         {productlogs?.map((p) => {
           let ts = new Date(p.timestamp).toString();
@@ -64,11 +63,38 @@ const Logs = () => {
             <div
               style={{
                 border: "1px solid black",
-                overflowY: "scroll",
+                // overflowY: "scroll",
               }}
+              className="css1Card"
               key={p._id}
             >
-              <pre>{JSON.stringify(p, null, 2)}</pre>
+              <div className="css1ContentBx">
+                <div className="tag">Product</div>
+                <div className="info">
+                  {p?.product?.prodName}[{p?.product?.prodSKU}]
+                </div>
+
+                {p?.damagedDescription?.length !== 0 && (
+                  <>
+                    <div className="tag">Damaged</div>
+                    <div className="info">{p?.damagedDescription}</div>
+                  </>
+                )}
+
+                <div className="tag">Qty</div>
+                <div className="info">{p?.qty}</div>
+
+                <div className="tag">Operation</div>
+                <div className="info">{p?.operation}</div>
+
+                <div className="tag">Timestamp</div>
+                <div className="info">
+                  {new Date(p?.createdAt).toDateString() + " "}[
+                  {new Date(p?.createdAt).toTimeString().split(" ")[0]}]
+                </div>
+              </div>
+
+              {/* <pre>{JSON.stringify(p, null, 2)}</pre> */}
               {/* <div>SKU: {p.product.prodSKU}</div>
               <div>Prodname: {p.product.prodName}</div>
               <div>timestamp : {ts}</div>

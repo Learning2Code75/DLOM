@@ -1,7 +1,9 @@
 import React from "react";
 import { CSVLink } from "react-csv";
+import { BsDownload } from "react-icons/bs";
+import { FaDownload } from "react-icons/fa";
 
-const CRMCSV = ({ crmData }) => {
+const CRMCSV = ({ crmData, fileTitle }) => {
   const headers = [
     { label: "Timestamp", key: "timestamp" },
     { label: "Sender", key: "personType" },
@@ -20,15 +22,33 @@ const CRMCSV = ({ crmData }) => {
 
   return (
     <div>
-      <h5>Client , Salesperson Chats</h5>
-      <CSVLink
-        data={crmData}
-        headers={headers}
-        filename={"crm_chats"}
-        target="_blank"
+      <h4>Client , Salesperson Chats</h4>
+      <div
+        className="btn1"
+        style={{
+          display: "flex",
+          justifyContent: "space-around",
+          width: "45%",
+          margin: ".5rem 0",
+          fontWeight: "bold",
+          fontSize: ".8em",
+          padding: ".6em",
+        }}
       >
-        Download Chats CSV
-      </CSVLink>
+        <BsDownload />
+        <CSVLink
+          data={crmData}
+          headers={headers}
+          filename={`${fileTitle}_chats`}
+          target="_blank"
+          style={{
+            color: "cyan",
+            textDecoration: "none",
+          }}
+        >
+          Chats CSV
+        </CSVLink>
+      </div>
     </div>
   );
 };

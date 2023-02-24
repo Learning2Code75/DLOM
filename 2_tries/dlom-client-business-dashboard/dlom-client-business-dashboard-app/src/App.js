@@ -8,34 +8,49 @@ import Subscription from "./components/Subscription/Subscription";
 import DlomClient from "./components/DlomClient/DlomClient";
 import Tracking from "./components/Tracking/Tracking";
 import Billing from "./components/Billing/Billing";
+import { createContext, useState } from "react";
+export const ThemeContext = createContext(null);
 
 function App() {
+  const [theme, setTheme] = useState("dark");
+  const toggleTheme = () => {
+    setTheme((curr) => (curr === "light" ? "dark" : "light"));
+  };
   return (
     <>
-      <Router>
-        <Header />
+      <ThemeContext.Provider value={{ theme, toggleTheme }}>
+        <Router>
+          <div
+            id={theme}
+            style={{
+              minHeight: "100vh",
+            }}
+          >
+            <Header />
 
-        <div className="container">
-          <Routes>
-            <Route path="/" element={<Home />} />
+            <div className="mainContainer">
+              <Routes>
+                <Route path="/" element={<Home />} />
 
-            {/* Subscription */}
-            <Route path="/subscription" element={<Subscription />} />
+                {/* Subscription */}
+                <Route path="/subscription" element={<Subscription />} />
 
-            {/* Dlom client */}
-            <Route path="/dlomclient" element={<DlomClient />} />
+                {/* Dlom client */}
+                <Route path="/dlomclient" element={<DlomClient />} />
 
-            {/* Tracking */}
-            <Route path="/tracking" element={<Tracking />} />
+                {/* Tracking */}
+                <Route path="/tracking" element={<Tracking />} />
 
-            {/* Billing */}
-            <Route path="/billing" element={<Billing />} />
+                {/* Billing */}
+                <Route path="/billing" element={<Billing />} />
 
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </div>
-        <Footer />
-      </Router>
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </div>
+            {/* <Footer /> */}
+          </div>
+        </Router>
+      </ThemeContext.Provider>
     </>
   );
 }

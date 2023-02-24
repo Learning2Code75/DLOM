@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -6,9 +6,15 @@ import { signup } from "../../../redux/actions/Auth";
 import { createOp, getUsers, updateUser } from "../../../redux/actions/users";
 import ViewUsers from "./ViewUsers";
 import { TiArrowLeftThick } from "react-icons/ti";
+import { Dialog, IconButton, useMediaQuery, useTheme } from "@mui/material";
+import { GrClose } from "react-icons/gr";
+import { ThemeContext } from "../../../App";
 
 const UserManage = () => {
+  const theme = useTheme();
+  const tc = useContext(ThemeContext);
   const dispatch = useDispatch();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const user = useSelector((state) => state?.auth?.authData?.result);
   const [state, setState] = useState({
     firstName: "",
@@ -20,6 +26,7 @@ const UserManage = () => {
   });
   const [currUser, setCurrUser] = useState({});
   const [isUpdate, setIsUpdate] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -29,6 +36,7 @@ const UserManage = () => {
         delete new_state.password;
         delete new_state.cpassword;
       }
+      console.log(state);
 
       dispatch(updateUser(state._id, new_state));
     } else {
@@ -40,7 +48,10 @@ const UserManage = () => {
       );
       dispatch(signup(state));
     }
-
+    clear();
+    setOpenDialog(false);
+  };
+  const clear = () => {
     setState({
       firstName: "",
       lastName: "",
@@ -52,7 +63,6 @@ const UserManage = () => {
     setIsUpdate(false);
     setCurrUser({});
   };
-
   const handleChange = (e) => {
     setState({
       ...state,
@@ -75,16 +85,16 @@ const UserManage = () => {
       >
         <Link
           to="/users"
-          className="dashboardLink"
+          className="openStylesButton1"
           style={{
             marginRight: "1rem",
-            fontSize: "2em",
-            color: "white",
-            boxShadow:
-              " inset 5px 5px 5px rgba(0,0,0,0.2),inset -5px -5px 15px rgba(255,255,255,0.1), 5px 5px 15px rgba(0,0,0,0.3),  -5px -5px 15px rgba(255,255,255,0.2)",
             borderRadius: ".64rem",
-            padding: ".4rem .6rem",
+            padding: ".6rem",
             cursor: "pointer",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            color: tc.theme === "light" ? "#232427" : "#ebecf0",
           }}
         >
           <TiArrowLeftThick
@@ -94,16 +104,60 @@ const UserManage = () => {
             }}
           />
         </Link>
-        <h1>Manage Users</h1>
+        <h2>Manage Users</h2>
       </div>
-      <pre>state:{JSON.stringify(state, null, 2)}</pre>
-      <pre>currUser:{JSON.stringify(currUser, null, 2)}</pre>
+      {/* <pre>state:{JSON.stringify(state, null, 2)}</pre> */}
+      {/* <pre>currUser:{JSON.stringify(currUser, null, 2)}</pre> */}
 
-      <form onSubmit={handleSubmit} autoComplete="nope">
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
-          <h3>Add User</h3>
+      <div className="dialogOpenContainer">
+        <div className="openStylesButton1" onClick={() => setOpenDialog(true)}>
+          Create User
+        </div>
+      </div>
 
-          <div></div>
+      <Dialog
+        open={openDialog}
+        fullWidth={true}
+        fullScreen={fullScreen}
+        // maxWidth={}
+        onClose={(e, r) => {
+          if (r === "backdropClick") {
+            clear();
+            setOpenDialog(!openDialog);
+          } else {
+            clear();
+            setOpenDialog(!openDialog);
+          }
+        }}
+        // PaperComponent={<PaperC />}
+        PaperProps={{
+          sx: {
+            borderRadius: "1rem",
+            background: tc.theme === "light" ? "#ebecf0" : "#232427",
+            color: tc.theme === "light" ? "#1c1c1c" : "#ebecf0",
+          },
+        }}
+        scroll={"body"}
+        id={tc.theme}
+      >
+        <form autoComplete="nope" className="css5Form">
+          <div className="FlexBetween">
+            <h3>{isUpdate ? "Edit" : "Add"} User</h3>
+
+            <IconButton
+              onClick={() => {
+                clear();
+                setOpenDialog(false);
+              }}
+              style={{
+                background: tc.theme === "dark" ? "lightgrey" : "transparent",
+                padding: ".25rem",
+              }}
+            >
+              <GrClose />
+            </IconButton>
+          </div>
+          <div className="formLabel">First Name</div>
 
           <input
             name={"firstName"}
@@ -113,7 +167,10 @@ const UserManage = () => {
             placeholder={"First Name"}
             value={state.firstName}
             autoComplete="nope"
+            className="formControl"
           />
+          <div className="formLabel">Last Name</div>
+
           <input
             name={"lastName"}
             onChange={handleChange}
@@ -121,7 +178,10 @@ const UserManage = () => {
             placeholder={"Last Name"}
             value={state.lastName}
             autoComplete="nope"
+            className="formControl"
           />
+          <div className="formLabel">Email</div>
+
           <input
             name={"email"}
             onChange={handleChange}
@@ -129,12 +189,14 @@ const UserManage = () => {
             placeholder={"Email"}
             value={state.email}
             autoComplete="nope"
+            className="formControl"
           />
           {(user?.userRole === "root" || !isUpdate) && (
-            <div>
-              <label htmlFor="password">
+            <>
+              <div className="formLabel">
                 {isUpdate ? "New Password" : "Password"}
-              </label>
+              </div>
+
               <input
                 name={"password"}
                 onChange={handleChange}
@@ -142,25 +204,33 @@ const UserManage = () => {
                 placeholder={isUpdate ? "New Password" : "Password"}
                 value={state.password}
                 autoComplete="nope"
+                className="formControl"
               />
-            </div>
+            </>
           )}
 
           {(user?.userRole === "root" || !isUpdate) && (
-            <input
-              name={"cpassword"}
-              onChange={handleChange}
-              type={"password"}
-              placeholder={"Confirm Password"}
-              value={state.cpassword}
-              autoComplete="nope"
-            />
+            <>
+              <div className="formLabel">Confirm Password</div>
+              <input
+                name={"cpassword"}
+                onChange={handleChange}
+                type={"password"}
+                placeholder={"Confirm Password"}
+                value={state.cpassword}
+                autoComplete="nope"
+                className="formControl"
+              />
+            </>
           )}
+
+          <div className="formLabel">User Role</div>
 
           <select
             name="userRole"
             onChange={handleChange}
             value={state.userRole}
+            className="btn1"
           >
             <option>Select Role of User</option>
             <option value="root">Root</option>
@@ -170,13 +240,11 @@ const UserManage = () => {
             <option value="warehouse">Warehouse</option>
           </select>
 
-          <div>
-            <button type="submit">
-              {isUpdate ? "Update User" : "Add User"}
-            </button>
+          <div onClick={handleSubmit} className="btn2">
+            {isUpdate ? "Update User" : "Add User"}
           </div>
-        </div>
-      </form>
+        </form>
+      </Dialog>
 
       <div>
         <h3>Users</h3>
@@ -185,6 +253,7 @@ const UserManage = () => {
           setState={setState}
           currUser={currUser}
           setCurrUser={setCurrUser}
+          setOpenDialog={setOpenDialog}
         />
       </div>
     </div>

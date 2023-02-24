@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect, useContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { TiArrowLeftThick } from "react-icons/ti";
 
@@ -9,12 +9,20 @@ import AddQtyForm from "./Form/AddQtyForm";
 import SubQtyForm from "./Form/SubQtyForm";
 import UpdateQtyForm from "./Form/UpdateQtyForm";
 import DamagedQtyForm from "./Form/DamagedQtyForm";
+import { ThemeContext } from "../../../App";
+import InventoryCSV from "./InventoryCSV";
 const Inventory = () => {
   const dispatch = useDispatch();
+  const tc = useContext(ThemeContext);
+  const products = useSelector((state) => state.products);
 
   const [curProdId, setCurProdId] = useState(null);
 
   const [prodLog, setProdLog] = useState("");
+  const [addQtyDialog, setAddQtyDialog] = useState(false);
+  const [subQtyDialog, setSubQtyDialog] = useState(false);
+  const [updateQtyDialog, setUpdateQtyDialog] = useState(false);
+  const [damagedQtyDialog, setDamagedQtyDialog] = useState(false);
 
   useEffect(() => {
     dispatch(getProducts());
@@ -31,16 +39,16 @@ const Inventory = () => {
       >
         <Link
           to="/product"
-          className="dashboardLink"
+          className="openStylesButton1"
           style={{
             marginRight: "1rem",
-            fontSize: "2em",
-            color: "white",
-            boxShadow:
-              " inset 5px 5px 5px rgba(0,0,0,0.2),inset -5px -5px 15px rgba(255,255,255,0.1), 5px 5px 15px rgba(0,0,0,0.3),  -5px -5px 15px rgba(255,255,255,0.2)",
             borderRadius: ".64rem",
-            padding: ".4rem .6rem",
+            padding: ".6rem",
             cursor: "pointer",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            color: tc.theme === "light" ? "#232427" : "#ebecf0",
           }}
         >
           <TiArrowLeftThick
@@ -50,9 +58,12 @@ const Inventory = () => {
             }}
           />
         </Link>
-        <h1>Inventory</h1>
+        <h2>Inventory</h2>
       </div>
-      <pre>{JSON.stringify(curProdId, null, 2)}</pre>
+      <div className="dialogOpenContainer">
+        <InventoryCSV invData={products} />
+      </div>
+      {/* <pre>{JSON.stringify(curProdId, null, 2)}</pre> */}
       <div
         style={{
           display: "flex",
@@ -64,21 +75,48 @@ const Inventory = () => {
         <div>
           {/* <Form curProdId={curProdId} setCurProdId={setCurProdId} /> */}
           {prodLog === "addQty" && (
-            <AddQtyForm curProdId={curProdId} setCurProdId={setCurProdId} />
+            <AddQtyForm
+              openDialog={addQtyDialog}
+              setOpenDialog={setAddQtyDialog}
+              curProdId={curProdId}
+              setCurProdId={setCurProdId}
+            />
           )}
           {prodLog === "subQty" && (
-            <SubQtyForm curProdId={curProdId} setCurProdId={setCurProdId} />
+            <SubQtyForm
+              openDialog={subQtyDialog}
+              setOpenDialog={setSubQtyDialog}
+              curProdId={curProdId}
+              setCurProdId={setCurProdId}
+            />
           )}
           {prodLog === "updateQty" && (
-            <UpdateQtyForm curProdId={curProdId} setCurProdId={setCurProdId} />
+            <UpdateQtyForm
+              openDialog={updateQtyDialog}
+              setOpenDialog={setUpdateQtyDialog}
+              curProdId={curProdId}
+              setCurProdId={setCurProdId}
+            />
           )}
           {prodLog === "markDamaged" && (
-            <DamagedQtyForm curProdId={curProdId} setCurProdId={setCurProdId} />
+            <DamagedQtyForm
+              openDialog={damagedQtyDialog}
+              setOpenDialog={setDamagedQtyDialog}
+              curProdId={curProdId}
+              setCurProdId={setCurProdId}
+            />
           )}
         </div>
       </div>
       <div>
-        <Products setProdLog={setProdLog} setCurProdId={setCurProdId} />
+        <Products
+          setProdLog={setProdLog}
+          setCurProdId={setCurProdId}
+          setAddQtyDialog={setAddQtyDialog}
+          setSubQtyDialog={setSubQtyDialog}
+          setUpdateQtyDialog={setUpdateQtyDialog}
+          setDamagedQtyDialog={setDamagedQtyDialog}
+        />
       </div>
     </>
   );

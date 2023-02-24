@@ -11,14 +11,15 @@ const AddSuggestion = ({ user, task }) => {
   });
 
   return (
-    <>
-      <div>AddSuggestion</div>
+    <div className="css5Form">
+      <div className="formLabel">Add Suggestion</div>
       <input
         placeholder="suggestion description"
         value={state.description}
         onChange={(e) => setState({ ...state, description: e.target.value })}
+        className="formControl"
       />
-      <button
+      <div
         onClick={(e) => {
           let new_task = { ...task };
           let new_suggestions = new_task.suggestions;
@@ -32,10 +33,17 @@ const AddSuggestion = ({ user, task }) => {
             timestamp: new Date().toISOString(),
           });
         }}
+        className="btn1"
+        style={{
+          fontSize: ".8em",
+          padding: ".5em",
+          margin: "0",
+          marginTop: ".2rem",
+        }}
       >
         Add Suggestion
-      </button>
-    </>
+      </div>
+    </div>
   );
 };
 

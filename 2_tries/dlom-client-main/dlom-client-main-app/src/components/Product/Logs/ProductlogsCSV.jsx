@@ -1,5 +1,6 @@
 import React from "react";
 import { CSVLink } from "react-csv";
+import { FaDownload } from "react-icons/fa";
 
 const ProductlogsCSV = ({ prodLogsData }) => {
   const headers = [
@@ -24,18 +25,29 @@ const ProductlogsCSV = ({ prodLogsData }) => {
 
   return (
     <div>
-      <h5>Productlogs CSV</h5>
+      {/* <h5>Productlogs CSV</h5> */}
       {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
       {/* <pre>{JSON.stringify(prodLogsData, null, 2)}</pre> */}
 
-      <CSVLink
-        data={data}
-        headers={headers}
-        filename={"productlogs"}
-        target="_blank"
-      >
-        Download Productlogs CSV
-      </CSVLink>
+      <div className="btn1">
+        <FaDownload
+          style={{
+            marginRight: ".5rem",
+          }}
+        />
+        <CSVLink
+          data={data}
+          headers={headers}
+          filename={"productlogs"}
+          target="_blank"
+          style={{
+            textDecoration: "none",
+            color: "cyan",
+          }}
+        >
+          Productlogs CSV
+        </CSVLink>
+      </div>
     </div>
   );
 };

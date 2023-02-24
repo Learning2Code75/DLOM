@@ -144,6 +144,17 @@ function App() {
           </div>
         </div>
         <h1>css4 - view card elements (dark)</h1>
+        <div className="css4Container">
+          <div className="css4Grid">
+            <div className="css4BtnOff">
+              <button className="css4btn css4morph">Button</button>
+            </div>
+
+            <div className="css4BtnAct">
+              <button className="css4btn css4morph css4active">Pressed</button>
+            </div>
+          </div>
+        </div>
         <h1>css5 - form ui (light)</h1>
         <div className="css5Container">
           <div className="css5Form">
@@ -168,6 +179,28 @@ function App() {
           </div>
         </div>
         <h1>css6 - form ui (dark)</h1>
+        <div className="css6Container">
+          <div className="css6Form">
+            <h6>Username</h6>
+            <input className="ip" type="text" placeholder="placeholder" />
+
+            <h6>Who are you?</h6>
+            <input className="ipR" type="radio" name="job" id="developer" />
+            <input className="ipR" type="radio" name="job" id="designer" />
+            <h6>Email</h6>
+            <input className="ip" type="email" placeholder="email1@gmail.com" />
+            <h6>Password</h6>
+            <input className="ip" type="password" placeholder="min 6 chars" />
+            <a href="" className="submit">
+              {" "}
+              Submit{" "}
+            </a>
+
+            <button className="btn1">Highlight</button>
+
+            <button className="btn2">Submit</button>
+          </div>
+        </div>
         <h1>css7 - route cards (light)</h1>
         <div className="css7Container">
           <div className="css7Card">
@@ -238,6 +271,54 @@ function App() {
             </form>
             <CustomSwitch />
           </div>
+        </div>
+
+        <h1>css9 - Basic grid</h1>
+        <div className="css9BasicGrid">
+          <div className="css9Card">1</div>
+          <div className="css9Card">2</div>
+          <div className="css9Card">3</div>
+          <div className="css9Card">4</div>
+          <div className="css9Card">5</div>
+          <div className="css9Card">6</div>
+          <div className="css9Card">7</div>
+          <div className="css9Card">8</div>
+          <div className="css9Card">9</div>
+          <div className="css9Card">10</div>
+          <div className="css9Card">11</div>
+          <div className="css9Card">12</div>
+        </div>
+        <h1>css10 - Photo grid</h1>
+        <div className="css10PhotoGrid">
+          <div className="css10Card css10CardTall">1</div>
+          <div className="css10Card">2</div>
+          <div className="css10Card">3</div>
+          <div className="css10Card">4</div>
+          <div className="css10Card css10CardWide">5</div>
+          <div className="css10Card">6</div>
+          <div className="css10Card">7</div>
+          <div className="css10Card">8</div>
+          <div className="css10Card">9</div>
+          <div className="css10Card">10</div>
+          <div className="css10Card css10CardWide ">11</div>
+          <div className="css10Card">12</div>
+        </div>
+
+        <h1>css11 - Animated grid</h1>
+        <div className="css11AnimatedGrid">
+          <div className="css11Card">a</div>
+          <div className="css11Card">b</div>
+          <div className="css11Card">c</div>
+          <div className="css11Card">d</div>
+          <div className="css11Card">e</div>
+          <div className="css11Card">f</div>
+          <div className="css11Card">g</div>
+          <div className="css11Card">h</div>
+          <div className="css11Card">i</div>
+          <div className="css11Card">j</div>
+          <div className="css11Card">k</div>
+          <div className="css11Card">l</div>
+          <div className="css11Card">main</div>
         </div>
       </div>
     </ThemeContext.Provider>

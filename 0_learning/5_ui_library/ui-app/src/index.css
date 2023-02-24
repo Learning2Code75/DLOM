@@ -129,14 +129,14 @@ img{
   margin:20px;
   padding:40px 30px;
   border-radius:1rem;
-  background:rgb(20, 10, 3);
+  background:#1c1c1c;
   box-shadow:-6px -6px 20px rgba(255, 255,255,0),
-  6px 6px 20px rgba(255, 255,255,0.9);
+  6px 6px 20px rgba(0, 0,0,0.9);
 }
 
 .css2Container .css2Card:hover{
-  box-shadow: inset -6px -6px 10px rgba(255, 255,255,0.5),
-  inset 6px 6px 20px rgba(255, 255,255,0.95);
+  box-shadow: inset -6px -6px 10px rgba(255, 255,255,0.05),
+  inset 6px 6px 20px rgba(0, 0,0,0.95);
 }
 
 .css2Container .css2Card .css2ImgBx{
@@ -174,15 +174,15 @@ img{
   border-radius:2.3rem;
   color:#32a3b1;
   font-size:1.2rem;
-  box-shadow:-4px -4px 15px rgba(255, 255,255,1),
-  4px 4px 15px rgba(0, 0,0,0.1);
+  box-shadow:-4px -4px 15px rgba(255, 255,255,0),
+  4px 4px 15px rgba(0, 0,0,0.9);
   cursor:pointer;
   transition:.1s ease;
 }
 
 .css2Container .css2Card .css2Btn:hover{
-  box-shadow:inset -4px -4px 10px rgba(255, 255,255,0.5),
-  inset 4px 4px 10px rgba(0, 0,0,0.1);
+  box-shadow:inset -4px -4px 10px rgba(255, 255,255,0.05),
+  inset 4px 4px 10px rgba(0, 0,0,0.9);
 }
 
 .css2Container .css2Card .css2Btn:hover span{
@@ -264,13 +264,53 @@ img{
   border-radius: 100%;
 }
 
+/* css4 */
+.css4Grid{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap:1rem;
+}
+.css4Container{
+  font-family: "montserrat",sans-serif;
+  position:relative;
+  padding:6rem;
+  min-height: 20vh;
+  font-size:14px;
+  font-weight: 500;
+  background:#232427;
+
+}
+
+.css4morph{
+  border: 2px solid transparent;
+  background: linear-gradient(160deg,#f0f1f400 0%,#e4e6eb00 100%);
+  box-shadow: -3px -3px 6px 2px #ffffff00 , 5px 5px 8px 0px rgba(0, 0, 0, 0.479), 1px 2px 2px 0px rgba(0, 0, 0, 0.901);
+  transition: 0.1s;
+}
+
+
+
+.css4morph.css4active,
+.css4morph:focus{
+  border:1.4px solid #fafafa00;
+  outline:none;
+  box-shadow: inset -3px -3px 5px 0px rgba(255, 255, 255, 0.045) , -1px -1px 4px 0px rgba(255, 255, 255, 0.04), inset 5px 5px 10px 0px rgba(0, 0, 0, 0.845) , inset 2px 2px 3px 0px rgba(0, 0, 0, 0.895), 1px 2px 3px 0px rgba(0, 0, 0, 0);
+}
+
+.css4Container .css4btn{
+  cursor:pointer;
+  padding:.8rem 1.3rem;
+  border-radius: .9rem;
+  text-align:center;
+  color:#ebecf0;
+}
 
 
 /* css5 */
 ::placeholder{
   font-size:.8rem;
   font-weight: 500;
-  color:#ababab;
+  color:rgba(31, 21, 21, 0.274);
   letter-spacing:1.3px;
 
 }
@@ -376,7 +416,7 @@ img{
   color:#15e38a;
 }
 
-.css5Form .btn1,.btn2{
+.css5Form .btn1,.css5Form .btn2{
   border:none;
   cursor:pointer;
   display:flex;
@@ -406,6 +446,152 @@ img{
 }
 
 .css5Form .btn1:hover{
+  background:none;
+  color:#15e38a;
+}
+
+/* css6 */
+::placeholder{
+  font-size:.8rem;
+  font-weight: 500;
+  color:rgba(252, 242, 242, 0.844);
+  letter-spacing:1.3px;
+
+}
+.css6Container{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 1200px;
+  color: #ececec;
+  background:#232427;
+  font-size:1rem;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  padding:2rem 0;
+
+}
+.css6Form{
+  width:350px;
+  /* position:absolute; */
+  /* transform: translate(-50%,-50%);
+  top:50%;
+  left:50%; */
+  /* box-shadow: -10px -10px 15px rgba(255, 255, 255, 0.01),
+    10px 10px 15px rgba(70, 70, 70, 0.304); */
+      box-shadow:-6px -6px 20px rgba(255, 255,255,0),
+  6px 6px 20px rgba(0, 0,0,0.9);
+  padding: 2.6rem 1.4rem;
+  border-radius: .8rem;
+}
+.css6Form h6{
+  margin-bottom:10px;
+  font:inherit;
+  text-transform: uppercase;
+}
+
+.css6Form .submit{
+  display:flex;
+  width:80%;
+  margin-left:10%;
+  text-align: center;
+  font:inherit;
+  color:inherit;
+  text-decoration: none;
+  border-radius: 1.4rem;
+  padding:.8rem;
+  box-shadow:-6px -6px 20px rgba(255, 255,255,0),
+  6px 6px 20px rgba(0, 0,0,0.9);
+}
+
+.css6Form .ip{
+  margin-bottom:1.4rem;
+  border:none;
+  background: transparent;
+  box-shadow: inset -6px -6px 10px rgba(255, 255,255,0.05),
+  inset 6px 6px 20px rgba(0, 0,0,0.95);
+  padding: .6rem;
+  width: 90%;
+  border-radius: .45rem;
+  outline:none;
+}
+
+.css6Form .ipR{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  position:relative;
+  height: 2.2rem;
+  width:6.6rem;
+  box-shadow:-6px -6px 20px rgba(255, 255,255,0),
+  6px 6px 20px rgba(0, 0,0,0.9);
+  border: .5rem solid rgba(236, 236, 236, 0.03);
+  margin-right: 1.8rem;
+  border-radius: 1.8rem;
+  font:inherit; 
+  outline:none;
+  cursor:pointer;
+}
+
+.css6Form .ipR:after{
+  position:absolute;
+  transform: translate(-50%,-50%);
+  top:50%;
+  left:50%;
+  color:rgb(96, 96, 96);
+  letter-spacing:0.5px;
+}
+
+.css6Form #developer:after{
+  content:"Developer";
+}
+.css6Form #designer:after{
+  content:"Designer";
+}
+
+/* .css6Form .ipR:checked,
+.css6Form a:active
+{
+  box-shadow: -10px -10px 15px rgba(255,255,255,0.55),
+  10px 10px 15px rgba(70,70,70,0.12)
+  inset -10px -10px 15px rgba(255,255,255,0.55),
+  inset 10px 10px 15px rgba(70,70,70,0.12);
+} */
+
+.css6Form .inpR:checked:after{
+  color:#15e38a;
+}
+
+.css6Form .btn1,.css6Form .btn2{
+  border:none;
+  cursor:pointer;
+  display:flex;
+  width:80%;
+  margin-left:10%;
+  margin-top:1rem;
+  text-align: center;
+  font:inherit;
+  color:#ebf5fc;
+  background:#232427;
+  text-decoration: none;
+  border-radius: 1.4rem;
+  padding:.8rem;
+  box-shadow:-6px -6px 20px rgba(255, 255,255,0),
+  6px 6px 20px rgba(0, 0,0,0.9);
+  transition:0.3s;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.css6Form .btn2:hover{
+  background:transparent;
+  box-shadow: inset -6px -6px 10px rgba(255, 255,255,0.05),
+  inset 6px 6px 20px rgba(0, 0,0,0.95);
+}
+
+.css6Form .btn1:hover{
   background:none;
   color:#15e38a;
 }
@@ -655,3 +841,153 @@ img{
   margin-bottom: 27px;
   font-family: "Ubuntu", sans-serif;
 }
+
+/* css9 */
+.css9BasicGrid{
+  display: grid;
+  gap:1rem;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(12,minmax(240px,1fr));
+  grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+  /* auto-fill can also be used */
+}
+.css9Card{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  border:1px solid black;
+}
+
+/* css10 */
+
+.css10PhotoGrid{
+  display:grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+  grid-auto-rows: 240px;
+}
+
+.css10Card{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  border:1px solid black;
+}
+
+@media screen and (min-width: 600px){
+  .css10CardTall{
+    grid-row: span 2 / auto; 
+  }
+  
+  .css10CardWide{
+    grid-column: span 2 / auto;
+  }
+}
+
+/* css11 */
+
+.css11Card:hover{
+  transform: scale(1.1);
+}
+.css11AnimatedGrid{
+  height: 85vh;
+  display: grid;
+  gap:1rem;
+
+  grid-template-areas: 
+  'a b c d'
+  'l gg gg e'
+  'k gg gg f'
+  'j i h g';
+
+  grid-template-rows:repeat(4,25%);
+  grid-template-columns: 240px auto auto 240px;
+  --stagger-delay:100ms;
+}
+
+@keyframes cardEntrance {
+  from{
+    opacity: 0;
+    transform: scale(0.3);
+    filter:hue-rotate(180deg);
+  }
+  to{
+    opacity:1;
+    transform: scale(1);
+    filter:hue-rotate(0deg);
+  }
+}
+.css11Card{
+  background:#15e38a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation:cardEntrance 700ms ease-out;
+  animation-fill-mode:backwards;
+  transition: 0.2s;
+}
+.css11Card:nth-child(1){
+  grid-area:a;
+  animation-delay: calc(1* var(--stagger-delay));
+}
+.css11Card:nth-child(2){
+  grid-area:b;
+  animation-delay: calc(2* var(--stagger-delay));
+
+}
+.css11Card:nth-child(3){
+  grid-area:c;
+  animation-delay: calc(3* var(--stagger-delay));
+
+}
+.css11Card:nth-child(4){
+  grid-area:d;
+  animation-delay: calc(4* var(--stagger-delay));
+
+}
+.css11Card:nth-child(5){
+  grid-area:e;
+  animation-delay: calc(5* var(--stagger-delay));
+
+}
+.css11Card:nth-child(6){
+  grid-area:f;
+  animation-delay: calc(6* var(--stagger-delay));
+
+}
+.css11Card:nth-child(7){
+  grid-area:g;
+  animation-delay: calc(7* var(--stagger-delay));
+
+}
+.css11Card:nth-child(8){
+  grid-area:h;
+  animation-delay: calc(8* var(--stagger-delay));
+
+}
+.css11Card:nth-child(9){
+  grid-area:i;
+  animation-delay: calc(9* var(--stagger-delay));
+
+}
+.css11Card:nth-child(10){
+  grid-area:j;
+  animation-delay: calc(10* var(--stagger-delay));
+
+}
+.css11Card:nth-child(11){
+  grid-area:k;
+  animation-delay: calc(11* var(--stagger-delay));
+
+}
+.css11Card:nth-child(12){
+  grid-area:l;
+  animation-delay: calc(12* var(--stagger-delay));
+
+}
+.css11Card:last-child{
+  grid-area:gg;
+  animation-delay: calc(13* var(--stagger-delay));
+
+}
+

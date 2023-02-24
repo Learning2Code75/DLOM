@@ -7,35 +7,26 @@ const Products = ({ setCurProdId, prodsForCatelog, setProdsForCatelog }) => {
   console.log(products);
   return (
     <>
-      <div>Products</div>
+      <h3>Products</h3>
       <div
         style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gridGap: "10px",
-          margin: "0 auto",
-          maxWidth: "95vw",
-          marginBottom: "2rem",
+          margin: ".5rem",
+          marginBottom: "5rem",
         }}
+        className="css9BasicGrid"
       >
-        {products?.map((p) => (
-          <div
-            style={{
-              border: "2px solid lightgrey",
-              overflow: "scroll",
-              padding: "0",
-              borderRadius: "1rem",
-            }}
-            key={p._id}
-          >
-            <Product
-              p={p}
-              setCurProdId={setCurProdId}
-              prodsForCatelog={prodsForCatelog}
-              setProdsForCatelog={setProdsForCatelog}
-            />
-          </div>
-        ))}
+        {products
+          ?.filter((p) => p.damaged !== "damaged")
+          .map((p) => (
+            <div key={p._id}>
+              <Product
+                p={p}
+                setCurProdId={setCurProdId}
+                prodsForCatelog={prodsForCatelog}
+                setProdsForCatelog={setProdsForCatelog}
+              />
+            </div>
+          ))}
       </div>
     </>
   );

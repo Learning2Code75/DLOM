@@ -1,7 +1,11 @@
+import { Dialog, IconButton, useMediaQuery, useTheme } from "@mui/material";
 import React, { useState } from "react";
+import { useContext } from "react";
 import { useEffect } from "react";
 import FileBase from "react-file-base64";
+import { GrClose } from "react-icons/gr";
 import { useDispatch, useSelector } from "react-redux";
+import { ThemeContext } from "../../../../App";
 import {
   createProduct,
   getProducts,
@@ -10,10 +14,12 @@ import {
 import { createOp } from "../../../../redux/actions/users";
 import DescInput from "./DescInput";
 
-const Form = ({ curProdId, setCurProdId }) => {
+const Form = ({ curProdId, setCurProdId, openDialog, setOpenDialog }) => {
   const dispatch = useDispatch();
+  const tc = useContext(ThemeContext);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const user = useSelector((state) => state?.auth?.authData?.result);
-
   const prodToUpdate = useSelector((state) =>
     curProdId ? state.products.find((p) => p._id === curProdId) : null
   );
@@ -74,40 +80,82 @@ const Form = ({ curProdId, setCurProdId }) => {
       dispatch(createProduct(prodD));
     }
     clear();
+    setOpenDialog(false);
   };
 
   return (
     <>
-      <pre>{JSON.stringify(productData, null, 2)}</pre>
-      <form autoComplete="off" noValidate onSubmit={handleSubmit}>
-        <h2>{curProdId ? "Update" : "Create"} a Product</h2>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            margin: "0 auto",
-            maxWidth: "85vw",
-            gridGap: ".5rem",
-          }}
-        >
-          <div>ProdSKU</div>
+      {/* <pre>{JSON.stringify(productData, null, 2)}</pre> */}
+      <div className="dialogOpenContainer">
+        <div className="openStylesButton1" onClick={() => setOpenDialog(true)}>
+          Create Product
+        </div>
+      </div>
+
+      <Dialog
+        open={openDialog}
+        fullWidth={true}
+        fullScreen={fullScreen}
+        // maxWidth={}
+        onClose={(e, r) => {
+          if (r === "backdropClick") {
+            clear();
+            setOpenDialog(!openDialog);
+          } else {
+            clear();
+            setOpenDialog(!openDialog);
+          }
+        }}
+        // PaperComponent={<PaperC />}
+        PaperProps={{
+          sx: {
+            borderRadius: "1rem",
+            background: tc.theme === "light" ? "#ebecf0" : "#232427",
+            color: tc.theme === "light" ? "#1c1c1c" : "#ebecf0",
+          },
+        }}
+        scroll={"body"}
+        id={tc.theme}
+      >
+        <form autoComplete="off" className="css5Form" noValidate>
+          <div className="FlexBetween">
+            <h2>{curProdId ? "Update" : "Create"} Product</h2>
+            <IconButton
+              onClick={() => {
+                setOpenDialog(false);
+                clear();
+              }}
+              style={{
+                background: tc.theme === "dark" ? "lightgrey" : "transparent",
+                padding: ".25rem",
+              }}
+            >
+              <GrClose />
+            </IconButton>
+          </div>
+
+          <div className="formLabel">ProdSKU</div>
           <input
             name="prodSKU"
             value={productData.prodSKU}
             onChange={(e) =>
               setProductData({ ...productData, prodSKU: e.target.value })
             }
+            placeholder="product SKU"
+            className="formControl"
           />
-          <div>Product Name</div>
+          <div className="formLabel">Product Name</div>
           <input
             name="prodName"
             value={productData.prodName}
             onChange={(e) =>
               setProductData({ ...productData, prodName: e.target.value })
             }
+            placeholder="product name"
+            className="formControl"
           />
 
-          <div>productUnitRate</div>
+          <div className="formLabel">Product Unit Rate</div>
           <input
             name="productUnitRate"
             value={productData.productUnitRate}
@@ -117,28 +165,38 @@ const Form = ({ curProdId, setCurProdId }) => {
                 productUnitRate: e.target.value,
               })
             }
+            placeholder="product unit rate"
+            className="formControl"
           />
-          <div>prodTax</div>
+          <div className="formLabel">Product Tax Rate</div>
           <input
             name="prodTax"
             value={productData.prodTax}
             onChange={(e) =>
               setProductData({ ...productData, prodTax: e.target.value })
             }
+            placeholder="product tax rate"
+            className="formControl"
           />
-          <div>prodDesc</div>
+          <div className="formLabel">Product Description</div>
 
           <div>
-            <button
+            <div
               onClick={(e) => {
                 e.preventDefault();
                 let new_desc_arr = [...productData.prodDesc];
                 new_desc_arr.push({ title: "", desc: "" });
                 setProductData({ ...productData, prodDesc: new_desc_arr });
               }}
+              className="btn1"
+              style={{
+                margin: "0 0 0 .4em",
+                padding: ".4rem 0",
+                width: "20%",
+              }}
             >
               +
-            </button>
+            </div>
             {productData.prodDesc.map((pd, idx) => (
               <DescInput
                 pd={pd}
@@ -149,8 +207,8 @@ const Form = ({ curProdId, setCurProdId }) => {
             ))}
           </div>
 
-          <div>prodImgUrl</div>
-          <div>
+          <div className="formLabel">Product Img</div>
+          <div className="btn1">
             <FileBase
               type="File"
               multiple={false}
@@ -160,7 +218,7 @@ const Form = ({ curProdId, setCurProdId }) => {
             />
           </div>
 
-          <div>qty</div>
+          <div className="formLabel">qty</div>
           <input
             name="qty"
             type="number"
@@ -168,36 +226,45 @@ const Form = ({ curProdId, setCurProdId }) => {
             onChange={(e) =>
               setProductData({ ...productData, qty: e.target.value })
             }
+            placeholder="product qty"
+            className="formControl"
           />
-          <div>category</div>
+          <div className="formLabel">category</div>
           <input
             name="category"
             value={productData.category}
             onChange={(e) =>
               setProductData({ ...productData, category: e.target.value })
             }
+            placeholder="product category"
+            className="formControl"
           />
-          <div>discount</div>
+          <div className="formLabel">discount</div>
           <input
             name="discount"
             value={productData.discount}
             onChange={(e) =>
               setProductData({ ...productData, discount: e.target.value })
             }
+            placeholder="product discount rate"
+            className="formControl"
           />
-        </div>
 
-        <button type="submit">Submit</button>
-        <button onClick={clear}>Clear</button>
-      </form>
+          <div onClick={handleSubmit} type="submit" className="btn2">
+            {curProdId ? "Update Product" : "Create Product"}
+          </div>
+          {/* <div onClick={clear}>Clear</div> */}
+        </form>
+      </Dialog>
+
       <pre
         style={{
           overflow: "hidden",
         }}
       >
-        {JSON.stringify(productData, null, 4)}
+        {/* {JSON.stringify(productData, null, 4)} */}
       </pre>
-      <pre>{JSON.stringify(curProdId, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(curProdId, null, 2)}</pre> */}
     </>
   );
 };

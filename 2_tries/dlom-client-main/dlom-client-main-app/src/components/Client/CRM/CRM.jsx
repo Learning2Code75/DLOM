@@ -9,9 +9,12 @@ import ViewClientsCRM from "./ViewClientsCRM";
 import { TiArrowLeftThick } from "react-icons/ti";
 import { Dialog, IconButton, useMediaQuery, useTheme } from "@mui/material";
 import { GrClose, GrFormAdd } from "react-icons/gr";
+import { useContext } from "react";
+import { ThemeContext } from "../../../App";
 
 const CRM = () => {
   const theme = useTheme();
+  const tc = useContext(ThemeContext);
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   const [state, setState] = useState({
@@ -128,16 +131,16 @@ const CRM = () => {
       >
         <Link
           to="/client"
-          className="dashboardLink"
+          className="openStylesButton1"
           style={{
             marginRight: "1rem",
-            fontSize: "2em",
-            color: "white",
-            boxShadow:
-              " inset 5px 5px 5px rgba(0,0,0,0.2),inset -5px -5px 15px rgba(255,255,255,0.1), 5px 5px 15px rgba(0,0,0,0.3),  -5px -5px 15px rgba(255,255,255,0.2)",
             borderRadius: ".64rem",
-            padding: ".4rem .6rem",
+            padding: ".6rem",
             cursor: "pointer",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            color: tc.theme === "light" ? "#232427" : "#ebecf0",
           }}
         >
           <TiArrowLeftThick
@@ -147,9 +150,9 @@ const CRM = () => {
             }}
           />
         </Link>
-        <h1>CRM</h1>
+        <h2>CRM</h2>
       </div>
-      <pre>{JSON.stringify(currClient, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(currClient, null, 2)}</pre> */}
       <div>
         <Dialog
           open={openDialog}
@@ -166,16 +169,27 @@ const CRM = () => {
             }
           }}
           // PaperComponent={}
-          PaperProps={{ sx: { borderRadius: "1rem" } }}
+          PaperProps={{
+            sx: {
+              borderRadius: "1rem",
+              background: tc.theme === "light" ? "#ebecf0" : "#232427",
+              color: tc.theme === "light" ? "#1c1c1c" : "#ebecf0",
+            },
+          }}
           scroll={"body"}
+          id={tc.theme}
         >
-          <form>
-            <div className="manageClientDialogHeading">
-              <h2> Add Chat</h2>
+          <form className="css5Form">
+            <div className="FlexBetween">
+              <h2> {isUpdate ? "Edit" : "Add"} Chat</h2>
               <IconButton
                 onClick={() => {
                   setOpenDialog(false);
                   clear();
+                }}
+                style={{
+                  background: tc.theme === "dark" ? "lightgrey" : "transparent",
+                  padding: ".25rem",
                 }}
               >
                 <GrClose />
@@ -235,35 +249,58 @@ const CRM = () => {
                 })
               }
               id="type"
-              className="formControl"
+              className="btn1"
             >
               <option value={"client"}>Client</option>
               <option value={"sp"}>Salesperson</option>
             </select>
-            <div>
-              <button
+            <div
+              className="FlexBetween"
+              style={{
+                marginTop: "1rem",
+              }}
+            >
+              <div
+                className="btn2"
                 onClick={isUpdate ? (e) => updateChat(e) : (e) => addChat(e)}
+                style={{
+                  margin: "0",
+                  width: "40%",
+                }}
               >
                 {isUpdate ? "Update Chat" : "Add Chat"}
-              </button>
+              </div>
 
-              <button
+              <div
+                className="btn2"
                 onClick={(e) => {
                   e.preventDefault();
                   updateClientCRM(currClient.id, currClient.crm);
+                  setOpenDialog(false);
+                }}
+                style={{
+                  margin: "0",
+                  width: "40%",
+                  marginLeft: ".5em",
                 }}
               >
                 {"Save Changes"}
-              </button>
-              <button
+              </div>
+              {/* <div
+                className="btn2"
                 onClick={(e) => {
                   e.preventDefault();
                   setOpenDialog(false);
                   clear();
                 }}
+                style={{
+                  margin: "0",
+                  width: "20%",
+                  marginLeft: ".5em",
+                }}
               >
                 Cancel
-              </button>
+              </div> */}
             </div>
           </form>
         </Dialog>
@@ -281,9 +318,9 @@ const CRM = () => {
           setOpenDialog={setOpenDialog}
         />
       </div>
-      <pre>{JSON.stringify(state, null, 2)}</pre>
-      <pre>{JSON.stringify(isUpdate, null, 2)}</pre>
-      <pre>{JSON.stringify(currClient, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(state, null, 2)}</pre> */}
+      {/* <pre>{JSON.stringify(isUpdate, null, 2)}</pre> */}
+      {/* <pre>{JSON.stringify(currClient, null, 2)}</pre> */}
     </div>
   );
 };

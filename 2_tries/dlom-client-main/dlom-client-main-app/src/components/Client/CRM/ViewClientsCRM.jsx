@@ -1,10 +1,21 @@
 import { useMutation, useQuery } from "@apollo/client";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Dialog,
+} from "@mui/material";
 import React, { useState } from "react";
+import { useContext } from "react";
+import { BsArrowDownSquare, BsChatRight } from "react-icons/bs";
 import { FiDelete, FiEdit } from "react-icons/fi";
+import { MdExpandMore } from "react-icons/md";
+import { ThemeContext } from "../../../App";
 import { UPDATE_CLIENT } from "../../../mutations/dlomClientMutation";
 import { GET_CLIENTS } from "../../../queries/dlomClientQueries";
 import Spinner from "../../Spinner";
 import CRMCSV from "./CRMCSV";
+import ViewChatsAccordion from "./ViewChatsAccordion";
 const ViewClientsCRM = ({
   currClient,
   setCurrClient,
@@ -15,9 +26,12 @@ const ViewClientsCRM = ({
   setOpenDialog,
 }) => {
   const { loading, error, data } = useQuery(GET_CLIENTS);
+  const tc = useContext(ThemeContext);
 
   const [state, setState] = useState({ id: "", typeOfCustomer: "permanent" });
   const [delChatState, setDelChatState] = useState({ id: "" });
+  const [delDialog, setDelDialog] = useState(false);
+  const [convertDialog, setConvertDialog] = useState(false);
 
   const [updateClientConvert] = useMutation(UPDATE_CLIENT, {
     variables: {
@@ -61,7 +75,7 @@ const ViewClientsCRM = ({
       {!loading && !error && (
         <>
           <div className="partials">
-            {state.id && (
+            {/* {state.id && (
               <div>
                 <p>
                   Are you sure you want to convert the potential client to
@@ -83,9 +97,86 @@ const ViewClientsCRM = ({
                   Cancel
                 </button>
               </div>
-            )}
+            )} */}
 
-            {delChatState.id && (
+            <Dialog
+              open={convertDialog}
+              fullWidth={true}
+              // maxWidth={}
+              onClose={(e, r) => {
+                if (r === "backdropClick") {
+                  setState({ ...state, id: "" });
+                  setConvertDialog(!convertDialog);
+                } else {
+                  setState({ ...state, id: "" });
+                  setConvertDialog(!convertDialog);
+                }
+              }}
+              // PaperComponent={}
+              PaperProps={{
+                sx: {
+                  minHeight: "6rem",
+                  borderRadius: "1rem",
+                  background: tc.theme === "light" ? "#ebecf0" : "#232427",
+                  color: tc.theme === "light" ? "#1c1c1c" : "#ebecf0",
+                },
+              }}
+              scroll={"body"}
+              id={tc.theme}
+            >
+              <div
+                className="css5Form "
+                style={{
+                  padding: "1rem",
+                }}
+              >
+                <h6
+                  style={{
+                    textAlign: "center",
+                    fontSize: "1rem",
+                    marginBottom: ".5rem",
+                  }}
+                >
+                  Are you sure you want to convert the potential client to
+                  permanent?
+                </h6>
+                <div className="FlexAround">
+                  <div
+                    onClick={() => {
+                      updateClientConvert(state.id, state.typeOfCustomer);
+                      setState({ ...state, id: "" });
+                      setConvertDialog(false);
+                    }}
+                    className="btn1"
+                    style={{
+                      fontSize: ".6rem",
+                      padding: ".6rem .4rem",
+                      margin: "0",
+                      width: "30%",
+                    }}
+                  >
+                    Convert
+                  </div>
+                  <div
+                    onClick={() => {
+                      setConvertDialog(false);
+                      setState({ ...state, id: "" });
+                    }}
+                    className="btn3"
+                    style={{
+                      fontSize: ".6rem",
+                      padding: ".6rem .4rem",
+                      margin: "0",
+                      width: "30%",
+                    }}
+                  >
+                    Cancel
+                  </div>
+                </div>
+              </div>
+            </Dialog>
+
+            {/* {delChatState.id && (
               <div>
                 <p>Are you sure you want to delete the message?</p>
                 <button
@@ -108,32 +199,107 @@ const ViewClientsCRM = ({
                   Cancel
                 </button>
               </div>
-            )}
+            )} */}
+
+            <Dialog
+              open={delDialog}
+              fullWidth={true}
+              // maxWidth={}
+              onClose={(e, r) => {
+                if (r === "backdropClick") {
+                  setDelChatState({ ...delChatState, id: "" });
+                  setCurrClient({});
+                  setDelDialog(!delDialog);
+                } else {
+                  setDelChatState({ ...delChatState, id: "" });
+                  setCurrClient({});
+                  setDelDialog(!delDialog);
+                }
+              }}
+              // PaperComponent={}
+              PaperProps={{
+                sx: {
+                  minHeight: "6rem",
+                  borderRadius: "1rem",
+                  background: tc.theme === "light" ? "#ebecf0" : "#232427",
+                  color: tc.theme === "light" ? "#1c1c1c" : "#ebecf0",
+                },
+              }}
+              scroll={"body"}
+              id={tc.theme}
+            >
+              <div
+                className="css5Form "
+                style={{
+                  padding: "1rem",
+                }}
+              >
+                <h6
+                  style={{
+                    textAlign: "center",
+                    fontSize: "1rem",
+                    marginBottom: ".5rem",
+                  }}
+                >
+                  Delete the chat?
+                </h6>
+                <div className="FlexAround">
+                  <div
+                    onClick={() => {
+                      deleteItemAPI();
+                      setDelChatState({ ...delChatState, id: "" });
+                      setCurrClient({});
+                      setDelDialog(false);
+                    }}
+                    className="btn3"
+                    style={{
+                      fontSize: ".6rem",
+                      padding: ".6rem .4rem",
+                      margin: "0",
+                      width: "30%",
+                    }}
+                  >
+                    Delete
+                  </div>
+                  <div
+                    onClick={() => {
+                      setDelDialog(false);
+                      setDelChatState({ ...delChatState, id: "" });
+                      setCurrClient({});
+                    }}
+                    className="btn1"
+                    style={{
+                      fontSize: ".6rem",
+                      padding: ".6rem .4rem",
+                      margin: "0",
+                      width: "30%",
+                    }}
+                  >
+                    Cancel
+                  </div>
+                </div>
+              </div>
+            </Dialog>
           </div>
           <div
             style={{
-              margin: "1rem",
+              margin: ".5rem",
+              marginBottom: "5rem",
             }}
+            className="css9BasicGrid"
           >
             {data.clients.map((client, i) => (
-              <div
-                style={{
-                  border: "1px solid lightgrey",
-                  borderRadius: "1rem",
-                  marginBottom: "1rem",
-                }}
-                key={client.id}
-              >
-                <div>
-                  <button
-                    className="btn"
+              <div className="css1Card" key={client.id}>
+                <div className="FlexBetween">
+                  <div
+                    className="css1Btn"
                     onClick={() => {
                       settingCurrClient(client);
                       setOpenDialog(true);
                     }}
                   >
                     Add Chat
-                  </button>
+                  </div>
                   {/* <button
                   className="btn"
                   //   onClick={() => {
@@ -144,102 +310,63 @@ const ViewClientsCRM = ({
                   Delete
                 </button> */}
                   {client.typeOfCustomer === "potential" && (
-                    <button
-                      className="btn"
-                      onClick={() => setState({ ...state, id: client.id })}
+                    <div
+                      className="css1Btn"
+                      onClick={() => {
+                        setState({ ...state, id: client.id });
+                        setConvertDialog(true);
+                      }}
                     >
                       Convert
-                    </button>
+                    </div>
                   )}
                 </div>
-                <div>
-                  <div>{client.companyName}</div>
-                  <div>{client.contactPersonName}</div>
-                  <div>{client.address}</div>
-                  <div>{client.phoneNumber}</div>
-                  <div>{client.salesPersonAssigned}</div>
-                  <div>{client.typeOfCustomer}</div>
-                  <div>
-                    <CRMCSV crmData={client?.crm} />
-                  </div>
-                  {client.clientSocialMedia.map((cs) => (
-                    <div>
-                      <h3>{cs.title}</h3>
-                      <p>{cs.link}</p>
-                    </div>
-                  ))}
-                  <div
-                    style={{
-                      display: "flex",
-                    }}
-                  >
-                    {client.crm.map((c, index) => (
-                      <div
-                        style={{
-                          border: "1px solid lightgrey",
-                          display: "flex",
-                          flexDirection: "column",
-                          borderRadius: "1rem",
-                          alignItems: "flex-start",
-                          margin: "1rem",
-                          padding: ".5rem",
-                        }}
-                      >
-                        <div
-                          style={{
-                            display: "flex",
-                            justifyContent: "flex-end",
-                            width: "100%",
-                          }}
-                        >
-                          <FiEdit
+                <div className="css1ContentBx">
+                  <div className="css9BasicGrid1">
+                    <div className="tag">Client Details</div>
+                    <div className="info">
+                      <div>{client.companyName}</div>
+                      <div>{client.contactPersonName}</div>
+                      <div>{client.address}</div>
+                      <div>{client.phoneNumber}</div>
+                      <div>{client.salesPersonAssigned}</div>
+                      <div>{client.typeOfCustomer}</div>
+                      {client.clientSocialMedia.map((cs) => (
+                        <div>
+                          <h3>{cs.title}</h3>
+                          <a
                             style={{
-                              marginRight: ".5rem",
-                              cursor: "pointer",
+                              color: "cyan",
                             }}
-                            onClick={() => {
-                              settingCurrClient(client);
-                              setCurrChat({
-                                time: c.timestamp.split(" ")[1],
-                                date: c.timestamp.split(" ")[0],
-                                msg: c.msg,
-                                type: c.personType,
-                                timestamp: c.timestamp,
-                                index: index,
-                              });
-                              setIsUpdate(true);
-                            }}
-                          />
-                          <FiDelete
-                            style={{
-                              cursor: "pointer",
-                            }}
-                            onClick={() => {
-                              setDelChatState({
-                                ...delChatState,
-                                id: client.id,
-                              });
-                              deleteItem(client, index);
-                            }}
-                          />
+                            href={cs.link}
+                            target="__blank"
+                          >
+                            {cs.link}
+                          </a>
                         </div>
-                        <span
-                          style={{
-                            textDecoration: "underline",
-                          }}
-                        >
-                          {c.personType === "client"
-                            ? "client:"
-                            : "salesperson:"}
-                          {c.personType === "client"
-                            ? client.contactPersonName
-                            : client.salesPersonAssigned}
-                        </span>
-                        <h5>{c.msg}</h5>
-                        <span>{c.timestamp}</span>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
+
+                  <div>
+                    <CRMCSV
+                      crmData={client?.crm}
+                      fileTitle={client?.companyName}
+                    />
+                  </div>
+
+                  <ViewChatsAccordion
+                    client={client}
+                    setOpenDialog={setOpenDialog}
+                    settingCurrClient={settingCurrClient}
+                    setCurrChat={setCurrChat}
+                    setIsUpdate={setIsUpdate}
+                    setDelDialog={setDelDialog}
+                    setDelChatState={setDelChatState}
+                    delChatState={delChatState}
+                    deleteItem={deleteItem}
+                    tc={tc}
+                  />
                 </div>
               </div>
             ))}

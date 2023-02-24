@@ -2,30 +2,31 @@ import React from "react";
 import Product from "./Product/Product";
 import { useSelector } from "react-redux";
 
-const Products = ({ setCurProdId }) => {
+const Products = ({ setCurProdId, setOpenDialog }) => {
   const products = useSelector((state) => state.products);
   return (
     <>
-      <div>Products</div>
+      <h2>Products</h2>
       <div
         style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gridGap: "10px",
-          margin: "0 auto",
-          maxWidth: "95vw",
-          marginBottom: "2rem",
+          margin: ".5rem",
+          marginBottom: "5rem",
         }}
+        className="css9BasicGrid"
       >
         {products?.map((p) => (
           <div
             style={{
-              border: "1px solid black",
-              overflowY: "scroll",
+              overflowX: "scroll",
             }}
+            className="css1Card"
             key={p._id}
           >
-            <Product p={p} setCurProdId={setCurProdId} />
+            <Product
+              p={p}
+              setCurProdId={setCurProdId}
+              setOpenDialog={setOpenDialog}
+            />
           </div>
         ))}
       </div>

@@ -194,27 +194,32 @@ const InvTableEntry = ({ state, setState, index }) => {
     <div
       style={{
         display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
-      <pre>{JSON.stringify(entry, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(entry, null, 2)}</pre> */}
       <input
         placeholder="descn of goods"
         value={entry.descriptionOfGoods}
         onChange={(e) =>
           setEntry({ ...entry, descriptionOfGoods: e.target.value })
         }
+        className="formControl"
       />
 
       <input
         placeholder="HSN SAC"
         value={entry.hsnSAC}
         onChange={(e) => setEntry({ ...entry, hsnSAC: e.target.value })}
+        className="formControl"
       />
 
       <input
         placeholder="GST Rate"
         value={entry.GSTRate}
         onChange={(e) => setEntry({ ...entry, GSTRate: e.target.value })}
+        className="formControl"
       />
 
       <input
@@ -222,11 +227,13 @@ const InvTableEntry = ({ state, setState, index }) => {
         placeholder="qty"
         value={entry.qty}
         onChange={(e) => setEntry({ ...entry, qty: parseInt(e.target.value) })}
+        className="formControl"
       />
       <input
         placeholder="rate"
         value={entry.rate}
         onChange={(e) => setEntry({ ...entry, rate: e.target.value })}
+        className="formControl"
       />
 
       {/* <select
@@ -236,20 +243,37 @@ const InvTableEntry = ({ state, setState, index }) => {
         <option value={"unit"}>unit</option>
       </select> */}
 
-      <input value={entry.per} disabled={true} />
+      <input value={entry.per} disabled={true} className="formControl" />
 
       <input
         placeholder="amount"
         value={entry.amount}
         onChange={(e) => setEntry({ ...entry, amount: e.target.value })}
         disabled={true}
+        className="formControl"
       />
 
-      <button onClick={addEntry}>
+      <button
+        className="btn1"
+        style={{
+          margin: "0 0 0 .4em",
+          padding: ".4rem 0",
+          width: "20%",
+        }}
+        onClick={addEntry}
+      >
         <FiSave />
       </button>
 
-      <button onClick={delEntry}>
+      <button
+        className="btn3"
+        style={{
+          margin: "0 0 0 .4em",
+          padding: ".4rem 0",
+          width: "20%",
+        }}
+        onClick={delEntry}
+      >
         <FiDelete />
       </button>
     </div>

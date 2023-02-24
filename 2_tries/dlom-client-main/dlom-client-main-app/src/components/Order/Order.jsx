@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import DistributorCRUD from "./DistributorCRUD/DistributorCRUD";
 import OrderCardCRUD from "./OrderCardCRUD/OrderCardCRUD";
 import { TiArrowLeftThick } from "react-icons/ti";
+import { ThemeContext } from "../../App";
 
 const Order = () => {
+  const tc = useContext(ThemeContext);
   const user = useSelector((state) => state?.auth?.authData?.result);
 
   return (
@@ -19,16 +21,16 @@ const Order = () => {
       >
         <Link
           to="/orders"
-          className="dashboardLink"
+          className="openStylesButton1"
           style={{
             marginRight: "1rem",
-            fontSize: "2em",
-            color: "white",
-            boxShadow:
-              " inset 5px 5px 5px rgba(0,0,0,0.2),inset -5px -5px 15px rgba(255,255,255,0.1), 5px 5px 15px rgba(0,0,0,0.3),  -5px -5px 15px rgba(255,255,255,0.2)",
             borderRadius: ".64rem",
-            padding: ".4rem .6rem",
+            padding: ".6rem",
             cursor: "pointer",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            color: tc.theme === "light" ? "#232427" : "#ebecf0",
           }}
         >
           <TiArrowLeftThick
@@ -38,16 +40,16 @@ const Order = () => {
             }}
           />
         </Link>
-        <h1>Orders</h1>
+        <h2>Orders</h2>
       </div>
 
-      {(user?.userRole === "manager" ||
+      {/* {(user?.userRole === "manager" ||
         user?.userRole === "root" ||
         user?.userRole === "finance") && (
         <div>
           <DistributorCRUD />
         </div>
-      )}
+      )} */}
 
       <div>
         <OrderCardCRUD />

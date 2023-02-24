@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
+import { FiDelete, FiSave } from "react-icons/fi";
 
 const PaymentInput = ({ p, idx, bill, setBill }) => {
   const [state, setState] = useState({
@@ -17,9 +18,11 @@ const PaymentInput = ({ p, idx, bill, setBill }) => {
       <div
         style={{
           display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
-        <pre>{JSON.stringify(state, null, 2)}</pre>
+        {/* <pre>{JSON.stringify(state, null, 2)}</pre> */}
 
         <input
           placeholder="description"
@@ -27,6 +30,7 @@ const PaymentInput = ({ p, idx, bill, setBill }) => {
           onChange={(e) => {
             setState({ ...state, description: e.target.value });
           }}
+          className="formControl"
         />
         <input
           placeholder="mode"
@@ -34,6 +38,7 @@ const PaymentInput = ({ p, idx, bill, setBill }) => {
           onChange={(e) => {
             setState({ ...state, mode: e.target.value });
           }}
+          className="formControl"
         />
         <input
           placeholder="amount"
@@ -41,26 +46,37 @@ const PaymentInput = ({ p, idx, bill, setBill }) => {
           onChange={(e) => {
             setState({ ...state, amount: e.target.value });
           }}
+          className="formControl"
         />
-        <div>
-          <button
-            onClick={() => {
-              let new_bill = { ...bill };
-              new_bill.payments[idx] = { ...state };
-              setBill(new_bill);
-            }}
-          >
-            Save
-          </button>
-          <button
-            onClick={() => {
-              let new_bill = { ...bill };
-              new_bill.payments.splice(idx, 1);
-              setBill(new_bill);
-            }}
-          >
-            Delete
-          </button>
+        <div
+          onClick={() => {
+            let new_bill = { ...bill };
+            new_bill.payments[idx] = { ...state };
+            setBill(new_bill);
+          }}
+          className="btn1"
+          style={{
+            margin: "0 0 0 .4em",
+            padding: ".4rem 0",
+            width: "20%",
+          }}
+        >
+          <FiSave />
+        </div>
+        <div
+          onClick={() => {
+            let new_bill = { ...bill };
+            new_bill.payments.splice(idx, 1);
+            setBill(new_bill);
+          }}
+          className="btn3"
+          style={{
+            margin: "0 0 0 .4em",
+            padding: ".4rem 0",
+            width: "20%",
+          }}
+        >
+          <FiDelete />
         </div>
       </div>
     </div>

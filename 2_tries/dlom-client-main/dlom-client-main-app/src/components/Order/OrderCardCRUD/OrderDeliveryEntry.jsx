@@ -38,20 +38,39 @@ const OrderDeliveryEntry = ({ state, setState, index }) => {
     <div
       style={{
         display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
-      <pre>{JSON.stringify(entry, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(entry, null, 2)}</pre> */}
       <input
         placeholder="status"
         value={entry.status}
         onChange={(e) => setEntry({ ...entry, status: e.target.value })}
+        className="formControl"
       />
 
-      <button onClick={addEntry}>
+      <button
+        className="btn1"
+        style={{
+          margin: "0 0 0 .4em",
+          padding: ".4rem 0",
+          width: "20%",
+        }}
+        onClick={addEntry}
+      >
         <FiSave />
       </button>
 
-      <button onClick={delEntry}>
+      <button
+        className="btn3"
+        style={{
+          margin: "0 0 0 .4em",
+          padding: ".4rem 0",
+          width: "20%",
+        }}
+        onClick={delEntry}
+      >
         <FiDelete />
       </button>
     </div>

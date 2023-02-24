@@ -39,6 +39,8 @@ const SoTableEntryNew = ({ state, setState, index }) => {
     <div
       style={{
         display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
       {/* <div>
@@ -58,16 +60,34 @@ const SoTableEntryNew = ({ state, setState, index }) => {
               imgString: e.target.value,
             });
           }}
+          placeholder="img url"
+          className="formControl"
         />
       </div>
 
-      <img src={entry.imgString} height={500} width={500} />
+      <img src={entry.imgString} height={100} width={100} />
 
-      <button onClick={addEntry}>
+      <button
+        className="btn1"
+        style={{
+          margin: "0 0 0 .4em",
+          padding: ".4rem 0",
+          width: "20%",
+        }}
+        onClick={addEntry}
+      >
         <FiSave />
       </button>
 
-      <button onClick={delEntry}>
+      <button
+        className="btn3"
+        style={{
+          margin: "0 0 0 .4em",
+          padding: ".4rem 0",
+          width: "20%",
+        }}
+        onClick={delEntry}
+      >
         <FiDelete />
       </button>
     </div>

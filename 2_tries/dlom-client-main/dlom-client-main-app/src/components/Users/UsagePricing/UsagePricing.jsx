@@ -1,15 +1,21 @@
-import React from "react";
-import { useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getBilling, getDlomCli } from "../../../redux/actions/users";
 import { TiArrowLeftThick } from "react-icons/ti";
+import { ThemeContext } from "../../../App";
+import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import { MdExpandMore } from "react-icons/md";
+import PurchaseAccordion from "./PurchaseAccordion";
+import PaymentAccordion from "./PaymentAccordion";
 
 const UsagePricing = () => {
   const dispatch = useDispatch();
+  const tc = useContext(ThemeContext);
   const user = useSelector((state) => state?.auth?.authData?.result);
   const dlomclient = useSelector((state) => state?.dlomclient);
   const billing = useSelector((state) => state?.billing);
+
   const findOpsLeft = (done, cf, allowed) => {
     let leftOps = {
       CliOps: 0,
@@ -110,16 +116,16 @@ const UsagePricing = () => {
       >
         <Link
           to="/users"
-          className="dashboardLink"
+          className="openStylesButton1"
           style={{
             marginRight: "1rem",
-            fontSize: "2em",
-            color: "white",
-            boxShadow:
-              " inset 5px 5px 5px rgba(0,0,0,0.2),inset -5px -5px 15px rgba(255,255,255,0.1), 5px 5px 15px rgba(0,0,0,0.3),  -5px -5px 15px rgba(255,255,255,0.2)",
             borderRadius: ".64rem",
-            padding: ".4rem .6rem",
+            padding: ".6rem",
             cursor: "pointer",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            color: tc.theme === "light" ? "#232427" : "#ebecf0",
           }}
         >
           <TiArrowLeftThick
@@ -129,97 +135,311 @@ const UsagePricing = () => {
             }}
           />
         </Link>
-        <h1>Usage and Pricing</h1>
+        <h2>Usage and Pricing</h2>
       </div>
 
-      <div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          margin: "1rem",
+        }}
+      >
         <h2>Usage</h2>
-        <div>
-          <h3>Curr usage</h3>
-          <pre>{JSON.stringify(dlomclient.tracking, null, 2)}</pre>
-        </div>
 
-        <div>
-          <h3>Quota</h3>
-          <pre>{JSON.stringify(dlomclient.subscription.tracking, null, 2)}</pre>
-        </div>
+        <div
+          style={{
+            margin: ".5rem",
+            marginBottom: "5rem",
+          }}
+          className="css9BasicGrid"
+        >
+          <div className="css1Card">
+            <h3
+              style={{
+                color: "cyan",
+              }}
+            >
+              Current usage
+            </h3>
+            <div>
+              <div>Client Ops : {dlomclient.tracking.CliOps}</div>
+              <div>User Ops : {dlomclient.tracking.UserOps}</div>
+              <div>Product Ops : {dlomclient.tracking.ProdOps}</div>
+              <div>Order Ops : {dlomclient.tracking.OrderOps}</div>
+              <div>Task Ops : {dlomclient.tracking.TaskOps}</div>
+            </div>
+            {/* <pre>{JSON.stringify(dlomclient.tracking, null, 2)}</pre> */}
+          </div>
 
-        <div>
-          <h3>Carry forward</h3>
-          <pre>{JSON.stringify(dlomclient.carryForward, null, 2)}</pre>
-        </div>
+          <div className="css1Card">
+            <h3
+              style={{
+                color: "cyan",
+              }}
+            >
+              Quota
+            </h3>
+            <div>
+              <div>Client Ops : {dlomclient.subscription.tracking.CliOps}</div>
+              <div>User Ops : {dlomclient.subscription.tracking.UserOps}</div>
+              <div>
+                Product Ops : {dlomclient.subscription.tracking.ProdOps}
+              </div>
+              <div>Order Ops : {dlomclient.subscription.tracking.OrderOps}</div>
+              <div>Task Ops : {dlomclient.subscription.tracking.TaskOps}</div>
+            </div>
+            {/* <pre>{JSON.stringify(dlomclient.subscription.tracking, null, 2)}</pre> */}
+          </div>
 
-        <div>
-          <h3>Operations left</h3>
-          CliOps:
-          {
-            findOpsLeft(
-              dlomclient.tracking,
-              dlomclient.carryForward,
-              dlomclient.subscription.tracking
-            ).CliOps
-          }
-          UserOps:
-          {
-            findOpsLeft(
-              dlomclient.tracking,
-              dlomclient.carryForward,
-              dlomclient.subscription.tracking
-            ).UserOps
-          }
-          ProdOps:
-          {
-            findOpsLeft(
-              dlomclient.tracking,
-              dlomclient.carryForward,
-              dlomclient.subscription.tracking
-            ).ProdOps
-          }
-          OrderOps:
-          {
-            findOpsLeft(
-              dlomclient.tracking,
-              dlomclient.carryForward,
-              dlomclient.subscription.tracking
-            ).OrderOps
-          }
-          TaskOps:
-          {
-            findOpsLeft(
-              dlomclient.tracking,
-              dlomclient.carryForward,
-              dlomclient.subscription.tracking
-            ).TaskOps
-          }
-        </div>
+          <div className="css1Card">
+            <h3
+              style={{
+                color: "cyan",
+              }}
+            >
+              Carry forward
+            </h3>
+            <div>
+              <div>Client Ops : {dlomclient.carryForward.CliOps}</div>
+              <div>User Ops : {dlomclient.carryForward.UserOps}</div>
+              <div>Product Ops : {dlomclient.carryForward.ProdOps}</div>
+              <div>Order Ops : {dlomclient.carryForward.OrderOps}</div>
+              <div>Task Ops : {dlomclient.carryForward.TaskOps}</div>
+            </div>
+            {/* <pre>{JSON.stringify(dlomclient.carryForward, null, 2)}</pre> */}
+          </div>
 
+          <div className="css1Card">
+            <h3
+              style={{
+                color: "cyan",
+              }}
+            >
+              Operations left
+            </h3>
+            <div>
+              <div>
+                CliOps:
+                {
+                  findOpsLeft(
+                    dlomclient.tracking,
+                    dlomclient.carryForward,
+                    dlomclient.subscription.tracking
+                  ).CliOps
+                }
+              </div>
+
+              <div>
+                UserOps:
+                {
+                  findOpsLeft(
+                    dlomclient.tracking,
+                    dlomclient.carryForward,
+                    dlomclient.subscription.tracking
+                  ).UserOps
+                }
+              </div>
+              <div>
+                ProdOps:
+                {
+                  findOpsLeft(
+                    dlomclient.tracking,
+                    dlomclient.carryForward,
+                    dlomclient.subscription.tracking
+                  ).ProdOps
+                }
+              </div>
+              <div>
+                OrderOps:
+                {
+                  findOpsLeft(
+                    dlomclient.tracking,
+                    dlomclient.carryForward,
+                    dlomclient.subscription.tracking
+                  ).OrderOps
+                }
+              </div>
+              <div>
+                TaskOps:
+                {
+                  findOpsLeft(
+                    dlomclient.tracking,
+                    dlomclient.carryForward,
+                    dlomclient.subscription.tracking
+                  ).TaskOps
+                }
+              </div>
+            </div>
+          </div>
+
+          {/* <pre>{JSON.stringify(dlomclient, null, 2)}</pre> */}
+          {/* <pre>{JSON.stringify(billing, null, 2)}</pre> */}
+        </div>
         <h2>Pricing</h2>
-        <div>
-          <h3>Current plan</h3>
-          <pre>{JSON.stringify(dlomclient.subscription, null, 2)}</pre>
-        </div>
-
-        <div>
-          <h3>Payment</h3>
-          <div>Purchase History Table</div>
-          {findPurHT()?.map((pht) => (
+        <div
+          style={{
+            margin: ".5rem",
+            marginBottom: "5rem",
+          }}
+          className="css9BasicGrid"
+        >
+          <div
+            className="css1Card"
+            style={{
+              height: "fit-content",
+            }}
+          >
+            <h3
+              style={{
+                color: "cyan",
+              }}
+            >
+              Current plan
+            </h3>
+            <h4>{dlomclient.subscription.name}</h4>
             <div>
-              <pre>{JSON.stringify(pht, null, 2)}</pre>
+              <div>Client Ops : {dlomclient.subscription.tracking.CliOps}</div>
+              <div>User Ops : {dlomclient.subscription.tracking.UserOps}</div>
+              <div>
+                Product Ops : {dlomclient.subscription.tracking.ProdOps}
+              </div>
+              <div>Order Ops : {dlomclient.subscription.tracking.OrderOps}</div>
+              <div>Task Ops : {dlomclient.subscription.tracking.TaskOps}</div>
             </div>
-          ))}
-          <div>Payment History Table</div>
-          {findPayHT()?.map((p) => (
+            <div
+              style={{
+                fontSize: "1.2em",
+                fontWeight: "bold",
+              }}
+            >
+              ₹ {dlomclient.subscription.cost}
+            </div>
             <div>
-              <pre>{JSON.stringify(p, null, 2)}</pre>
+              {dlomclient.status === "active" ? (
+                <span style={{ color: "cyan", fontWeight: "bold" }}>
+                  {dlomclient.status}
+                </span>
+              ) : (
+                <span>{dlomclient.status}</span>
+              )}
             </div>
-          ))}
-          <div>Total Amount: {findBillMetas().tot_amt}</div>
-          <div>Total Amount paid: {findBillMetas().tot_amt_paid}</div>
-          <div>Total Amount left: {findBillMetas().bal}</div>
-        </div>
+            <div className="tag">Description</div>
+            <div className="info">{dlomclient.subscription.description}</div>
+            {/* <pre>{JSON.stringify(dlomclient.subscription, null, 2)}</pre> */}
+          </div>
 
-        {/* <pre>{JSON.stringify(dlomclient, null, 2)}</pre> */}
-        {/* <pre>{JSON.stringify(billing, null, 2)}</pre> */}
+          <div className="css1Card">
+            <h3
+              style={{
+                color: "cyan",
+              }}
+            >
+              Payments
+            </h3>
+            {/* <PurchaseAccordion data={findPurHT()} tc={tc} /> */}
+            {/* <PaymentAccordion data={findPayHT()} tc={tc} /> */}
+            <div
+              style={{
+                fontSize: "1.1em",
+                fontWeight: "bold",
+              }}
+            >
+              Purchase History
+            </div>
+            {findPurHT()?.map((p) => (
+              <div
+                className="css1Card"
+                style={{
+                  overflowX: "scroll",
+                }}
+              >
+                <div className="tag">Bill ID</div>
+                <div
+                  className="info"
+                  style={{
+                    overflowX: "scroll",
+                  }}
+                >
+                  {p.bill_id}
+                </div>
+                <div className="tag">Date</div>
+                <div className="info">{p.date}</div>
+
+                <div className="tag">Subscription Name</div>
+                <div className="info">{p.subscription_name}</div>
+
+                <div className="tag">Subscription Description</div>
+                <div className="info">{p.subscription_desc}</div>
+
+                <div className="tag">Cost</div>
+                <div className="info">
+                  <div>Before tax : {p.cost_bef_tax}</div>
+                  <div>Tax :{p.tax} </div>
+                  <div>After tax : {p.cost_after_tax}</div>
+                </div>
+
+                {/* {<pre>{JSON.stringify(p, null, 2)}</pre>} */}
+              </div>
+            ))}
+            <div
+              style={{
+                fontSize: "1.1em",
+                fontWeight: "bold",
+              }}
+            >
+              Payments History
+            </div>
+            {findPayHT()?.map((p) => (
+              <div
+                className="css1Card"
+                style={{
+                  marginBottom: "1rem",
+                  overflowX: "scroll",
+                }}
+              >
+                <div>Bill ID : {p.bill_id}</div>
+                <div>Date : {p.date}</div>
+                <div>Time : {p.time}</div>
+                <div>Description : {p.description}</div>
+                <div>Mode : {p.mode}</div>
+                <div style={{ fontSize: "1.1em", fontWeight: "bold" }}>
+                  ₹{p.amount}
+                </div>
+
+                {/* {<pre>{JSON.stringify(p, null, 2)}</pre>} */}
+              </div>
+            ))}
+
+            <div className="FlexBetween">
+              <div
+                style={{
+                  fontWeight: "bold",
+                }}
+              >
+                Total
+                <div>₹{findBillMetas().tot_amt}</div>
+              </div>
+
+              <div
+                style={{
+                  color: "cyan",
+                  fontWeight: "bold",
+                }}
+              >
+                Paid <div>₹{findBillMetas().tot_amt_paid}</div>
+              </div>
+              <div
+                style={{
+                  color: "rgba(200,77,0)",
+                  fontWeight: "bold",
+                }}
+              >
+                Balance <div>₹{findBillMetas().bal}</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );

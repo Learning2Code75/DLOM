@@ -28,25 +28,45 @@ const ClientSocialMediaInput = ({ state, setState, index, isUpdate }) => {
     <div
       style={{
         display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
-      <pre>{JSON.stringify(cli, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(cli, null, 2)}</pre> */}
       <input
         placeholder="title"
         value={cli.title}
         onChange={(e) => setCli({ ...cli, title: e.target.value })}
+        className="formControl"
       />
 
       <input
         placeholder="link"
         value={cli.link}
         onChange={(e) => setCli({ ...cli, link: e.target.value })}
+        className="formControl"
       />
 
-      <button onClick={addClientInput}>
+      <button
+        onClick={addClientInput}
+        className="btn1"
+        style={{
+          margin: "0 0 0 .4em",
+          padding: ".4rem 0",
+          width: "20%",
+        }}
+      >
         <FiSave />
       </button>
-      <button onClick={delClientInput}>
+      <button
+        onClick={delClientInput}
+        className="btn3"
+        style={{
+          margin: "0 0 0 .4em",
+          padding: ".4rem 0",
+          width: "20%",
+        }}
+      >
         <FiDelete />
       </button>
     </div>

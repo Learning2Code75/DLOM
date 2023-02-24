@@ -28,6 +28,7 @@ import { useSelector } from "react-redux";
 import UsagePricing from "./components/Users/UsagePricing/UsagePricing";
 import Orders from "./components/Order/Orders";
 import { createContext, useState } from "react";
+import DistributorCRUD from "./components/Order/DistributorCRUD/DistributorCRUD";
 const cache = new InMemoryCache({
   typePolicies: {
     Query: {
@@ -89,23 +90,25 @@ function App() {
                     user?.userRole === "root") && (
                     <>
                       <Route
-                        path="/users"
-                        element={user?._id ? <Users /> : <Auth />}
-                      />
-                      <Route
                         path="users/userManage"
                         element={user?._id ? <UserManage /> : <Auth />}
                       />
-                      <Route
-                        path="users/userTaskboard"
-                        element={user?._id ? <UserTaskboard /> : <Auth />}
-                      />
+
                       <Route
                         path="users/usagePricing"
                         element={user?._id ? <UsagePricing /> : <Auth />}
                       />
                     </>
                   )}
+
+                  <Route
+                    path="/users"
+                    element={user?._id ? <Users /> : <Auth />}
+                  />
+                  <Route
+                    path="users/userTaskboard"
+                    element={user?._id ? <UserTaskboard /> : <Auth />}
+                  />
 
                   {/* <Route path="/orders/:id" element={<OrderI />} /> */}
 
@@ -142,6 +145,10 @@ function App() {
                   <Route
                     path="/order"
                     element={user?._id ? <Order /> : <Auth />}
+                  />
+                  <Route
+                    path="/orderdistribdetails"
+                    element={user?._id ? <DistributorCRUD /> : <Auth />}
                   />
                   {(user?.userRole === "manager" ||
                     user?.userRole === "root") && (

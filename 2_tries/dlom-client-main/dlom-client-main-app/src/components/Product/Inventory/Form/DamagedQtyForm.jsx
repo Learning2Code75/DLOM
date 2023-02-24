@@ -1,13 +1,25 @@
-import React, { useEffect, useState } from "react";
+import { Dialog, IconButton, useMediaQuery, useTheme } from "@mui/material";
+import React, { useContext, useEffect, useState } from "react";
+import { GrClose } from "react-icons/gr";
 import { useDispatch, useSelector } from "react-redux";
+import { ThemeContext } from "../../../../App";
 import { createProductlog } from "../../../../redux/actions/productlogs";
 import {
   createProduct,
   updateProduct,
 } from "../../../../redux/actions/products";
 
-const DamagedQtyForm = ({ curProdId, setCurProdId }) => {
+const DamagedQtyForm = ({
+  curProdId,
+  setCurProdId,
+  openDialog,
+  setOpenDialog,
+}) => {
   const dispatch = useDispatch();
+  const theme = useTheme();
+  const tc = useContext(ThemeContext);
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
+
   const prodToUpdate = useSelector((state) =>
     curProdId ? state.products.find((p) => p._id === curProdId) : null
   );
@@ -30,7 +42,7 @@ const DamagedQtyForm = ({ curProdId, setCurProdId }) => {
 
   useEffect(() => {
     if (prodToUpdate) {
-      console.log(prodToUpdate);
+      // console.log(prodToUpdate);
       setProductData(prodToUpdate);
     }
   }, [prodToUpdate]);
@@ -67,7 +79,7 @@ const DamagedQtyForm = ({ curProdId, setCurProdId }) => {
       title: pd.title,
       desc: pd.desc,
     }));
-    console.log(new_prod);
+    // console.log(new_prod);
     dispatch(createProduct(new_prod));
     let new_prod_log = {
       product: { _id: curProdId },
@@ -77,21 +89,53 @@ const DamagedQtyForm = ({ curProdId, setCurProdId }) => {
     };
     dispatch(createProductlog(new_prod_log));
     clear();
+    setOpenDialog(false);
   };
   return (
     <>
-      <form autoComplete="off" noValidate onSubmit={handleSubmit}>
-        <h2>Mark Damaged</h2>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            margin: "0 auto",
-            maxWidth: "85vw",
-            gridGap: ".5rem",
-          }}
-        >
-          <div>ProdSKU</div>
+      <Dialog
+        open={openDialog}
+        fullWidth={true}
+        fullScreen={fullScreen}
+        // maxWidth={}
+        onClose={(e, r) => {
+          if (r === "backdropClick") {
+            clear();
+            setOpenDialog(!openDialog);
+          } else {
+            clear();
+            setOpenDialog(!openDialog);
+          }
+        }}
+        // PaperComponent={<PaperC />}
+        PaperProps={{
+          sx: {
+            borderRadius: "1rem",
+            background: tc.theme === "light" ? "#ebecf0" : "#232427",
+            color: tc.theme === "light" ? "#1c1c1c" : "#ebecf0",
+          },
+        }}
+        scroll={"body"}
+        id={tc.theme}
+      >
+        <form autoComplete="off" className="css5Form" noValidate>
+          <div className="FlexBetween">
+            <h2>Mark Damaged</h2>
+            <IconButton
+              onClick={() => {
+                setOpenDialog(false);
+                clear();
+              }}
+              style={{
+                background: tc.theme === "dark" ? "lightgrey" : "transparent",
+                padding: ".25rem",
+              }}
+            >
+              <GrClose />
+            </IconButton>
+          </div>
+
+          <div className="formLabel">ProdSKU</div>
           <input
             name="prodSKU"
             value={productData.prodSKU}
@@ -99,8 +143,9 @@ const DamagedQtyForm = ({ curProdId, setCurProdId }) => {
               setProductData({ ...productData, prodSKU: e.target.value })
             }
             disabled={true}
+            className="formControl"
           />
-          <div>Product Name</div>
+          <div className="formLabel">Product Name</div>
           <input
             name="prodName"
             value={productData.prodName}
@@ -108,16 +153,18 @@ const DamagedQtyForm = ({ curProdId, setCurProdId }) => {
               setProductData({ ...productData, prodName: e.target.value })
             }
             disabled={true}
+            className="formControl"
           />
 
-          <div>Qty</div>
+          <div className="formLabel">Qty</div>
           <input
             name="prodName"
             value={damagedQty}
             onChange={(e) => setDamagedQty(e.target.value)}
+            className="formControl"
           />
 
-          <div>Reason for marking damaged</div>
+          <div className="formLabel">Reason for marking damaged</div>
           <input
             name="damagedDescription"
             type="text"
@@ -128,19 +175,23 @@ const DamagedQtyForm = ({ curProdId, setCurProdId }) => {
                 damagedDescription: e.target.value,
               });
             }}
+            placeholder="reason"
+            className="formControl"
           />
-        </div>
 
-        <button type="submit">Submit</button>
-        <button onClick={clear}>Clear</button>
-      </form>
-      <pre
+          <div className="btn2" onClick={handleSubmit}>
+            Submit
+          </div>
+          {/* <button onClick={clear}>Clear</button> */}
+        </form>
+      </Dialog>
+      {/* <pre
         style={{
           overflow: "hidden",
         }}
       >
         {JSON.stringify(productData, null, 4)}
-      </pre>
+      </pre> */}
     </>
   );
 };

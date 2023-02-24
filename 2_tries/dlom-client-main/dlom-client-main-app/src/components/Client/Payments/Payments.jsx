@@ -1,14 +1,16 @@
 import { useQuery } from "@apollo/client";
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { GET_CLIENTS } from "../../../queries/dlomClientQueries";
 import { GET_ORDERS } from "../../../queries/dlomOrderQueries";
 import Spinner from "../../Spinner";
 import PaymentCSV from "./PaymentCSV";
 import { TiArrowLeftThick } from "react-icons/ti";
+import { ThemeContext } from "../../../App";
 
 const Payments = () => {
   const { loading, error, data } = useQuery(GET_ORDERS);
+  const tc = useContext(ThemeContext);
   const {
     loading: loading1,
     error: error1,
@@ -35,16 +37,16 @@ const Payments = () => {
       >
         <Link
           to="/client"
-          className="dashboardLink"
+          className="openStylesButton1"
           style={{
             marginRight: "1rem",
-            fontSize: "2em",
-            color: "white",
-            boxShadow:
-              " inset 5px 5px 5px rgba(0,0,0,0.2),inset -5px -5px 15px rgba(255,255,255,0.1), 5px 5px 15px rgba(0,0,0,0.3),  -5px -5px 15px rgba(255,255,255,0.2)",
             borderRadius: ".64rem",
-            padding: ".4rem .6rem",
+            padding: ".6rem",
             cursor: "pointer",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            color: tc.theme === "light" ? "#232427" : "#ebecf0",
           }}
         >
           <TiArrowLeftThick
@@ -54,7 +56,7 @@ const Payments = () => {
             }}
           />
         </Link>
-        <h1>Payments</h1>
+        <h2>Payments</h2>
       </div>
       <PaymentCSV orderData={data} clientData={data1} />
     </div>

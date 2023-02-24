@@ -33,7 +33,7 @@ const dashboardArr = [
     desc: ` Clients module enables the distributor to create and manage client details including company name , contact person ,  address, GST number, phone number, discount rate , sales person  assigned and social media links.`,
     link: "/users",
     linkText: "Users",
-    allowedUsers: ["root", "manager"],
+    allowedUsers: ["root", "manager", "finance", "warehouse", "salesperson"],
   },
 ];
 const Dashboard = () => {

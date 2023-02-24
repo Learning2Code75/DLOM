@@ -2,7 +2,13 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteUser } from "../../../redux/actions/users";
 
-const ViewUsers = ({ setIsUpdate, setState, currUser, setCurrUser }) => {
+const ViewUsers = ({
+  setIsUpdate,
+  setState,
+  currUser,
+  setCurrUser,
+  setOpenDialog,
+}) => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users);
 
@@ -15,27 +21,15 @@ const ViewUsers = ({ setIsUpdate, setState, currUser, setCurrUser }) => {
     <>
       <div
         style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gridGap: "10px",
-          margin: "0 auto",
-          maxWidth: "95vw",
-          marginBottom: "2rem",
+          margin: ".5rem",
+          marginBottom: "5rem",
         }}
+        className="css9BasicGrid"
       >
         {users?.map((u) => (
-          <div
-            style={{
-              border: "1px solid lightgrey",
-              padding: ".3rem",
-              borderRadius: ".3rem",
-              overflowY: "scroll",
-            }}
-            key={u._id}
-          >
-            <pre>{JSON.stringify(u, null, 2)}</pre>
-            <div>
-              <button
+          <div className="css1Card" key={u._id}>
+            <div className="FlexBetween">
+              <div
                 onClick={() => {
                   setCurrUser(u);
                   setIsUpdate(true);
@@ -49,12 +43,29 @@ const ViewUsers = ({ setIsUpdate, setState, currUser, setCurrUser }) => {
                   new_state.cpassword = "";
 
                   setState(new_state);
+                  setOpenDialog(true);
                 }}
+                className="css1Btn"
               >
                 Edit
-              </button>
-              <button onClick={(e) => delUser(e, u._id)}>Delete</button>
+              </div>
+              <div onClick={(e) => delUser(e, u._id)} className="css1Btn">
+                Delete
+              </div>
             </div>
+
+            <div className="css1ContentBx">
+              <div className="css9BasicGrid1">
+                <div className="tag">Name</div>
+                <div className="info">{u.name}</div>
+                <div className="tag">Email</div>
+                <div className="info">{u.email}</div>
+                <div className="tag">Role</div>
+                <div className="info">{u.userRole}</div>
+              </div>
+            </div>
+
+            {/* <pre>{JSON.stringify(u, null, 2)}</pre> */}
           </div>
         ))}
       </div>

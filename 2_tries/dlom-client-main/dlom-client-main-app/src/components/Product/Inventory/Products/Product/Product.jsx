@@ -2,117 +2,140 @@ import React from "react";
 import moment from "moment";
 import { useDispatch } from "react-redux";
 import { deleteProduct } from "../../../../../redux/actions/products";
-const Product = ({ p, setCurProdId, setProdLog }) => {
+const Product = ({
+  p,
+  setCurProdId,
+  setProdLog,
+  setAddQtyDialog,
+  setSubQtyDialog,
+  setUpdateQtyDialog,
+  setDamagedQtyDialog,
+}) => {
   const dispatch = useDispatch();
   return (
     <>
       <div
-        style={{
-          padding: "1em",
-          borderRadius: "1rem",
-          background: "rgba(0,0,0,0.89)",
-          color: "#f0f0f0",
-        }}
+      // style={{
+      //   padding: "1em",
+      //   borderRadius: "1rem",
+      //   background: "rgba(0,0,0,0.89)",
+      //   color: "#f0f0f0",
+      // }}
       >
-        <div>SKU:{p.prodSKU}</div>
-        <div
-          style={{
-            overflow: "contain",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <img width={350} height={350} src={p.prodImgUrl} />
-        </div>
-        <div>Name : {p.prodName}</div>
-        <div>Unit Rate : {p.productUnitRate}</div>
-        <div>Tax : {p.prodTax}</div>
-        <div>Qty : {p.qty}</div>
-        <div>Category : {p.category}</div>
-        <div>Discount : {p.discount}</div>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "column",
-          }}
-        >
-          {p.prodDesc.map((pd) => (
+        {p.damaged === "normal" && (
+          <>
+            <div className="FlexBetween">
+              <div
+                className="css1Btn"
+                onClick={() => {
+                  setCurProdId(p._id);
+                  setProdLog("addQty");
+                  setAddQtyDialog(true);
+                }}
+              >
+                Add Qty
+              </div>
+              <div
+                className="css1Btn"
+                onClick={() => {
+                  setCurProdId(p._id);
+                  setProdLog("subQty");
+                  setSubQtyDialog(true);
+                }}
+              >
+                Reduce Qty
+              </div>
+            </div>
             <div
+              className="FlexBetween"
               style={{
-                display: "flex",
-                justifyContent: "space-around",
-                alignItems: "center",
-                width: "100%",
-                borderBottom: "1px solid lightgrey",
+                margin: "1em 0",
               }}
             >
-              <h6>{pd.title}</h6>
-              <p>{pd.desc}</p>
+              <div
+                className="css1Btn"
+                onClick={() => {
+                  setCurProdId(p._id);
+                  setProdLog("updateQty");
+                  setUpdateQtyDialog(true);
+                }}
+              >
+                Update Qty
+              </div>
+              <div
+                className="css1Btn"
+                onClick={() => {
+                  setCurProdId(p._id);
+                  setProdLog("markDamaged");
+                  setDamagedQtyDialog(true);
+                }}
+              >
+                Mark Damaged
+              </div>
             </div>
-          ))}
+          </>
+        )}
+        <div className="css1ContentBx">
+          <div className="css1ImgBx">
+            <img
+              style={{
+                borderRadius: ".5em",
+              }}
+              src={p.prodImgUrl}
+            />
+          </div>
+          <div className="tag">SKU</div>
+          <div className="info">{p.prodSKU}</div>
+
+          <div className="tag">Name</div>
+          <div className="info">{p.prodName}</div>
+          <div className="tag">Unit Rate</div>
+          <div className="info">{p.productUnitRate}</div>
+          <div className="tag">Tax</div>
+          <div className="info">{p.prodTax}%</div>
+          <div className="tag">Qty</div>
+          <div className="info">{p.qty}</div>
+
+          <div className="tag">Category</div>
+          <div className="info">{p.category}</div>
+          <div className="tag">Discount</div>
+          <div className="info">{p.discount}</div>
+
+          <div className="tag">Description</div>
+          <div className="info">
+            {p.prodDesc.map((pd) => (
+              <div>
+                <h6>{pd.title}</h6>
+                <p>{pd.desc}</p>
+              </div>
+            ))}
+          </div>
+          <div className="tag">Created</div>
+          <div className="info">{moment(p.createdAt).fromNow()}</div>
         </div>
-        <div>Created at : {moment(p.createdAt).fromNow()}</div>
 
         {/* <button onClick={() => setCurProdId(p._id)}>Update</button> */}
         {p.damaged === "damaged" && (
-          <button onClick={() => dispatch(deleteProduct(p._id))}>Delete</button>
-        )}
-        {p.damaged === "normal" && (
-          <div
-            style={{
-              display: "flex",
-            }}
-          >
-            <button
-              className="btn"
-              onClick={() => {
-                setCurProdId(p._id);
-                setProdLog("addQty");
-              }}
+          <>
+            <div className="tag">Damaged Description</div>
+            <div className="info">{p.damagedDescription}</div>
+            <div
+              className="btn3"
+              onClick={() => dispatch(deleteProduct(p._id))}
             >
-              Add Qty
-            </button>
-            <button
-              className="btn"
-              onClick={() => {
-                setCurProdId(p._id);
-                setProdLog("subQty");
-              }}
-            >
-              Reduce Qty
-            </button>
-
-            <button
-              className="btn"
-              onClick={() => {
-                setCurProdId(p._id);
-                setProdLog("updateQty");
-              }}
-            >
-              Update Qty
-            </button>
-            <button
-              className="btn"
-              onClick={() => {
-                setCurProdId(p._id);
-                setProdLog("markDamaged");
-              }}
-            >
-              Mark Damaged
-            </button>
-          </div>
+              Delete
+            </div>
+          </>
         )}
       </div>
 
-      <pre
+      {/* <pre
         style={{
           overflow: "hidden",
         }}
       >
         {JSON.stringify(p, null, 2)}
-      </pre>
+      </pre> */}
     </>
   );
 };

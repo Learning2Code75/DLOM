@@ -18,209 +18,25 @@ import OrderPaymentEntry from "./OrderPaymentEntry";
 import { useDispatch, useSelector } from "react-redux";
 import { createOrderlog } from "../../../redux/actions/orderlogs";
 import { createOp } from "../../../redux/actions/users";
+import { Dialog, IconButton, useMediaQuery, useTheme } from "@mui/material";
+import { GrClose } from "react-icons/gr";
+import { useContext } from "react";
+import { ThemeContext } from "../../../App";
 
 const OrderCardCRUD = () => {
   const dispatch = useDispatch();
+  const theme = useTheme();
+  const tc = useContext(ThemeContext);
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
+
   const user = useSelector((state) => state?.auth?.authData?.result);
-  // const [state, setState] = useState({
-  //   id: "",
-  //   clientId: "636672f7d649e0c2f9cc53e9",
-  //   salesperson: "sp1",
-  //   salesOrder: {
-  //     distributorName: "dname1",
-  //     distributorDetails: "daddr dno",
-  //     voucherNo: "vno1",
-  //     dated: "2022-12-02",
-  //     modeTermsOfPayment: "cash",
-  //     buyerRefOrderNo: "bron123",
-  //     otherRef: "or123",
-  //     invoiceTo: "buyer1",
-  //     despatchThrough: "fed x",
-  //     destination: "Kolkata",
-  //     termsOfDelivery: "30 day payment",
-  //     soTable: [
-  //       {
-  //         siNo: 1,
-  //         descriptionOfGoods: "prod1",
-  //         dueOn: "2022-12-20",
-  //         qty: 2,
-  //         rate: "500",
-  //         per: "unit",
-  //         amount: "1000",
-  //       },
-  //       {
-  //         siNo: 2,
-  //         descriptionOfGoods: "prod2",
-  //         dueOn: "2022-12-20",
-  //         qty: 2,
-  //         rate: "1000",
-  //         per: "unit",
-  //         amount: "2000",
-  //       },
-  //       {
-  //         siNo: 3,
-  //         descriptionOfGoods: "prod3",
-  //         dueOn: "2022-12-20",
-  //         qty: 1,
-  //         rate: "100",
-  //         per: "unit",
-  //         amount: "100",
-  //       },
-  //     ],
-  //     totalQty: 5,
-  //     totalAmt: "3100",
-  //     amtInWords: "Three Thousand One Hundred Only",
-  //   },
-  //   invoice: {
-  //     distributorName: "dname1",
-  //     distributorDetails: "daddr dno",
-  //     invoiceNo: "inv1",
-  //     dated: "2/12/22",
-  //     deliveryNote: "del note1",
-  //     supplierRef: "sr1",
-  //     otherRef: "or1",
-  //     client: "cli1",
-  //     despatchDocNo: "ddoc1",
-  //     deliveryNoteDate: "13/12/22",
-  //     despatchedThrough: "fed x",
-  //     destination: "Kolkata",
-  //     invTable: [
-  //       {
-  //         siNo: 1,
-  //         descriptionOfGoods: "prod1",
-  //         hsnSAC: "1243",
-  //         GSTRate: "18",
-  //         qty: 2,
-  //         rate: "500",
-  //         per: "unit",
-  //         amount: "1000",
-  //       },
-  //       {
-  //         siNo: 2,
-  //         descriptionOfGoods: "prod2",
-  //         hsnSAC: "1243",
-  //         GSTRate: "18",
-  //         qty: 2,
-  //         rate: "1000",
-  //         per: "unit",
-  //         amount: "2000",
-  //       },
-  //       {
-  //         siNo: 3,
-  //         descriptionOfGoods: "prod3",
-  //         hsnSAC: "1244",
-  //         GSTRate: "18",
-  //         qty: 1,
-  //         rate: "100",
-  //         per: "unit",
-  //         amount: "100",
-  //       },
-  //     ],
-  //     totalQty: 4,
-  //     totalAmount: "3100",
-  //     amtChargableInWords: "Three Thousand Only",
-  //     invTaxTable: [
-  //       {
-  //         hsnSAC: "1243",
-  //         taxableValue: "3000",
-  //         centralTaxRate: "9",
-  //         centralTaxAmt: "270",
-  //         stateTaxRate: "9",
-  //         stateTaxAmt: "270",
-  //       },
-  //       {
-  //         hsnSAC: "1244",
-  //         taxableValue: "100",
-  //         centralTaxRate: "9",
-  //         centralTaxAmt: "9",
-  //         stateTaxRate: "9",
-  //         stateTaxAmt: "9",
-  //       },
-  //     ],
-  //     totalTaxableValue: "3100",
-  //     totalCentralTaxAmt: "279",
-  //     totalStateTaxAmt: "279",
-  //     taxAmtInWords: "Two Hundred and Seventy Nine Only",
-  //     companyPAN: "123456789",
-  //     companyBankDetails: {
-  //       bankName: "bank1",
-  //       acNo: "321564798",
-  //       BranchIFSCode: "bk12354",
-  //     },
-  //     for: "dname1",
-  //   },
-  //   wareHouseReceipt: [
-  //     {
-  //       imgString: "https://daf.adsa.com",
-  //     },
-  //   ],
-  //   salesReceipt: {
-  //     distributorName: "dname1",
-  //     distributorDetails: "daddr dno",
-  //     soldBy: "dname 1",
-  //     date: "4/12/22",
-  //     name: "company1",
-  //     address: "addr1",
-  //     mode: "cash",
-  //     srTable: [
-  //       {
-  //         qty: 2,
-  //         details: "prod1",
-  //         price: "500",
-  //         amount: "1000",
-  //       },
-  //       {
-  //         qty: 2,
-  //         details: "prod2",
-  //         price: "1000",
-  //         amount: "2000",
-  //       },
-  //       {
-  //         qty: 1,
-  //         details: "prod3",
-  //         price: "100",
-  //         amount: "100",
-  //       },
-  //     ],
-  //   },
-  //   orderDelivery: {
-  //     history: [
-  //       {
-  //         timeStamp: "time1",
-  //         status: "Ordered",
-  //       },
-  //       {
-  //         timeStamp: "time2",
-  //         status: "Dispatched",
-  //       },
-  //       {
-  //         timeStamp: "time3",
-  //         status: "Delivered",
-  //       },
-  //     ],
-  //   },
-  //   orderCancel: {
-  //     timeStamp: "",
-  //     state: "",
-  //     desc: "",
-  //   },
-  //   orderPayment: {
-  //     history: [
-  //       {
-  //         timeStamp: "time1",
-  //         amount: "2000",
-  //         method: "cash",
-  //         description: "payment 1",
-  //       },
-  //       {
-  //         timeStamp: "time2",
-  //         amount: "1379",
-  //         method: "cash",
-  //         description: "payment 2",
-  //       },
-  //     ],
-  //   },
-  // });
+  const [openDialog, setOpenDialog] = useState(false);
+  const [invDialog, setInvDialog] = useState(false);
+  const [srDialog, setSrDialog] = useState(false);
+  const [wrDialog, setWrDialog] = useState(false);
+  const [paymentDialog, setPaymentDialog] = useState(false);
+  const [deliveryDialog, setDeliveryDialog] = useState(false);
+  const [cancelDialog, setCancelDialog] = useState(false);
 
   const [state, setState] = useState({
     id: "",
@@ -388,6 +204,7 @@ const OrderCardCRUD = () => {
       state.orderCancel,
       state.orderPayment
     );
+    setOpenDialog(false);
   };
 
   const updateOrderSubmit = (e) => {
@@ -404,6 +221,7 @@ const OrderCardCRUD = () => {
       state.orderCancel,
       state.orderPayment
     );
+    setOpenDialog(false);
   };
 
   const calcSalesOrderFields = (soTable) => {
@@ -497,6 +315,7 @@ const OrderCardCRUD = () => {
         history: [],
       },
     });
+    setIsUpdate(false);
   };
 
   useEffect(() => {
@@ -553,144 +372,198 @@ const OrderCardCRUD = () => {
 
   return (
     <div>
-      <h1> OrderCard CRUD</h1>
+      <h2> Order Card </h2>
       {/* {console.log(distribDetails)} */}
-      <div>
-        <form>
-          <div className="formLabel">Client name</div>
-          <select
-            value={state.clientId}
-            onChange={(e) => setState({ ...state, clientId: e.target.value })}
-            className="formControl"
-            id="clientid"
-          >
-            <option value="--">Select client</option>
-            {clientIds?.data?.clients?.map((cid) => (
-              <option value={cid.id}>
-                {cid.companyName}: {cid.contactPersonName}
-              </option>
-            ))}
+      <div className="dialogOpenContainer">
+        <div className="openStylesButton1" onClick={() => setOpenDialog(true)}>
+          Create Order
+        </div>
+      </div>
+      <Dialog
+        open={openDialog}
+        fullWidth={true}
+        fullScreen={fullScreen}
+        // maxWidth={}
+        onClose={(e, r) => {
+          if (r === "backdropClick") {
+            clearState();
+            setOpenDialog(!openDialog);
+          } else {
+            clearState();
+            setOpenDialog(!openDialog);
+          }
+        }}
+        // PaperComponent={<PaperC />}
+        PaperProps={{
+          sx: {
+            borderRadius: "1rem",
+            background: tc.theme === "light" ? "#ebecf0" : "#232427",
+            color: tc.theme === "light" ? "#1c1c1c" : "#ebecf0",
+          },
+        }}
+        scroll={"body"}
+        id={tc.theme}
+      >
+        <div>
+          <form className="css5Form">
+            <div className="FlexBetween">
+              <h2>{isUpdate ? "Update" : "Add"} Order</h2>
+              <IconButton
+                onClick={() => {
+                  setOpenDialog(false);
+                  clearState();
+                }}
+                style={{
+                  background: tc.theme === "dark" ? "lightgrey" : "transparent",
+                  padding: ".25rem",
+                }}
+              >
+                <GrClose />
+              </IconButton>
+            </div>
 
-            {/* <option value="636672f7d649e0c2f9cc53e9">com1 : cp1</option>
+            <div className="formLabel">Client name</div>
+            <select
+              value={state.clientId}
+              onChange={(e) => setState({ ...state, clientId: e.target.value })}
+              className="btn1"
+              id="clientid"
+            >
+              <option value="--">Select client</option>
+              {clientIds?.data?.clients?.map((cid) => (
+                <option value={cid.id}>
+                  {cid.companyName}: {cid.contactPersonName}
+                </option>
+              ))}
+
+              {/* <option value="636672f7d649e0c2f9cc53e9">com1 : cp1</option>
             <option value="63667316d649e0c2f9cc53ed">com2 : cp2</option> */}
-          </select>
+            </select>
 
-          <div className="formLabel">salesperson</div>
-          <input
-            type="text"
-            value={state.salesperson}
-            onChange={(e) =>
-              setState({ ...state, salesperson: e.target.value })
-            }
-            id="salesperson"
-            className="formControl"
-          />
+            <div className="formLabel">salesperson</div>
+            <input
+              type="text"
+              value={state.salesperson}
+              onChange={(e) =>
+                setState({ ...state, salesperson: e.target.value })
+              }
+              id="salesperson"
+              placeholder="salesperson"
+              className="formControl"
+            />
 
-          <div>
-            <h2>Sales Order</h2>
-          </div>
+            <div>
+              <h2>Sales Order</h2>
+            </div>
 
-          <div className="formLabel">Distributor name</div>
-          <input
-            type="text"
-            value={state.salesOrder.distributorName}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.salesOrder.distributorName = e.target.value;
-              setState(new_state);
-            }}
-            id="soDistributorName"
-            className="formControl"
-          />
+            <div className="formLabel">Distributor name</div>
+            <input
+              type="text"
+              value={state.salesOrder.distributorName}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.salesOrder.distributorName = e.target.value;
+                setState(new_state);
+              }}
+              placeholder="distributor name"
+              id="soDistributorName"
+              className="formControl"
+            />
 
-          <div className="formLabel">Distributor details</div>
-          <input
-            type="text"
-            value={state.salesOrder.distributorDetails}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.salesOrder.distributorDetails = e.target.value;
-              setState(new_state);
-            }}
-            id="soDistributorDetails"
-            className="formControl"
-          />
+            <div className="formLabel">Distributor details</div>
+            <input
+              type="text"
+              value={state.salesOrder.distributorDetails}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.salesOrder.distributorDetails = e.target.value;
+                setState(new_state);
+              }}
+              placeholder="distributor details"
+              id="soDistributorDetails"
+              className="formControl"
+            />
 
-          <div className="formLabel">Voucher No.</div>
-          <input
-            type="text"
-            value={state.salesOrder.voucherNo}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.salesOrder.voucherNo = e.target.value;
-              setState(new_state);
-            }}
-            id="soVoucherNo"
-            className="formControl"
-          />
+            <div className="formLabel">Voucher No.</div>
+            <input
+              type="text"
+              value={state.salesOrder.voucherNo}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.salesOrder.voucherNo = e.target.value;
+                setState(new_state);
+              }}
+              id="soVoucherNo"
+              placeholder="voucher no."
+              className="formControl"
+            />
 
-          <div className="formLabel">Dated</div>
-          <input
-            type="date"
-            value={state.salesOrder.dated}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.salesOrder.dated = e.target.value;
-              setState(new_state);
-            }}
-            id="soDated"
-            className="formControl"
-          />
-          <div className="formLabel">Mode/Terms of Payment</div>
-          <input
-            type="text"
-            value={state.salesOrder.modeTermsOfPayment}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.salesOrder.modeTermsOfPayment = e.target.value;
-              setState(new_state);
-            }}
-            id="soModeTermsOfPayment"
-            className="formControl"
-          />
-          <div className="formLabel">Buyer Ref/ Order No.</div>
-          <input
-            type="text"
-            value={state.salesOrder.buyerRefOrderNo}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.salesOrder.buyerRefOrderNo = e.target.value;
-              setState(new_state);
-            }}
-            id="soBuyerRefOrderNo"
-            className="formControl"
-          />
-          <div className="formLabel">Other Ref</div>
-          <input
-            type="text"
-            value={state.salesOrder.otherRef}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.salesOrder.otherRef = e.target.value;
-              setState(new_state);
-            }}
-            id="soOtherRef"
-            className="formControl"
-          />
-          <div className="formLabel">Invoice To</div>
-          <input
-            type="text"
-            value={state.salesOrder.invoiceTo}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.salesOrder.invoiceTo = e.target.value;
-              setState(new_state);
-            }}
-            id="soInvoiceTo"
-            className="formControl"
-          />
+            <div className="formLabel">Dated</div>
+            <input
+              type="date"
+              value={state.salesOrder.dated}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.salesOrder.dated = e.target.value;
+                setState(new_state);
+              }}
+              id="soDated"
+              className="formControl"
+            />
+            <div className="formLabel">Mode/Terms of Payment</div>
+            <input
+              type="text"
+              value={state.salesOrder.modeTermsOfPayment}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.salesOrder.modeTermsOfPayment = e.target.value;
+                setState(new_state);
+              }}
+              placeholder="mode/terms of payment"
+              id="soModeTermsOfPayment"
+              className="formControl"
+            />
+            <div className="formLabel">Buyer Ref/ Order No.</div>
+            <input
+              type="text"
+              value={state.salesOrder.buyerRefOrderNo}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.salesOrder.buyerRefOrderNo = e.target.value;
+                setState(new_state);
+              }}
+              id="soBuyerRefOrderNo"
+              placeholder="buyer ref/ orderno."
+              className="formControl"
+            />
+            <div className="formLabel">Other Ref</div>
+            <input
+              type="text"
+              value={state.salesOrder.otherRef}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.salesOrder.otherRef = e.target.value;
+                setState(new_state);
+              }}
+              placeholder="other ref"
+              id="soOtherRef"
+              className="formControl"
+            />
+            <div className="formLabel">Invoice To</div>
+            <input
+              type="text"
+              value={state.salesOrder.invoiceTo}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.salesOrder.invoiceTo = e.target.value;
+                setState(new_state);
+              }}
+              placeholder="invoice to"
+              id="soInvoiceTo"
+              className="formControl"
+            />
 
-          {/* <div className="formLabel">Invoice To</div>
+            {/* <div className="formLabel">Invoice To</div>
           <select
             value={state.salesOrder.invoiceTo}
             onChange={(e) => {
@@ -707,127 +580,139 @@ const OrderCardCRUD = () => {
             ))}
           </select> */}
 
-          <div className="formLabel">Despatch through</div>
-          <input
-            type="text"
-            value={state.salesOrder.despatchThrough}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.salesOrder.despatchThrough = e.target.value;
-              setState(new_state);
-            }}
-            id="soDespatchThrough"
-            className="formControl"
-          />
-          <div className="formLabel">Destination</div>
-          <input
-            type="text"
-            value={state.salesOrder.destination}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.salesOrder.destination = e.target.value;
-              setState(new_state);
-            }}
-            id="soDestination"
-            className="formControl"
-          />
-          <div className="formLabel">Terms Of Delivery</div>
-          <input
-            type="text"
-            value={state.salesOrder.termsOfDelivery}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.salesOrder.termsOfDelivery = e.target.value;
-              setState(new_state);
-            }}
-            id="soTermsOfDelivery"
-            className="formControl"
-          />
+            <div className="formLabel">Despatch through</div>
+            <input
+              type="text"
+              value={state.salesOrder.despatchThrough}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.salesOrder.despatchThrough = e.target.value;
+                setState(new_state);
+              }}
+              id="soDespatchThrough"
+              placeholder="desptach through"
+              className="formControl"
+            />
+            <div className="formLabel">Destination</div>
+            <input
+              type="text"
+              value={state.salesOrder.destination}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.salesOrder.destination = e.target.value;
+                setState(new_state);
+              }}
+              id="soDestination"
+              placeholder="destination"
+              className="formControl"
+            />
+            <div className="formLabel">Terms Of Delivery</div>
+            <input
+              type="text"
+              value={state.salesOrder.termsOfDelivery}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.salesOrder.termsOfDelivery = e.target.value;
+                setState(new_state);
+              }}
+              id="soTermsOfDelivery"
+              placeholder="terms of delivery"
+              className="formControl"
+            />
 
-          <div className="formLabel">Total Quantity</div>
-          <input
-            type="text"
-            value={state.salesOrder.totalQty}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.salesOrder.totalQty = e.target.value;
-              setState(new_state);
-            }}
-            id="soTotalQty"
-            className="formControl"
-            disabled={true}
-          />
+            <div className="formLabel">Total Quantity</div>
+            <input
+              type="text"
+              value={state.salesOrder.totalQty}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.salesOrder.totalQty = e.target.value;
+                setState(new_state);
+              }}
+              id="soTotalQty"
+              placeholder=" total qty"
+              className="formControl"
+              disabled={true}
+            />
 
-          <div className="formLabel">Total Amount</div>
-          <input
-            type="text"
-            value={state.salesOrder.totalAmt}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.salesOrder.totalAmt = e.target.value;
-              setState(new_state);
-            }}
-            id="soTotalAmt"
-            className="formControl"
-            disabled={true}
-          />
+            <div className="formLabel">Total Amount</div>
+            <input
+              type="text"
+              value={state.salesOrder.totalAmt}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.salesOrder.totalAmt = e.target.value;
+                setState(new_state);
+              }}
+              id="soTotalAmt"
+              placeholder="total amount"
+              className="formControl"
+              disabled={true}
+            />
 
-          <div className="formLabel">Amount in Words</div>
-          <input
-            type="text"
-            value={state.salesOrder.amtInWords}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.salesOrder.amtInWords = e.target.value;
-              setState(new_state);
-            }}
-            id="soAmtInWords"
-            className="formControl"
-          />
+            <div className="formLabel">Amount in Words</div>
+            <input
+              type="text"
+              value={state.salesOrder.amtInWords}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.salesOrder.amtInWords = e.target.value;
+                setState(new_state);
+              }}
+              placeholder="amount in words"
+              id="soAmtInWords"
+              className="formControl"
+            />
 
-          <div className="formLabel">
-            <span>SO Table</span>{" "}
-            <button
-              className="btn"
-              onClick={(e) => {
-                e.preventDefault();
-                let new_sales_order = { ...state.salesOrder };
-                new_sales_order.soTable = [
-                  ...new_sales_order.soTable,
-                  {
-                    siNo: "",
-                    descriptionOfGoods: "",
-                    dueOn: "",
-                    qty: "",
-                    rate: "",
-                    per: "",
-                    amount: "",
-                  },
-                ];
-                setState({ ...state, salesOrder: new_sales_order });
+            <div className="formLabel">
+              <span>SO Table</span>{" "}
+              <button
+                className="btn1"
+                onClick={(e) => {
+                  e.preventDefault();
+                  let new_sales_order = { ...state.salesOrder };
+                  new_sales_order.soTable = [
+                    ...new_sales_order.soTable,
+                    {
+                      siNo: "",
+                      descriptionOfGoods: "",
+                      dueOn: "",
+                      qty: "",
+                      rate: "",
+                      per: "",
+                      amount: "",
+                    },
+                  ];
+                  setState({ ...state, salesOrder: new_sales_order });
+                }}
+                style={{
+                  width: "10%",
+                  marginLeft: "0",
+                  fontSize: "1.3em",
+                  padding: ".6rem",
+                }}
+              >
+                +
+              </button>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
               }}
             >
-              Add Entry
-            </button>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <div>Si</div>
-            <div>Description</div>
-            <div>Due on</div>
-            <div>Qty</div>
-            <div>Rate</div>
-            <div>Per</div>
-            <div>Amount</div>
-            <div>{""}</div>
-            <div>{""}</div>
-          </div>
-          {/* {state.salesOrder.soTable.map((soEntry, idx) => (
+              {/* <div>Si</div> */}
+              <div>Description</div>
+              <div>Due on</div>
+              <div>Qty</div>
+              <div>Rate</div>
+              <div>Per</div>
+              <div>Amount</div>
+              <div>{""}</div>
+              <div>{""}</div>
+            </div>
+            {/* {state.salesOrder.soTable.map((soEntry, idx) => (
             <SoTableEntry
               idx={idx}
               setOrder={setState}
@@ -837,45 +722,47 @@ const OrderCardCRUD = () => {
             />
           ))} */}
 
-          {state.salesOrder.soTable.map((soTableEntry, idx) => (
-            <SoTableEntryNew
-              state={state}
-              setState={setState}
-              index={idx}
-              soTableEntry={soTableEntry}
-              calcSalesOrderFields={calcSalesOrderFields}
-            />
-          ))}
+            {state.salesOrder.soTable.map((soTableEntry, idx) => (
+              <SoTableEntryNew
+                state={state}
+                setState={setState}
+                index={idx}
+                soTableEntry={soTableEntry}
+                calcSalesOrderFields={calcSalesOrderFields}
+              />
+            ))}
 
-          <div className="formLabel">
-            <button
-              onClick={(e) => {
-                if (isUpdate) {
-                  updateOrderSubmit(e);
-                  dispatch(
-                    createOrderlog({
-                      order: { ...state },
-                      operation: "so update",
-                    })
-                  );
-                } else {
-                  addOrderSubmit(e);
-                  dispatch(
-                    createOrderlog({
-                      order: { ...state },
-                      operation: "so create",
-                    })
-                  );
-                }
-                setIsUpdate(false);
-                clearState();
-              }}
-            >
-              {isUpdate ? "Edit" : "Save"} Sales Order
-            </button>
-          </div>
-        </form>
-      </div>
+            <div className="formLabel">
+              <div
+                className="btn2"
+                onClick={(e) => {
+                  if (isUpdate) {
+                    updateOrderSubmit(e);
+                    dispatch(
+                      createOrderlog({
+                        order: { ...state },
+                        operation: "so update",
+                      })
+                    );
+                  } else {
+                    addOrderSubmit(e);
+                    dispatch(
+                      createOrderlog({
+                        order: { ...state },
+                        operation: "so create",
+                      })
+                    );
+                  }
+                  setIsUpdate(false);
+                  clearState();
+                }}
+              >
+                {isUpdate ? "Edit" : "Save"} Sales Order
+              </div>
+            </div>
+          </form>
+        </div>
+      </Dialog>
 
       <ViewOrders
         currOrder={currOrder}
@@ -883,745 +770,1014 @@ const OrderCardCRUD = () => {
         state={state}
         setState={setState}
         setIsUpdate={setIsUpdate}
+        setOpenDialog={setOpenDialog}
+        setInvDialog={setInvDialog}
+        setWrDialog={setWrDialog}
+        setSrDialog={setSrDialog}
+        setPaymentDialog={setPaymentDialog}
+        setDeliveryDialog={setDeliveryDialog}
+        setCancelDialog={setCancelDialog}
       />
       <div>
-        <form>
-          <div>
-            <h2>Invoice </h2>
-            <p>{currOrder}</p>
-          </div>
-          <div className="formLabel">Distributor name</div>
-          <input
-            type="text"
-            value={state.invoice.distributorName}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.invoice = {
-                ...new_state.invoice,
-                distributorName: e.target.value,
-              };
-              setState(new_state);
-            }}
-            id="invDistributorName"
-            className="formControl"
-          />
+        <Dialog
+          open={invDialog}
+          fullWidth={true}
+          fullScreen={fullScreen}
+          // maxWidth={}
+          onClose={(e, r) => {
+            if (r === "backdropClick") {
+              clearState();
+              setInvDialog(false);
+            } else {
+              clearState();
+              setInvDialog(false);
+            }
+          }}
+          // PaperComponent={<PaperC />}
+          PaperProps={{
+            sx: {
+              borderRadius: "1rem",
+              background: tc.theme === "light" ? "#ebecf0" : "#232427",
+              color: tc.theme === "light" ? "#1c1c1c" : "#ebecf0",
+            },
+          }}
+          scroll={"body"}
+          id={tc.theme}
+        >
+          <form className="css5Form">
+            <div className="FlexBetween">
+              <h2>Invoice </h2>
+              <IconButton
+                onClick={() => {
+                  setInvDialog(false);
+                  clearState();
+                }}
+                style={{
+                  background: tc.theme === "dark" ? "lightgrey" : "transparent",
+                  padding: ".25rem",
+                }}
+              >
+                <GrClose />
+              </IconButton>
+            </div>
+            <div>{/* <p>{currOrder}</p> */}</div>
+            <div className="formLabel">Distributor name</div>
+            <input
+              type="text"
+              value={state.invoice.distributorName}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.invoice = {
+                  ...new_state.invoice,
+                  distributorName: e.target.value,
+                };
+                setState(new_state);
+              }}
+              id="invDistributorName"
+              placeholder="distributor name"
+              className="formControl"
+            />
 
-          <div className="formLabel">Distributor details</div>
-          <input
-            type="text"
-            value={state.invoice.distributorDetails}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.invoice = {
-                ...new_state.invoice,
-                distributorDetails: e.target.value,
-              };
-              setState(new_state);
-            }}
-            id="invDistributorDetails"
-            className="formControl"
-          />
+            <div className="formLabel">Distributor details</div>
+            <input
+              type="text"
+              value={state.invoice.distributorDetails}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.invoice = {
+                  ...new_state.invoice,
+                  distributorDetails: e.target.value,
+                };
+                setState(new_state);
+              }}
+              id="invDistributorDetails"
+              placeholder="distributor details"
+              className="formControl"
+            />
 
-          <div className="formLabel">Invoice No.</div>
-          <input
-            type="text"
-            value={state.invoice.invoiceNo}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.invoice = {
-                ...new_state.invoice,
-                invoiceNo: e.target.value,
-              };
-              setState(new_state);
-            }}
-            id="invInvNo"
-            className="formControl"
-          />
+            <div className="formLabel">Invoice No.</div>
+            <input
+              type="text"
+              value={state.invoice.invoiceNo}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.invoice = {
+                  ...new_state.invoice,
+                  invoiceNo: e.target.value,
+                };
+                setState(new_state);
+              }}
+              placeholder="invoice no."
+              id="invInvNo"
+              className="formControl"
+            />
 
-          <div className="formLabel">Dated</div>
-          <input
-            type="date"
-            value={state.invoice.dated}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.invoice = {
-                ...new_state.invoice,
-                dated: e.target.value,
-              };
-              setState(new_state);
-            }}
-            id="invDated"
-            className="formControl"
-          />
+            <div className="formLabel">Dated</div>
+            <input
+              type="date"
+              value={state.invoice.dated}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.invoice = {
+                  ...new_state.invoice,
+                  dated: e.target.value,
+                };
+                setState(new_state);
+              }}
+              id="invDated"
+              className="formControl"
+            />
 
-          <div className="formLabel">Delivery Note</div>
-          <input
-            type="text"
-            value={state.invoice.deliveryNote}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.invoice = {
-                ...new_state.invoice,
-                deliveryNote: e.target.value,
-              };
-              setState(new_state);
-            }}
-            id="invDeliveryNote"
-            className="formControl"
-          />
+            <div className="formLabel">Delivery Note</div>
+            <input
+              type="text"
+              value={state.invoice.deliveryNote}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.invoice = {
+                  ...new_state.invoice,
+                  deliveryNote: e.target.value,
+                };
+                setState(new_state);
+              }}
+              id="invDeliveryNote"
+              placeholder="delivery note"
+              className="formControl"
+            />
 
-          <div className="formLabel">Supplier Ref.</div>
-          <input
-            type="text"
-            value={state.invoice.supplierRef}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.invoice = {
-                ...new_state.invoice,
-                supplierRef: e.target.value,
-              };
-              setState(new_state);
-            }}
-            id="invSupplierRef"
-            className="formControl"
-          />
+            <div className="formLabel">Supplier Ref.</div>
+            <input
+              type="text"
+              value={state.invoice.supplierRef}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.invoice = {
+                  ...new_state.invoice,
+                  supplierRef: e.target.value,
+                };
+                setState(new_state);
+              }}
+              id="invSupplierRef"
+              placeholder="supplier ref"
+              className="formControl"
+            />
 
-          <div className="formLabel">Other Ref.</div>
-          <input
-            type="text"
-            value={state.invoice.otherRef}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.invoice = {
-                ...new_state.invoice,
-                otherRef: e.target.value,
-              };
-              setState(new_state);
-            }}
-            id="invotherRef"
-            className="formControl"
-          />
+            <div className="formLabel">Other Ref.</div>
+            <input
+              type="text"
+              value={state.invoice.otherRef}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.invoice = {
+                  ...new_state.invoice,
+                  otherRef: e.target.value,
+                };
+                setState(new_state);
+              }}
+              id="invotherRef"
+              placeholder="other ref"
+              className="formControl"
+            />
 
-          <div className="formLabel">Client</div>
-          <input
-            type="text"
-            value={state.invoice.client}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.invoice = {
-                ...new_state.invoice,
-                client: e.target.value,
-              };
-              setState(new_state);
-            }}
-            id="invClient"
-            className="formControl"
-          />
+            <div className="formLabel">Client</div>
+            <input
+              type="text"
+              value={state.invoice.client}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.invoice = {
+                  ...new_state.invoice,
+                  client: e.target.value,
+                };
+                setState(new_state);
+              }}
+              id="invClient"
+              placeholder="client"
+              className="formControl"
+            />
 
-          <div className="formLabel">Despatch Doc No</div>
-          <input
-            type="text"
-            value={state.invoice.despatchDocNo}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.invoice = {
-                ...new_state.invoice,
-                despatchDocNo: e.target.value,
-              };
-              setState(new_state);
-            }}
-            id="invdespatchDocNo"
-            className="formControl"
-          />
+            <div className="formLabel">Despatch Doc No</div>
+            <input
+              type="text"
+              value={state.invoice.despatchDocNo}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.invoice = {
+                  ...new_state.invoice,
+                  despatchDocNo: e.target.value,
+                };
+                setState(new_state);
+              }}
+              id="invdespatchDocNo"
+              placeholder="despatch doc no."
+              className="formControl"
+            />
 
-          <div className="formLabel">Delivery Note Date</div>
-          <input
-            type="date"
-            value={state.invoice.deliveryNoteDate}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.invoice = {
-                ...new_state.invoice,
-                deliveryNoteDate: e.target.value,
-              };
-              setState(new_state);
-            }}
-            id="invdeliveryNoteDate"
-            className="formControl"
-          />
+            <div className="formLabel">Delivery Note Date</div>
+            <input
+              type="date"
+              value={state.invoice.deliveryNoteDate}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.invoice = {
+                  ...new_state.invoice,
+                  deliveryNoteDate: e.target.value,
+                };
+                setState(new_state);
+              }}
+              id="invdeliveryNoteDate"
+              placeholder="delivery note date"
+              className="formControl"
+            />
 
-          <div className="formLabel">Despatch Through</div>
-          <input
-            type="text"
-            value={state.invoice.despatchedThrough}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.invoice = {
-                ...new_state.invoice,
-                despatchedThrough: e.target.value,
-              };
-              setState(new_state);
-            }}
-            id="invdespatchedThrough"
-            className="formControl"
-          />
+            <div className="formLabel">Despatch Through</div>
+            <input
+              type="text"
+              value={state.invoice.despatchedThrough}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.invoice = {
+                  ...new_state.invoice,
+                  despatchedThrough: e.target.value,
+                };
+                setState(new_state);
+              }}
+              id="invdespatchedThrough"
+              placeholder="despatched through"
+              className="formControl"
+            />
 
-          <div className="formLabel">Destination</div>
-          <input
-            type="text"
-            value={state.invoice.destination}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.invoice = {
-                ...new_state.invoice,
-                destination: e.target.value,
-              };
-              setState(new_state);
-            }}
-            id="invdestination"
-            className="formControl"
-          />
+            <div className="formLabel">Destination</div>
+            <input
+              type="text"
+              value={state.invoice.destination}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.invoice = {
+                  ...new_state.invoice,
+                  destination: e.target.value,
+                };
+                setState(new_state);
+              }}
+              id="invdestination"
+              placeholder="destination"
+              className="formControl"
+            />
 
-          <div className="formLabel">Invoice Table</div>
-          <button
-            className="btn"
-            onClick={(e) => {
-              e.preventDefault();
-              let new_invoice = { ...state.invoice };
-              new_invoice.invTable = [
-                ...new_invoice.invTable,
-                {
-                  siNo: 0,
-                  descriptionOfGoods: "",
-                  hsnSAC: "",
-                  GSTRate: "",
-                  qty: 0,
-                  rate: "",
-                  per: "unit",
-                  amount: "",
-                },
-              ];
-              setState({ ...state, invoice: new_invoice });
-            }}
-          >
-            Add Entry
-          </button>
-          {state.invoice.invTable.map((invTEntry, index) => (
-            <InvTableEntry state={state} setState={setState} index={index} />
-          ))}
-
-          <div className="formLabel">Total Qty</div>
-          <input
-            type="number"
-            value={state.invoice.totalQty}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.invoice = {
-                ...new_state.invoice,
-                totalQty: e.target.value,
-              };
-              setState(new_state);
-            }}
-            id="invtotalQty"
-            className="formControl"
-            disabled={true}
-          />
-
-          <div className="formLabel">Total Amount</div>
-          <input
-            type="text"
-            value={state.invoice.totalAmount}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.invoice = {
-                ...new_state.invoice,
-                totalAmount: e.target.value,
-              };
-              setState(new_state);
-            }}
-            id="invtotalAmount"
-            className="formControl"
-            disabled={true}
-          />
-
-          <div className="formLabel">Amount in words</div>
-          <input
-            type="text"
-            value={state.invoice.amtChargableInWords}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.invoice = {
-                ...new_state.invoice,
-                amtChargableInWords: e.target.value,
-              };
-              setState(new_state);
-            }}
-            id="invamtChargableInWords"
-            className="formControl"
-          />
-
-          <div className="formLabel">Invoice Tax Table</div>
-          <table
-            style={{
-              border: "1px solid lightgrey",
-            }}
-          >
-            <thead>
-              <tr>
-                <td>HSN SAC</td>
-                <td>Taxable value</td>
-                <td>central tax rate</td>
-                <td>central tax amt</td>
-                <td>state tax rate</td>
-                <td>state tax amt</td>
-              </tr>
-            </thead>
-
-            {state.invoice.invTaxTable.map((i) => (
-              <tr>
-                <td>{i.hsnSAC}</td>
-                <td>{i.taxableValue}</td>
-                <td>{i.centralTaxRate}</td>
-                <td>{i.centralTaxAmt}</td>
-                <td>{i.stateTaxRate}</td>
-                <td>{i.stateTaxAmt}</td>
-              </tr>
+            <div className="formLabel">Invoice Table</div>
+            <button
+              className="btn1"
+              style={{
+                width: "10%",
+                marginLeft: "0",
+                fontSize: "1.3em",
+                padding: ".6rem",
+              }}
+              onClick={(e) => {
+                e.preventDefault();
+                let new_invoice = { ...state.invoice };
+                new_invoice.invTable = [
+                  ...new_invoice.invTable,
+                  {
+                    siNo: 0,
+                    descriptionOfGoods: "",
+                    hsnSAC: "",
+                    GSTRate: "",
+                    qty: 0,
+                    rate: "",
+                    per: "unit",
+                    amount: "",
+                  },
+                ];
+                setState({ ...state, invoice: new_invoice });
+              }}
+            >
+              +
+            </button>
+            {state.invoice.invTable.map((invTEntry, index) => (
+              <InvTableEntry state={state} setState={setState} index={index} />
             ))}
-          </table>
 
-          <div className="formLabel">Total Taxable Value</div>
-          <input
-            type="text"
-            value={state.invoice.totalTaxableValue}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.invoice = {
-                ...new_state.invoice,
-                totalTaxableValue: e.target.value,
-              };
-              setState(new_state);
-            }}
-            id="invtotalTaxableValue"
-            className="formControl"
-            disabled={true}
-          />
-
-          <div className="formLabel">Total Central Tax Amount</div>
-          <input
-            type="text"
-            value={state.invoice.totalCentralTaxAmt}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.invoice = {
-                ...new_state.invoice,
-                totalCentralTaxAmt: e.target.value,
-              };
-              setState(new_state);
-            }}
-            id="invtotalCentralTaxAmt"
-            className="formControl"
-            disabled={true}
-          />
-
-          <div className="formLabel">Total State Tax Amount</div>
-          <input
-            type="text"
-            value={state.invoice.totalStateTaxAmt}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.invoice = {
-                ...new_state.invoice,
-                totalStateTaxAmt: e.target.value,
-              };
-              setState(new_state);
-            }}
-            id="invtotalStateTaxAmt"
-            className="formControl"
-            disabled={true}
-          />
-
-          <div className="formLabel">Tax Amount In Words</div>
-          <input
-            type="text"
-            value={state.invoice.taxAmtInWords}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.invoice = {
-                ...new_state.invoice,
-                taxAmtInWords: e.target.value,
-              };
-              setState(new_state);
-            }}
-            id="invtaxAmtInWords"
-            className="formControl"
-          />
-
-          <div className="formLabel">Company PAN</div>
-          <input
-            type="text"
-            value={state.invoice.companyPAN}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.invoice = {
-                ...new_state.invoice,
-                companyPAN: e.target.value,
-              };
-              setState(new_state);
-            }}
-            id="invcompanyPAN"
-            className="formControl"
-          />
-
-          <h4>Company Bank Details</h4>
-          <div className="formLabel">Bank Name</div>
-          <input
-            type="text"
-            value={state.invoice.companyBankDetails.bankName}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.invoice.companyBankDetails = {
-                ...new_state.invoice.companyBankDetails,
-                bankName: e.target.value,
-              };
-              setState(new_state);
-            }}
-            id="invbankName"
-            className="formControl"
-          />
-
-          <div className="formLabel">A/C No.</div>
-          <input
-            type="text"
-            value={state.invoice.companyBankDetails.acNo}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.invoice.companyBankDetails = {
-                ...new_state.invoice.companyBankDetails,
-                acNo: e.target.value,
-              };
-              setState(new_state);
-            }}
-            id="invacNo"
-            className="formControl"
-          />
-
-          <div className="formLabel">BranchIFSCode</div>
-          <input
-            type="text"
-            value={state.invoice.companyBankDetails.BranchIFSCode}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.invoice.companyBankDetails = {
-                ...new_state.invoice.companyBankDetails,
-                BranchIFSCode: e.target.value,
-              };
-              setState(new_state);
-            }}
-            id="invBranchIFSCode"
-            className="formControl"
-          />
-
-          <div className="formLabel">For</div>
-          <input
-            type="text"
-            value={state.invoice.for}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.invoice = {
-                ...new_state.invoice,
-                for: e.target.value,
-              };
-              setState(new_state);
-            }}
-            id="invfor"
-            className="formControl"
-          />
-
-          <div className="formLabel">
-            <button
-              onClick={(e) => {
-                updateOrderSubmit(e);
-                dispatch(
-                  createOrderlog({
-                    order: { ...state },
-                    operation: "invoice",
-                  })
-                );
-                clearState();
+            <div className="formLabel">Total Qty</div>
+            <input
+              type="number"
+              value={state.invoice.totalQty}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.invoice = {
+                  ...new_state.invoice,
+                  totalQty: e.target.value,
+                };
+                setState(new_state);
               }}
-            >
-              Save Invoice
-            </button>
-          </div>
-        </form>
-      </div>
-
-      <div>
-        <form>
-          <div>
-            <h2>Warehouse Receipt </h2>
-          </div>
-          <div className="formLabel">Img Upload table</div>
-          <button
-            className="btn"
-            onClick={(e) => {
-              e.preventDefault();
-              let new_whr = [...state.wareHouseReceipt];
-              new_whr = [
-                ...new_whr,
-                {
-                  imgString: "",
-                },
-              ];
-              setState({ ...state, wareHouseReceipt: new_whr });
-            }}
-          >
-            Add Entry
-          </button>
-          {state.wareHouseReceipt.map((item, index) => (
-            <WarehouseReceiptEntry
-              state={state}
-              setState={setState}
-              index={index}
+              id="invtotalQty"
+              placeholder="total qty"
+              className="formControl"
+              disabled={true}
             />
-          ))}
 
-          <div className="formLabel">
-            <button
-              onClick={(e) => {
-                updateOrderSubmit(e);
-                dispatch(
-                  createOrderlog({
-                    order: { ...state },
-                    operation: "warehouse receipt",
-                  })
-                );
-                clearState();
+            <div className="formLabel">Total Amount</div>
+            <input
+              type="text"
+              value={state.invoice.totalAmount}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.invoice = {
+                  ...new_state.invoice,
+                  totalAmount: e.target.value,
+                };
+                setState(new_state);
               }}
-            >
-              Save Warehouse Receipt
-            </button>
-          </div>
-        </form>
-      </div>
-
-      <div>
-        <form>
-          <div>
-            <h2>Sales Receipt </h2>
-          </div>
-          <div className="formLabel">Distributor Name</div>
-          <input
-            type="text"
-            value={state.salesReceipt.distributorName}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.salesReceipt = {
-                ...new_state.salesReceipt,
-                distributorName: e.target.value,
-              };
-              setState(new_state);
-            }}
-            id="srdistributorName"
-            className="formControl"
-          />
-
-          <div className="formLabel">Distributor Details</div>
-          <input
-            type="text"
-            value={state.salesReceipt.distributorDetails}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.salesReceipt = {
-                ...new_state.salesReceipt,
-                distributorDetails: e.target.value,
-              };
-              setState(new_state);
-            }}
-            id="srdistributorDetails"
-            className="formControl"
-          />
-
-          <div className="formLabel">Sold By </div>
-          <input
-            type="text"
-            value={state.salesReceipt.soldBy}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.salesReceipt = {
-                ...new_state.salesReceipt,
-                soldBy: e.target.value,
-              };
-              setState(new_state);
-            }}
-            id="srsoldBy"
-            className="formControl"
-          />
-
-          <div className="formLabel">Date</div>
-          <input
-            type="date"
-            value={state.salesReceipt.date}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.salesReceipt = {
-                ...new_state.salesReceipt,
-                date: e.target.value,
-              };
-              setState(new_state);
-            }}
-            id="srdate"
-            className="formControl"
-          />
-
-          <div className="formLabel">Name</div>
-          <input
-            type="text"
-            value={state.salesReceipt.name}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.salesReceipt = {
-                ...new_state.salesReceipt,
-                name: e.target.value,
-              };
-              setState(new_state);
-            }}
-            id="srname"
-            className="formControl"
-          />
-
-          <div className="formLabel">Address</div>
-          <input
-            type="text"
-            value={state.salesReceipt.address}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.salesReceipt = {
-                ...new_state.salesReceipt,
-                address: e.target.value,
-              };
-              setState(new_state);
-            }}
-            id="sraddress"
-            className="formControl"
-          />
-
-          <div className="formLabel">Mode</div>
-          <input
-            type="text"
-            value={state.salesReceipt.mode}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.salesReceipt = {
-                ...new_state.salesReceipt,
-                mode: e.target.value,
-              };
-              setState(new_state);
-            }}
-            id="srmode"
-            className="formControl"
-          />
-
-          <div className="formLabel">Sales Receipt table</div>
-          <button
-            className="btn"
-            onClick={(e) => {
-              e.preventDefault();
-              let new_sales_receipt = { ...state.salesReceipt };
-              new_sales_receipt.srTable = [
-                ...new_sales_receipt.srTable,
-                {
-                  qty: 0,
-                  details: "",
-                  price: "",
-                  amount: "",
-                },
-              ];
-              setState({ ...state, salesReceipt: new_sales_receipt });
-            }}
-          >
-            Add Entry
-          </button>
-          {state.salesReceipt.srTable.map((item, index) => (
-            <SrTableEntry state={state} setState={setState} index={index} />
-          ))}
-
-          <div className="formLabel">
-            <button
-              onClick={(e) => {
-                updateOrderSubmit(e);
-                dispatch(
-                  createOrderlog({
-                    order: { ...state },
-                    operation: "sales receipt",
-                  })
-                );
-                clearState();
-              }}
-            >
-              Save Sales Receipt
-            </button>
-          </div>
-        </form>
-      </div>
-
-      <div>
-        <form>
-          <div>
-            <h2>Order Delivery </h2>
-          </div>
-          <div className="formLabel">History table</div>
-          <button
-            className="btn"
-            onClick={(e) => {
-              e.preventDefault();
-              let new_order_delivery = { ...state.orderDelivery };
-              new_order_delivery.history = [
-                ...new_order_delivery.history,
-                {
-                  timeStamp: "",
-                  status: "",
-                },
-              ];
-              setState({ ...state, orderDelivery: new_order_delivery });
-            }}
-          >
-            Add Entry
-          </button>
-          {state.orderDelivery.history.map((item, index) => (
-            <OrderDeliveryEntry
-              state={state}
-              setState={setState}
-              index={index}
+              id="invtotalAmount"
+              placeholder="total amount"
+              className="formControl"
+              disabled={true}
             />
-          ))}
 
-          <div className="formLabel">
-            <button
-              onClick={(e) => {
-                updateOrderSubmit(e);
-                dispatch(
-                  createOrderlog({
-                    order: { ...state },
-                    operation: "delivery entry",
-                  })
-                );
-                clearState();
+            <div className="formLabel">Amount in words</div>
+            <input
+              type="text"
+              value={state.invoice.amtChargableInWords}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.invoice = {
+                  ...new_state.invoice,
+                  amtChargableInWords: e.target.value,
+                };
+                setState(new_state);
+              }}
+              id="invamtChargableInWords"
+              placeholder="amt in words"
+              className="formControl"
+            />
+
+            <div className="formLabel">Invoice Tax Table</div>
+            <table
+              style={{
+                border: "1px solid lightgrey",
               }}
             >
-              Save Order Delivery entry
-            </button>
-          </div>
-        </form>
+              <thead
+                style={{
+                  borderBottom: "2px solid white",
+                }}
+              >
+                <tr>
+                  <td>HSN SAC</td>
+                  <td>Taxable value</td>
+                  <td>central tax rate</td>
+                  <td>central tax amt</td>
+                  <td>state tax rate</td>
+                  <td>state tax amt</td>
+                </tr>
+              </thead>
+
+              {state.invoice.invTaxTable.map((i) => (
+                <tr>
+                  <td>{i.hsnSAC}</td>
+                  <td>{i.taxableValue}</td>
+                  <td>{i.centralTaxRate}</td>
+                  <td>{i.centralTaxAmt}</td>
+                  <td>{i.stateTaxRate}</td>
+                  <td>{i.stateTaxAmt}</td>
+                </tr>
+              ))}
+            </table>
+
+            <div className="formLabel">Total Taxable Value</div>
+            <input
+              type="text"
+              value={state.invoice.totalTaxableValue}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.invoice = {
+                  ...new_state.invoice,
+                  totalTaxableValue: e.target.value,
+                };
+                setState(new_state);
+              }}
+              id="invtotalTaxableValue"
+              className="formControl"
+              placeholder="total taxable value"
+              disabled={true}
+            />
+
+            <div className="formLabel">Total Central Tax Amount</div>
+            <input
+              type="text"
+              value={state.invoice.totalCentralTaxAmt}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.invoice = {
+                  ...new_state.invoice,
+                  totalCentralTaxAmt: e.target.value,
+                };
+                setState(new_state);
+              }}
+              id="invtotalCentralTaxAmt"
+              placeholder="total central tax amt"
+              className="formControl"
+              disabled={true}
+            />
+
+            <div className="formLabel">Total State Tax Amount</div>
+            <input
+              type="text"
+              value={state.invoice.totalStateTaxAmt}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.invoice = {
+                  ...new_state.invoice,
+                  totalStateTaxAmt: e.target.value,
+                };
+                setState(new_state);
+              }}
+              id="invtotalStateTaxAmt"
+              placeholder="total state tax amt"
+              className="formControl"
+              disabled={true}
+            />
+
+            <div className="formLabel">Tax Amount In Words</div>
+            <input
+              type="text"
+              value={state.invoice.taxAmtInWords}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.invoice = {
+                  ...new_state.invoice,
+                  taxAmtInWords: e.target.value,
+                };
+                setState(new_state);
+              }}
+              id="invtaxAmtInWords"
+              placeholder="tax amt in words"
+              className="formControl"
+            />
+
+            <div className="formLabel">Company PAN</div>
+            <input
+              type="text"
+              value={state.invoice.companyPAN}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.invoice = {
+                  ...new_state.invoice,
+                  companyPAN: e.target.value,
+                };
+                setState(new_state);
+              }}
+              id="invcompanyPAN"
+              placeholder="company PAN no."
+              className="formControl"
+            />
+
+            <h4>Company Bank Details</h4>
+            <div className="formLabel">Bank Name</div>
+            <input
+              type="text"
+              value={state.invoice.companyBankDetails.bankName}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.invoice.companyBankDetails = {
+                  ...new_state.invoice.companyBankDetails,
+                  bankName: e.target.value,
+                };
+                setState(new_state);
+              }}
+              placeholder="bank name"
+              id="invbankName"
+              className="formControl"
+            />
+
+            <div className="formLabel">A/C No.</div>
+            <input
+              type="text"
+              value={state.invoice.companyBankDetails.acNo}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.invoice.companyBankDetails = {
+                  ...new_state.invoice.companyBankDetails,
+                  acNo: e.target.value,
+                };
+                setState(new_state);
+              }}
+              placeholder="A/C no."
+              id="invacNo"
+              className="formControl"
+            />
+
+            <div className="formLabel">BranchIFSCode</div>
+            <input
+              type="text"
+              value={state.invoice.companyBankDetails.BranchIFSCode}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.invoice.companyBankDetails = {
+                  ...new_state.invoice.companyBankDetails,
+                  BranchIFSCode: e.target.value,
+                };
+                setState(new_state);
+              }}
+              placeholder="branch IFSC Code"
+              id="invBranchIFSCode"
+              className="formControl"
+            />
+
+            <div className="formLabel">For</div>
+            <input
+              type="text"
+              value={state.invoice.for}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.invoice = {
+                  ...new_state.invoice,
+                  for: e.target.value,
+                };
+                setState(new_state);
+              }}
+              placeholder="invoice for"
+              id="invfor"
+              className="formControl"
+            />
+
+            <div className="formLabel">
+              <div
+                onClick={(e) => {
+                  updateOrderSubmit(e);
+                  dispatch(
+                    createOrderlog({
+                      order: { ...state },
+                      operation: "invoice",
+                    })
+                  );
+                  clearState();
+                  setInvDialog(false);
+                }}
+                className="btn2"
+              >
+                Save Invoice
+              </div>
+            </div>
+          </form>
+        </Dialog>
       </div>
 
       <div>
-        <form>
-          <div>
-            <h2>Order Payment </h2>
+        <Dialog
+          open={wrDialog}
+          fullWidth={true}
+          fullScreen={fullScreen}
+          // maxWidth={}
+          onClose={(e, r) => {
+            if (r === "backdropClick") {
+              clearState();
+              setWrDialog(false);
+            } else {
+              clearState();
+              setWrDialog(false);
+            }
+          }}
+          // PaperComponent={<PaperC />}
+          PaperProps={{
+            sx: {
+              borderRadius: "1rem",
+              background: tc.theme === "light" ? "#ebecf0" : "#232427",
+              color: tc.theme === "light" ? "#1c1c1c" : "#ebecf0",
+            },
+          }}
+          scroll={"body"}
+          id={tc.theme}
+        >
+          <form className="css5Form">
+            <div className="FlexBetween">
+              <h2>Warehouse Receipt </h2>
+              <IconButton
+                onClick={() => {
+                  setWrDialog(false);
+                  clearState();
+                }}
+                style={{
+                  background: tc.theme === "dark" ? "lightgrey" : "transparent",
+                  padding: ".25rem",
+                }}
+              >
+                <GrClose />
+              </IconButton>
+            </div>
+            <div className="formLabel">Img Upload table</div>
+            <button
+              className="btn1"
+              style={{
+                width: "10%",
+                marginLeft: "0",
+                fontSize: "1.3em",
+                padding: ".6rem",
+              }}
+              onClick={(e) => {
+                e.preventDefault();
+                let new_whr = [...state.wareHouseReceipt];
+                new_whr = [
+                  ...new_whr,
+                  {
+                    imgString: "",
+                  },
+                ];
+                setState({ ...state, wareHouseReceipt: new_whr });
+              }}
+            >
+              +
+            </button>
+            {state.wareHouseReceipt.map((item, index) => (
+              <WarehouseReceiptEntry
+                state={state}
+                setState={setState}
+                index={index}
+              />
+            ))}
+
+            <div className="formLabel">
+              <div
+                className="btn2"
+                onClick={(e) => {
+                  updateOrderSubmit(e);
+                  dispatch(
+                    createOrderlog({
+                      order: { ...state },
+                      operation: "warehouse receipt",
+                    })
+                  );
+                  clearState();
+                  setWrDialog(false);
+                }}
+              >
+                Save Warehouse Receipt
+              </div>
+            </div>
+          </form>
+        </Dialog>
+      </div>
+
+      <div>
+        <Dialog
+          open={srDialog}
+          fullWidth={true}
+          fullScreen={fullScreen}
+          // maxWidth={}
+          onClose={(e, r) => {
+            if (r === "backdropClick") {
+              clearState();
+              setSrDialog(false);
+            } else {
+              clearState();
+              setSrDialog(false);
+            }
+          }}
+          // PaperComponent={<PaperC />}
+          PaperProps={{
+            sx: {
+              borderRadius: "1rem",
+              background: tc.theme === "light" ? "#ebecf0" : "#232427",
+              color: tc.theme === "light" ? "#1c1c1c" : "#ebecf0",
+            },
+          }}
+          scroll={"body"}
+          id={tc.theme}
+        >
+          <form className="css5Form">
+            <div className="FlexBetween">
+              <h2>Sales Receipt </h2>
+              <IconButton
+                onClick={() => {
+                  setSrDialog(false);
+                  clearState();
+                }}
+                style={{
+                  background: tc.theme === "dark" ? "lightgrey" : "transparent",
+                  padding: ".25rem",
+                }}
+              >
+                <GrClose />
+              </IconButton>
+            </div>
+            <div className="formLabel">Distributor Name</div>
+            <input
+              type="text"
+              value={state.salesReceipt.distributorName}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.salesReceipt = {
+                  ...new_state.salesReceipt,
+                  distributorName: e.target.value,
+                };
+                setState(new_state);
+              }}
+              id="srdistributorName"
+              placeholder="distributor name"
+              className="formControl"
+            />
+
+            <div className="formLabel">Distributor Details</div>
+            <input
+              type="text"
+              value={state.salesReceipt.distributorDetails}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.salesReceipt = {
+                  ...new_state.salesReceipt,
+                  distributorDetails: e.target.value,
+                };
+                setState(new_state);
+              }}
+              id="srdistributorDetails"
+              placeholder="distributor details"
+              className="formControl"
+            />
+
+            <div className="formLabel">Sold By </div>
+            <input
+              type="text"
+              value={state.salesReceipt.soldBy}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.salesReceipt = {
+                  ...new_state.salesReceipt,
+                  soldBy: e.target.value,
+                };
+                setState(new_state);
+              }}
+              placeholder="sold by"
+              id="srsoldBy"
+              className="formControl"
+            />
+
+            <div className="formLabel">Date</div>
+            <input
+              type="date"
+              value={state.salesReceipt.date}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.salesReceipt = {
+                  ...new_state.salesReceipt,
+                  date: e.target.value,
+                };
+                setState(new_state);
+              }}
+              id="srdate"
+              className="formControl"
+            />
+
+            <div className="formLabel">Name</div>
+            <input
+              type="text"
+              value={state.salesReceipt.name}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.salesReceipt = {
+                  ...new_state.salesReceipt,
+                  name: e.target.value,
+                };
+                setState(new_state);
+              }}
+              id="srname"
+              placeholder="name "
+              className="formControl"
+            />
+
+            <div className="formLabel">Address</div>
+            <input
+              type="text"
+              value={state.salesReceipt.address}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.salesReceipt = {
+                  ...new_state.salesReceipt,
+                  address: e.target.value,
+                };
+                setState(new_state);
+              }}
+              id="sraddress"
+              placeholder="address"
+              className="formControl"
+            />
+
+            <div className="formLabel">Mode</div>
+            <input
+              type="text"
+              value={state.salesReceipt.mode}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.salesReceipt = {
+                  ...new_state.salesReceipt,
+                  mode: e.target.value,
+                };
+                setState(new_state);
+              }}
+              id="srmode"
+              placeholder="mode "
+              className="formControl"
+            />
+
+            <div className="formLabel">Sales Receipt table</div>
+            <button
+              className="btn1"
+              style={{
+                width: "10%",
+                marginLeft: "0",
+                fontSize: "1.3em",
+                padding: ".6rem",
+              }}
+              onClick={(e) => {
+                e.preventDefault();
+                let new_sales_receipt = { ...state.salesReceipt };
+                new_sales_receipt.srTable = [
+                  ...new_sales_receipt.srTable,
+                  {
+                    qty: 0,
+                    details: "",
+                    price: "",
+                    amount: "",
+                  },
+                ];
+                setState({ ...state, salesReceipt: new_sales_receipt });
+              }}
+            >
+              +
+            </button>
+            {state.salesReceipt.srTable.map((item, index) => (
+              <SrTableEntry state={state} setState={setState} index={index} />
+            ))}
+
+            <div className="formLabel">
+              <div
+                onClick={(e) => {
+                  updateOrderSubmit(e);
+                  dispatch(
+                    createOrderlog({
+                      order: { ...state },
+                      operation: "sales receipt",
+                    })
+                  );
+                  clearState();
+                  setSrDialog(false);
+                }}
+                className="btn2"
+              >
+                Save Sales Receipt
+              </div>
+            </div>
+          </form>
+        </Dialog>
+      </div>
+
+      <div>
+        <Dialog
+          open={deliveryDialog}
+          fullWidth={true}
+          fullScreen={fullScreen}
+          // maxWidth={}
+          onClose={(e, r) => {
+            if (r === "backdropClick") {
+              clearState();
+              setDeliveryDialog(false);
+            } else {
+              clearState();
+              setDeliveryDialog(false);
+            }
+          }}
+          // PaperComponent={<PaperC />}
+          PaperProps={{
+            sx: {
+              borderRadius: "1rem",
+              background: tc.theme === "light" ? "#ebecf0" : "#232427",
+              color: tc.theme === "light" ? "#1c1c1c" : "#ebecf0",
+            },
+          }}
+          scroll={"body"}
+          id={tc.theme}
+        >
+          <form className="css5Form">
+            <div className="FlexBetween">
+              <h2>Order Delivery </h2>
+              <IconButton
+                onClick={() => {
+                  setDeliveryDialog(false);
+                  clearState();
+                }}
+                style={{
+                  background: tc.theme === "dark" ? "lightgrey" : "transparent",
+                  padding: ".25rem",
+                }}
+              >
+                <GrClose />
+              </IconButton>
+            </div>
             <div className="formLabel">History table</div>
             <button
-              className="btn"
+              className="btn1"
+              style={{
+                width: "10%",
+                marginLeft: "0",
+                fontSize: "1.3em",
+                padding: ".6rem",
+              }}
+              onClick={(e) => {
+                e.preventDefault();
+                let new_order_delivery = { ...state.orderDelivery };
+                new_order_delivery.history = [
+                  ...new_order_delivery.history,
+                  {
+                    timeStamp: "",
+                    status: "",
+                  },
+                ];
+                setState({ ...state, orderDelivery: new_order_delivery });
+              }}
+            >
+              +
+            </button>
+            {state.orderDelivery.history.map((item, index) => (
+              <OrderDeliveryEntry
+                state={state}
+                setState={setState}
+                index={index}
+              />
+            ))}
+
+            <div className="formLabel">
+              <div
+                className="btn2"
+                onClick={(e) => {
+                  updateOrderSubmit(e);
+                  dispatch(
+                    createOrderlog({
+                      order: { ...state },
+                      operation: "delivery entry",
+                    })
+                  );
+                  clearState();
+                  setDeliveryDialog(false);
+                }}
+              >
+                Save Order Delivery entry
+              </div>
+            </div>
+          </form>
+        </Dialog>
+      </div>
+
+      <div>
+        <Dialog
+          open={paymentDialog}
+          fullWidth={true}
+          fullScreen={fullScreen}
+          // maxWidth={}
+          onClose={(e, r) => {
+            if (r === "backdropClick") {
+              clearState();
+              setPaymentDialog(false);
+            } else {
+              clearState();
+              setPaymentDialog(false);
+            }
+          }}
+          // PaperComponent={<PaperC />}
+          PaperProps={{
+            sx: {
+              borderRadius: "1rem",
+              background: tc.theme === "light" ? "#ebecf0" : "#232427",
+              color: tc.theme === "light" ? "#1c1c1c" : "#ebecf0",
+            },
+          }}
+          scroll={"body"}
+          id={tc.theme}
+        >
+          <form className="css5Form">
+            <div className="FlexBetween">
+              <h2>Order Payment </h2>
+              <IconButton
+                onClick={() => {
+                  setPaymentDialog(false);
+                  clearState();
+                }}
+                style={{
+                  background: tc.theme === "dark" ? "lightgrey" : "transparent",
+                  padding: ".25rem",
+                }}
+              >
+                <GrClose />
+              </IconButton>
+            </div>
+
+            <div className="formLabel">History table</div>
+            <button
+              className="btn1"
+              style={{
+                width: "10%",
+                marginLeft: "0",
+                fontSize: "1.3em",
+                padding: ".6rem",
+              }}
               onClick={(e) => {
                 e.preventDefault();
                 let new_order_payment = { ...state.orderPayment };
@@ -1637,7 +1793,7 @@ const OrderCardCRUD = () => {
                 setState({ ...state, orderPayment: new_order_payment });
               }}
             >
-              Add Entry
+              +
             </button>
             {state.orderPayment.history.map((item, index) => (
               <OrderPaymentEntry
@@ -1648,7 +1804,8 @@ const OrderCardCRUD = () => {
             ))}
 
             <div className="formLabel">
-              <button
+              <div
+                className="btn2"
                 onClick={(e) => {
                   updateOrderSubmit(e);
                   dispatch(
@@ -1658,72 +1815,115 @@ const OrderCardCRUD = () => {
                     })
                   );
                   clearState();
+                  setPaymentDialog(false);
                 }}
               >
                 Save Order Payment entry
-              </button>
+              </div>
             </div>
-          </div>
-        </form>
+          </form>
+        </Dialog>
       </div>
 
       <div>
-        <form>
-          <div>
-            <h2>Order Cancel </h2>
-          </div>
+        <Dialog
+          open={cancelDialog}
+          fullWidth={true}
+          fullScreen={fullScreen}
+          // maxWidth={}
+          onClose={(e, r) => {
+            if (r === "backdropClick") {
+              clearState();
+              setCancelDialog(false);
+            } else {
+              clearState();
+              setCancelDialog(false);
+            }
+          }}
+          // PaperComponent={<PaperC />}
+          PaperProps={{
+            sx: {
+              borderRadius: "1rem",
+              background: tc.theme === "light" ? "#ebecf0" : "#232427",
+              color: tc.theme === "light" ? "#1c1c1c" : "#ebecf0",
+            },
+          }}
+          scroll={"body"}
+          id={tc.theme}
+        >
+          <form className="css5Form">
+            <div className="FlexBetween">
+              <h2>Order Cancel </h2>
+              <IconButton
+                onClick={() => {
+                  setCancelDialog(false);
+                  clearState();
+                }}
+                style={{
+                  background: tc.theme === "dark" ? "lightgrey" : "transparent",
+                  padding: ".25rem",
+                }}
+              >
+                <GrClose />
+              </IconButton>
+            </div>
 
-          <div className="formLabel">Reason for cancel</div>
-          <input
-            type="text"
-            value={state.orderCancel.state}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.orderCancel = {
-                ...new_state.orderCancel,
-                state: e.target.value,
-              };
-              setState(new_state);
-            }}
-            id="srstate"
-            className="formControl"
-          />
-          <div className="formLabel">Description</div>
-          <input
-            type="text"
-            value={state.orderCancel.desc}
-            onChange={(e) => {
-              let new_state = { ...state };
-              new_state.orderCancel = {
-                ...new_state.orderCancel,
-                desc: e.target.value,
-              };
-              setState(new_state);
-            }}
-            id="srdesc"
-            className="formControl"
-          />
-
-          <div className="formLabel">
-            <button
-              onClick={(e) => {
-                updateOrderSubmit(e);
-                dispatch(
-                  createOrderlog({
-                    order: { ...state },
-                    operation: "order cancel",
-                  })
-                );
-                clearState();
+            <div className="formLabel">Reason for cancel</div>
+            <input
+              type="text"
+              value={state.orderCancel.state}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.orderCancel = {
+                  ...new_state.orderCancel,
+                  state: e.target.value,
+                };
+                setState(new_state);
               }}
-            >
-              Cancel Order
-            </button>
-          </div>
-        </form>
+              id="srstate"
+              placeholder="reason for cancellation"
+              className="formControl"
+            />
+            <div className="formLabel">Description</div>
+            <input
+              type="text"
+              value={state.orderCancel.desc}
+              onChange={(e) => {
+                let new_state = { ...state };
+                new_state.orderCancel = {
+                  ...new_state.orderCancel,
+                  desc: e.target.value,
+                };
+                setState(new_state);
+              }}
+              id="srdesc"
+              placeholder="reason description"
+              className="formControl"
+            />
+
+            <div className="formLabel">
+              <div
+                onClick={(e) => {
+                  updateOrderSubmit(e);
+                  dispatch(
+                    createOrderlog({
+                      order: { ...state },
+                      operation: "order cancel",
+                    })
+                  );
+                  clearState();
+                  setCancelDialog(false);
+                }}
+                className="btn2"
+              >
+                Cancel Order
+              </div>
+            </div>
+          </form>
+        </Dialog>
       </div>
 
-      <pre>{JSON.stringify(state, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(state, null, 2)}</pre> */}
     </div>
   );
 };

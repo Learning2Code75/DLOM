@@ -33,25 +33,45 @@ const DistributorSocialMediaInputNew = ({ state, setState, index }) => {
     <div
       style={{
         display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
-      <pre>{JSON.stringify(dis, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(dis, null, 2)}</pre> */}
       <input
         placeholder="title"
         value={dis.title}
         onChange={(e) => setDis({ ...dis, title: e.target.value })}
+        className="formControl"
       />
 
       <input
         placeholder="link"
         value={dis.link}
         onChange={(e) => setDis({ ...dis, link: e.target.value })}
+        className="formControl"
       />
 
-      <button onClick={addDisInput}>
+      <button
+        onClick={addDisInput}
+        className="btn1"
+        style={{
+          margin: "0 0 0 .4em",
+          padding: ".4rem 0",
+          width: "20%",
+        }}
+      >
         <FiSave />
       </button>
-      <button onClick={delDisInput}>
+      <button
+        onClick={delDisInput}
+        className="btn3"
+        style={{
+          margin: "0 0 0 .4em",
+          padding: ".4rem 0",
+          width: "20%",
+        }}
+      >
         <FiDelete />
       </button>
     </div>

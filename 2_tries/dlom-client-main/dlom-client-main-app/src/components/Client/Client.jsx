@@ -33,6 +33,8 @@ const clientDashboardArr = [
 const Client = () => {
   const user = useSelector((state) => state?.auth?.authData?.result);
   const { theme } = useContext(ThemeContext);
+  const tc = useContext(ThemeContext);
+
   return (
     <div
       style={{
@@ -52,16 +54,16 @@ const Client = () => {
       >
         <Link
           to="/"
-          className="dashboardLink"
+          className="openStylesButton1"
           style={{
             marginRight: "1rem",
-            fontSize: "2em",
-            color: "white",
-            boxShadow:
-              " inset 5px 5px 5px rgba(0,0,0,0.2),inset -5px -5px 15px rgba(255,255,255,0.1), 5px 5px 15px rgba(0,0,0,0.3),  -5px -5px 15px rgba(255,255,255,0.2)",
             borderRadius: ".64rem",
-            padding: ".4rem .6rem",
+            padding: ".6rem",
             cursor: "pointer",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            color: tc.theme === "light" ? "#232427" : "#ebecf0",
           }}
         >
           <TiArrowLeftThick
@@ -71,7 +73,7 @@ const Client = () => {
             }}
           />
         </Link>
-        <h1>Client Functionalities</h1>
+        <h2>Client Functionalities</h2>
       </div>
 
       <div className="dashboardContainer">
