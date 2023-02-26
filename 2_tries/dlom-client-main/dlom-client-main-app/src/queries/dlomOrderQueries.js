@@ -4,6 +4,7 @@ const GET_ORDERS = gql`
   query getOrders {
     orders {
       id
+      createdAt
       client {
         id
         companyName

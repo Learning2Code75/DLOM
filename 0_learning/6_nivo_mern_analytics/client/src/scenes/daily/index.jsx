@@ -180,6 +180,7 @@ const Daily = () => {
           <>Loading...</>
         )}
       </Box>
+      <pre>{JSON.stringify(formattedData, null, 2)}</pre>
     </Box>
   );
 };

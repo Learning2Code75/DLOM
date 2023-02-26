@@ -25,7 +25,7 @@ const ViewOrders = ({
 }) => {
   const { loading, error, data } = useQuery(GET_ORDERS);
   const user = useSelector((state) => state?.auth?.authData?.result);
-
+  const all_users = useSelector((state) => state?.users);
   if (loading) {
     return <Spinner />;
   }
@@ -215,6 +215,21 @@ const ViewOrders = ({
     return parseFloat(b) - parseFloat(a);
   };
 
+  const findUser = (uid) => {
+    // console.log(all_users);
+    // console.log(typeof uid);
+
+    let name = "";
+    for (let i = 0; i < all_users.length; i++) {
+      if (all_users[i]._id === uid) {
+        name = all_users[i].name;
+        break;
+      }
+    }
+
+    return name;
+  };
+
   return (
     <>
       {!loading && !error && (
@@ -231,7 +246,10 @@ const ViewOrders = ({
               <div className="info">{order?.invoice?.invoiceNo}</div>
 
               <div className="tag">Salesperson</div>
-              <div className="info">{order.salesperson}</div>
+              <div className="info">{findUser(order.salesperson)}</div>
+
+              <div className="tag">Client</div>
+              <div className="info">{order.client.companyName}</div>
 
               <div className="tag">Delivery</div>
               <div className="info">

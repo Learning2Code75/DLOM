@@ -2,8 +2,13 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { FiDelete, FiSave } from "react-icons/fi";
 import numWords from "num-words";
+import { useDispatch, useSelector } from "react-redux";
+import { getProducts } from "../../../redux/actions/products";
 
 const InvTableEntry = ({ state, setState, index }) => {
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.products);
+
   const [entry, setEntry] = useState({
     siNo: 0,
     descriptionOfGoods: "",
@@ -179,6 +184,9 @@ const InvTableEntry = ({ state, setState, index }) => {
     setState(new_state);
   };
   useEffect(() => {
+    console.log("rendered");
+    console.log(state.invoice.invTable[index]);
+
     setEntry({
       ...state.invoice.invTable[index],
     });
@@ -190,93 +198,157 @@ const InvTableEntry = ({ state, setState, index }) => {
     setEntry({ ...entry, amount: new_amount.toString() });
   }, [entry.qty, entry.rate]);
 
+  useEffect(() => {
+    dispatch(getProducts());
+  }, [dispatch]);
+
+  const populateProduct = () => {
+    let new_entry = { ...entry };
+    let prodSKUSel = new_entry.descriptionOfGoods;
+    let prod = {};
+    for (let i = 0; i < products.length; i++) {
+      if (products[i].prodSKU === prodSKUSel) {
+        prod = { ...products[i] };
+        break;
+      }
+    }
+    // console.log("rendered");
+    setEntry({
+      ...entry,
+      GSTRate: prod.prodTax,
+      rate: prod.productUnitRate,
+    });
+  };
+
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <>
       {/* <pre>{JSON.stringify(entry, null, 2)}</pre> */}
-      <input
+      <div
+        className="FlexBetween"
+        style={{
+          margin: ".3em 0",
+          alignItems: "center",
+        }}
+      >
+        <select
+          placeholder="descn of goods"
+          value={entry.descriptionOfGoods}
+          onChange={(e) =>
+            setEntry({ ...entry, descriptionOfGoods: e.target.value })
+          }
+          className="formControl"
+          style={{ width: "80%" }}
+        >
+          <option value="">select product</option>
+          {products.map((p) => (
+            <option value={p.prodSKU}>
+              {p.prodName}|{p.prodSKU}|{p.damaged}
+            </option>
+          ))}
+        </select>
+        <div
+          className="btn1"
+          onClick={() => populateProduct()}
+          style={{
+            fontSize: ".8em",
+            margin: "0",
+            width: "20%",
+            marginLeft: ".3em",
+            padding: ".5em .4em",
+          }}
+        >
+          Populate
+        </div>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        {/* <pre>{JSON.stringify(entry, null, 2)}</pre> */}
+        {/* <input
         placeholder="descn of goods"
         value={entry.descriptionOfGoods}
         onChange={(e) =>
           setEntry({ ...entry, descriptionOfGoods: e.target.value })
         }
         className="formControl"
-      />
+      /> */}
 
-      <input
-        placeholder="HSN SAC"
-        value={entry.hsnSAC}
-        onChange={(e) => setEntry({ ...entry, hsnSAC: e.target.value })}
-        className="formControl"
-      />
+        <input
+          placeholder="HSN SAC"
+          value={entry.hsnSAC}
+          onChange={(e) => setEntry({ ...entry, hsnSAC: e.target.value })}
+          className="formControl"
+        />
 
-      <input
-        placeholder="GST Rate"
-        value={entry.GSTRate}
-        onChange={(e) => setEntry({ ...entry, GSTRate: e.target.value })}
-        className="formControl"
-      />
+        <input
+          placeholder="GST Rate"
+          value={entry.GSTRate}
+          onChange={(e) => setEntry({ ...entry, GSTRate: e.target.value })}
+          className="formControl"
+        />
 
-      <input
-        type="number"
-        placeholder="qty"
-        value={entry.qty}
-        onChange={(e) => setEntry({ ...entry, qty: parseInt(e.target.value) })}
-        className="formControl"
-      />
-      <input
-        placeholder="rate"
-        value={entry.rate}
-        onChange={(e) => setEntry({ ...entry, rate: e.target.value })}
-        className="formControl"
-      />
+        <input
+          type="number"
+          placeholder="qty"
+          value={entry.qty}
+          onChange={(e) =>
+            setEntry({ ...entry, qty: parseInt(e.target.value) })
+          }
+          className="formControl"
+        />
+        <input
+          placeholder="rate"
+          value={entry.rate}
+          onChange={(e) => setEntry({ ...entry, rate: e.target.value })}
+          className="formControl"
+        />
 
-      {/* <select
+        {/* <select
         value={entry.per}
         onChange={(e) => setEntry({ ...entry, per: e.target.value })}
       >
         <option value={"unit"}>unit</option>
       </select> */}
 
-      <input value={entry.per} disabled={true} className="formControl" />
+        <input value={entry.per} disabled={true} className="formControl" />
 
-      <input
-        placeholder="amount"
-        value={entry.amount}
-        onChange={(e) => setEntry({ ...entry, amount: e.target.value })}
-        disabled={true}
-        className="formControl"
-      />
+        <input
+          placeholder="amount"
+          value={entry.amount}
+          onChange={(e) => setEntry({ ...entry, amount: e.target.value })}
+          disabled={true}
+          className="formControl"
+        />
 
-      <button
-        className="btn1"
-        style={{
-          margin: "0 0 0 .4em",
-          padding: ".4rem 0",
-          width: "20%",
-        }}
-        onClick={addEntry}
-      >
-        <FiSave />
-      </button>
+        <button
+          className="btn1"
+          style={{
+            margin: "0 0 0 .4em",
+            padding: ".4rem 0",
+            width: "20%",
+          }}
+          onClick={addEntry}
+        >
+          <FiSave />
+        </button>
 
-      <button
-        className="btn3"
-        style={{
-          margin: "0 0 0 .4em",
-          padding: ".4rem 0",
-          width: "20%",
-        }}
-        onClick={delEntry}
-      >
-        <FiDelete />
-      </button>
-    </div>
+        <button
+          className="btn3"
+          style={{
+            margin: "0 0 0 .4em",
+            padding: ".4rem 0",
+            width: "20%",
+          }}
+          onClick={delEntry}
+        >
+          <FiDelete />
+        </button>
+      </div>
+    </>
   );
 };
 

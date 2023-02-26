@@ -17,7 +17,9 @@ import { RiBillLine } from "react-icons/ri";
 import { BsPeopleFill } from "react-icons/bs";
 import { DiGhostSmall } from "react-icons/di";
 import { IconButton, useMediaQuery } from "@mui/material";
-import { GrClose } from "react-icons/gr";
+import { GrAnalytics, GrClose } from "react-icons/gr";
+import { SiGoogleanalytics } from "react-icons/si";
+
 const Header = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
   const isSmallScreen = useMediaQuery("(max-width: 600px)");
@@ -65,6 +67,8 @@ const Header = () => {
       setActive(3);
     } else if (txt1 === "users" || txt2 === "users") {
       setActive(4);
+    } else if (txt1 === "analytics" || txt2 === "analytics") {
+      setActive(5);
     }
   }, [window.location.href]);
   return (
@@ -273,6 +277,25 @@ const Header = () => {
                 <span className="linkText">Users</span>
               </Link>
             </li>
+            <li
+              className={`navItem ${active === 5 ? "active" : ""}`}
+              onClick={() => setActive(5)}
+            >
+              <Link to="/analytics" className="navLink">
+                {/* <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-grid"
+                viewBox="0 0 16 16"
+              >
+                <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
+              </svg> */}
+                <SiGoogleanalytics />
+                <span className="linkText">Analytics</span>
+              </Link>
+            </li>
 
             <li className="navItem">
               <a
@@ -474,6 +497,18 @@ const Header = () => {
                 </Link>
               </li>
 
+              <li
+                className={` ${active === 5 ? "active" : ""}`}
+                onClick={() => {
+                  setActive(5);
+                  setGridNav(false);
+                }}
+              >
+                <Link to="/analytics">
+                  <SiGoogleanalytics className="icon" />
+                  <span className="linkText">Analytics</span>
+                </Link>
+              </li>
               <li
                 className="nav__item "
                 onClick={() => {

@@ -30,6 +30,7 @@ const BreakdownChart = ({ isDashboard = false }) => {
       minWidth={isDashboard ? "325px" : undefined}
       position="relative"
     >
+      <pre>{JSON.stringify(formattedData, null, 2)}</pre>
       <ResponsivePie
         data={formattedData}
         theme={{

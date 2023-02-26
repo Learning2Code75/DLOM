@@ -152,7 +152,7 @@ const BillingAccordion = ({ dc, setState, setOpenDialog }) => {
                             ? "cyan"
                             : bm.name === "balance"
                             ? "#f00"
-                            : "white"
+                            : "grey"
                         }`,
                       }}
                     >

@@ -199,6 +199,7 @@ select{
   margin-left:5rem;
   padding:1rem;
   min-height: 100vh;
+  padding-top:5rem;
 }
 /* Login */
 .loginContainer{
@@ -359,12 +360,17 @@ select{
   justify-content: space-between;
   align-items: center;
   padding: 1rem 0 1rem 6rem;
+  position:fixed;
+  width:100%;
+  z-index: 1000;
 }
 #light .appbar{
+  background-color: #ebecf0;
   box-shadow:  5px 5px 3px #c7c7c7,
   -5px -5px 3px #f9f9f9;
 }
 #dark .appbar{
+  background:#232427;
   box-shadow:  5px 5px 3px #c7c7c711,
   -5px -5px 3px rgba(15, 1, 1, 0.064);
 }
@@ -731,6 +737,7 @@ select{
   }
   .appbar{
     padding:1rem 0rem 1rem 1.3rem;
+    
   
   }
   .switch{

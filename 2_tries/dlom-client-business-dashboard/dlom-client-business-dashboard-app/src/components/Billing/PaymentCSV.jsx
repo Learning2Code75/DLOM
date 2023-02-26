@@ -51,96 +51,95 @@ const PaymentCSV = ({ clientData, billingData }) => {
 
   return (
     <div>
-      {currLedger.length > 0 && (
-        <div>
-          <Dialog
-            open={openDialog}
-            fullWidth={true}
-            fullScreen={fullScreen}
-            // maxWidth={}
-            onClose={(e, r) => {
-              if (r === "backdropClick") {
-                setOpenDialog(!openDialog);
-              } else {
-                setOpenDialog(!openDialog);
-              }
+      <div>
+        <Dialog
+          open={openDialog}
+          fullWidth={true}
+          fullScreen={fullScreen}
+          // maxWidth={}
+          onClose={(e, r) => {
+            if (r === "backdropClick") {
+              setOpenDialog(!openDialog);
+            } else {
+              setOpenDialog(!openDialog);
+            }
+          }}
+          // PaperComponent={<PaperC />}
+          PaperProps={{
+            sx: {
+              borderRadius: "1rem",
+              background: tc.theme === "light" ? "#ebecf0" : "#232427",
+              color: tc.theme === "light" ? "#1c1c1c" : "#ebecf0",
+            },
+          }}
+          scroll={"body"}
+          id={tc.theme}
+        >
+          <IconButton
+            onClick={() => {
+              setOpenDialog(false);
             }}
-            // PaperComponent={<PaperC />}
-            PaperProps={{
-              sx: {
-                borderRadius: "1rem",
-                background: tc.theme === "light" ? "#ebecf0" : "#232427",
-                color: tc.theme === "light" ? "#1c1c1c" : "#ebecf0",
-              },
+            style={{
+              background: tc.theme === "dark" ? "lightgrey" : "transparent",
+              padding: ".25rem",
+              position: "absolute",
+              top: "0",
+              right: "0",
+              margin: ".25rem",
             }}
-            scroll={"body"}
-            id={tc.theme}
           >
-            <IconButton
-              onClick={() => {
-                setOpenDialog(false);
-              }}
+            <GrClose />
+          </IconButton>
+          <div className="btn1">
+            <BsDownload />
+
+            <CSVLink
+              data={currLedger}
+              headers={headers}
+              filename={`${clientData.companyName}_ledger`}
+              target="_blank"
               style={{
-                background: tc.theme === "dark" ? "lightgrey" : "transparent",
-                padding: ".25rem",
-                position: "absolute",
-                top: "0",
-                right: "0",
-                margin: ".25rem",
+                marginLeft: ".2em",
+                color: "cyan",
+                textDecoration: "none",
               }}
             >
-              <GrClose />
-            </IconButton>
-            <div className="btn1">
-              <BsDownload />
+              Payment Ledger CSV
+            </CSVLink>
+          </div>
 
-              <CSVLink
-                data={currLedger}
-                headers={headers}
-                filename={`${clientData.companyName}_ledger`}
-                target="_blank"
-                style={{
-                  marginLeft: ".2em",
-                  color: "cyan",
-                  textDecoration: "none",
-                }}
-              >
-                Payment Ledger CSV
-              </CSVLink>
-            </div>
-
-            <div
-              style={{
-                margin: "2.5rem .5rem",
-                marginBottom: "5rem",
-              }}
-              className="css9BasicGrid"
-            >
-              {currLedger.map((cr) => (
-                <div className="css1Card">
-                  <div className="css1ContentBx">
-                    <div className="css9BasicGrid1">
-                      <div className="tag">Bill ID</div>
-                      <div className="info">{cr.billId}</div>
-                      <div className="tag">Date</div>
-                      <div className="info">{cr.date}</div>
-                      <div className="tag">Time</div>
-                      <div className="info">{cr.time}</div>
-                      <div className="tag">Desc</div>
-                      <div className="info">{cr.description}</div>
-                      <div className="tag">Mode</div>
-                      <div className="info">{cr.mode}</div>
-                      <div className="tag">Amount</div>
-                      <div className="info">{cr.amount}</div>
-                    </div>
+          <div
+            style={{
+              margin: "2.5rem .5rem",
+              marginBottom: "5rem",
+            }}
+            className="css9BasicGrid"
+          >
+            {currLedger.map((cr) => (
+              <div className="css1Card">
+                <div className="css1ContentBx">
+                  <div className="css9BasicGrid1">
+                    <div className="tag">Bill ID</div>
+                    <div className="info">{cr.billId}</div>
+                    <div className="tag">Date</div>
+                    <div className="info">{cr.date}</div>
+                    <div className="tag">Time</div>
+                    <div className="info">{cr.time}</div>
+                    <div className="tag">Desc</div>
+                    <div className="info">{cr.description}</div>
+                    <div className="tag">Mode</div>
+                    <div className="info">{cr.mode}</div>
+                    <div className="tag">Amount</div>
+                    <div className="info">{cr.amount}</div>
                   </div>
                 </div>
-              ))}
-            </div>
-          </Dialog>
-          <div>{/* <pre>{JSON.stringify(currLedger, null, 2)}</pre> */}</div>
-        </div>
-      )}
+              </div>
+            ))}
+          </div>
+        </Dialog>
+        <div>{/* <pre>{JSON.stringify(currLedger, null, 2)}</pre> */}</div>
+      </div>
+
       <div
         onClick={() => {
           calcLedger();

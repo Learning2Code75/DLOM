@@ -18,6 +18,7 @@ import {
 const DlomClient = () => {
   const dispatch = useDispatch();
   const dlomclients = useSelector((state) => state.dlomclients);
+  // console.log(dlomclients);
   const subs = useSelector((state) => state.subscriptions);
   const tc = useContext(ThemeContext);
   const theme = useTheme();
@@ -54,7 +55,9 @@ const DlomClient = () => {
       OrderOps: "allowed",
       TaskOps: "allowed",
     },
+    subscription: {},
   });
+  const [addSubState, setAddSubState] = useState({});
   const [isUpdate, setIsUpdate] = useState(false);
   const [isAddSub, setIsAddSub] = useState(false);
 
@@ -89,8 +92,10 @@ const DlomClient = () => {
         OrderOps: "allowed",
         TaskOps: "allowed",
       },
+      subscription: {},
     });
     setIsUpdate(false);
+    setAddSubState({});
   };
 
   const terminateDlomClient = (s) => {
@@ -317,7 +322,7 @@ const DlomClient = () => {
         id={tc.theme}
       >
         {isAddSub && (
-          <form className="css5Form">
+          <div className="css5Form">
             <div className="FlexBetween">
               <h2> Client Subscription Update/Add</h2>
               <IconButton
@@ -358,27 +363,32 @@ const DlomClient = () => {
               className="btn2"
               onClick={() => {
                 let new_state = { ...state };
-                if (new_state.subscription.tracking !== undefined) {
+                // console.log(new_state);
+                let old_state = { ...addSubState };
+
+                if (old_state.subscription.tracking !== undefined) {
                   let new_cli_ops =
-                    new_state.carryForward.CliOps +
-                    (new_state.subscription.tracking.CliOps -
-                      new_state.tracking.CliOps);
+                    old_state.carryForward.CliOps +
+                    (old_state.subscription.tracking.CliOps -
+                      old_state.tracking.CliOps);
                   let new_user_ops =
-                    new_state.carryForward.UserOps +
-                    (new_state.subscription.tracking.UserOps -
-                      new_state.tracking.UserOps);
+                    old_state.carryForward.UserOps +
+                    (old_state.subscription.tracking.UserOps -
+                      old_state.tracking.UserOps);
                   let new_prod_ops =
-                    new_state.carryForward.ProdOps +
-                    (new_state.subscription.tracking.ProdOps -
-                      new_state.tracking.ProdOps);
+                    old_state.carryForward.ProdOps +
+                    (old_state.subscription.tracking.ProdOps -
+                      old_state.tracking.ProdOps);
                   let new_order_ops =
-                    new_state.carryForward.OrderOps +
-                    (new_state.subscription.tracking.OrderOps -
-                      new_state.tracking.OrderOps);
+                    old_state.carryForward.OrderOps +
+                    (old_state.subscription.tracking.OrderOps -
+                      old_state.tracking.OrderOps);
                   let new_task_ops =
-                    new_state.carryForward.TaskOps +
-                    (new_state.subscription.tracking.TaskOps -
-                      new_state.tracking.TaskOps);
+                    old_state.carryForward.TaskOps +
+                    (old_state.subscription.tracking.TaskOps -
+                      old_state.tracking.TaskOps);
+
+                  // console.log(new_cli_ops);
 
                   new_state.carryForward = {
                     CliOps: new_cli_ops,
@@ -388,6 +398,7 @@ const DlomClient = () => {
                     TaskOps: new_task_ops,
                   };
                 }
+                // console.log(new_state);
 
                 // console.log(new_state.carryForward);
                 let new_bill = {
@@ -421,7 +432,8 @@ const DlomClient = () => {
             >
               Add/Edit Subscription
             </div>
-          </form>
+            <pre>{JSON.stringify(addSubState, null, 2)}</pre>
+          </div>
         )}
       </Dialog>
 
@@ -450,8 +462,10 @@ const DlomClient = () => {
                 <div
                   onClick={() => {
                     setIsAddSub(true);
+                    setAddSubState(s);
                     setState(s);
                     setOpenSubDialog(true);
+                    // console.log(s);
                   }}
                   className="css1Btn"
                 >

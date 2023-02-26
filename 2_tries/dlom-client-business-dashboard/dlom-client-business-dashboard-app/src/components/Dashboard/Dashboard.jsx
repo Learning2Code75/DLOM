@@ -173,6 +173,44 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
+          <div className="dashboardCard">
+            <div className="dashboardBox">
+              <div className="dashboardContent">
+                <h2>05</h2>
+                <h3>Analytics</h3>
+                <p>
+                  Clients module enables the distributor to create and manage
+                  client details including
+                </p>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Link
+                    to={`/analytics`}
+                    className="dashboardLink"
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      position: "relative",
+                      padding: ".5rem .6rem",
+                      marginTop: ".5rem",
+                      borderRadius: "1.2rem",
+                      textDecoration: "none",
+                      boxShadow: "0 10px 20px rgba(0,0,0,0.2)",
+                    }}
+                  >
+                    <span>Analytics</span>
+                    <BsFillCaretRightFill />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

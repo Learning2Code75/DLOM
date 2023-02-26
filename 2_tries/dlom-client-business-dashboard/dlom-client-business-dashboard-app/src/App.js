@@ -9,6 +9,7 @@ import DlomClient from "./components/DlomClient/DlomClient";
 import Tracking from "./components/Tracking/Tracking";
 import Billing from "./components/Billing/Billing";
 import { createContext, useState } from "react";
+import Analytics from "./components/Analytics/Analytics";
 export const ThemeContext = createContext(null);
 
 function App() {
@@ -43,6 +44,9 @@ function App() {
 
                 {/* Billing */}
                 <Route path="/billing" element={<Billing />} />
+
+                {/* Analytics */}
+                <Route path="/analytics" element={<Analytics />} />
 
                 <Route path="*" element={<NotFound />} />
               </Routes>

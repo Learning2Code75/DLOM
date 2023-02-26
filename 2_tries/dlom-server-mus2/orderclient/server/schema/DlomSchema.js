@@ -348,6 +348,7 @@ const DlomOrderType = new GraphQLObjectType({
         }),
       }),
     },
+    createdAt: { type: GraphQLString },
   }),
 });
 

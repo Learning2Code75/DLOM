@@ -29,6 +29,7 @@ import UsagePricing from "./components/Users/UsagePricing/UsagePricing";
 import Orders from "./components/Order/Orders";
 import { createContext, useState } from "react";
 import DistributorCRUD from "./components/Order/DistributorCRUD/DistributorCRUD";
+import Analytics from "./components/Analytics/Analytics";
 const cache = new InMemoryCache({
   typePolicies: {
     Query: {
@@ -190,13 +191,23 @@ function App() {
                     />
                   )}
 
+                  {(user?.userRole === "manager" ||
+                    user?.userRole === "root") && (
+                    <>
+                      <Route
+                        path="analytics"
+                        element={user?._id ? <Analytics /> : <Auth />}
+                      />
+                    </>
+                  )}
+
                   <Route
                     path="*"
                     element={user?._id ? <NotFound /> : <Auth />}
                   />
                 </Routes>
               </div>
-              {user?._id && <Footer />}
+              {/* {user?._id && <Footer />} */}
             </div>
           </Router>
         </ThemeContext.Provider>

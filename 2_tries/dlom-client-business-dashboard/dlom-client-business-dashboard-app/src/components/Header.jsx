@@ -9,6 +9,7 @@ import { GiHumanTarget } from "react-icons/gi";
 import { RiBillLine } from "react-icons/ri";
 import { BsPeopleFill } from "react-icons/bs";
 import { DiGhostSmall } from "react-icons/di";
+import { SiGoogleanalytics } from "react-icons/si";
 import {
   MdClose,
   MdDarkMode,
@@ -56,6 +57,8 @@ const Header = () => {
       setActive(4);
     } else if (txt === "billing") {
       setActive(2);
+    } else if (txt === "analytics") {
+      setActive(5);
     } else if (txt === "") {
       setActive(0);
     }
@@ -204,7 +207,16 @@ const Header = () => {
                 <span className="linkText">Billings</span>
               </Link>
             </li>
+            <li
+              className={`navItem ${active === 5 ? "active" : ""}`}
+              onClick={() => setActive(5)}
+            >
+              <Link to="/analytics" className="navLink">
+                <SiGoogleanalytics />
 
+                <span className="linkText">Analytics</span>
+              </Link>
+            </li>
             <li className="navItem">
               <a
                 href="https://github.com/Learning2Code75"
@@ -377,6 +389,19 @@ const Header = () => {
                   <RiBillLine className="icon" />
 
                   <span className="linkText">Billings</span>
+                </Link>
+              </li>
+              <li
+                className={` ${active === 5 ? "active" : ""}`}
+                onClick={() => {
+                  setActive(5);
+                  setGridNav(false);
+                }}
+              >
+                <Link to="/analytics">
+                  <SiGoogleanalytics className="icon" />
+
+                  <span className="linkText">Analytics</span>
                 </Link>
               </li>
 

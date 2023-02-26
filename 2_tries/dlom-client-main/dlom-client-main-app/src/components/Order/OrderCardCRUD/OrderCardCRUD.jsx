@@ -17,7 +17,7 @@ import OrderDeliveryEntry from "./OrderDeliveryEntry";
 import OrderPaymentEntry from "./OrderPaymentEntry";
 import { useDispatch, useSelector } from "react-redux";
 import { createOrderlog } from "../../../redux/actions/orderlogs";
-import { createOp } from "../../../redux/actions/users";
+import { createOp, getUsers } from "../../../redux/actions/users";
 import { Dialog, IconButton, useMediaQuery, useTheme } from "@mui/material";
 import { GrClose } from "react-icons/gr";
 import { useContext } from "react";
@@ -30,6 +30,7 @@ const OrderCardCRUD = () => {
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   const user = useSelector((state) => state?.auth?.authData?.result);
+  const users = useSelector((state) => state?.users);
   const [openDialog, setOpenDialog] = useState(false);
   const [invDialog, setInvDialog] = useState(false);
   const [srDialog, setSrDialog] = useState(false);
@@ -369,7 +370,9 @@ const OrderCardCRUD = () => {
 
     setState(new_state);
   }, [distribDetails.loading, state.id]);
-
+  useEffect(() => {
+    dispatch(getUsers());
+  }, [dispatch]);
   return (
     <div>
       <h2> Order Card </h2>
@@ -441,7 +444,8 @@ const OrderCardCRUD = () => {
             </select>
 
             <div className="formLabel">salesperson</div>
-            <input
+
+            {/* <input
               type="text"
               value={state.salesperson}
               onChange={(e) =>
@@ -450,7 +454,27 @@ const OrderCardCRUD = () => {
               id="salesperson"
               placeholder="salesperson"
               className="formControl"
-            />
+            /> */}
+            <select
+              value={state.salesperson}
+              onChange={(e) =>
+                setState({ ...state, salesperson: e.target.value })
+              }
+              id="salesperson"
+              placeholder="salesperson"
+              className="btn1"
+            >
+              <option value="--">Select salesperson</option>
+
+              {users?.map((u) => (
+                <option value={u._id}>
+                  {u.name}: [{u.userRole}]
+                </option>
+              ))}
+
+              {/* <option value="636672f7d649e0c2f9cc53e9">com1 : cp1</option>
+            <option value="63667316d649e0c2f9cc53ed">com2 : cp2</option> */}
+            </select>
 
             <div>
               <h2>Sales Order</h2>
