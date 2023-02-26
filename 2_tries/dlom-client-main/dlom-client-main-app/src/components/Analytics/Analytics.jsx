@@ -589,7 +589,7 @@ const Analytics = () => {
         });
       } else if (pprods[i].damaged === "damaged") {
         let res = damagedExistsIn(dataMap, pprods[i]);
-        console.log(res);
+        // console.log(res);
         if (res >= 0) {
           dataMap[res].value += pprods[i].totSales;
         } else {
@@ -1041,7 +1041,7 @@ const Analytics = () => {
           <h3>Client Geography</h3>
           {/* {JSON.stringify(processClientGeography(), null, 2)} */}
           <Box height="75vh" border={`1px solid lightgrey`} borderRadius="4px">
-            {clients?.clients && (
+            {orders?.orders && (
               <ResponsiveChoropleth
                 theme={{
                   axis: {
@@ -1513,7 +1513,7 @@ const Analytics = () => {
           <h3>Sales - breakdown</h3>
           {/* {JSON.stringify(processSalesBreakdown(), null, 2)} */}
           <Box height="75vh">
-            {products && (
+            {orders?.orders && (
               <Box height={"100%"} position="relative">
                 <ResponsivePie
                   data={processSalesBreakdown()}
@@ -1624,7 +1624,7 @@ const Analytics = () => {
           <h3>Sales units - breakdown</h3>
           {/* {JSON.stringify(processSalesUnitsBreakdown(), null, 2)} */}
           <Box height="75vh">
-            {products && (
+            {orders?.orders && (
               <Box height={"100%"} position="relative">
                 <ResponsivePie
                   data={processSalesUnitsBreakdown()}
@@ -1733,7 +1733,7 @@ const Analytics = () => {
           }}
         >
           <h3>Admin table - all users</h3>
-          {users && (
+          {orders?.orders && (
             <Box
               height={"50vh"}
               sx={{
@@ -1813,7 +1813,7 @@ const Analytics = () => {
         >
           <h3>Performance table</h3>
           {/* {JSON.stringify(processUserPerformance(),null,2)} */}
-          {users && (
+          {orders?.orders && (
             <Box
               height={"50vh"}
               sx={{

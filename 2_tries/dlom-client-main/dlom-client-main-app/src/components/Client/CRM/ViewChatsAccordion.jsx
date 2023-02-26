@@ -1,8 +1,10 @@
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { BsChatRight } from "react-icons/bs";
 import { FiDelete, FiEdit } from "react-icons/fi";
 import { MdExpandMore } from "react-icons/md";
+import { predArr } from "../../../api/ml";
 
 const ViewChatsAccordion = ({
   client,
@@ -17,6 +19,67 @@ const ViewChatsAccordion = ({
   tc,
 }) => {
   const [expandedChat, setExpandedChat] = useState(false);
+  const [avgPredCli, setAvgPredCli] = useState(0);
+  const [avgPredSp, setAvgPredSp] = useState(0);
+
+  const findCliAvgSentiment = async () => {
+    let preds = [];
+    let ipTextArr = [];
+    let avgpred = 0;
+    for (let i = 0; i < client.crm.length; i++) {
+      if (client.crm[i].personType === "client") {
+        ipTextArr.push(client.crm[i].msg);
+      }
+    }
+    let payload = {
+      textArr: [...ipTextArr],
+    };
+    // console.log(payload);
+
+    if (ipTextArr.length > 0) {
+      preds = await predArr(payload);
+      // console.log(preds);
+      for (let i = 0; i < preds.data.length; i++) {
+        avgpred = parseFloat(avgpred) + parseFloat(preds.data[i].pred);
+      }
+      avgpred = avgpred / preds.data.length;
+    }
+
+    setAvgPredCli(avgpred);
+    // return avgpred;
+  };
+
+  const findSpAvgSentiment = async () => {
+    let preds = [];
+    let ipTextArr = [];
+    let avgpred = 0;
+    for (let i = 0; i < client.crm.length; i++) {
+      if (client.crm[i].personType === "sp") {
+        ipTextArr.push(client.crm[i].msg);
+      }
+    }
+    let payload = {
+      textArr: [...ipTextArr],
+    };
+    // console.log(client.crm);
+    // console.log(payload);
+    if (ipTextArr.length > 0) {
+      preds = await predArr(payload);
+      for (let i = 0; i < preds.data.length; i++) {
+        avgpred = parseFloat(avgpred) + parseFloat(preds.data[i].pred);
+      }
+      avgpred = avgpred / preds.data.length;
+    }
+    setAvgPredSp(avgpred);
+
+    // return avgpred;
+  };
+
+  useEffect(() => {
+    findCliAvgSentiment();
+    findSpAvgSentiment();
+    console.log("rendered");
+  }, []);
 
   return (
     <div>
@@ -87,6 +150,25 @@ const ViewChatsAccordion = ({
           </div>
         </AccordionSummary>
         <AccordionDetails>
+          <div>Avg Sentiments</div>
+          <div
+            className="FlexBetween"
+            style={{
+              width: "100%",
+              padding: ".4rem",
+            }}
+          >
+            <div>
+              Client :{/* {JSON.stringify(findCliAvgSentiment(), null, 2)} */}
+              {/* {findCliAvgSentiment()} */}
+              {avgPredCli}
+            </div>
+            <div>
+              Salesperson :{/* {findSpAvgSentiment()} */}
+              {avgPredSp}
+              {/* {JSON.stringify(findSpAvgSentiment(), null, 2)} */}
+            </div>
+          </div>
           <div
             style={{
               display: "flex",
