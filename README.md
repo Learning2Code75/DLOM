@@ -238,6 +238,7 @@ https://youtube.com/playlist?list=PLAyz_McAak4kdOqpribZk3pyw3NSNHb3q
 5. [24v] mern dashboard : [https://youtu.be/0cPCMIuDk2I]
 6. [24vi] fetch data from mongo --> pandas df : [https://youtu.be/4l4yOZZ9FYY , https://youtu.be/magzEfYqIos?list=PLZoTAELRMXVN_8zzsevm1bm6G-plsiO1I , https://youtu.be/IUUPz5HjkkE , https://youtu.be/qWYx5neOh2s ]
 7. [24vii] make mock data : [https://www.mockaroo.com/ , ]
+8. [24viii] ml pipeline, pickle exports,imports predicts : [https://youtu.be/xOccYkgRV4Q]
 <hr/>
 
 # RP writing vids (what to include?)
@@ -1399,7 +1400,7 @@ query{
 id row row number
 address.city type
 address.state type
-friends[2-5] type 
+friends[2-5] type
 friendsArr JSON array
 friendsArr.firstName type
 friendsArr.lastName type

@@ -43,6 +43,14 @@ const dashboardArr = [
     linkText: "Analytics",
     allowedUsers: ["root", "manager"],
   },
+  {
+    headingBg: "06",
+    heading: "ML",
+    desc: ` Clients module enables the distributor to create and manage client details including company name , contact person ,  address, GST number, phone number, discount rate , sales person  assigned and social media links.`,
+    link: "/ml",
+    linkText: "ML",
+    allowedUsers: ["root", "manager"],
+  },
 ];
 const Dashboard = () => {
   const user = useSelector((state) => state?.auth?.authData?.result);

@@ -1,5 +1,7 @@
 import re
 import pickle
+import numpy as np
+import pandas as pd
 
 # nltk
 from nltk.stem import WordNetLemmatizer
@@ -11,6 +13,161 @@ with open('models/pipeline.pickle', 'rb') as f:
 
 with open('models/model.pkl', 'rb') as f:
     pment_model = pickle.load(f)
+
+with open('models/m1.pkl', 'rb') as f:
+    m1_loaded = pickle.load(f)
+
+with open('models/m2.pkl', 'rb') as f:
+    m2_loaded = pickle.load(f)
+
+with open('models/m3.pkl', 'rb') as f:
+    m3_loaded = pickle.load(f)
+
+with open('models/m4.pkl', 'rb') as f:
+    m4_loaded = pickle.load(f)
+
+with open('models/m5.pkl', 'rb') as f:
+    m5_loaded = pickle.load(f)
+
+with open('models/clientName_oe.pkl', 'rb') as f:
+    clientName_oe_loaded = pickle.load(f)
+
+with open('models/prodName_oe.pkl', 'rb') as f:
+    prodName_oe_loaded = pickle.load(f)
+
+with open('models/month_oe.pkl', 'rb') as f:
+    month_oe_loaded = pickle.load(f)
+
+with open('models/day_oe.pkl', 'rb') as f:
+    day_oe_loaded = pickle.load(f)
+
+
+def predict_m1(arr):
+    test_m1_input = np.array(arr).reshape(1, 6)
+    test_m1_input_df = pd.DataFrame(test_m1_input, columns=[
+                                    'qty', 'cliAvgSenti', 'spAvgSenti', 'clientName', 'month', 'day'])
+
+    test_m1_input_df_clientName = pd.DataFrame(clientName_oe_loaded.transform(
+        test_m1_input_df['clientName']), columns=['clientName'])
+    test_m1_input_df_month = pd.DataFrame(month_oe_loaded.transform(
+        test_m1_input_df['month']), columns=['month'])
+    test_m1_input_df_day = pd.DataFrame(
+        day_oe_loaded.transform(test_m1_input_df['day']), columns=['day'])
+    test_m1_input_df_transformed = pd.concat([test_m1_input_df.drop(
+        columns=['clientName', 'month', 'day']), test_m1_input_df_clientName, test_m1_input_df_month, test_m1_input_df_day], axis=1)
+
+    test_m1_input_df_transformed['qty'] = test_m1_input_df_transformed['qty'].astype(
+        int)
+    test_m1_input_df_transformed['cliAvgSenti'] = test_m1_input_df_transformed['cliAvgSenti'].astype(
+        float)
+    test_m1_input_df_transformed['spAvgSenti'] = test_m1_input_df_transformed['spAvgSenti'].astype(
+        float)
+
+    return m1_loaded.predict(test_m1_input_df_transformed)
+
+
+def predict_m2(arr):
+    test_m2_input = np.array(arr).reshape(1, 8)
+    test_m2_input_df = pd.DataFrame(test_m2_input, columns=[
+                                    'orderQty', 'orderTotal', 'cliAvgSenti', 'spAvgSenti', 'clientName', 'prodName', 'month', 'day'])
+
+    test_m2_input_df_prodName = pd.DataFrame(prodName_oe_loaded.transform(
+        test_m2_input_df['prodName']), columns=['prodName'])
+    test_m2_input_df_clientName = pd.DataFrame(clientName_oe_loaded.transform(
+        test_m2_input_df['clientName']), columns=['clientName'])
+    test_m2_input_df_month = pd.DataFrame(month_oe_loaded.transform(
+        test_m2_input_df['month']), columns=['month'])
+    test_m2_input_df_day = pd.DataFrame(
+        day_oe_loaded.transform(test_m2_input_df['day']), columns=['day'])
+    test_m2_input_df_transformed = pd.concat([test_m2_input_df.drop(columns=['prodName', 'clientName', 'month', 'day']),
+                                             test_m2_input_df_clientName, test_m2_input_df_prodName, test_m2_input_df_month, test_m2_input_df_day], axis=1)
+
+    test_m2_input_df_transformed['orderQty'] = test_m2_input_df_transformed['orderQty'].astype(
+        int)
+    test_m2_input_df_transformed['orderTotal'] = test_m2_input_df_transformed['orderTotal'].astype(
+        float)
+    test_m2_input_df_transformed['cliAvgSenti'] = test_m2_input_df_transformed['cliAvgSenti'].astype(
+        float)
+    test_m2_input_df_transformed['spAvgSenti'] = test_m2_input_df_transformed['spAvgSenti'].astype(
+        float)
+
+    return m2_loaded.predict(test_m2_input_df_transformed)
+
+
+def predict_m3(arr):
+    test_m3_input = np.array(arr).reshape(1, 8)
+    test_m3_input_df = pd.DataFrame(test_m3_input, columns=[
+                                    'orderQty', 'orderTotal', 'cliAvgSenti', 'spAvgSenti', 'sales', 'prodName', 'month', 'day'])
+
+    test_m3_input_df_prodName = pd.DataFrame(prodName_oe_loaded.transform(
+        test_m3_input_df['prodName']), columns=['prodName'])
+    test_m3_input_df_month = pd.DataFrame(month_oe_loaded.transform(
+        test_m3_input_df['month']), columns=['month'])
+    test_m3_input_df_day = pd.DataFrame(
+        day_oe_loaded.transform(test_m3_input_df['day']), columns=['day'])
+    test_m3_input_df_transformed = pd.concat([test_m3_input_df.drop(
+        columns=['prodName', 'month', 'day']), test_m3_input_df_prodName, test_m3_input_df_month, test_m3_input_df_day], axis=1)
+
+    test_m3_input_df_transformed['orderQty'] = test_m3_input_df_transformed['orderQty'].astype(
+        int)
+    test_m3_input_df_transformed['orderTotal'] = test_m3_input_df_transformed['orderTotal'].astype(
+        float)
+    test_m3_input_df_transformed['cliAvgSenti'] = test_m3_input_df_transformed['cliAvgSenti'].astype(
+        float)
+    test_m3_input_df_transformed['spAvgSenti'] = test_m3_input_df_transformed['spAvgSenti'].astype(
+        float)
+    test_m3_input_df_transformed['sales'] = test_m3_input_df_transformed['sales'].astype(
+        float)
+
+    return clientName_oe_loaded.inverse_transform(m3_loaded.predict(test_m3_input_df_transformed))
+
+
+def predict_m4(arr):
+    test_m4_input = np.array(arr).reshape(1, 8)
+    test_m4_input_df = pd.DataFrame(test_m4_input, columns=[
+                                    'orderQty', 'orderTotal', 'cliAvgSenti', 'spAvgSenti', 'sales', 'clientName', 'month', 'day'])
+
+    test_m4_input_df_clientName = pd.DataFrame(clientName_oe_loaded.transform(
+        test_m4_input_df['clientName']), columns=['clientName'])
+    test_m4_input_df_month = pd.DataFrame(month_oe_loaded.transform(
+        test_m4_input_df['month']), columns=['month'])
+    test_m4_input_df_day = pd.DataFrame(
+        day_oe_loaded.transform(test_m4_input_df['day']), columns=['day'])
+    test_m4_input_df_transformed = pd.concat([test_m4_input_df.drop(
+        columns=['clientName', 'month', 'day']), test_m4_input_df_clientName, test_m4_input_df_month, test_m4_input_df_day], axis=1)
+
+    test_m4_input_df_transformed['orderQty'] = test_m4_input_df_transformed['orderQty'].astype(
+        int)
+    test_m4_input_df_transformed['orderTotal'] = test_m4_input_df_transformed['orderTotal'].astype(
+        float)
+    test_m4_input_df_transformed['cliAvgSenti'] = test_m4_input_df_transformed['cliAvgSenti'].astype(
+        float)
+    test_m4_input_df_transformed['spAvgSenti'] = test_m4_input_df_transformed['spAvgSenti'].astype(
+        float)
+    test_m4_input_df_transformed['sales'] = test_m4_input_df_transformed['sales'].astype(
+        float)
+
+    return prodName_oe_loaded.inverse_transform(m4_loaded.predict(test_m4_input_df_transformed))
+
+
+def predict_m5(arr):
+    test_m5_input = np.array(arr).reshape(1, 4)
+    test_m5_input_df = pd.DataFrame(
+        test_m5_input, columns=['qty', 'cliName', 'month', 'day'])
+
+    test_m5_input_df_clientName = pd.DataFrame(clientName_oe_loaded.transform(
+        test_m5_input_df['cliName']), columns=['cliName'])
+    test_m5_input_df_month = pd.DataFrame(month_oe_loaded.transform(
+        test_m5_input_df['month']), columns=['month'])
+    test_m5_input_df_day = pd.DataFrame(
+        day_oe_loaded.transform(test_m5_input_df['day']), columns=['day'])
+    test_m5_input_df_transformed = pd.concat([test_m5_input_df.drop(
+        columns=['cliName', 'month', 'day']), test_m5_input_df_clientName, test_m5_input_df_month, test_m5_input_df_day], axis=1)
+
+    test_m5_input_df_transformed['qty'] = test_m5_input_df_transformed['qty'].astype(
+        int)
+
+    return m5_loaded.predict(test_m5_input_df_transformed)
 
 
 def predict_pment_op(arr):
