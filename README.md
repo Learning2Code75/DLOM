@@ -227,7 +227,7 @@ https://youtube.com/playlist?list=PLAyz_McAak4kdOqpribZk3pyw3NSNHb3q
 # Poster, docs vids
 1. [23i] poster : [https://youtu.be/ZwiTqrVfDFU]
 2. [23ii] ppt : [https://youtu.be/VBzQrac6lUE]
-3. [23iii] software reports : [own_pjs ,https://www.youtube.com/playlist?list=PLEJZyr6k_ykJ4Sa7B-FMr7zbr4uegNO5_ , https://youtu.be/WuBhWX1s_m0 ]
+3. [23iii] software reports : [own_pjs ,https://www.youtube.com/playlist?list=PLEJZyr6k_ykJ4Sa7B-FMr7zbr4uegNO5_ , https://youtube.com/playlist?list=PLGUHassoVdDQF9AQyzMmjX1KbodkEQqdC ]
 4. [23iv] diags : [uml(https://youtu.be/WnMQ8HlmeXc) ]
 5. [23v] vids :https://youtube.com/@TKKader [https://youtu.be/AxNu7oeVG0M , https://youtu.be/32gw7HrR2rY , https://youtu.be/lSNKPzcUohM]
 
@@ -246,7 +246,7 @@ https://youtube.com/playlist?list=PLAyz_McAak4kdOqpribZk3pyw3NSNHb3q
 1. [25i]abstract,proposal :[https://youtu.be/m7ePXitjZ3Y , https://youtu.be/XE1IFt4FYUE ,  https://youtu.be/eALzUfkQJRU?list=PLvcb33xNTVUk-Bj4Y9iuU0n46LowYtjb5 , https://youtu.be/oUiKwFNzKDM?list=PLvcb33xNTVUk-Bj4Y9iuU0n46LowYtjb5]
 2. [25ii] full paper : [https://www.youtube.com/playlist?list=PLvcb33xNTVUk-Bj4Y9iuU0n46LowYtjb5]
 
- 
+
 
 # Tries
 
