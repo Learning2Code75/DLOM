@@ -24,8 +24,8 @@ const Dashboard = () => {
                 <h2>01</h2>
                 <h3>Subscriptions</h3>
                 <p>
-                  Clients module enables the distributor to create and manage
-                  client details including
+                  Subscription plan customized for the dlom client according to
+                  the needs in various areas of the application.
                 </p>
                 <div
                   style={{
@@ -63,8 +63,9 @@ const Dashboard = () => {
                 <h2>02</h2>
                 <h3>Dlom Clients</h3>
                 <p>
-                  Clients module enables the distributor to create and manage
-                  client details including
+                  Clients made for organization, each user associated with the
+                  dlom client id to track operations, manage billings,
+                  subscriptions.
                 </p>
                 <div
                   style={{
@@ -102,8 +103,8 @@ const Dashboard = () => {
                 <h2>03</h2>
                 <h3>Tracking</h3>
                 <p>
-                  Clients module enables the distributor to create and manage
-                  client details including
+                  Operations done by the users in dufferent areas of the
+                  application .
                 </p>
                 <div
                   style={{
@@ -141,8 +142,9 @@ const Dashboard = () => {
                 <h2>04</h2>
                 <h3>Billing</h3>
                 <p>
-                  Clients module enables the distributor to create and manage
-                  client details including
+                  Billing entries generated when a Dlom Client is assigned to a
+                  subscription plan. Download pdf , view client wise bills.
+                  ledgers, manage payments
                 </p>
                 <div
                   style={{
@@ -179,8 +181,10 @@ const Dashboard = () => {
                 <h2>05</h2>
                 <h3>Analytics</h3>
                 <p>
-                  Clients module enables the distributor to create and manage
-                  client details including
+                  Analytics module enabling the user to see sales overview,
+                  breakdown , monthly sales , client geography , subscription
+                  wise sales , transactions, client wise sales, client wise
+                  trackings
                 </p>
                 <div
                   style={{

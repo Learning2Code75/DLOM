@@ -6,7 +6,7 @@ const dashboardArr = [
   {
     headingBg: "01",
     heading: "Clients",
-    desc: ` Clients module enables the distributor to create and manage client details including company name , contact person ,  address, GST number, phone number, discount rate , sales person  assigned and social media links.`,
+    desc: ` Clients module enables the distributor to create and manage client details , CRM , payments.`,
     link: "/client",
     linkText: "Clients",
     allowedUsers: ["root", "manager", "salesperson", "finance", "warehouse"],
@@ -14,7 +14,7 @@ const dashboardArr = [
   {
     headingBg: "02",
     heading: "Orders",
-    desc: ` Clients module enables the distributor to create and manage client details including company name , contact person ,  address, GST number, phone number, discount rate , sales person  assigned and social media links.`,
+    desc: ` Orders module enables the distributor to create and manage order details , distributor details, order logs `,
     link: "/orders",
     linkText: "Orders",
     allowedUsers: ["root", "manager", "salesperson", "finance", "warehouse"],
@@ -22,7 +22,7 @@ const dashboardArr = [
   {
     headingBg: "03",
     heading: "Products",
-    desc: ` Clients module enables the distributor to create and manage client details including company name , contact person ,  address, GST number, phone number, discount rate , sales person  assigned and social media links.`,
+    desc: ` Products module enables the distributor to create and manage product details , inventory,catelog, product logs `,
     link: "/product",
     linkText: "Products",
     allowedUsers: ["root", "manager", "salesperson", "finance", "warehouse"],
@@ -30,7 +30,7 @@ const dashboardArr = [
   {
     headingBg: "04",
     heading: "Users",
-    desc: ` Clients module enables the distributor to create and manage client details including company name , contact person ,  address, GST number, phone number, discount rate , sales person  assigned and social media links.`,
+    desc: ` Users module enables the distributor to create and manage user details , taskboard , usage and pricing.`,
     link: "/users",
     linkText: "Users",
     allowedUsers: ["root", "manager", "finance", "warehouse", "salesperson"],
@@ -38,7 +38,7 @@ const dashboardArr = [
   {
     headingBg: "05",
     heading: "Analytics",
-    desc: ` Clients module enables the distributor to create and manage client details including company name , contact person ,  address, GST number, phone number, discount rate , sales person  assigned and social media links.`,
+    desc: ` Analytics module enables the manager to view the productwise sales , clientwise sales, userwise sales, transactions, client geolocation distribution , daily monthly overview of sales, sales breakdown .`,
     link: "/analytics",
     linkText: "Analytics",
     allowedUsers: ["root", "manager"],
@@ -46,7 +46,7 @@ const dashboardArr = [
   {
     headingBg: "06",
     heading: "ML",
-    desc: ` Clients module enables the distributor to create and manage client details including company name , contact person ,  address, GST number, phone number, discount rate , sales person  assigned and social media links.`,
+    desc: `ML module enables the manager to forecast order wise sales, product wise sales, client wise sales.`,
     link: "/ml",
     linkText: "ML",
     allowedUsers: ["root", "manager"],

@@ -244,7 +244,7 @@ https://youtube.com/playlist?list=PLAyz_McAak4kdOqpribZk3pyw3NSNHb3q
 
 # RP writing vids (what to include?)
 1. [25i]abstract,proposal :[https://youtu.be/m7ePXitjZ3Y , https://youtu.be/XE1IFt4FYUE ,  https://youtu.be/eALzUfkQJRU?list=PLvcb33xNTVUk-Bj4Y9iuU0n46LowYtjb5 , https://youtu.be/oUiKwFNzKDM?list=PLvcb33xNTVUk-Bj4Y9iuU0n46LowYtjb5]
-2. [25ii] full paper : [https://www.youtube.com/playlist?list=PLvcb33xNTVUk-Bj4Y9iuU0n46LowYtjb5]
+2. [25ii] full paper : [https://www.youtube.com/playlist?list=PLvcb33xNTVUk-Bj4Y9iuU0n46LowYtjb5 , https://youtube.com/playlist?list=PLvcb33xNTVUlzRG6HOEZiZPyf8LKYzKe- , https://youtube.com/playlist?list=PLvcb33xNTVUmfIpA5majoCXgLS5mFOcck ]
 
 
 
