@@ -246,7 +246,9 @@ const ViewOrders = ({
               <div className="info">{order?.invoice?.invoiceNo}</div>
 
               <div className="tag">Salesperson</div>
-              <div className="info">{findUser(order.salesperson)}</div>
+              <div className="info">
+                {findUser(order.salesperson.split(",")[0])}
+              </div>
 
               <div className="tag">Client</div>
               <div className="info">{order.client.companyName}</div>
@@ -422,18 +424,21 @@ const ViewOrders = ({
                 <SrPrint data={order?.salesReceipt} />
               </div>
 
-              <div>
-                <DeliveryCSV
-                  id={order?.invoice?.invoiceNo}
-                  deliveryData={order?.orderDelivery?.history}
-                />
-              </div>
-
               <div
                 style={{
                   marginTop: "1rem",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
                 }}
               >
+                <div>
+                  <DeliveryCSV
+                    id={order?.invoice?.invoiceNo}
+                    deliveryData={order?.orderDelivery?.history}
+                  />
+                </div>
+
                 <PaymentCSV
                   id={order?.invoice?.invoiceNo}
                   paymentData={order?.orderPayment?.history}

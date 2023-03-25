@@ -4,6 +4,7 @@ import { MdExpandMore } from "react-icons/md";
 import { ThemeContext } from "../../App";
 
 const TrackingAccordion = ({ ct }) => {
+  // console.log(ct[0]);
   const [expandedChat, setExpandedChat] = useState(false);
   const tc = useContext(ThemeContext);
   return (

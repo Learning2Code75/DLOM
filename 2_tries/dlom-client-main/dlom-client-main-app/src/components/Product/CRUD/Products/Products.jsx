@@ -14,21 +14,23 @@ const Products = ({ setCurProdId, setOpenDialog }) => {
         }}
         className="css9BasicGrid"
       >
-        {products?.map((p) => (
-          <div
-            style={{
-              overflowX: "scroll",
-            }}
-            className="css1Card"
-            key={p._id}
-          >
-            <Product
-              p={p}
-              setCurProdId={setCurProdId}
-              setOpenDialog={setOpenDialog}
-            />
-          </div>
-        ))}
+        {products
+          ?.filter((p) => p.damaged !== "damaged")
+          .map((p) => (
+            <div
+              style={{
+                overflowX: "scroll",
+              }}
+              className="css1Card"
+              key={p._id}
+            >
+              <Product
+                p={p}
+                setCurProdId={setCurProdId}
+                setOpenDialog={setOpenDialog}
+              />
+            </div>
+          ))}
       </div>
     </>
   );

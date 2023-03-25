@@ -166,7 +166,8 @@ function App() {
                   />
                   {(user?.userRole === "manager" ||
                     user?.userRole === "root" ||
-                    user?.userRole === "finance") && (
+                    user?.userRole === "finance" ||
+                    user?.userRole === "salesperson") && (
                     <Route
                       path="/product/productsCRUD"
                       element={user?._id ? <ProductsCRUD /> : <Auth />}
@@ -174,7 +175,8 @@ function App() {
                   )}
                   {(user?.userRole === "manager" ||
                     user?.userRole === "root" ||
-                    user?.userRole === "finance") && (
+                    user?.userRole === "finance" ||
+                    user?.userRole === "warehouse") && (
                     <Route
                       path="/product/productsInventory"
                       element={user?._id ? <ProductsInventory /> : <Auth />}

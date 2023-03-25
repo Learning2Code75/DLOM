@@ -21,7 +21,7 @@ const DeliveryCSV = ({ deliveryData, id }) => {
 
   return (
     <div>
-      <h5>Delivery CSV</h5>
+      {/* <h5>Delivery CSV</h5> */}
       {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
       {/* <pre>{JSON.stringify(deliveryData, null, 2)}</pre> */}
       <div className="btn1">

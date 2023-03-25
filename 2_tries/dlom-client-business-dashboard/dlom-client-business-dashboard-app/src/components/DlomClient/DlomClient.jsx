@@ -432,7 +432,7 @@ const DlomClient = () => {
             >
               Add/Edit Subscription
             </div>
-            <pre>{JSON.stringify(addSubState, null, 2)}</pre>
+            {/* <pre>{JSON.stringify(addSubState, null, 2)}</pre> */}
           </div>
         )}
       </Dialog>

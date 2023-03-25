@@ -11,7 +11,7 @@ const ordersDashboardArr = [
   {
     headingBg: "01",
     heading: "Manage Orders",
-    desc: "Client Manager includes client detail management functionalities",
+    desc: "Order Manager includes order detail management functionalities. Sale Order, Invoice, Warehouse Receipt, Sales Receipt, Delivery and Payment Tracking, Cancel Order.",
     link: "/order",
     linkText: "Manage Orders",
     allowedUsers: ["root", "manager", "salesperson", "finance", "warehouse"],
@@ -19,7 +19,7 @@ const ordersDashboardArr = [
   {
     headingBg: "02",
     heading: "Distributor Details",
-    desc: "Client Manager includes client detail management functionalities",
+    desc: "Edit Distributor Details",
     link: "/orderdistribdetails",
     linkText: "Distributor Details",
     allowedUsers: ["root", "manager", "finance"],
@@ -27,7 +27,7 @@ const ordersDashboardArr = [
   {
     headingBg: "03",
     heading: "Order Logs",
-    desc: "Client Manager includes client detail management functionalities",
+    desc: "Logs for Order operations including Sales Order, Order Creation ,Invoice, Sales Receipt, Warehouse Receipt, Cancellation",
     link: "/orderlogs",
     linkText: "Orderlogs",
     allowedUsers: ["root", "manager"],

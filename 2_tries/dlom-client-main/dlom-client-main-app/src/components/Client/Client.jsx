@@ -16,7 +16,7 @@ const clientDashboardArr = [
   {
     headingBg: "02",
     heading: "CRM",
-    desc: "Client Manager includes client detail management functionalities",
+    desc: "CRM includes lead generation, conversion, conversations between client and salesperson.",
     link: "clientsCRM",
     linkText: "CRM",
     allowedUsers: ["root", "manager", "salesperson"],
@@ -24,7 +24,7 @@ const clientDashboardArr = [
   {
     headingBg: "03",
     heading: "Payments",
-    desc: "Client Manager includes client detail management functionalities",
+    desc: "Client Ledgers with total pending amounts, amout paid including all orders of the client.",
     link: "clientsPayments",
     linkText: "Payments",
     allowedUsers: ["root", "manager", "salesperson", "finance"],

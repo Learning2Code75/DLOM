@@ -159,13 +159,16 @@ const ViewChatsAccordion = ({
             }}
           >
             <div>
-              Client :{/* {JSON.stringify(findCliAvgSentiment(), null, 2)} */}
+              <div className="tag">Client</div>
+              {/* {JSON.stringify(findCliAvgSentiment(), null, 2)} */}
               {/* {findCliAvgSentiment()} */}
-              {avgPredCli}
+              <div className="info">{parseFloat(avgPredCli) * 100}%</div>
             </div>
             <div>
-              Salesperson :{/* {findSpAvgSentiment()} */}
-              {avgPredSp}
+              <div className="tag">
+                Salesperson {/* {findSpAvgSentiment()} */}
+              </div>
+              <div className="info">{parseFloat(avgPredSp) * 100}%</div>
               {/* {JSON.stringify(findSpAvgSentiment(), null, 2)} */}
             </div>
           </div>

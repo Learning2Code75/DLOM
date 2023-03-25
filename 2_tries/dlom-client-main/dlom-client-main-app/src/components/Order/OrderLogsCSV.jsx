@@ -7,7 +7,7 @@ const OrderLogsCSV = ({ orderLogsData }) => {
     { label: "Created Date", key: "date" },
     { label: "Created Time", key: "time" },
     { label: "Salesperson", key: "order.salesperson" },
-    { label: "Client", key: "order.salesOrder.invoiceTo" },
+    { label: "Client", key: "order.client.companyName" },
     { label: "Qty", key: "order.invoice.totalQty" },
     { label: "Amount", key: "order.invoice.totalAmount" },
     { label: "Operation", key: "operation" },

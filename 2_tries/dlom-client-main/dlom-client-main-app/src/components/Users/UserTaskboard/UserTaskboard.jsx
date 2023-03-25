@@ -7,7 +7,14 @@ import { createOp } from "../../../redux/actions/users";
 import AddResponse from "./AddResponse";
 import AddSuggestion from "./AddSuggestion";
 import { TiArrowLeftThick } from "react-icons/ti";
-import { Dialog, IconButton, useMediaQuery, useTheme } from "@mui/material";
+import {
+  CircularProgress,
+  Dialog,
+  IconButton,
+  LinearProgress,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { GrClose } from "react-icons/gr";
 import { useContext } from "react";
 import { ThemeContext } from "../../../App";
@@ -146,8 +153,48 @@ const UserTaskboard = () => {
     return false;
   };
 
+  const [taskCounts, setTaskCounts] = useState({
+    todo: 0,
+    toBeApproved: 0,
+    totalDone: 0,
+    total: 0,
+    td: 0,
+  });
+  const findTaskCounts = () => {
+    let new_task_counts = { ...taskCounts };
+    let td = 0;
+    let tba = 0;
+    let tdone = 0;
+    let tott = 0;
+
+    if (tasks.length !== 0) {
+      for (let i = 0; i < tasks.length; i++) {
+        if (
+          findUserInTask(tasks[i]) ||
+          user.userRole === "manager" ||
+          user.userRole === "root"
+        ) {
+          if (tasks[i].status === "todo") {
+            td += 1;
+          } else if (tasks[i].status === "toBeApproved") {
+            tba += 1;
+          } else if (tasks[i].status === "done") {
+            tdone += 1;
+          }
+          tott += 1;
+        }
+      }
+    }
+    new_task_counts.todo = td;
+    new_task_counts.toBeApproved = tba;
+    new_task_counts.td = tdone;
+    new_task_counts.total = tott;
+    new_task_counts.totalDone = (parseFloat(tdone) * 100) / tott;
+    setTaskCounts(new_task_counts);
+  };
   useEffect(() => {
     dispatch(getTasks());
+    findTaskCounts();
   }, [dispatch]);
   return (
     <div>
@@ -181,22 +228,35 @@ const UserTaskboard = () => {
         </Link>
         <h2>User Taskboard</h2>
       </div>
-
-      <h3>Tasks CRUD</h3>
-      <div
-        style={{
-          display: "flex",
-        }}
-      >
-        <div
-          onClick={() => {
-            dispatch(getTasks());
-          }}
-          className="openStylesButton1"
-        >
-          Fetch latest
+      <div className="css1Card">
+        <div className="css1ContentBx">
+          <div className="css9BasicGrid">
+            <div className="css9BasicGrid1">
+              <div className="tag">Tasks todo</div>
+              <div className="info">{taskCounts.todo}</div>
+              <div className="tag">Tasks to be approved</div>
+              <div className="info">{taskCounts.toBeApproved}</div>
+              <div className="tag">Tasks Done</div>
+              <div className="info">
+                {taskCounts.td}/{taskCounts.total}
+                <LinearProgress
+                  value={taskCounts.totalDone}
+                  variant="determinate"
+                />
+              </div>
+              <div
+                onClick={() => {
+                  dispatch(getTasks());
+                }}
+                className="openStylesButton1"
+              >
+                Fetch latest
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+
       {/* <pre>{JSON.stringify(state, null, 2)}</pre> */}
 
       <div className="dialogOpenContainer">
@@ -346,72 +406,71 @@ const UserTaskboard = () => {
           {/* if manager/root: add suggestion */}
           {/* if manager/root : add users */}
 
-          {user?.userRole === "manager" ||
-            (user?.userRole === "root" && (
-              <>
-                <div className="formLabel">Assign task to users</div>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "flex-start",
-                    alignItems: "flex-start",
-                  }}
-                >
-                  {users
-                    ?.filter(
-                      (u) => u.userRole !== "manager" && u.userRole !== "root"
-                    )
-                    .map((u) => (
-                      <div
+          {(user?.userRole === "manager" || user?.userRole === "root") && (
+            <>
+              <div className="formLabel">Assign task to users</div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "flex-start",
+                  alignItems: "flex-start",
+                }}
+              >
+                {users
+                  ?.filter(
+                    (u) => u.userRole !== "manager" && u.userRole !== "root"
+                  )
+                  .map((u) => (
+                    <div
+                      style={{
+                        border: "1px solid lightgrey",
+                        borderRadius: ".5rem",
+                        padding: ".5rem",
+                        background: findUser(u._id) ? "black" : "white",
+                        color: findUser(u._id) ? "white" : "black",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                      }}
+                      className="formControl"
+                    >
+                      {u.name}[{u.userRole}]
+                      {/* <pre>{JSON.stringify(u, null, 2)}</pre> */}
+                      <span
                         style={{
-                          border: "1px solid lightgrey",
-                          borderRadius: ".5rem",
-                          padding: ".5rem",
-                          background: findUser(u._id) ? "black" : "white",
-                          color: findUser(u._id) ? "white" : "black",
                           display: "flex",
-                          alignItems: "center",
-                          justifyContent: "space-between",
                         }}
-                        className="formControl"
                       >
-                        {u.name}[{u.userRole}]
-                        {/* <pre>{JSON.stringify(u, null, 2)}</pre> */}
-                        <span
+                        <div
+                          className="btn1"
                           style={{
-                            display: "flex",
+                            margin: "0",
+                            padding: ".3em",
+                            fontSize: ".8em",
                           }}
+                          onClick={() => assignUser(u._id)}
                         >
-                          <div
-                            className="btn1"
-                            style={{
-                              margin: "0",
-                              padding: ".3em",
-                              fontSize: ".8em",
-                            }}
-                            onClick={() => assignUser(u._id)}
-                          >
-                            Assign
-                          </div>
-                          <div
-                            className="btn1"
-                            style={{
-                              margin: "0",
-                              padding: ".3em",
-                              fontSize: ".8em",
-                              marginLeft: ".4em",
-                            }}
-                            onClick={() => removeUser(u._id)}
-                          >
-                            Unassign
-                          </div>
-                        </span>
-                      </div>
-                    ))}
-                </div>
-              </>
-            ))}
+                          Assign
+                        </div>
+                        <div
+                          className="btn1"
+                          style={{
+                            margin: "0",
+                            padding: ".3em",
+                            fontSize: ".8em",
+                            marginLeft: ".4em",
+                          }}
+                          onClick={() => removeUser(u._id)}
+                        >
+                          Unassign
+                        </div>
+                      </span>
+                    </div>
+                  ))}
+              </div>
+            </>
+          )}
           <div
             onClick={() => {
               dispatch(

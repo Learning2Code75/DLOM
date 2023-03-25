@@ -70,7 +70,7 @@ const OrderLogs = () => {
               <div className="css1ContentBx">
                 <div className="css9BasicGrid1">
                   <div className="tag">Invoice No.</div>
-                  <div className="info">{ol?.invoice?.invoiceNo}</div>
+                  <div className="info">{ol?.order?.invoice?.invoiceNo}</div>
                   <div className="tag">Operation</div>
                   <div className="info">{ol?.operation}</div>
                   <div className="tag">Timestamp</div>

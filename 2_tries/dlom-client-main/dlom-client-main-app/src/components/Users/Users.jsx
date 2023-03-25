@@ -9,7 +9,7 @@ const userDashboardArr = [
   {
     headingBg: "01",
     heading: "Manage Users",
-    desc: "Client Manager includes client detail management functionalities",
+    desc: "User Manager includes user detail management functionalities",
     link: "userManage",
     linkText: "Manage Users",
     allowedUsers: ["root", "manager"],
@@ -17,7 +17,7 @@ const userDashboardArr = [
   {
     headingBg: "02",
     heading: "User Taskboard",
-    desc: "Client Manager includes client detail management functionalities",
+    desc: "Create tasks and assign to users for the task to be done. Users can also create tasks to be approved by manager.",
     link: "userTaskboard",
     linkText: "User Taskboard",
     allowedUsers: ["root", "manager", "salesperson", "finance", "warehouse"],
@@ -25,7 +25,7 @@ const userDashboardArr = [
   {
     headingBg: "03",
     heading: "Usage and Pricing",
-    desc: "Client Manager includes client detail management functionalities",
+    desc: "View Current Subscription Plan with limits of operations, payment and purchase history of OMS product subscriptions.",
     link: "usagePricing",
     linkText: "Usage and Pricing",
     allowedUsers: ["root", "manager"],

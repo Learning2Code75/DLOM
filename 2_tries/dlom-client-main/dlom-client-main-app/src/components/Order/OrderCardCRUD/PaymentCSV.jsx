@@ -23,7 +23,7 @@ const PaymentCSV = ({ paymentData, id }) => {
 
   return (
     <div>
-      <h5>PaymentCSV</h5>
+      {/* <h5>PaymentCSV</h5> */}
       {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
       {/* <pre>{JSON.stringify(paymentData, null, 2)}</pre> */}
       <div className="btn1">

@@ -601,6 +601,26 @@ const ML = () => {
             className="formControl"
             placeholder="Order Qty"
           />
+          <div className="formLabel">Client Avg Sentiment [0-1]</div>
+          <input
+            type="number"
+            value={m4State.cliAvgSenti}
+            onChange={(e) => {
+              setM4State({ ...m4State, cliAvgSenti: e.target.value });
+            }}
+            className="formControl"
+            placeholder="Client Avg Sentiment [0-1]"
+          />
+          <div className="formLabel">Salesperson Avg Sentiment [0-1]</div>
+          <input
+            type="number"
+            value={m4State.spAvgSenti}
+            onChange={(e) => {
+              setM4State({ ...m4State, spAvgSenti: e.target.value });
+            }}
+            className="formControl"
+            placeholder="Salesperson Avg Sentiment [0-1]"
+          />
           <div className="formLabel">Order Value</div>
           <input
             type="text"

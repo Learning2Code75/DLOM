@@ -375,7 +375,7 @@ const OrderCardCRUD = () => {
   }, [dispatch]);
   return (
     <div>
-      <h2> Order Card </h2>
+      {/* <h2> Order Card </h2> */}
       {/* {console.log(distribDetails)} */}
       <div className="dialogOpenContainer">
         <div className="openStylesButton1" onClick={() => setOpenDialog(true)}>
@@ -467,7 +467,7 @@ const OrderCardCRUD = () => {
               <option value="--">Select salesperson</option>
 
               {users?.map((u) => (
-                <option value={u._id}>
+                <option value={`${u._id},${u.name},${u.userRole}`}>
                   {u.name}: [{u.userRole}]
                 </option>
               ))}
