@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const ML_API = axios.create({ baseURL: "http://localhost:5000" });
+// const ML_API = axios.create({ baseURL: "http://localhost:5000" });
+const ML_API = axios.create({ baseURL: "http://192.168.1.39:5000" });
 
 export const predArr = (ipTextArr) => ML_API.post("/predict_arr", ipTextArr);
 export const predM1 = (payload) =>

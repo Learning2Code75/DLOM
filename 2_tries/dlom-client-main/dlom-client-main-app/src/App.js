@@ -55,8 +55,13 @@ const cache = new InMemoryCache({
 //   cache,
 // });
 
+// const dlomClient = new ApolloClient({
+//   uri: "http://localhost:5002/graphql",
+//   cache,
+// });
+
 const dlomClient = new ApolloClient({
-  uri: "http://localhost:5002/graphql",
+  uri: "http://192.168.1.39:5002/graphql",
   cache,
 });
 

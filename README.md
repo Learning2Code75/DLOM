@@ -226,7 +226,7 @@ https://youtube.com/playlist?list=PLAyz_McAak4kdOqpribZk3pyw3NSNHb3q
 
 # Poster, docs vids
 1. [23i] poster : [https://youtu.be/ZwiTqrVfDFU]
-2. [23ii] ppt : [https://youtu.be/VBzQrac6lUE]
+2. [23ii] ppt : [https://youtu.be/VBzQrac6lUE , https://youtu.be/-ViDaRJkay4s]
 3. [23iii] software reports : [own_pjs ,https://www.youtube.com/playlist?list=PLEJZyr6k_ykJ4Sa7B-FMr7zbr4uegNO5_ , https://youtube.com/playlist?list=PLGUHassoVdDQF9AQyzMmjX1KbodkEQqdC ]
 4. [23iv] diags : [uml(https://youtu.be/WnMQ8HlmeXc) ]
 5. [23v] vids :https://youtube.com/@TKKader [https://youtu.be/AxNu7oeVG0M , https://youtu.be/32gw7HrR2rY , https://youtu.be/lSNKPzcUohM]

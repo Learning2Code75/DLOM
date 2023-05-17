@@ -1,7 +1,10 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: "http://localhost:80" });
-const BUSINESS_API = axios.create({ baseURL: "http://localhost:9000" });
+// const API = axios.create({ baseURL: "http://localhost:80" });
+// const BUSINESS_API = axios.create({ baseURL: "http://localhost:9000" });
+
+const API = axios.create({ baseURL: "http://192.168.1.39:80" });
+const BUSINESS_API = axios.create({ baseURL: "http://192.168.1.39:9000" });
 
 const MUS1_API = axios.create();
 // const API = axios.create();
